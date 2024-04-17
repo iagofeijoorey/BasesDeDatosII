@@ -36,17 +36,17 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 ## Contacto
 Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de desarrollo a través de los siguientes correos electrónicos:
 
-Sara Castro: sara.castro@email.com
+   Sara Castro: sara.castro@email.com
 
-Mateo Bodenlle: mateo.bodenlle@email.com
+   Mateo Bodenlle: mateo.bodenlle@rai.usc.es
 
-Diego Cristóbal: diego.cristobal@email.com
+   Diego Cristóbal: diego.cristobal@email.com
 
-Laura Antelo: laura.antelo@email.com
+   Laura Antelo: laura.antelo@email.com
 
-Iago Feijoo: iagofeijoo@correito.correito
+   Iago Feijoo: iagofeijoo@correito.correito
 
-Jose Luis: jose.luis@email.com
+   Jose Luis: jose.luis@email.com
 
 
 
