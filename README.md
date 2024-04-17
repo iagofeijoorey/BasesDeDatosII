@@ -45,7 +45,7 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
    
 **Mateo Bodenlle**: mateo.bodenlle@rai.usc.es  
   
-* [LinkedIn]([www.linkedin.com/in/mateobodenlle](https://www.linkedin.com/in/mateo-bodenlle-villarino/))
+* [LinkedIn]([www.linkedin.com/in/mateo-bodenlle-villarino](https://www.linkedin.com/in/mateo-bodenlle-villarino/))
 
   
 **Iago Feijoo**:  iagofeijoorey@gmail.com  
