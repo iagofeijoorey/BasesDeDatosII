@@ -23,7 +23,7 @@ MySQL Server.
 3. Ejecuta los scripts SQL en tu servidor MySQL para crear la base de datos y cargar los datos de prueba.
 4. Configura la conexión a la base de datos en el código fuente según sea necesario.
 5. Compila y ejecuta la aplicación desde tu IDE.
-6. 
+   
 ## Contribuciones
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
