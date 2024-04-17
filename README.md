@@ -7,15 +7,16 @@ El proyecto consiste en una aplicación Java que utiliza JDBC para la comunicaci
 La aplicación tiene como objetivo gestionar una base de datos relacional, proporcionando funcionalidades para la creación, modificación y consulta de datos, así como la generación de informes y estadísticas sobre los mismos.
 
 ## Contenido del Repositorio
-src: Contiene el código fuente de la aplicación Java.
-docs: Contiene la documentación del proyecto, incluyendo el diagrama del modelo entidad-relación, el enunciado de la asignatura y cualquier otra documentación relevante.
-sql: Contiene los scripts SQL necesarios para la creación de la base de datos y la inserción de datos de prueba.
-libs: Contiene las bibliotecas externas necesarias para la ejecución de la aplicación.
-README.md: Este archivo que estás leyendo actualmente, proporciona una descripción general del proyecto y cómo utilizarlo.
-## Requisitos del Sistema
-Java Development Kit (JDK) 8 o superior.
-NetBeans IDE (opcional pero recomendado).
-MySQL Server.
+* src: Contiene el código fuente de la aplicación Java.
+* docs: Contiene la documentación del proyecto, incluyendo el diagrama del modelo entidad-relación, el enunciado de la asignatura y cualquier otra documentación relevante.
+* sql: Contiene los scripts SQL necesarios para la creación de la base de datos y la inserción de datos de prueba.
+* libs: Contiene las bibliotecas externas necesarias para la ejecución de la aplicación.
+* README.md: Este archivo que estás leyendo actualmente, proporciona una descripción general del proyecto y cómo utilizarlo.
+
+## Requisitos del Sistema - A ACTUALIZAR 
+* Java Development Kit (JDK) 8 o superior.
+* NetBeans IDE (opcional pero recomendado).
+* MySQL Server.
 
 ## Instrucciones de Uso
 1. Clona este repositorio en tu máquina local.
