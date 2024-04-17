@@ -38,17 +38,45 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 ## Contacto
 Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de desarrollo a través de los siguientes correos electrónicos:
 
-   Sara Castro: sara.castro@email.com
+**Sara Castro**:  sara.castro@email.com  
 
-   Mateo Bodenlle: mateo.bodenlle@rai.usc.es
+* [LinkedIn](www.linkedin.com/in/saracastro??)
+  
+   
+**Mateo Bodenlle**: mateo.bodenlle@rai.usc.es  
+  
+* [LinkedIn]([www.linkedin.com/in/mateobodenlle](https://www.linkedin.com/in/mateo-bodenlle-villarino/))
 
-   Diego Cristóbal: diego.cristobal@email.com
+  
+**Iago Feijoo**:  iagofeijoorey@gmail.com  
 
-   Laura Antelo: laura.antelo@email.com
+* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
 
-   Iago Feijoo: iagofeijoo@correito.correito
+    
+**Iago Feijoo Rey**:  iagofeijoo@correito.correito  
 
-   Jose Luis: jose.luis@email.com
+* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+
+  
+**Diego Cristóbal**:  diego.cristobal@email.com    
+
+* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+   
+  
+**Laura Antelo**:  laura.antelo@email.com      
+
+* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+  
+  
+**Jose Luis**:  jose.luis@email.com      
+
+* [LinkedIn](www.linkedin.com/in/iagofeijoorey) 
+
+  
+## Languages and Tools used
+<p align="left"> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> 
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> </p>
 
 
 
