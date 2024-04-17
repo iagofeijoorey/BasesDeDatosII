@@ -19,9 +19,9 @@ La aplicación tiene como objetivo gestionar una base de datos relacional, propo
 * MySQL Server.
 
 ## Instrucciones de Uso
-1. Clona este repositorio en tu máquina local.
-2. Importa el proyecto en NetBeans o tu IDE preferido.
-3. Ejecuta los scripts SQL en tu servidor MySQL para crear la base de datos y cargar los datos de prueba.
+1. Instala o habilita la extensión de GitHub en tu IDE (recomendado NetBeans).
+2. Importa el proyecto.
+3. Ejecuta los scripts SQL en tu servidor MySQL para crear la base de datos y cargar los datos de prueba. - HAY QUE VER COMO ES ESTO
 4. Configura la conexión a la base de datos en el código fuente según sea necesario.
 5. Compila y ejecuta la aplicación desde tu IDE.
    
@@ -29,10 +29,11 @@ La aplicación tiene como objetivo gestionar una base de datos relacional, propo
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
 1. Haz un fork del repositorio.
-2. Crea una rama con el nombre de la característica que quieres implementar (git checkout -b mi-nueva-caracteristica).
-3. Realiza tus cambios y haz commit de ellos (git commit -am 'Añadir nueva característica').
-4. Sube los cambios a tu repositorio fork (git push origin mi-nueva-caracteristica).
+2. Crea una rama con el nombre de la característica que quieres implementar.
+3. Realiza tus cambios y haz commit de ellos.
+4. Sube los cambios a tu repositorio fork.
 5. Crea un nuevo pull request y describe tus cambios detalladamente.
+6. Avisa por el grupo de whatsapp a ser posible, comentando por encima los cambios (menos detalle que en la descripción del pull request).
 
 ## Contacto
 Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de desarrollo a través de los siguientes correos electrónicos:
