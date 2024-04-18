@@ -1,0 +1,111 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp jPanel1::t:::x, seq {space :::p, par l {comp jScrollPane1::l::631:x, seq l {par l {comp etiquetaTitulo:::p::p, comp jLabel1::l:p::p}, space u:::p, par l {seq {comp buscaIsbn:::p:144:p, space u:::p, comp jLabel2:::p::p, space u:::p, comp buscaAutor:::::x}, comp buscaTitulo:::::x}}, seq t {comp btnNuevoLibro:::p::p, space s:::p, comp btnEditarLibro:::p::p, space :::x, comp btnSalir:::p::p}, seq t {comp jLabel3:::p::p, space :::p, comp buscaId:::p:50:p, space :::x, comp btnBuscar:::p::p}}, space :::p}, seq {par l {comp jButton1::l:p::p, comp jButton2::l:p::p}, space :0:0:x}}"
+			"$verticalGroup": "par l {seq l {comp jPanel1:::p::p, space :0:0:p, comp jButton1:::p::p, space :0:0:p, comp jButton2:::p::p, space :p::p, par b {comp buscaTitulo::b:p::p, comp etiquetaTitulo::b:p::p}, space :p:21:p, par b {comp buscaAutor::b:p::p, comp jLabel1::b:p::p, comp buscaIsbn::b:p::p, comp jLabel2::b:p::p}, space u:::p, par l {par b {comp btnBuscar::b:p::p, comp jLabel3::b:p::p}, comp buscaId::l:p::p}, space :p:12:p, comp jScrollPane1:::p:292:p, space u:::p, par b {comp btnSalir::b:p::p, comp btnNuevoLibro::b:p::p, comp btnEditarLibro::b:p::p}, space :::x}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"title": "Biblioteca de Informática"
+			"name": "vPrincipal"
+			"resizable": false
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaTitulo"
+				"toolTipText": "Titulo a buscar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buscaTituloActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "etiquetaTitulo"
+				"text": "Título:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaIsbn"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel1"
+				"text": "Isbn:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel2"
+				"text": "Autor:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaAutor"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buscaAutorActionPerformed", true ) )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "jScrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "tablaLibros"
+					"columnSelectionAllowed": true
+					"selectionMode": 0
+					auxiliary() {
+						"JavaCodeGenerator.preInitCode": "${field}.setModel(new ModeloTablaLibros());"
+					}
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnBuscar"
+				"text": "Buscar"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBuscarActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSalir"
+				"text": "Salir"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSalirActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnNuevoLibro"
+				"text": "Nuevo"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnNuevoLibroActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnEditarLibro"
+				"text": "Editar"
+				"enabled": false
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnEditarLibroActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel3"
+				"text": "Id:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaId"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :p:17:p, comp jLabel4:::::x, space :p:260:p}}"
+				"$verticalGroup": "par l {seq t {space :::p, comp jLabel4::::25:x, space :0:0:p}}"
+			} ) {
+				name: "jPanel1"
+				"background": new java.awt.Color( 220, 220, 220, 255 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "jLabel4"
+					"background": new java.awt.Color( 220, 220, 220, 255 )
+					"font": new java.awt.Font( "sansserif", 1, 14 )
+					"text": "Administración"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButton1"
+				"font": new java.awt.Font( "sansserif", 1, 13 )
+				"text": "Usuarios"
+				"maximumSize": new java.awt.Dimension( 120, 23 )
+				"minimumSize": new java.awt.Dimension( 120, 23 )
+				"preferredSize": new java.awt.Dimension( 125, 23 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnUsuariosActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButton2"
+				"font": new java.awt.Font( "sansserif", 1, 13 )
+				"text": "Categorías"
+				"maximumSize": new java.awt.Dimension( 120, 23 )
+				"minimumSize": new java.awt.Dimension( 120, 23 )
+				"preferredSize": new java.awt.Dimension( 125, 23 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnCategoriasActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) )
+	}
+}
