@@ -56,7 +56,7 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
     
 **Iago Feijoo Rey**:  iagofeijoo@correito.correito  
 
-* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+* [LinkedIn](https://www.linkedin.com/in/iagofeijoorey/)
 
   
 **Diego Cristóbal**:  diego.cristobal@email.com    
