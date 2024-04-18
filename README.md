@@ -15,8 +15,9 @@ La aplicación tiene como objetivo gestionar una base de datos relacional, propo
 
 ## Requisitos del Sistema - A ACTUALIZAR 
 * Java Development Kit (JDK) 8 o superior.
-* NetBeans IDE (opcional pero recomendado).
+* JetBrains IDE (opcional pero recomendado).
 * MySQL Server.
+* Plug-in de JetBrains: JFormDesigner
 
 ## Instrucciones de Uso
 1. Instala o habilita la extensión de GitHub en tu IDE (recomendado NetBeans).
