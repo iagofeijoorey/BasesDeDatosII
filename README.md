@@ -51,27 +51,22 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
   
 **Iago Feijoo**:  iagofeijoorey@gmail.com  
 
-* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
-
-    
-**Iago Feijoo Rey**:  iagofeijoo@correito.correito  
-
 * [LinkedIn](https://www.linkedin.com/in/iagofeijoorey/)
 
   
 **Diego Cristóbal**:  diego.cristobal@email.com    
 
-* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+* [LinkedIn](www.linkedin.com/in/diegoCristobal??)
    
   
 **Laura Antelo**:  laura.antelo@email.com      
 
-* [LinkedIn](www.linkedin.com/in/iagofeijoorey)
+* [LinkedIn](www.linkedin.com/in/lauraAntelo??)
   
   
 **Jose Luis**:  jose.luis@email.com      
 
-* [LinkedIn](www.linkedin.com/in/) 
+* [LinkedIn](www.linkedin.com/in/JodeLuisEstrada??) 
 
   
 ## Languages and Tools used
