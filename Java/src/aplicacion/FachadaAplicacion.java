@@ -16,6 +16,7 @@ public class FachadaAplicacion {
     GesionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
+    Integer nuevoIntDeCHill;
     
     
  public FachadaAplicacion(){
