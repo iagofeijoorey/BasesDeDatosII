@@ -20,7 +20,7 @@ La aplicación tiene como objetivo gestionar una base de datos relacional, propo
 * Plug-in de JetBrains: JFormDesigner
 
 ## Instrucciones de Uso
-1. Instala o habilita la extensión de GitHub en tu IDE (recomendado NetBeans).
+1. Instala o habilita la extensión de GitHub en tu IDE (recomendado IntelliJ).
 2. Importa el proyecto.
 3. Ejecuta los scripts SQL en tu servidor MySQL para crear la base de datos y cargar los datos de prueba. - HAY QUE VER COMO ES ESTO
 4. Configura la conexión a la base de datos en el código fuente según sea necesario.
