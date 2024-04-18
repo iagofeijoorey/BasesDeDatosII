@@ -70,7 +70,7 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
   
 **Jose Luis**:  jose.luis@email.com      
 
-* [LinkedIn](www.linkedin.com/in/iagofeijoorey) 
+* [LinkedIn](www.linkedin.com/in/) 
 
   
 ## Languages and Tools used
