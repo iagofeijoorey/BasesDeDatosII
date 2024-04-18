@@ -21,6 +21,7 @@ import java.util.Properties;
  * @author basesdatos
  */
 public class FachadaBaseDatos {
+    // Hola, esta es la branch de prueba
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
     private DAOLibros daoLibros;
