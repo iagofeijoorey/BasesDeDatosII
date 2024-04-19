@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp jPanel1::t:::x, seq {space :::p, par l {comp jScrollPane1::l::631:x, seq l {par l {comp etiquetaTitulo:::p::p, comp jLabel1::l:p::p}, space u:::p, par l {seq {comp buscaIsbn:::p:144:p, space u:::p, comp jLabel2:::p::p, space u:::p, comp buscaAutor:::::x}, comp buscaTitulo:::::x}}, seq t {comp btnNuevoLibro:::p::p, space s:::p, comp btnEditarLibro:::p::p, space :::x, comp btnSalir:::p::p}, seq t {comp jLabel3:::p::p, space :::p, comp buscaId:::p:50:p, space :::x, comp btnBuscar:::p::p}}, space :::p}, seq {par l {comp jButton1::l:p::p, comp jButton2::l:p::p}, space :0:0:x}}"
-			"$verticalGroup": "par l {seq l {comp jPanel1:::p::p, space :0:0:p, comp jButton1:::p::p, space :0:0:p, comp jButton2:::p::p, space :p::p, par b {comp buscaTitulo::b:p::p, comp etiquetaTitulo::b:p::p}, space :p:21:p, par b {comp buscaAutor::b:p::p, comp jLabel1::b:p::p, comp buscaIsbn::b:p::p, comp jLabel2::b:p::p}, space u:::p, par l {par b {comp btnBuscar::b:p::p, comp jLabel3::b:p::p}, comp buscaId::l:p::p}, space :p:12:p, comp jScrollPane1:::p:292:p, space u:::p, par b {comp btnSalir::b:p::p, comp btnNuevoLibro::b:p::p, comp btnEditarLibro::b:p::p}, space :::x}}"
+			"$horizontalGroup": "par l {comp jPanel1::t:::x, seq {space :::p, par l {seq l {par l {comp etiquetaTitulo:::p::p, comp jLabel1::l:p::p}, space u:::p, par l {seq {comp buscaIsbn:::p:144:p, space u:::p, comp jLabel2:::p::p, space u:::p, comp buscaAutor:::::x}, comp buscaTitulo:::::x}}, seq t {comp jLabel3:::p::p, space :::p, comp buscaId:::p:50:p, space :::x, comp btnBuscar:::p::p}, seq {comp jScrollPane1:::p:516:p, space :0:0:x}, seq l {comp btnNuevoLibro:::p::p, space s:::p, comp btnEditarLibro:::p::p, space ::187:x, comp btnSalir:::p::p, space :p:110:p, comp menu1:::p:100:p}}, space :::p}, seq {par l {comp jButton1::l:p::p, comp jButton2::l:p::p}, space :0:0:x}}"
+			"$verticalGroup": "par l {seq l {comp jPanel1:::p::p, par l {seq {comp jButton1:::p::p, space :0:0:p, comp jButton2:::p::p, space :p::p, par b {comp buscaTitulo::b:p::p, comp etiquetaTitulo::b:p::p}, space :p:21:p, par b {comp buscaAutor::b:p::p, comp jLabel1::b:p::p, comp buscaIsbn::b:p::p, comp jLabel2::b:p::p}, space u:::p, par l {par b {comp btnBuscar::b:p::p, comp jLabel3::b:p::p}, comp buscaId::l:p::p}, space :p:12:p, comp jScrollPane1:::p:286:p, space s:::p, par b {comp btnNuevoLibro::b:p::p, comp btnEditarLibro::b:p::p, comp btnSalir::b:p::p}, space :::x}, seq t {space :::x, comp menu1:::p::p}}}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -76,7 +76,7 @@ new FormModel {
 				name: "buscaId"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :p:17:p, comp jLabel4:::::x, space :p:260:p}}"
+				"$horizontalGroup": "par l {seq {space :p:17:p, comp jLabel4::::366:x, space :p:260:p}}"
 				"$verticalGroup": "par l {seq t {space :::p, comp jLabel4::::25:x, space :0:0:p}}"
 			} ) {
 				name: "jPanel1"
@@ -106,6 +106,36 @@ new FormModel {
 				"preferredSize": new java.awt.Dimension( 125, 23 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnCategoriasActionPerformed", true ) )
 			} )
-		}, new FormLayoutConstraints( null ) )
+			add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+				name: "menu1"
+				"text": "text"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "text"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button5"
+					"text": "text"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button6"
+					"text": "text"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": "text"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "text"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button4"
+					"text": "text"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 30 )
+		} )
 	}
 }

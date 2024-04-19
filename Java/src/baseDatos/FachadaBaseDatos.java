@@ -35,8 +35,9 @@ public class FachadaBaseDatos {
         FileInputStream arqConfiguracion;
 
         try {
-            arqConfiguracion = new FileInputStream("baseDatos.properties");
+            arqConfiguracion = new FileInputStream("Java/baseDatosSecta.properties");
             configuracion.load(arqConfiguracion);
+
             arqConfiguracion.close();
 
             Properties usuario = new Properties();
@@ -46,11 +47,14 @@ public class FachadaBaseDatos {
 
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
+            System.out.println("HE LLEGAO");
+
             this.conexion=java.sql.DriverManager.getConnection("jdbc:"+gestor+"://"+
                     configuracion.getProperty("servidor")+":"+
                     configuracion.getProperty("puerto")+"/"+
                     configuracion.getProperty("baseDatos"),
                     usuario);
+
             daoLibros = new DAOLibros(conexion, fa);
             daoCategorias = new DAOCategorias(conexion, fa);
             daoUsuarios = new DAOUsuarios(conexion, fa);
