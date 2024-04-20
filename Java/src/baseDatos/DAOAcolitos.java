@@ -4,22 +4,16 @@
  */
 
 package baseDatos;
-
-import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import aplicacion.TipoUsuario;
+import java.sql.*;
 /**
  *
  * @author basesdatos
  */
-public class DAOUsuarios extends AbstractDAO {
+public class DAOAcolitos extends AbstractDAO {
 
-   public DAOUsuarios(Connection conexion, aplicacion.FachadaAplicacion fa){
+   public DAOAcolitos(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }

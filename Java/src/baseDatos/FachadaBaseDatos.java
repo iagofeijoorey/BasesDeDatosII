@@ -12,7 +12,6 @@ import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -24,9 +23,10 @@ public class FachadaBaseDatos {
     // Hola, esta es la branch de prueba
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
-    private DAOLibros daoLibros;
-    private DAOCategorias daoCategorias;
-    private DAOUsuarios daoUsuarios;
+    private DAOEventos daoEventos;
+    private DAOPropiedades daoPropiedades;
+    private DAOContactos daoContactos;
+    private DAOAcolitos daoAcolitos;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa) {
 
@@ -54,115 +54,108 @@ public class FachadaBaseDatos {
                             configuracion.getProperty("baseDatos"),
                     usuario);
 
-            daoLibros = new DAOLibros(conexion, fa);
-            daoCategorias = new DAOCategorias(conexion, fa);
-            daoUsuarios = new DAOUsuarios(conexion, fa);
+            daoEventos = new DAOEventos(conexion, fa);
+            daoPropiedades = new DAOPropiedades(conexion, fa);
+            daoAcolitos = new DAOAcolitos(conexion, fa);
+            daoContactos = new DAOContactos(conexion, fa);
 
-
-        } catch (FileNotFoundException f) {
-            System.out.println(f.getMessage());
-            fa.muestraExcepcion(f.getMessage());
-        } catch (IOException i) {
+        } catch (IOException | SQLException i) {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
-        } catch (java.sql.SQLException e) {
-            System.out.println(e.getMessage());
-            fa.muestraExcepcion(e.getMessage());
-
         }
     }
     
     public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    daoLibros.anadirPrestamo(usuario,ejemplar);
+    daoEventos.anadirPrestamo(usuario,ejemplar);
     }
 
 
     public void devolver(Ejemplar ejemplar){
-        daoLibros.devolver(ejemplar);
+        daoEventos.devolver(ejemplar);
     }
 
 
     public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor){
-        return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
+        return daoEventos.consultarCatalogo(id, titulo, isbn, autor);
     }
 
     public Libro consultarLibro(Integer idLibro){
-        return daoLibros.consultarLibro(idLibro);
+        return daoEventos.consultarLibro(idLibro);
     }
     public java.util.List<Ejemplar> consultarEjemplaresLibro(Integer idLibro){
-        return daoLibros.consultarEjemplaresLibro(idLibro);
+        return daoEventos.consultarEjemplaresLibro(idLibro);
     }
     
     public Integer consultarMaxEjemplarLibro(Integer idLibro){
-        return daoLibros.consultarMaxEjemplarLibro(idLibro);
+        return daoEventos.consultarMaxEjemplarLibro(idLibro);
     }
                 
             
     public java.util.List<String> obtenerRestoCategorias(Integer idLibro){
-        return daoLibros.obtenerRestoCategorias(idLibro);
+        return daoEventos.obtenerRestoCategorias(idLibro);
     }
     public void insertarCategoria(Categoria categoria){
-        daoCategorias.insertarCategoria(categoria);
+        daoPropiedades.insertarCategoria(categoria);
     }
     public void borrarCategoria(Categoria categoria){
-        daoCategorias.borrarCategoria(categoria);
+        daoPropiedades.borrarCategoria(categoria);
     }
     
     public Integer insertarLibro(Libro libro){
-       return daoLibros.insertarLibro(libro);
+       return daoEventos.insertarLibro(libro);
     }
     
     public void insertarUsuario(Usuario usuario){
-        daoUsuarios.insertarUsuario(usuario);
+        daoAcolitos.insertarUsuario(usuario);
     }
     
     public void borrarLibro(Integer idLibro){
-        daoLibros.borrarLibro(idLibro);
+        daoEventos.borrarLibro(idLibro);
     }
     
     public void borrarUsuario(Usuario usuario){
-        daoUsuarios.borrarUsuario(usuario);
+        daoAcolitos.borrarUsuario(usuario);
     }
     public void modificarLibro(Libro libro){
-         daoLibros.modificarLibro(libro);
+         daoEventos.modificarLibro(libro);
     }
     public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
-       daoLibros.modificarCategoriasLibro(idLibro, categorias);
+       daoEventos.modificarCategoriasLibro(idLibro, categorias);
     }
     public void insertarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        ejemplar.setNumEjemplar(daoLibros.consultarMaxEjemplarLibro(idLibro)+1);
-        daoLibros.insertarEjemplarLibro(idLibro, ejemplar);
+        ejemplar.setNumEjemplar(daoEventos.consultarMaxEjemplarLibro(idLibro)+1);
+        daoEventos.insertarEjemplarLibro(idLibro, ejemplar);
     }
     public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar){
-        daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
+        daoEventos.borrarEjemplaresLibro(idLibro, numsEjemplar);
     }
     public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
+        daoEventos.modificarEjemplarLibro(idLibro, ejemplar);
     }
 
     public Usuario validarUsuario(String idUsuario, String clave){
-        return daoUsuarios.validarUsuario(idUsuario, clave);
+        return daoAcolitos.validarUsuario(idUsuario, clave);
     }
    
     public java.util.List<Categoria> consultarCategorias(){
-        return daoCategorias.consultarCategorias();
+        return daoPropiedades.consultarCategorias();
     }
     
     public java.util.List<Usuario> consultarUsuarios(){
-        return daoUsuarios.consultarUsuarios();
+        return daoAcolitos.consultarUsuarios();
     }
     
     public java.util.List<Usuario> consultarUsuariosPrestamos(){
-        return daoUsuarios.consultarUsuariosPrestamos("",""); //Sin filtros
+        return daoAcolitos.consultarUsuariosPrestamos("",""); //Sin filtros
     }
     
     public java.util.List<Usuario> consultarUsuariosPrestamos(String IDUsuario, String Nombre) {
-        return daoUsuarios.consultarUsuariosPrestamos(IDUsuario,Nombre);
+        return daoAcolitos.consultarUsuariosPrestamos(IDUsuario,Nombre);
      }
          
     public java.util.List<Usuario> consultarUsuarios(String IDUsuario, String Nombre){
         //System.out.println("Iniciando consulta de ID: "+IDUsuario +" y Nombre: "+Nombre);
-        return daoUsuarios.consultarUsuarios(IDUsuario, Nombre);
+        return daoAcolitos.consultarUsuarios(IDUsuario, Nombre);
     }
 
 

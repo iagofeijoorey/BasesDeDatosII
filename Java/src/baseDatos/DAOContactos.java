@@ -17,9 +17,9 @@ import java.sql.SQLException;
  *
  * @author basesdatos
  */
-public class DAOUsuarios extends AbstractDAO {
+public class DAOContactos extends AbstractDAO {
 
-   public DAOUsuarios(Connection conexion, aplicacion.FachadaAplicacion fa){
+   public DAOContactos(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }

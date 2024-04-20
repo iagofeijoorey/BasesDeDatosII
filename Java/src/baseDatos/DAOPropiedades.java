@@ -10,10 +10,10 @@ import java.sql.*;
  *
  * @author basesdatos
  */
-public class DAOCategorias extends AbstractDAO {
+public class DAOPropiedades extends AbstractDAO {
    
     
-    public DAOCategorias (Connection conexion, aplicacion.FachadaAplicacion fa){
+    public DAOPropiedades(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }

@@ -14,9 +14,9 @@ import aplicacion.Usuario;
  *
  * @author basesdatos
  */
-public class DAOLibros extends AbstractDAO {
+public class DAOEventos extends AbstractDAO {
 
-    public DAOLibros (Connection conexion, aplicacion.FachadaAplicacion fa){
+    public DAOEventos(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
