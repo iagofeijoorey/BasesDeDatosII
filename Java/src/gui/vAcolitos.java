@@ -23,7 +23,7 @@ import java.util.ArrayList;
  *
  * @author basesdatos
  */
-public class VLibro extends javax.swing.JDialog {
+public class vAcolitos extends javax.swing.JDialog {
 
      private Integer idLibro;
      private java.util.List<Integer> ejemplaresBorrados;
@@ -32,7 +32,7 @@ public class VLibro extends javax.swing.JDialog {
      private Libro libro;
 
     /** Creates new form VLibro */
-    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoCategorias) {
+    public vAcolitos(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, java.util.List<String> restoCategorias) {
         super(parent, modal);
         this.fa=fa;
         initComponents();
@@ -55,7 +55,7 @@ public class VLibro extends javax.swing.JDialog {
         btnBorrarEjemplar.setEnabled(false);
     }
 
-    public VLibro(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Libro libro, java.util.List<String> categorias, java.util.List<String> restoCategorias) {
+    public vAcolitos(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Libro libro, java.util.List<String> categorias, java.util.List<String> restoCategorias) {
         super(parent, modal);
         this.fa=fa;
         this.libro = libro;

@@ -33,21 +33,21 @@ public class FachadaGui {
     
    
     public void visualizaLibro(Libro l, java.util.List<String>restoCategorias){
-        VLibro vl;
+        vAcolitos vl;
         java.util.List<String> categorias = new java.util.ArrayList<String>();
         
         for(Acolito c:l.getCategorias()){
             categorias.add(c.getNombre());
         }
         
-        vl=new VLibro(vp, true, fa, l, categorias, restoCategorias);
+        vl=new vAcolitos(vp, true, fa, l, categorias, restoCategorias);
         vl.setVisible(true);
     }
     
     public void nuevoLibro(java.util.List<String>  restoCategorias){
-        VLibro vl;
+        vAcolitos vl;
         
-        vl=new VLibro(vp, true, fa, restoCategorias);
+        vl=new vAcolitos(vp, true, fa, restoCategorias);
         vl.setVisible(true);
     }
     
@@ -59,9 +59,9 @@ public class FachadaGui {
     }
     
     public void categorias(){
-        VCategorías vC;
+        vContrato vC;
         
-        vC = new VCategorías (vp, true, fa);
+        vC = new vContrato(vp, true, fa);
         vC.setVisible(true);
     }
     

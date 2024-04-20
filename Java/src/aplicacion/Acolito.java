@@ -35,6 +35,7 @@ public class Acolito {
         this.dinero = dinero;
         this.primeraEntrada = true;
     }
+}
 
 
 
