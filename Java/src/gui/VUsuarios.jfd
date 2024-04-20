@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.9" class="java.beans.XMLDecoder">
+<java version="17.0.8" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -499,13 +499,12 @@
      </object>
      <object class="com.jformdesigner.model.FormLayoutConstraints">
       <null/>
-     </object>
-    </void>
-    <void method="add">
-     <object class="com.jformdesigner.model.FormComponent">
-      <string>javax.swing.JFileChooser</string>
-      <void property="name">
-       <string>jFileChooser1</string>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>0</int>
+        <int>0</int>
+       </object>
       </void>
      </object>
     </void>

@@ -12,12 +12,11 @@ import aplicacion.Acolito;
  */
 
 
-public class ModeloListaCategorias extends javax.swing.AbstractListModel{
+public class ModeloListaAcolitos extends javax.swing.AbstractListModel{
     private java.util.List<Acolito> acolitos;
 
-
-    public ModeloListaCategorias(){
-        this.acolitos =new java.util.ArrayList<Acolito>();
+    public ModeloListaAcolitos(){
+        this.acolitos = new java.util.ArrayList<Acolito>();
     }
 
     public Acolito getElementAt(int p){
@@ -26,7 +25,6 @@ public class ModeloListaCategorias extends javax.swing.AbstractListModel{
     
     public void setContent(java.util.List<Acolito> acolitos){
         this.acolitos = acolitos;
-        
     }
     
     public int getColumnCount (){
@@ -45,17 +43,15 @@ public class ModeloListaCategorias extends javax.swing.AbstractListModel{
         this.acolitos = acolitos;
     }
     
-    public void addCategoria(Acolito acolito){
+    public void addAcolito(Acolito acolito){
         acolitos.add(acolito);
-        //
     }
 
     public Object getValueAt(int row, int col){
-        return acolitos.get(row).getNombre();
+        return acolitos.get(row);
     }
 
- 
-    public Acolito obtenerCategoria(int i){
+    public Acolito obtenerAcolito(int i){
         return this.acolitos.get(i);
     }
 

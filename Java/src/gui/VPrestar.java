@@ -16,7 +16,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
+
 import aplicacion.Ejemplar;
 
 /**
@@ -25,7 +25,7 @@ import aplicacion.Ejemplar;
  */
 public class VPrestar extends javax.swing.JDialog {
 
-     protected VLibro padre;
+     protected vAcolitos padre;
      private aplicacion.FachadaAplicacion fa;
      private Ejemplar ejemplar;
 
