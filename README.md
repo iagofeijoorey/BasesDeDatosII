@@ -61,7 +61,7 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
   
 **Laura Antelo**:  lauraantelogonzalez@gmail.com      
 
-* [LinkedIn](www.linkedin.com/in/lauraantelogonzález)
+* [LinkedIn](www.linkedin.com/in/lauraantelogonzález/)
   
   
 **Jose Luis**:  jose.luis@email.com      
