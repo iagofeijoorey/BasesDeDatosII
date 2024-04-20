@@ -59,9 +59,9 @@ Para cualquier duda o sugerencia, puedes ponerte en contacto con el equipo de de
 * [LinkedIn](www.linkedin.com/in/diegoCristobal??)
    
   
-**Laura Antelo**:  laura.antelo@email.com      
+**Laura Antelo**:  lauraantelogonzalez@gmail.com      
 
-* [LinkedIn](www.linkedin.com/in/lauraAntelo??)
+* [LinkedIn](www.linkedin.com/in/lauraantelogonzález)
   
   
 **Jose Luis**:  jose.luis@email.com      
