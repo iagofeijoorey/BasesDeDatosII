@@ -4,9 +4,8 @@
  */
 
 package gui;
-import javax.swing.table.*;
-import aplicacion.Categoria;
-import javax.swing.AbstractListModel.*;
+import aplicacion.Acolito;
+
 /**
  *
  * @author basesdatos
@@ -14,19 +13,19 @@ import javax.swing.AbstractListModel.*;
 
 
 public class ModeloListaCategorias extends javax.swing.AbstractListModel{
-    private java.util.List<Categoria> categorias;
+    private java.util.List<Acolito> acolitos;
 
 
     public ModeloListaCategorias(){
-        this.categorias=new java.util.ArrayList<Categoria>();
+        this.acolitos =new java.util.ArrayList<Acolito>();
     }
 
-    public Categoria getElementAt(int p){
-        return categorias.get(p);
+    public Acolito getElementAt(int p){
+        return acolitos.get(p);
     }
     
-    public void setContent(java.util.List<Categoria> categorias){
-        this.categorias = categorias;
+    public void setContent(java.util.List<Acolito> acolitos){
+        this.acolitos = acolitos;
         
     }
     
@@ -35,29 +34,29 @@ public class ModeloListaCategorias extends javax.swing.AbstractListModel{
     }
     
     public int getSize(){
-        return categorias.size();
+        return acolitos.size();
     }
 
     public int getRowCount(){
-        return categorias.size();
+        return acolitos.size();
     }
     
-    public void setLista(java.util.ArrayList<Categoria> categorias){
-        this.categorias = categorias;
+    public void setLista(java.util.ArrayList<Acolito> acolitos){
+        this.acolitos = acolitos;
     }
     
-    public void addCategoria(Categoria categoria){
-        categorias.add(categoria);
+    public void addCategoria(Acolito acolito){
+        acolitos.add(acolito);
         //
     }
 
     public Object getValueAt(int row, int col){
-        return categorias.get(row).getNombre();
+        return acolitos.get(row).getNombre();
     }
 
  
-    public Categoria obtenerCategoria(int i){
-        return this.categorias.get(i);
+    public Acolito obtenerCategoria(int i){
+        return this.acolitos.get(i);
     }
 
 }

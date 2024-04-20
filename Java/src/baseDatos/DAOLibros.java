@@ -6,7 +6,7 @@
 package baseDatos;
 
 import aplicacion.Ejemplar;
-import aplicacion.Categoria;
+import aplicacion.Acolito;
 import aplicacion.Libro;
 import java.sql.*;
 import aplicacion.Usuario;
@@ -136,7 +136,7 @@ public class DAOLibros extends AbstractDAO {
             rsCategorias=stmCategorias.executeQuery();
             while (rsCategorias.next())
             {
-                 resultado.addCategoria(new Categoria(rsCategorias.getString("categoria"), null));
+                 resultado.addCategoria(new Acolito(rsCategorias.getString("categoria"), null));
             }
             } catch (SQLException e){
                  System.out.println(e.getMessage());

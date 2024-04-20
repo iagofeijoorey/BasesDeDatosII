@@ -24,7 +24,7 @@ public class GesionLibros{
         return fbd.consultarCatalogo(id, titulo, isbn, autor);
     }
     
-    public java.util.List<Categoria> obtenerCategorias(){
+    public java.util.List<Acolito> obtenerCategorias(){
         return fbd.consultarCategorias(); 
     }
     
@@ -41,7 +41,7 @@ public class GesionLibros{
     public void nuevoLibro(){
         java.util.List<String> restoCategorias = new java.util.ArrayList<String> ();
 
-        for(Categoria c:fbd.consultarCategorias()){
+        for(Acolito c:fbd.consultarCategorias()){
             restoCategorias.add(c.getNombre());
         }
 

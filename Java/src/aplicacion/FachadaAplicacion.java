@@ -45,7 +45,7 @@ public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isb
   return cl.obtenerLibros(id, titulo,  isbn,  autor);
 };
 
-public java.util.List<Categoria> obtenerCategorias(){
+public java.util.List<Acolito> obtenerCategorias(){
   return cl.obtenerCategorias();
 };
 
@@ -81,12 +81,12 @@ public void nuevoUsuario(Usuario usuario){
     cu.nuevoUsuario(usuario);
 }
 
-public void nuevaCategoria(Categoria categoria){
-    cc.nuevaCategoria(categoria);
+public void nuevaCategoria(Acolito acolito){
+    cc.nuevaCategoria(acolito);
 }
 
-public void borrarCategoria(Categoria categoria){
-    cc.borrarCategoria(categoria);
+public void borrarCategoria(Acolito acolito){
+    cc.borrarCategoria(acolito);
 }
 
 public void usuarios(){

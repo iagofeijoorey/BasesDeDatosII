@@ -4,7 +4,7 @@
  */
 package gui;
 
-import aplicacion.Categoria;
+import aplicacion.Acolito;
 import aplicacion.Libro;
 import aplicacion.Ejemplar;
 
@@ -36,7 +36,7 @@ public class FachadaGui {
         VLibro vl;
         java.util.List<String> categorias = new java.util.ArrayList<String>();
         
-        for(Categoria c:l.getCategorias()){
+        for(Acolito c:l.getCategorias()){
             categorias.add(c.getNombre());
         }
         

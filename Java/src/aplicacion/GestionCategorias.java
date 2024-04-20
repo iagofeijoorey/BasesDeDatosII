@@ -32,12 +32,12 @@ public class GestionCategorias {
   }
   
 
-  public void nuevaCategoria(Categoria categoria){
-      fbd.insertarCategoria(categoria);
+  public void nuevaCategoria(Acolito acolito){
+      fbd.insertarCategoria(acolito);
   }
   
-  public void borrarCategoria(Categoria categoria){
-      fbd.borrarCategoria(categoria);
+  public void borrarCategoria(Acolito acolito){
+      fbd.borrarCategoria(acolito);
   }
  
   

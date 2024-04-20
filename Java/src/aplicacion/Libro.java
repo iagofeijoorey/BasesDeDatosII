@@ -20,7 +20,7 @@ public class Libro {
     private Integer paginas;
     private String ano;
     private java.util.List<String> autores;
-    private java.util.List<Categoria> categorias;
+    private java.util.List<Acolito> acolitos;
     private java.util.List<Ejemplar> ejemplares;
 
     public Libro (Integer idLibro, String titulo, String isbn, String editorial, Integer paginas, String ano){
@@ -31,7 +31,7 @@ public class Libro {
         this.paginas=paginas;
         this.ano=ano;
         autores = new java.util.ArrayList<String>();
-        categorias = new java.util.ArrayList<Categoria>();
+        acolitos = new java.util.ArrayList<Acolito>();
         ejemplares = new java.util.ArrayList<Ejemplar>();
     }
 
@@ -71,12 +71,12 @@ public class Libro {
         this.autores.add(autor);
     }
 
-    public java.util.List<Categoria> getCategorias (){
-        return this.categorias;
+    public java.util.List<Acolito> getCategorias (){
+        return this.acolitos;
     }
 
-    public void addCategoria (Categoria categoria){
-        this.categorias.add(categoria);
+    public void addCategoria (Acolito acolito){
+        this.acolitos.add(acolito);
     }
 
     public java.util.List<Ejemplar> getEjemplares (){

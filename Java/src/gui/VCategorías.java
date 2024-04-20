@@ -16,9 +16,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
-import aplicacion.Categoria;
+
+import aplicacion.Acolito;
 /**
  *
  * @author basesdatos
@@ -202,7 +201,7 @@ public class VCategorías extends javax.swing.JDialog {
         if (jTextField1.getText()!=null){
             System.out.println(jTextField1.getText());
             if (jList1.getSelectedIndex() == -1){
-            fa.nuevaCategoria(new Categoria(jTextField1.getText(),jTextPane1.getText()));
+            fa.nuevaCategoria(new Acolito(jTextField1.getText(),jTextPane1.getText()));
             mLC.setContent(fa.obtenerCategorias());
             }
         }
@@ -278,7 +277,7 @@ public class VCategorías extends javax.swing.JDialog {
     private JLabel jLabel2;
     private JLabel jLabel3;
     private JScrollPane jScrollPane2;
-    private JList<Categoria> jList1;
+    private JList<Acolito> jList1;
     // End of variables declaration//GEN-END:variables
 
 }

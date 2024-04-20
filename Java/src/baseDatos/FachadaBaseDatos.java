@@ -7,13 +7,11 @@ package baseDatos;
 
 import aplicacion.Ejemplar;
 import aplicacion.Usuario;
-import aplicacion.Categoria;
+import aplicacion.Acolito;
 import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -103,11 +101,11 @@ public class FachadaBaseDatos {
     public java.util.List<String> obtenerRestoCategorias(Integer idLibro){
         return daoLibros.obtenerRestoCategorias(idLibro);
     }
-    public void insertarCategoria(Categoria categoria){
-        daoCategorias.insertarCategoria(categoria);
+    public void insertarCategoria(Acolito acolito){
+        daoCategorias.insertarCategoria(acolito);
     }
-    public void borrarCategoria(Categoria categoria){
-        daoCategorias.borrarCategoria(categoria);
+    public void borrarCategoria(Acolito acolito){
+        daoCategorias.borrarCategoria(acolito);
     }
     
     public Integer insertarLibro(Libro libro){
@@ -146,7 +144,7 @@ public class FachadaBaseDatos {
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
    
-    public java.util.List<Categoria> consultarCategorias(){
+    public java.util.List<Acolito> consultarCategorias(){
         return daoCategorias.consultarCategorias();
     }
     
