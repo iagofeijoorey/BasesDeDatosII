@@ -4,17 +4,18 @@
  */
 
 package gui;
-import aplicacion.Usuario;
+import aplicacion.Acolito;
+
 import javax.swing.table.*;
 /**
  *
  * @author basesdatos
  */
 public class ModeloPrestamos extends AbstractTableModel{
-    private java.util.List<Usuario> usuarios;
+    private java.util.List<Acolito> acolitos;
 
     public ModeloPrestamos(){
-        this.usuarios=new java.util.ArrayList<Usuario>();
+        this.acolitos =new java.util.ArrayList<Acolito>();
     }
 
     public int getColumnCount (){
@@ -22,7 +23,7 @@ public class ModeloPrestamos extends AbstractTableModel{
     }
 
     public int getRowCount(){
-        return usuarios.size();
+        return acolitos.size();
     }
 
     @Override
@@ -38,8 +39,8 @@ public class ModeloPrestamos extends AbstractTableModel{
         return nombre;
     }
 
-    public Usuario getUsuario(Integer i){
-        return usuarios.get(i);
+    public Acolito getUsuario(Integer i){
+        return acolitos.get(i);
     }
     
     @Override
@@ -64,22 +65,22 @@ public class ModeloPrestamos extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= usuarios.get(row).getIdUsuario(); break;
-            case 1: resultado= usuarios.get(row).getNombre(); break;
-            case 2: resultado=usuarios.get(row).getEmail();break;
-            case 3: resultado=usuarios.get(row).getPrestamosVencidos(); break;
+            case 0: resultado= acolitos.get(row).getIdUsuario(); break;
+            case 1: resultado= acolitos.get(row).getNombre(); break;
+            case 2: resultado= acolitos.get(row).getEmail();break;
+            case 3: resultado= acolitos.get(row).getPrestamosVencidos(); break;
 
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Usuario> usuarios){
-        this.usuarios=usuarios;
+    public void setFilas(java.util.List<Acolito> acolitos){
+        this.acolitos = acolitos;
         fireTableDataChanged();
     }
 
-    public Usuario obtenerUsuario(int i){
-        return this.usuarios.get(i);
+    public Acolito obtenerUsuario(int i){
+        return this.acolitos.get(i);
     }
 
 }

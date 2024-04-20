@@ -4,9 +4,6 @@
  */
 package aplicacion;
 
-import aplicacion.Libro;
-import java.util.Date;
-
 /**
  *
  * @author basesdatos
@@ -17,11 +14,11 @@ public class Ejemplar {
     private String localizador;
     private String anoCompra;
     private Libro libro;
-    private Usuario tenedor = new Usuario(" "," "," "," "," ",TipoUsuario.Normal); //Usamos un usuario vacío para los ejemplares en manos de la biblioteca
+    private Acolito tenedor = new Acolito(" "," "," "," "," ", TipoAcolito.Normal); //Usamos un usuario vacío para los ejemplares en manos de la biblioteca
     private String fechaPrestamo = " ";
     private String fechaVencimiento = " ";
 
-    public void setTenedor(Usuario tenedor) {
+    public void setTenedor(Acolito tenedor) {
         this.tenedor = tenedor;
     }
     
@@ -41,7 +38,7 @@ public class Ejemplar {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public Usuario getTenedor() {
+    public Acolito getTenedor() {
         return tenedor;
     }
 

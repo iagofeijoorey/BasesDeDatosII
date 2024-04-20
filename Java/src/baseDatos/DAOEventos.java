@@ -9,7 +9,7 @@ import aplicacion.Ejemplar;
 import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.sql.*;
-import aplicacion.Usuario;
+import aplicacion.Acolito;
 /**
  *
  * @author basesdatos
@@ -202,7 +202,7 @@ public class DAOEventos extends AbstractDAO {
         }
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
+    public void anadirPrestamo (Acolito acolito, Ejemplar ejemplar){
         System.out.println("Añadiendo prestamo");
         Connection con;
         PreparedStatement stmPrestamo=null;
@@ -211,7 +211,7 @@ public class DAOEventos extends AbstractDAO {
 
         try {
         stmPrestamo=con.prepareStatement("insert into prestamo(id_usuario, num_ejemplar, id_libro, fechaprestamo) values (?,?,?,date(current_date))");
-        stmPrestamo.setString(1, usuario.getIdUsuario());
+        stmPrestamo.setString(1, acolito.getIdUsuario());
         stmPrestamo.setInt(2, ejemplar.getNumEjemplar());
         stmPrestamo.setInt(3, ejemplar.getLibro().getIdLibro());
         

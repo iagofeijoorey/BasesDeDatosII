@@ -11,11 +11,16 @@ package aplicacion;
  *
  * @author basesdatos
  */
-public enum TipoUsuario {
+public enum TipoAcolito {
     Administrador,
+    Cabecilla,
+    JefeDivision,
+    Gestor,
+
     Normal;
 
-    public static TipoUsuario stringToTipoUsuario(String tu){
+
+    public static TipoAcolito stringToTipoAcolito(String tu){
         switch (tu){
             case ("Administrador"):
                 return Administrador;

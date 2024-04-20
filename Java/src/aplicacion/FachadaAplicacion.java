@@ -18,6 +18,7 @@ FachadaAplicacion {
     GesionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
+    Acolito currentUser;
     
     
  public FachadaAplicacion(){
@@ -51,21 +52,21 @@ public java.util.List<Categoria> obtenerCategorias(){
   return cl.obtenerCategorias();
 };
 
-public java.util.List<Usuario> obtenerUsuarios(){
+public java.util.List<Acolito> obtenerUsuarios(){
     return cu.obtenerUsuarios();
 }
-public java.util.List<Usuario> obtenerUsuariosPretamos(){
+public java.util.List<Acolito> obtenerUsuariosPretamos(){
     return cu.obtenerUsuariosPrestamos();
 }
 
-public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    cl.anadirPrestamo(usuario,ejemplar);
+public void anadirPrestamo (Acolito acolito, Ejemplar ejemplar){
+    cl.anadirPrestamo(acolito,ejemplar);
 }
 
-public java.util.List<Usuario> buscarUsuarios(String IDUsuario, String Nombre){
+public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre){
     return cu.buscarUsuarios(IDUsuario, Nombre);
 }
-public java.util.List<Usuario> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
+public java.util.List<Acolito> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
     return cu.buscarUsuariosPrestamos(IDUsuario, Nombre);
 }
 
@@ -79,8 +80,8 @@ public void nuevoLibro(){
 }
 
 
-public void nuevoUsuario(Usuario usuario){
-    cu.nuevoUsuario(usuario);
+public void nuevoUsuario(Acolito acolito){
+    cu.nuevoUsuario(acolito);
 }
 
 public void nuevaCategoria(Categoria categoria){
@@ -114,8 +115,8 @@ public void borrarLibro(Integer idLibro){
    cl.borrarLibro(idLibro);
 }
 
-public void borrarUsuario(Usuario usuario){
-    cu.borrarUsuario(usuario);
+public void borrarUsuario(Acolito acolito){
+    cu.borrarUsuario(acolito);
 }
 
 public void borrarEjemplar(Integer idLibro, Integer numEjemplar){
@@ -132,12 +133,12 @@ public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.
 
 
 public Boolean comprobarAutentificacion(String idUsuario, String clave){
-  //return cu.comprobarAutentificacion(idUsuario, clave);
-    return true;
+    return cu.comprobarAutentificacion(idUsuario, clave, this);
+    //return true;
 }
- 
 
 
-
-
+    public void setCurrentUser(Acolito u) {
+    currentUser = u;
+    }
 }

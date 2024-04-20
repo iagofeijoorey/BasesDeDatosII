@@ -16,10 +16,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
-import aplicacion.TipoUsuario;
-import aplicacion.Usuario;
+
+import aplicacion.TipoAcolito;
+import aplicacion.Acolito;
 
 /**
  *
@@ -38,7 +37,7 @@ public class VUsuarios extends javax.swing.JDialog {
         ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
         
         jComboBox1.addItem(" ");
-        for (TipoUsuario i: TipoUsuario.values())
+        for (TipoAcolito i: TipoAcolito.values())
             jComboBox1.addItem(i.toString());
         
     }
@@ -323,20 +322,20 @@ public class VUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
         //Comprobación de si existe en la bd
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
-        Usuario u = new Usuario(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),jTextField5.getText(),TipoUsuario.stringToTipoUsuario(jComboBox1.getSelectedItem().toString()));
-        Usuario us;
+        Acolito u = new Acolito(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),jTextField5.getText(), TipoAcolito.stringToTipoAcolito(jComboBox1.getSelectedItem().toString()));
+        Acolito us;
         
         
         if (jTable1.getSelectedRow()!=-1){ //Borramos el usuario anterior al editar..
             us = mu.obtenerUsuario(jTable1.getSelectedRow()); //Usuario seleccionado
-            for (Usuario iu: fa.obtenerUsuarios())
+            for (Acolito iu: fa.obtenerUsuarios())
                 if (iu.getIdUsuario().equals(u.getIdUsuario()) && !iu.getIdUsuario().equals(us.getIdUsuario())){
                     jLabel9.setVisible(true);
                     return;
                 }
             fa.borrarUsuario(us);
         }
-        for (Usuario iu: fa.obtenerUsuarios())
+        for (Acolito iu: fa.obtenerUsuarios())
             if (iu.getIdUsuario().equals(u.getIdUsuario())){
                 jLabel9.setVisible(true);
                 return;
@@ -349,7 +348,7 @@ public class VUsuarios extends javax.swing.JDialog {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
-        Usuario u = mu.obtenerUsuario(jTable1.getSelectedRow());
+        Acolito u = mu.obtenerUsuario(jTable1.getSelectedRow());
         
         fa.borrarUsuario(u);
         ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios()); //Refrescar la tabla

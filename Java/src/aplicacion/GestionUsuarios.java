@@ -22,35 +22,36 @@ public class GestionUsuarios {
     }  
     
     
-  public Boolean comprobarAutentificacion(String idUsuario, String clave){
-      Usuario u;
+  public Boolean comprobarAutentificacion(String idUsuario, String clave, FachadaAplicacion faABD){
+      Acolito u;
 
       u=fbd.validarUsuario(idUsuario, clave);
       if (u!=null){
-          return u.getTipoUsuario()==TipoUsuario.Administrador;
+          faABD.setCurrentUser(u);
+          return true;
       } else return false;
   }
   
-     public java.util.List<Usuario> obtenerUsuarios(){
+     public java.util.List<Acolito> obtenerUsuarios(){
         return fbd.consultarUsuarios();
     }
-     public java.util.List<Usuario> obtenerUsuariosPrestamos(){
+     public java.util.List<Acolito> obtenerUsuariosPrestamos(){
         return fbd.consultarUsuariosPrestamos();
     }
      
-     public java.util.List<Usuario> buscarUsuariosPrestamos(String IDUsuario, String Nombre) {
+     public java.util.List<Acolito> buscarUsuariosPrestamos(String IDUsuario, String Nombre) {
          return fbd.consultarUsuariosPrestamos(IDUsuario,Nombre);
      }
-     public java.util.List<Usuario> buscarUsuarios(String IDUsuario, String Nombre) {
+     public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
          return fbd.consultarUsuarios(IDUsuario,Nombre);
      }
 
-     public void borrarUsuario(Usuario usuario){
-         fbd.borrarUsuario(usuario);
+     public void borrarUsuario(Acolito acolito){
+         fbd.borrarUsuario(acolito);
      }
      
-     public void nuevoUsuario(Usuario usuario){
-         fbd.insertarUsuario(usuario);
+     public void nuevoUsuario(Acolito acolito){
+         fbd.insertarUsuario(acolito);
      }
   
 }

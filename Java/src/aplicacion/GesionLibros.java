@@ -48,8 +48,8 @@ public class GesionLibros{
         fgui.nuevoLibro(restoCategorias);
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    fbd.anadirPrestamo(usuario,ejemplar);
+    public void anadirPrestamo (Acolito acolito, Ejemplar ejemplar){
+    fbd.anadirPrestamo(acolito,ejemplar);
 }
     
     public void usuarios(){

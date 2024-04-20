@@ -15,14 +15,14 @@ public class Prestamo {
 
     private Libro libro;
     private Ejemplar ejemplar;
-    private Usuario usuario;
+    private Acolito acolito;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
 
-    public Prestamo (Libro libro, Ejemplar ejemplar, Usuario usuario, Date fechaPrestamo){  
+    public Prestamo (Libro libro, Ejemplar ejemplar, Acolito acolito, Date fechaPrestamo){
         this.libro = libro;
         this.ejemplar = ejemplar;
-        this.usuario = usuario;
+        this.acolito = acolito;
         this.fechaPrestamo = fechaPrestamo;
     }
 
@@ -34,8 +34,8 @@ public class Prestamo {
         return ejemplar;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Acolito getUsuario() {
+        return acolito;
     }
 
     public Date getFechaPrestamo() {
@@ -54,8 +54,8 @@ public class Prestamo {
         this.ejemplar = ejemplar;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(Acolito acolito) {
+        this.acolito = acolito;
     }
 
     public void setFechaPrestamo(Date fechaPrestamo) {

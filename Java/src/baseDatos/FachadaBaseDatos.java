@@ -5,12 +5,11 @@
 
 package baseDatos;
 
+import aplicacion.Acolito;
 import aplicacion.Ejemplar;
-import aplicacion.Usuario;
 import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -65,8 +64,8 @@ public class FachadaBaseDatos {
         }
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    daoEventos.anadirPrestamo(usuario,ejemplar);
+    public void anadirPrestamo (Acolito acolito, Ejemplar ejemplar){
+    daoEventos.anadirPrestamo(acolito,ejemplar);
     }
 
 
@@ -105,16 +104,16 @@ public class FachadaBaseDatos {
        return daoEventos.insertarLibro(libro);
     }
     
-    public void insertarUsuario(Usuario usuario){
-        daoAcolitos.insertarUsuario(usuario);
+    public void insertarUsuario(Acolito acolito){
+        daoAcolitos.insertarUsuario(acolito);
     }
     
     public void borrarLibro(Integer idLibro){
         daoEventos.borrarLibro(idLibro);
     }
     
-    public void borrarUsuario(Usuario usuario){
-        daoAcolitos.borrarUsuario(usuario);
+    public void borrarUsuario(Acolito acolito){
+        daoAcolitos.borrarUsuario(acolito);
     }
     public void modificarLibro(Libro libro){
          daoEventos.modificarLibro(libro);
@@ -133,7 +132,7 @@ public class FachadaBaseDatos {
         daoEventos.modificarEjemplarLibro(idLibro, ejemplar);
     }
 
-    public Usuario validarUsuario(String idUsuario, String clave){
+    public Acolito validarUsuario(String idUsuario, String clave){
         return daoAcolitos.validarUsuario(idUsuario, clave);
     }
    
@@ -141,22 +140,20 @@ public class FachadaBaseDatos {
         return daoPropiedades.consultarCategorias();
     }
     
-    public java.util.List<Usuario> consultarUsuarios(){
+    public java.util.List<Acolito> consultarUsuarios(){
         return daoAcolitos.consultarUsuarios();
     }
     
-    public java.util.List<Usuario> consultarUsuariosPrestamos(){
+    public java.util.List<Acolito> consultarUsuariosPrestamos(){
         return daoAcolitos.consultarUsuariosPrestamos("",""); //Sin filtros
     }
     
-    public java.util.List<Usuario> consultarUsuariosPrestamos(String IDUsuario, String Nombre) {
+    public java.util.List<Acolito> consultarUsuariosPrestamos(String IDUsuario, String Nombre) {
         return daoAcolitos.consultarUsuariosPrestamos(IDUsuario,Nombre);
      }
          
-    public java.util.List<Usuario> consultarUsuarios(String IDUsuario, String Nombre){
+    public java.util.List<Acolito> consultarUsuarios(String IDUsuario, String Nombre){
         //System.out.println("Iniciando consulta de ID: "+IDUsuario +" y Nombre: "+Nombre);
         return daoAcolitos.consultarUsuarios(IDUsuario, Nombre);
     }
-
-
 }

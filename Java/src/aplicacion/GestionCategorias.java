@@ -23,11 +23,11 @@ public class GestionCategorias {
     
     
   public Boolean comprobarAutentificacion(String idUsuario, String clave){
-      Usuario u;
+      Acolito u;
 
       u=fbd.validarUsuario(idUsuario, clave);
       if (u!=null){
-          return u.getTipoUsuario()==TipoUsuario.Administrador;
+          return u.getTipoUsuario()== TipoAcolito.Administrador;
       } else return false;
   }
   
