@@ -10,7 +10,9 @@ package aplicacion;
  *
  * @author basesdatos
  */
-public class FachadaAplicacion {
+public class
+
+FachadaAplicacion {
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
     GesionLibros cl;

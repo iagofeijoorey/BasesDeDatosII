@@ -28,10 +28,10 @@ public class FachadaBaseDatos {
     private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
 
-    public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
-        
+    public FachadaBaseDatos (aplicacion.FachadaAplicacion fa) {
+
         Properties configuracion = new Properties();
-        this.fa=fa;
+        this.fa = fa;
         FileInputStream arqConfiguracion;
 
         try {
@@ -41,7 +41,6 @@ public class FachadaBaseDatos {
             arqConfiguracion.close();
 
             Properties usuario = new Properties();
-     
 
             String gestor = configuracion.getProperty("gestor");
 
@@ -49,44 +48,39 @@ public class FachadaBaseDatos {
             usuario.setProperty("password", configuracion.getProperty("clave"));
             System.out.println("HE LLEGAO");
 
-            this.conexion=java.sql.DriverManager.getConnection("jdbc:"+gestor+"://"+
-                    configuracion.getProperty("servidor")+":"+
-                    configuracion.getProperty("puerto")+"/"+
-                    configuracion.getProperty("baseDatos"),
+            this.conexion = java.sql.DriverManager.getConnection("jdbc:" + gestor + "://" +
+                            configuracion.getProperty("servidor") + ":" +
+                            configuracion.getProperty("puerto") + "/" +
+                            configuracion.getProperty("baseDatos"),
                     usuario);
 
             daoLibros = new DAOLibros(conexion, fa);
             daoCategorias = new DAOCategorias(conexion, fa);
             daoUsuarios = new DAOUsuarios(conexion, fa);
-          
 
 
-        } catch (FileNotFoundException f){
+        } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
             fa.muestraExcepcion(f.getMessage());
-        } catch (IOException i){
+        } catch (IOException i) {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
-        } 
-        catch (java.sql.SQLException e){
+        } catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
             fa.muestraExcepcion(e.getMessage());
+
         }
-        
-        
-        
     }
     
     public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
     daoLibros.anadirPrestamo(usuario,ejemplar);
     }
-    
-    
+
+
     public void devolver(Ejemplar ejemplar){
         daoLibros.devolver(ejemplar);
     }
-    
-    
+
 
     public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor){
         return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
