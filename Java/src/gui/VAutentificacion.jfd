@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.9" class="java.beans.XMLDecoder">
+ <object class="com.jformdesigner.model.FormModel">
+  <void property="contentType">
+   <string>form/swing</string>
+  </void>
+  <void property="root">
+   <object class="com.jformdesigner.model.FormRoot">
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>javax.swing.JDialog</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>org.jdesktop.layout.GroupLayout</class>
+       <void method="setProperty">
+        <string>$horizontalGroup</string>
+        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {par l {seq {space :61:61:p, par l {comp textoUsuario:::p:251:p:1, seq l {comp textoClave:::p:218:p:1, space :::p, comp label2:::p::p, space :::p, comp label1:::p::p}}}, seq l {space :p:76:p, comp btnAceptar:::p:213:p}}, space :0:55:x}}, space :::p}, seq l {space :p:143:p, comp textPane1:::p:86:p, space ::144:x}}</string>
+       </void>
+       <void method="setProperty">
+        <string>$verticalGroup</string>
+        <string>par l {seq l {space ::30:x, comp textPane1:::p:79:p, space s:::p, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp label1::b:p::p, comp label2::b:p::p}, space u:::p, comp btnAceptar:::p:89:p, space :::p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+       </void>
+      </object>
+      <void method="setProperty">
+       <string>defaultCloseOperation</string>
+       <int>2</int>
+      </void>
+      <void method="setProperty">
+       <string>title</string>
+       <string>Autentificación de usuarios</string>
+      </void>
+      <void method="setProperty">
+       <string>modal</string>
+       <boolean>true</boolean>
+      </void>
+      <void method="setProperty">
+       <string>name</string>
+       <string>VAutentificacion</string>
+      </void>
+      <void method="setProperty">
+       <string>resizable</string>
+       <boolean>false</boolean>
+      </void>
+      <void method="addEvent">
+       <object class="com.jformdesigner.model.FormEvent">
+        <string>java.awt.event.KeyListener</string>
+        <string>keyPressed</string>
+        <string>formKeyPressed</string>
+        <boolean>true</boolean>
+       </object>
+      </void>
+      <void method="addEvent">
+       <object class="com.jformdesigner.model.FormEvent">
+        <string>java.awt.event.KeyListener</string>
+        <string>keyTyped</string>
+        <string>formKeyTyped</string>
+        <boolean>true</boolean>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Usuario...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>textoUsuario</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Aceptar</string>
+        </void>
+        <void property="name">
+         <string>btnAceptar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnAceptarActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Cancelar</string>
+        </void>
+        <void property="name">
+         <string>btnCancelar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnCancelarActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color">
+          <int>255</int>
+          <int>51</int>
+          <int>51</int>
+          <int>255</int>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Autentificación incorrecta!</string>
+        </void>
+        <void property="name">
+         <string>etiquetaFallo</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Contraseña...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>textoClave</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextPane</string>
+        <void method="setProperty">
+         <string>font</string>
+         <object class="com.jformdesigner.model.SwingDerivedFont">
+          <null/>
+          <int>2</int>
+          <int>0</int>
+          <boolean>false</boolean>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>background</string>
+         <object class="java.awt.Color" field="red"/>
+        </void>
+        <void property="name">
+         <string>textPane1</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void property="name">
+         <string>label1</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>8</string>
+        </void>
+        <void method="setProperty">
+         <string>font</string>
+         <object class="com.jformdesigner.model.SwingDerivedFont">
+          <string>Wingdings 2</string>
+          <int>131073</int>
+          <int>0</int>
+          <boolean>false</boolean>
+         </object>
+        </void>
+        <void property="name">
+         <string>label2</string>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>this</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>5</int>
+        <int>5</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>375</int>
+        <int>355</int>
+       </object>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
