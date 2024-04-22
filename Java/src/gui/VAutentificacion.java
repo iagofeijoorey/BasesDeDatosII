@@ -54,6 +54,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo = new JLabel();
         textoClave = new JTextField();
         label1 = new JLabel();
+        checkBox1 = new JCheckBox();
         label2 = new JLabel();
 
         //======== this ========
@@ -97,8 +98,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         textoClave.addActionListener(e -> textoUsuarioActionPerformed(e));
 
         //---- label2 ----
-        label2.setText("8");
-        label2.setFont(new Font("Wingdings 2", Font.BOLD, label2.getFont().getSize()));
+        label2.setIcon(new ImageIcon(getClass().getResource("/gui/_imyr peque(que no Ymir).png")));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -113,33 +113,40 @@ public class VAutentificacion extends javax.swing.JDialog {
                             .addComponent(btnCancelar))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(61, 61, 61)
-                            .addGroup(contentPaneLayout.createParallelGroup()
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(label1))
                                 .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(label2))
-                                        .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(label1)))
+                                    .addComponent(checkBox1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGap(0, 55, Short.MAX_VALUE)))
                     .addContainerGap())
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addGap(0, 38, Short.MAX_VALUE)
+                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+                    .addGap(26, 26, 26))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap(136, Short.MAX_VALUE)
+                    .addGap(12, 12, 12)
+                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(label1)
+                    .addGap(12, 12, 12)
                     .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label1)
-                        .addComponent(label2))
-                    .addGap(27, 27, 27)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(textoClave)
+                        .addComponent(checkBox1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(19, 19, 19)
                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                    .addGap(37, 37, 37)
+                    .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCancelar)
                         .addComponent(etiquetaFallo))
@@ -193,6 +200,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     private JLabel etiquetaFallo;
     private JTextField textoClave;
     private JLabel label1;
+    private JCheckBox checkBox1;
     private JLabel label2;
     // End of variables declaration//GEN-END:variables
 

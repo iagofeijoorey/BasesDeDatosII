@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {space :61:61:p, par l {comp textoUsuario:::p:251:p:1, seq l {par t {seq {comp textoClave:::p:218:p:1, space :::p, comp label2:::p::p}, comp btnAceptar:::p:213:p}, space :::p, comp label1:::p::p}}, space :0:55:x}}, space :::p}}</string>
+        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {space :61:61:p, par l:::p {seq {space :p:19:p, comp btnAceptar:::p:213:p, space :::p, comp label1:::p::p}, comp textoUsuario::l:p:251:p:1, seq l {comp textoClave:::p:218:p:1, space :::p, comp checkBox1:::::x}}, space :0:55:x}}, space :::p}, seq t {space :0:38:x, comp label2:::p:309:p, space :p:26:p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space ::136:x, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp label1::b:p::p, comp label2::b:p::p}, space :p:27:p, comp btnAceptar:::p:43:p, space :p:37:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :p:12:p, comp label2:::p:139:p, space u:::p, comp label1:::p::p, space :p:12:p, comp textoUsuario:::p::p, space s:::p, par l:::p {comp textoClave:::::x, comp checkBox1:::::x}, space :p:19:p, comp btnAceptar:::p:43:p, space s:::p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -175,18 +175,20 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JCheckBox</string>
+        <void property="name">
+         <string>checkBox1</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JLabel</string>
         <void method="setProperty">
-         <string>text</string>
-         <string>8</string>
-        </void>
-        <void method="setProperty">
-         <string>font</string>
-         <object class="com.jformdesigner.model.SwingDerivedFont">
-          <string>Wingdings 2</string>
-          <int>131073</int>
+         <string>icon</string>
+         <object class="com.jformdesigner.model.SwingIcon">
           <int>0</int>
-          <boolean>false</boolean>
+          <string>/gui/_imyr peque(que no Ymir).png</string>
          </object>
         </void>
         <void property="name">
@@ -203,8 +205,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>225</int>
-        <int>50</int>
+        <int>260</int>
+        <int>75</int>
        </object>
       </void>
       <void method="setProperty">
