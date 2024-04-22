@@ -6,7 +6,7 @@ package gui;
 
 import aplicacion.Categoria;
 import aplicacion.Libro;
-import aplicacion.Ejemplar;
+import aplicacion.Evento;
 
 /**
  *
@@ -65,10 +65,10 @@ public class FachadaGui {
         vC.setVisible(true);
     }
     
-    public void prestar(Ejemplar ejemplar){
+    public void prestar(Evento evento){
         VPrestar vP;
         
-        vP = new VPrestar(vp, true, fa, ejemplar);
+        vP = new VPrestar(vp, true, fa, evento);
         vP.setVisible(true);
     }
     

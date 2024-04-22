@@ -16,8 +16,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
+
 import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
 
@@ -50,7 +49,7 @@ public class VUsuarios extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private void initComponents() {
         btnBorrarLibro = new JButton();
         btnSalir = new JButton();
@@ -76,7 +75,6 @@ public class VUsuarios extends javax.swing.JDialog {
         jLabel8 = new JLabel();
         btnBuscar = new JButton();
         jLabel9 = new JLabel();
-        jFileChooser1 = new JFileChooser();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -413,7 +411,7 @@ public class VUsuarios extends javax.swing.JDialog {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private JButton btnBorrarLibro;
     private JButton btnSalir;
     private JScrollPane jScrollPane1;
@@ -438,7 +436,6 @@ public class VUsuarios extends javax.swing.JDialog {
     private JLabel jLabel8;
     private JButton btnBuscar;
     private JLabel jLabel9;
-    private JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
 
 }
