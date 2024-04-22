@@ -54,6 +54,8 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo = new JLabel();
         textoClave = new JTextField();
         textPane1 = new JTextPane();
+        label1 = new JLabel();
+        label2 = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -99,6 +101,10 @@ public class VAutentificacion extends javax.swing.JDialog {
         textPane1.setFont(textPane1.getFont().deriveFont(textPane1.getFont().getStyle() | Font.ITALIC));
         textPane1.setBackground(Color.red);
 
+        //---- label2 ----
+        label2.setText("8");
+        label2.setFont(new Font("Wingdings 2", Font.BOLD, label2.getFont().getSize()));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -115,8 +121,13 @@ public class VAutentificacion extends javax.swing.JDialog {
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGap(61, 61, 61)
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(label2)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(label1))))
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGap(76, 76, 76)
                                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
@@ -135,7 +146,10 @@ public class VAutentificacion extends javax.swing.JDialog {
                     .addGap(18, 18, 18)
                     .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
-                    .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label1)
+                        .addComponent(label2))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -192,6 +206,8 @@ public class VAutentificacion extends javax.swing.JDialog {
     private JLabel etiquetaFallo;
     private JTextField textoClave;
     private JTextPane textPane1;
+    private JLabel label1;
+    private JLabel label2;
     // End of variables declaration//GEN-END:variables
 
 }

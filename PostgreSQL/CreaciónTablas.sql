@@ -1,245 +1,309 @@
+-- TIPOS DE MIEMBROS EN LA SECTA
+CREATE table if not exists Acólitos (
 
-# Tipos de miembros en la secta
-CREATE TABLE Acólitos (
+	alias VARCHAR(15) NOT NULL,
+	nombreCompleto VARCHAR(30) not null,
+	fechaIngreso DATE default CURRENT_DATE,
+	telefono integer not null,
+	direccion VARCHAR(50) not null,
+	influencia INTEGER default 0,
+	dinero DECIMAL(10,2) default 0,
+	contraseña VARCHAR(15) not null,
+	primeraEntrada BOOLEAN DEFAULT true, -- Esto para que de primeras salga el contrato inicial (luego ya lo cambiamos a FALSE)
 
-    alias VARCHAR(50) NOT NULL PRIMARY KEY,
-    nombreCompleto VARCHAR(60),
-    lugarNacimiento VARCHAR(80),
-    fechaIngreso DATE,
-    telefono VARCHAR(20),
-    direccion VARCHAR(255),
-    influencia INTEGER,
-    dinero DECIMAL(10,2),
-    primeraEntrada BOOLEAN DEFAULT TRUE # Esto para que de primeras salga el contrato inicial (luego ya lo cambiamos a FALSE)
+primary key(alias)
+);
+
+CREATE TABLE if not exists Cabecillas (
+
+	alias VARCHAR(15),		
+	
+	primary key (alias),
+	FOREIGN KEY (alias) REFERENCES Acólitos(alias)
+	  on delete cascade on update cascade
+	
+);
+
+CREATE table if not exists Jefes_de_division (
+
+	alias VARCHAR(15),
+	nombreDivision VARCHAR(50),
+	
+	PRIMARY KEY (alias),
+	FOREIGN KEY (alias) REFERENCES Acólitos(alias)
+	 on delete cascade on update cascade
+	
+);
+
+CREATE TABLE if not exists Miembros_basicos (
+
+	alias VARCHAR(15) NOT NULL,
+	jefe VARCHAR(15),
+	
+	PRIMARY KEY (alias),
+	FOREIGN KEY (alias) REFERENCES Acólitos(alias)
+		on delete cascade on update cascade,
+	FOREIGN KEY (jefe) REFERENCES Jefes_de_division(alias)
+		on delete cascade on update cascade
 
 );
 
-CREATE TABLE Cabecillas (
+CREATE TABLE if not exists Gestor_interno (
 
-    alias VARCHAR(50) NOT NULL PRIMARY KEY,
-    FOREIGN KEY (alias) REFERENCES Acólitos(alias)
-
-);
-
-CREATE TABLE Miembros_basicos (
-
-    alias VARCHAR(50) NOT NULL,
-    jefe VARCHAR(50),
-    PRIMARY KEY (alias),
-    FOREIGN KEY (alias) REFERENCES Acólitos(alias),
-    FOREIGN KEY (jefe) REFERENCES Jefes_de_division(alias)
+	alias VARCHAR(15),
+	
+	PRIMARY KEY (alias),
+	FOREIGN KEY (alias) REFERENCES Jefes_de_division(alias)
+	  on delete cascade on update cascade
 
 );
 
-CREATE TABLE Jefes_de_division (
+CREATE TABLE if not exists Guia_espiritual (
 
-    alias VARCHAR(50) NOT NULL PRIMARY KEY,
-    nombreDivision VARCHAR(100),
-    FOREIGN KEY (alias) REFERENCES Acólitos(alias)
+	alias VARCHAR(15),
+	
+	PRIMARY KEY (alias),
+	FOREIGN KEY (alias) REFERENCES Jefes_de_division(alias)
+	   on delete cascade on update cascade
+	
+);
+
+CREATE TABLE if not exists Contactos (
+
+	pseudonimo VARCHAR(15) NOT NULL,
+	nombre VARCHAR(30) not null,
+	telefono integer not null,
+	descripcion text,
+	
+	PRIMARY KEY (pseudonimo)
+);
+
+-- PROPIEDADES DE LA SECTA
+
+CREATE TABLE  if not exists Propiedades (
+
+	idPropiedad INT NOT NULL,
+	valor_actual DECIMAL(10,2) not null,
+	gestor VARCHAR(15),
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (gestor) REFERENCES Gestor_interno(alias)
+		on delete RESTRICT on update cascade
 
 );
 
-CREATE TABLE Gestor_interno (
+CREATE TABLE if not exists Cuentas (
 
-    alias VARCHAR(50) NOT NULL PRIMARY KEY,
-    FOREIGN KEY (alias) REFERENCES Jefes_de_division(alias)
+	IBAN VARCHAR(34) NOT NULL,
+	cantidad DECIMAL(10,2) not null,
+	divisa VARCHAR(5) default 'Euro' not null,
+	gestor VARCHAR(15),
+	
+	PRIMARY KEY (IBAN),
+	FOREIGN KEY (gestor) REFERENCES Gestor_interno(alias)
+	   on delete RESTRICT on update cascade
+	
+);
+
+CREATE TABLE if not exists Commodities (
+
+	idPropiedad INT,
+	nombre VARCHAR(30) not null,
+	cantidad INT not null,
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
+	   on delete cascade on update cascade
 
 );
 
-CREATE TABLE Guia_espiritual (
+CREATE TABLE if not exists Inmobiliario (
 
-    alias VARCHAR(50) NOT NULL PRIMARY KEY,
-    FOREIGN KEY (alias) REFERENCES Jefes_de_division(alias)
-
-);
-
-CREATE TABLE Contactos (
-
-    pseudonimo VARCHAR(50) NOT NULL PRIMARY KEY,
-    nombre VARCHAR(100),
-    telefono VARCHAR(20),
-    descripcion TEXT
+	idPropiedad INT,
+	ubicacion VARCHAR(100) not null,
+	tipoInmobiliario VARCHAR(50) not null,
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
+		on delete cascade on update cascade
 
 );
 
-# Propiedades de la secta
+CREATE TABLE if not exists Almacenes (
 
-CREATE TABLE Propiedades (
-
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    Valor_actual DECIMAL(10,2),
-    gestor VARCHAR(50),
-    FOREIGN KEY (gestor) REFERENCES gestor_interno(alias)
-
-);
-
-CREATE TABLE Cuentas (
-
-    IBAN VARCHAR(50) NOT NULL PRIMARY KEY,
-    cantidad DECIMAL(10,2),
-    divisa VARCHAR(3),
-    gestor VARCHAR(50),
-    FOREIGN KEY (gestor) REFERENCES gestor_interno(alias)
+	idPropiedad INT,
+	capacidad INT not null,
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (idPropiedad) REFERENCES Inmobiliario(idPropiedad)
+		on delete cascade on update cascade
 
 );
 
-CREATE TABLE Commodities (
+CREATE TABLE if not exists Vehiculos (
 
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    nombre VARCHAR(100),
-    cantidad INT,
-    FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
-
-);
-
-CREATE TABLE Inmobiliario (
-
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    ubicacion VARCHAR(255),
-    tipoInmobiliario VARCHAR(100),
-    FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
+	idPropiedad INT,
+	tipoVehiculo VARCHAR(30) not null,
+	capacidad INT not null,
+	almacén INT,
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
+		on delete cascade on update cascade,
+	FOREIGN KEY (almacén) REFERENCES Almacenes(idPropiedad)
+		on delete cascade on update cascade
 
 );
 
-CREATE TABLE Almacenes (
+CREATE TABLE if not exists Armas (
 
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    capacidad INT,
-    FOREIGN KEY (idPropiedad) REFERENCES Inmobiliario(idPropiedad)
+	idPropiedad INT,
+	tipoArmamento VARCHAR(30) not null,
+	cantidad INT not null,
+	numBalas INT not null,
+	almacén INT,
+	
+	PRIMARY KEY (idPropiedad),
+	FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad)
+		on delete cascade on update cascade,
+	FOREIGN KEY (almacén) REFERENCES Almacenes(idPropiedad)
+		on delete cascade on update cascade
+	
+);
+
+-- RELACIONES ENTRE ACÓLITOS Y CONTACTOS
+
+CREATE TABLE if not exists Tratos (
+	
+	idTrato INT NOT NULL,
+	tipoTrato VARCHAR(100) not null,
+	contacto VARCHAR(15),
+	acólito VARCHAR(15),
+	
+	PRIMARY KEY (idTrato, contacto, acólito),
+	FOREIGN KEY (contacto) REFERENCES Contactos(pseudonimo)
+		on delete RESTRICT on update cascade,
+	FOREIGN KEY (acólito) REFERENCES Acólitos(alias)
+		on delete cascade on update cascade
+	
+);
+
+CREATE TABLE if not exists SerSoloContacto (
+	
+	contacto VARCHAR(15),
+	acólito VARCHAR(15),
+	
+	PRIMARY KEY (contacto, acólito),
+	FOREIGN KEY (contacto) REFERENCES Contactos(pseudonimo)
+		on delete cascade on update cascade,
+	FOREIGN KEY (acólito) REFERENCES Acólitos(alias)
+		on delete cascade on update cascade
+	
+);
+
+-- RELACIÓN ENTRE ACÓLITOS Y GUÍA ESPIRITUAL
+
+CREATE TABLE if not exists Ritos (
+
+	idRito INT NOT NULL,
+	tipoRito VARCHAR(20) not null,
+	acólito VARCHAR(15),
+	guiaEspiritual VARCHAR(15),
+	fechaHora TIMESTAMP not null,
+	
+	PRIMARY KEY (idRito, guiaEspiritual, acólito),
+	FOREIGN KEY (acólito) REFERENCES Acólitos(alias)
+		on delete cascade on update cascade,
+	FOREIGN KEY (guiaEspiritual) REFERENCES Guia_espiritual(alias)
+		on delete RESTRICT on update cascade
 
 );
 
-CREATE TABLE Vehiculos (
+-- TABLAS RELACIONADAS CON LOS EVENTOS QUE LA SECTA ORGANIZA
 
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    tipoVehiculo VARCHAR(100),
-    capacidad INT,
-    almacén INT,
-    FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad),
-    FOREIGN KEY (almacén) REFERENCES Almacenes(idPropiedad)
+CREATE TABLE if not exists Eventos (
 
-);
-
-CREATE TABLE Armas (
-
-    idPropiedad INT NOT NULL PRIMARY KEY,
-    tipoArmamento VARCHAR(100),
-    cantidad INT,
-    numBalas INT,
-    almacén INT,
-    FOREIGN KEY (idPropiedad) REFERENCES Propiedades(idPropiedad),
-    FOREIGN KEY (almacén) REFERENCES Almacenes(idPropiedad)
+	ubicacion VARCHAR(100) NOT NULL,
+	fecha DATE NOT NULL,
+	tipoEvento VARCHAR(100) not null,
+	descripcion TEXT,
+	autorizador VARCHAR(50),
+	organizador VARCHAR(50),
+	
+	PRIMARY KEY (ubicacion, fecha),
+	FOREIGN KEY (autorizador) REFERENCES Cabecillas(alias)
+		on delete cascade on update cascade,
+	FOREIGN KEY (organizador) REFERENCES Jefes_de_division(alias)
+		on delete RESTRICT on update cascade
 
 );
 
-# Relaciones entre Acólitos y Contactos
+CREATE TABLE if not exists Objetivos (
 
-CREATE TABLE Tratos (
-    idTrato INT NOT NULL,
-    tipoTrato VARCHAR(100),
-    contacto VARCHAR(50) NOT NULL,
-    acólito VARCHAR(50) NOT NULL,
-    PRIMARY KEY (idTrato, contacto, acólito),
-    FOREIGN KEY (contacto) REFERENCES Contactos(pseudónimo),
-    FOREIGN KEY (acólito) REFERENCES Acólitos(alias)
-);
-
-CREATE TABLE SerSoloContacto (
-    contacto VARCHAR(50) NOT NULL,
-    acólito VARCHAR(50) NOT NULL,
-    PRIMARY KEY (contacto, acólito),
-    FOREIGN KEY (contacto) REFERENCES Contactos(pseudónimo),
-    FOREIGN KEY (acólito) REFERENCES Acólitos(alias)
-);
-
-# Relación entre Acólitos y guiaEspiritual
-
-CREATE TABLE Ritos (
-
-    idRito INT NOT NULL,
-    tipoRito VARCHAR(100),
-    acólito VARCHAR(50) NOT NULL,
-    guiaEspiritual VARCHAR(50) NOT NULL,
-    fechaHora DATETIME,
-    PRIMARY KEY (idRito, guiaEspiritual, acólito),
-    FOREIGN KEY (acólito) REFERENCES Acólitos(alias),
-    FOREIGN KEY (guiaEspiritual) REFERENCES Guia_espiritual(alias) 
+	idObjetivo INT NOT NULL,
+	ubicacion VARCHAR(100) not null,
+	fecha DATE not null,
+	descripción TEXT,
+	prioridad INT not null,
+	
+	PRIMARY KEY (idObjetivo, ubicacion, fecha),
+	FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos(ubicacion, fecha)
+		on delete cascade on update cascade
 
 );
 
-# Tablas relacionadas con los eventos que la secta organiza
+CREATE TABLE if not exists ProporcionarApoyo (
 
-CREATE TABLE Eventos (
+	jefe VARCHAR(15),
+	ubicacion VARCHAR(255),
+	fecha DATE,
+	
+	PRIMARY KEY (jefe, ubicacion, fecha),
+	FOREIGN KEY (jefe) REFERENCES Jefes_de_division (alias)
+		on delete cascade on update cascade,
+	FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos (ubicacion, fecha)
+		on delete cascade on update cascade
+	
+);
 
-    ubicacion VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
-    tipoEvento VARCHAR(100),
-    descripcion TEXT,
-    autorizador VARCHAR(50),
-    organizador VARCHAR(50),
-    PRIMARY KEY (ubicacion, fecha),
-    FOREIGN KEY (autorizador) REFERENCES Cabecillas(alias),
-    FOREIGN KEY (organizador) REFERENCES Jefes_de_division(alias)
+CREATE TABLE if not exists PropiedadesUsadas (
+
+	idPropiedad INT,
+	ubicacion VARCHAR(255),
+	fecha DATE,
+	
+	PRIMARY KEY (idPropiedad, ubicacion, fecha),
+	FOREIGN KEY (idPropiedad) REFERENCES Propiedades (idPropiedad)
+		on delete cascade on update cascade,
+	FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos (ubicacion, fecha)
+		on delete cascade on update cascade
 
 );
 
-CREATE TABLE Objetivos (
+CREATE TABLE if not exists Recompensas_Dinero (
 
-    idObjetivo INT NOT NULL,
-    ubicacion VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
-    descripción TEXT,
-    prioridad INT,
-    PRIMARY KEY (idObjetivo, Ubicación, fecha),
-    FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos(ubicacion, fecha)
+	idRecompensa INT NOT NULL,
+	dinero DECIMAL(10,2),
+	
+	PRIMARY KEY (idRecompensa)
 
 );
 
-CREATE TABLE ProporcionarApoyo (
+CREATE TABLE if not exists Recompensas_Influencia (
 
-    jefe VARCHAR(50) NOT NULL,
-    ubicacion VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
-    PRIMARY KEY (jefe, ubicacion, fecha),
-    FOREIGN KEY (jefe) REFERENCES Jefes_de_división (alias),
-    FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos (ubicacion, fecha)
+	idRecompensa INT NOT NULL,
+	influencia INTEGER not null,
+	PRIMARY KEY (idRecompensa)
 
 );
 
-CREATE TABLE PropiedadesUsadas (
+CREATE TABLE if not exists Recompensas_Contacto (
 
-    idPropiedad INT NOT NULL,
-    ubicacion VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
-    PRIMARY KEY (idPropiedad, ubicacion, fecha),
-    FOREIGN KEY (idPropiedad) REFERENCES Propiedades (idPropiedad),
-    FOREIGN KEY (ubicacion, fecha) REFERENCES Eventos (ubicacion, fecha)
-
-);
-
-CREATE TABLE Recompensas_Dinero (
-
-    idRecompensa INT NOT NULL PRIMARY KEY,
-    dinero DECIMAL(10,2)
+	idRecompensa INT NOT NULL,
+	contacto VARCHAR(15),
+	
+	PRIMARY KEY (idRecompensa),
+	FOREIGN KEY (contacto) REFERENCES Contactos (pseudonimo)
+		on delete cascade on update cascade
 
 );
-
-CREATE TABLE Recompensas_Influencia (
-
-    idRecompensa INT NOT NULL PRIMARY KEY,
-    influencia INTEGER
-
-);
-
-CREATE TABLE Recompensas_Contacto (
-
-    idRecompensa INT NOT NULL PRIMARY KEY,
-    dinero DECIMAL(10,2),
-    contacto VARCHAR(50),
-    FOREIGN KEY (contacto) REFERENCES Contactos (pseudónimo)
-
-);
-
-
-
-

@@ -58,6 +58,13 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel4 = new JLabel();
         jButton1 = new JButton();
         jButton2 = new JButton();
+        menu1 = new JMenu();
+        button1 = new JButton();
+        button5 = new JButton();
+        button6 = new JButton();
+        button2 = new JButton();
+        button3 = new JButton();
+        button4 = new JButton();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -115,13 +122,11 @@ public class VPrincipal extends javax.swing.JFrame {
         //======== jPanel1 ========
         {
             jPanel1.setBackground(new Color(0xdcdcdc));
-            jPanel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
-            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax
-            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
-            .awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),jPanel1. getBorder()));jPanel1. addPropertyChangeListener(new java.beans.
-            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".
-            equals(e.getPropertyName()))throw new RuntimeException();}});
+            jPanel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
+            0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
+            . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
+            red ) ,jPanel1. getBorder () ) ); jPanel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
+            beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //---- jLabel4 ----
             jLabel4.setBackground(new Color(0xdcdcdc));
@@ -134,7 +139,7 @@ public class VPrincipal extends javax.swing.JFrame {
                 jPanel1Layout.createParallelGroup()
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                         .addGap(260, 260, 260))
             );
             jPanel1Layout.setVerticalGroup(
@@ -162,6 +167,35 @@ public class VPrincipal extends javax.swing.JFrame {
         jButton2.setPreferredSize(new Dimension(125, 23));
         jButton2.addActionListener(e -> btnCategoriasActionPerformed(e));
 
+        //======== menu1 ========
+        {
+            menu1.setText("text");
+
+            //---- button1 ----
+            button1.setText("text");
+            menu1.add(button1);
+
+            //---- button5 ----
+            button5.setText("text");
+            menu1.add(button5);
+
+            //---- button6 ----
+            button6.setText("text");
+            menu1.add(button6);
+
+            //---- button2 ----
+            button2.setText("text");
+            menu1.add(button2);
+
+            //---- button3 ----
+            button3.setText("text");
+            menu1.add(button3);
+
+            //---- button4 ----
+            button4.setText("text");
+            menu1.add(button4);
+        }
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -170,7 +204,6 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addComponent(etiquetaTitulo)
@@ -185,17 +218,22 @@ public class VPrincipal extends javax.swing.JFrame {
                                     .addComponent(buscaAutor))
                                 .addComponent(buscaTitulo)))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addComponent(btnNuevoLibro)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnEditarLibro)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSalir))
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(buscaId, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscar)))
+                            .addComponent(btnBuscar))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 516, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(btnNuevoLibro)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEditarLibro)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                            .addComponent(btnSalir)
+                            .addGap(110, 110, 110)
+                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap())
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
@@ -207,34 +245,38 @@ public class VPrincipal extends javax.swing.JFrame {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(buscaTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(etiquetaTitulo))
-                    .addGap(21, 21, 21)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(buscaAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(buscaIsbn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscar)
-                            .addComponent(jLabel3))
-                        .addComponent(buscaId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(12, 12, 12)
-                    .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSalir)
-                        .addComponent(btnNuevoLibro)
-                        .addComponent(btnEditarLibro))
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(buscaTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(etiquetaTitulo))
+                            .addGap(21, 21, 21)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(buscaAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(buscaIsbn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnBuscar)
+                                    .addComponent(jLabel3))
+                                .addComponent(buscaId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGap(12, 12, 12)
+                            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnNuevoLibro)
+                                .addComponent(btnEditarLibro)
+                                .addComponent(btnSalir))
+                            .addContainerGap())
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -306,6 +348,13 @@ public class VPrincipal extends javax.swing.JFrame {
     private JLabel jLabel4;
     private JButton jButton1;
     private JButton jButton2;
+    private JMenu menu1;
+    private JButton button1;
+    private JButton button5;
+    private JButton button6;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
     // End of variables declaration//GEN-END:variables
 
     public void buscarLibros(){
