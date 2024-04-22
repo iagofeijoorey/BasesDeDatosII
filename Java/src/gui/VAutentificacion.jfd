@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.9" class="java.beans.XMLDecoder">
+<java version="17.0.8" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {par l {seq {space :61:61:p, par l {comp textoUsuario:::p:251:p:1, seq l {comp textoClave:::p:218:p:1, space :::p, comp label2:::p::p, space :::p, comp label1:::p::p}}}, seq l {space :p:76:p, comp btnAceptar:::p:213:p}}, space :0:55:x}}, space :::p}, seq l {space :p:143:p, comp textPane1:::p:86:p, space ::144:x}}</string>
+        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {space :61:61:p, par l {comp textoUsuario:::p:251:p:1, seq l {par t {seq {comp textoClave:::p:218:p:1, space :::p, comp label2:::p::p}, comp btnAceptar:::p:213:p}, space :::p, comp label1:::p::p}}, space :0:55:x}}, space :::p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space ::30:x, comp textPane1:::p:79:p, space s:::p, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp label1::b:p::p, comp label2::b:p::p}, space u:::p, comp btnAceptar:::p:89:p, space :::p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space ::136:x, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp label1::b:p::p, comp label2::b:p::p}, space :p:27:p, comp btnAceptar:::p:43:p, space :p:37:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -167,27 +167,6 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
-        <string>javax.swing.JTextPane</string>
-        <void method="setProperty">
-         <string>font</string>
-         <object class="com.jformdesigner.model.SwingDerivedFont">
-          <null/>
-          <int>2</int>
-          <int>0</int>
-          <boolean>false</boolean>
-         </object>
-        </void>
-        <void method="setProperty">
-         <string>background</string>
-         <object class="java.awt.Color" field="red"/>
-        </void>
-        <void property="name">
-         <string>textPane1</string>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JLabel</string>
         <void property="name">
          <string>label1</string>
@@ -224,15 +203,15 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>5</int>
-        <int>5</int>
+        <int>225</int>
+        <int>50</int>
        </object>
       </void>
       <void method="setProperty">
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>375</int>
-        <int>355</int>
+        <int>400</int>
        </object>
       </void>
      </object>

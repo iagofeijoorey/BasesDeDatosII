@@ -46,14 +46,13 @@ public class VAutentificacion extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         textoUsuario = new JTextField();
         btnAceptar = new JButton();
         btnCancelar = new JButton();
         etiquetaFallo = new JLabel();
         textoClave = new JTextField();
-        textPane1 = new JTextPane();
         label1 = new JLabel();
         label2 = new JLabel();
 
@@ -73,7 +72,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                 formKeyTyped(e);
             }
         });
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- textoUsuario ----
         textoUsuario.setText("Usuario...");
@@ -97,10 +96,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         textoClave.setForeground(Color.gray);
         textoClave.addActionListener(e -> textoUsuarioActionPerformed(e));
 
-        //---- textPane1 ----
-        textPane1.setFont(textPane1.getFont().deriveFont(textPane1.getFont().getStyle() | Font.ITALIC));
-        textPane1.setBackground(Color.red);
-
         //---- label2 ----
         label2.setText("8");
         label2.setFont(new Font("Wingdings 2", Font.BOLD, label2.getFont().getSize()));
@@ -117,42 +112,34 @@ public class VAutentificacion extends javax.swing.JDialog {
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelar))
                         .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(61, 61, 61)
                             .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(61, 61, 61)
-                                    .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                             .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(label2)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(label1))))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(76, 76, 76)
-                                    .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(label2))
+                                        .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(label1)))
                             .addGap(0, 55, Short.MAX_VALUE)))
                     .addContainerGap())
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(143, 143, 143)
-                    .addComponent(textPane1, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(144, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap(30, Short.MAX_VALUE)
-                    .addComponent(textPane1, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                    .addContainerGap(136, Short.MAX_VALUE)
                     .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(label1)
                         .addComponent(label2))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(27, 27, 27)
+                    .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                    .addGap(37, 37, 37)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCancelar)
                         .addComponent(etiquetaFallo))
@@ -199,13 +186,12 @@ public class VAutentificacion extends javax.swing.JDialog {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JTextField textoUsuario;
     private JButton btnAceptar;
     private JButton btnCancelar;
     private JLabel etiquetaFallo;
     private JTextField textoClave;
-    private JTextPane textPane1;
     private JLabel label1;
     private JLabel label2;
     // End of variables declaration//GEN-END:variables
