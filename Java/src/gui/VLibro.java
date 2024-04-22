@@ -16,7 +16,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import aplicacion.Libro;
-import aplicacion.Ejemplar;
+import aplicacion.Evento;
 import java.util.ArrayList;
 
 /**
@@ -593,7 +593,7 @@ public class VLibro extends javax.swing.JDialog {
     }//GEN-LAST:event_btnActualizarCategoriasLibroActionPerformed
 
     public void actualizarEjemplares(){
-        java.util.List<Ejemplar> ejemplares;
+        java.util.List<Evento> ejemplares;
         
         ModeloTablaEjemplares me= (ModeloTablaEjemplares)tablaEjemplares.getModel();
         
@@ -612,10 +612,10 @@ public class VLibro extends javax.swing.JDialog {
     private void btnNuevoEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEjemplarActionPerformed
         // TODO add your handling code here:
         ModeloTablaEjemplares me;
-        Ejemplar e;
+        Evento e;
 
         me=(ModeloTablaEjemplares) tablaEjemplares.getModel();
-        e=new Ejemplar(null, null, null, null,null,null);
+        e=new Evento(null, null, null, null,null,null);
         me.nuevoEjemplar(e);
         tablaEjemplares.setRowSelectionInterval(me.getRowCount()-1, me.getRowCount()-1);
         
@@ -629,7 +629,7 @@ public class VLibro extends javax.swing.JDialog {
 
     private void btnBorrarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarEjemplarActionPerformed
         //fa.borrarEjemplar(idLibro,((ModeloTablaEjemplares)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()).getNumEjemplar());
-        ArrayList<Ejemplar> aux = new ArrayList(((ModeloTablaEjemplares)tablaEjemplares.getModel()).getFilas());
+        ArrayList<Evento> aux = new ArrayList(((ModeloTablaEjemplares)tablaEjemplares.getModel()).getFilas());
         ejemplaresBorrados.add(aux.get(tablaEjemplares.getSelectedRow()).getNumEjemplar());
         aux.remove(tablaEjemplares.getSelectedRow());
         

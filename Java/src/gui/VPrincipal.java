@@ -15,6 +15,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import javax.swing.table.*;
 
 
 /**
@@ -38,7 +39,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private void initComponents() {
         buscaTitulo = new JTextField();
         etiquetaTitulo = new JLabel();
@@ -122,11 +123,13 @@ public class VPrincipal extends javax.swing.JFrame {
         //======== jPanel1 ========
         {
             jPanel1.setBackground(new Color(0xdcdcdc));
-            jPanel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
-            0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
-            . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
-            red ) ,jPanel1. getBorder () ) ); jPanel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
-            beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            jPanel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
+            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder
+            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .
+            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,jPanel1. getBorder () ) )
+            ; jPanel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
+            ;
 
             //---- jLabel4 ----
             jLabel4.setBackground(new Color(0xdcdcdc));
@@ -329,7 +332,7 @@ public class VPrincipal extends javax.swing.JFrame {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private JTextField buscaTitulo;
     private JLabel etiquetaTitulo;
     private JTextField buscaIsbn;

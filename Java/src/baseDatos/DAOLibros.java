@@ -5,7 +5,7 @@
 
 package baseDatos;
 
-import aplicacion.Ejemplar;
+import aplicacion.Evento;
 import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.sql.*;
@@ -152,7 +152,7 @@ public class DAOLibros extends AbstractDAO {
             rsEjemplares=stmEjemplares.executeQuery();
             while (rsEjemplares.next())
             {
-                 Ejemplar eaux = new Ejemplar(resultado, rsEjemplares.getInt("num_ejemplar"),
+                 Evento eaux = new Evento(resultado, rsEjemplares.getInt("num_ejemplar"),
                                                       rsEjemplares.getString("localizador"),
                                                       rsEjemplares.getString("ano_compra"),rsEjemplares.getString("fechaprestamo"), rsEjemplares.getString("fechavencimiento"));
                  if (!this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").isEmpty())
@@ -180,8 +180,8 @@ public class DAOLibros extends AbstractDAO {
         return resultado;
     }
     
-    public void devolver(Ejemplar ejemplar){
-        System.out.println("Estoy devolviendo el ejemplar "+ejemplar.getNumEjemplar()+" del libro "+ejemplar.getLibro().getIdLibro());
+    public void devolver(Evento evento){
+        System.out.println("Estoy devolviendo el ejemplar "+ evento.getNumEjemplar()+" del libro "+ evento.getLibro().getIdLibro());
         Connection con;
         PreparedStatement stmPrestamo=null;
 
@@ -189,8 +189,8 @@ public class DAOLibros extends AbstractDAO {
 
         try {
         stmPrestamo=con.prepareStatement("update prestamo set fechadevolucion = date(current_date) where id_libro = ? and num_ejemplar = ?");
-        stmPrestamo.setInt(1, ejemplar.getLibro().getIdLibro());
-        stmPrestamo.setInt(2, ejemplar.getNumEjemplar());
+        stmPrestamo.setInt(1, evento.getLibro().getIdLibro());
+        stmPrestamo.setInt(2, evento.getNumEjemplar());
         
         stmPrestamo.executeUpdate();
 
@@ -202,7 +202,7 @@ public class DAOLibros extends AbstractDAO {
         }
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
+    public void anadirPrestamo (Usuario usuario, Evento evento){
         System.out.println("Añadiendo prestamo");
         Connection con;
         PreparedStatement stmPrestamo=null;
@@ -212,8 +212,8 @@ public class DAOLibros extends AbstractDAO {
         try {
         stmPrestamo=con.prepareStatement("insert into prestamo(id_usuario, num_ejemplar, id_libro, fechaprestamo) values (?,?,?,date(current_date))");
         stmPrestamo.setString(1, usuario.getIdUsuario());
-        stmPrestamo.setInt(2, ejemplar.getNumEjemplar());
-        stmPrestamo.setInt(3, ejemplar.getLibro().getIdLibro());
+        stmPrestamo.setInt(2, evento.getNumEjemplar());
+        stmPrestamo.setInt(3, evento.getLibro().getIdLibro());
         
         stmPrestamo.executeUpdate();
 
@@ -254,8 +254,8 @@ public class DAOLibros extends AbstractDAO {
     }
     
 
-    public java.util.List<Ejemplar> consultarEjemplaresLibro(Integer idLibro){
-        java.util.List<Ejemplar> resultado=new java.util.ArrayList<Ejemplar>();
+    public java.util.List<Evento> consultarEjemplaresLibro(Integer idLibro){
+        java.util.List<Evento> resultado=new java.util.ArrayList<Evento>();
         Connection con;
         PreparedStatement stmEjemplares=null;
         ResultSet rsEjemplares;
@@ -270,7 +270,7 @@ public class DAOLibros extends AbstractDAO {
         rsEjemplares=stmEjemplares.executeQuery();
         while (rsEjemplares.next())
         {
-             Ejemplar eaux = new Ejemplar(null, rsEjemplares.getInt("num_ejemplar"),
+             Evento eaux = new Evento(null, rsEjemplares.getInt("num_ejemplar"),
                                                       rsEjemplares.getString("localizador"),
                                                       rsEjemplares.getString("ano_compra"),rsEjemplares.getString("fechaprestamo"), rsEjemplares.getString("fechavencimiento"));
                  if (!this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").isEmpty()){
@@ -499,7 +499,7 @@ public class DAOLibros extends AbstractDAO {
         }
   }
 
-  public void insertarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
+  public void insertarEjemplarLibro(Integer idLibro, Evento evento){
         Connection con;
         PreparedStatement stmEjemplar=null;
 
@@ -509,9 +509,9 @@ public class DAOLibros extends AbstractDAO {
         stmEjemplar=con.prepareStatement("insert into ejemplar(libro,ano_compra,localizador,num_ejemplar) "+
                                            "values (?,?,?,?)");
         stmEjemplar.setInt(1, idLibro);
-        stmEjemplar.setString(2, ejemplar.getAnoCompra());
-        stmEjemplar.setString(3, ejemplar.getLocalizador());
-        stmEjemplar.setInt(4, ejemplar.getNumEjemplar());
+        stmEjemplar.setString(2, evento.getAnoCompra());
+        stmEjemplar.setString(3, evento.getLocalizador());
+        stmEjemplar.setInt(4, evento.getNumEjemplar());
 
         stmEjemplar.executeUpdate();
 
@@ -545,7 +545,7 @@ public class DAOLibros extends AbstractDAO {
           try {stmEjemplar.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
   }
-  public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
+  public void modificarEjemplarLibro(Integer idLibro, Evento evento){
         Connection con;
         PreparedStatement stmEjemplar=null;
 
@@ -557,10 +557,10 @@ public class DAOLibros extends AbstractDAO {
                                             "   localizador=? "+
                                             "where libro=? and num_ejemplar=?");
         
-        stmEjemplar.setString(1, ejemplar.getAnoCompra());
-        stmEjemplar.setString(2, ejemplar.getLocalizador());
+        stmEjemplar.setString(1, evento.getAnoCompra());
+        stmEjemplar.setString(2, evento.getLocalizador());
         stmEjemplar.setInt(3, idLibro);
-        stmEjemplar.setInt(4, ejemplar.getNumEjemplar());
+        stmEjemplar.setInt(4, evento.getNumEjemplar());
         stmEjemplar.executeUpdate();
 
         } catch (SQLException e){

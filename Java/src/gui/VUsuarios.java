@@ -16,8 +16,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
+
 import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
 

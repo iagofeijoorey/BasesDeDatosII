@@ -5,15 +5,13 @@
 
 package baseDatos;
 
-import aplicacion.Ejemplar;
+import aplicacion.Evento;
 import aplicacion.Usuario;
 import aplicacion.Categoria;
 import aplicacion.Libro;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -72,13 +70,13 @@ public class FachadaBaseDatos {
         }
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    daoLibros.anadirPrestamo(usuario,ejemplar);
+    public void anadirPrestamo (Usuario usuario, Evento evento){
+    daoLibros.anadirPrestamo(usuario, evento);
     }
 
 
-    public void devolver(Ejemplar ejemplar){
-        daoLibros.devolver(ejemplar);
+    public void devolver(Evento evento){
+        daoLibros.devolver(evento);
     }
 
 
@@ -89,7 +87,7 @@ public class FachadaBaseDatos {
     public Libro consultarLibro(Integer idLibro){
         return daoLibros.consultarLibro(idLibro);
     }
-    public java.util.List<Ejemplar> consultarEjemplaresLibro(Integer idLibro){
+    public java.util.List<Evento> consultarEjemplaresLibro(Integer idLibro){
         return daoLibros.consultarEjemplaresLibro(idLibro);
     }
     
@@ -129,15 +127,15 @@ public class FachadaBaseDatos {
     public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
        daoLibros.modificarCategoriasLibro(idLibro, categorias);
     }
-    public void insertarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        ejemplar.setNumEjemplar(daoLibros.consultarMaxEjemplarLibro(idLibro)+1);
-        daoLibros.insertarEjemplarLibro(idLibro, ejemplar);
+    public void insertarEjemplarLibro(Integer idLibro, Evento evento){
+        evento.setNumEjemplar(daoLibros.consultarMaxEjemplarLibro(idLibro)+1);
+        daoLibros.insertarEjemplarLibro(idLibro, evento);
     }
     public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar){
         daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
     }
-    public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
+    public void modificarEjemplarLibro(Integer idLibro, Evento evento){
+        daoLibros.modificarEjemplarLibro(idLibro, evento);
     }
 
     public Usuario validarUsuario(String idUsuario, String clave){

@@ -31,7 +31,7 @@ public class GesionLibros{
 
     public void visualizarLibro(Integer idLibro){
         java.util.List<String> restoCategorias;
-        java.util.List<Ejemplar> ejemplares;
+        java.util.List<Evento> ejemplares;
         Libro l;
         l=fbd.consultarLibro(idLibro);
         restoCategorias=fbd.obtenerRestoCategorias(idLibro);
@@ -48,8 +48,8 @@ public class GesionLibros{
         fgui.nuevoLibro(restoCategorias);
     }
     
-    public void anadirPrestamo (Usuario usuario, Ejemplar ejemplar){
-    fbd.anadirPrestamo(usuario,ejemplar);
+    public void anadirPrestamo (Usuario usuario, Evento evento){
+    fbd.anadirPrestamo(usuario, evento);
 }
     
     public void usuarios(){
@@ -59,12 +59,12 @@ public class GesionLibros{
         fgui.categorias();
     }
     
-    public void prestar(Ejemplar ejemplar){
-        fgui.prestar(ejemplar);
+    public void prestar(Evento evento){
+        fgui.prestar(evento);
     }
     
-    public void devolver(Ejemplar ejemplar){
-        fbd.devolver(ejemplar);
+    public void devolver(Evento evento){
+        fbd.devolver(evento);
     }
     
     public Integer actualizarLibro(Libro l){
@@ -93,9 +93,9 @@ public class GesionLibros{
        fbd.modificarCategoriasLibro(idLibro, categorias);
     }
 
-    public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Ejemplar> ejemplares, java.util.List<Integer> borrar){
+    public java.util.List<Evento> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Evento> ejemplares, java.util.List<Integer> borrar){
 
-       for (Ejemplar e:ejemplares){
+       for (Evento e:ejemplares){
         if (e.getNumEjemplar()==null) fbd.insertarEjemplarLibro(idLibro, e);
         else fbd.modificarEjemplarLibro(idLibro, e);
        }

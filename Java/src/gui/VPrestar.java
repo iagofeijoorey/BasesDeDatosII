@@ -16,8 +16,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.Libro;
-import aplicacion.Ejemplar;
+
+import aplicacion.Evento;
 
 /**
  *
@@ -27,13 +27,13 @@ public class VPrestar extends javax.swing.JDialog {
 
      protected VLibro padre;
      private aplicacion.FachadaAplicacion fa;
-     private Ejemplar ejemplar;
+     private Evento evento;
 
     /** Creates new form VLibro */
-    public VPrestar(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Ejemplar ejemplar) {
+    public VPrestar(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa, Evento evento) {
         super(parent, modal);
         this.fa=fa;
-        this.ejemplar = ejemplar;
+        this.evento = evento;
         initComponents();
         //((ModeloPrestamos)jTable1.getModel()).setFilas(fa.obtenerUsuariosPretamos());
         ((ModeloPrestamos)jTable1.getModel()).setFilas(fa.buscarUsuariosPrestamos(jTextFieldIDUsuarioBusqueda.getText(),jTextFieldNombreUsuarioBusqueda.getText()));
@@ -174,7 +174,7 @@ public class VPrestar extends javax.swing.JDialog {
             jLabel3.setVisible(true);
         else{
             jLabel3.setVisible(false);
-            fa.anadirPrestamo(((ModeloPrestamos)jTable1.getModel()).getUsuario(jTable1.getSelectedRow()),ejemplar);
+            fa.anadirPrestamo(((ModeloPrestamos)jTable1.getModel()).getUsuario(jTable1.getSelectedRow()), evento);
             this.dispose();
         }
 
