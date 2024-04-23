@@ -17,8 +17,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
-import aplicacion.TipoAcolito;
-import aplicacion.Acolito;
+import aplicacion.TipoUsuario;
+import aplicacion.Usuario;
 
 /**
  *
@@ -37,7 +37,7 @@ public class VUsuarios extends javax.swing.JDialog {
         ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
         
         jComboBox1.addItem(" ");
-        for (TipoAcolito i: TipoAcolito.values())
+        for (TipoUsuario i: TipoUsuario.values())
             jComboBox1.addItem(i.toString());
         
     }
@@ -49,7 +49,7 @@ public class VUsuarios extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private void initComponents() {
         btnBorrarLibro = new JButton();
         btnSalir = new JButton();
@@ -75,7 +75,6 @@ public class VUsuarios extends javax.swing.JDialog {
         jLabel8 = new JLabel();
         btnBuscar = new JButton();
         jLabel9 = new JLabel();
-        jFileChooser1 = new JFileChooser();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -322,20 +321,20 @@ public class VUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
         //Comprobación de si existe en la bd
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
-        Acolito u = new Acolito(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),jTextField5.getText(), TipoAcolito.stringToTipoAcolito(jComboBox1.getSelectedItem().toString()));
-        Acolito us;
+        Usuario u = new Usuario(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),jTextField5.getText(),TipoUsuario.stringToTipoUsuario(jComboBox1.getSelectedItem().toString()));
+        Usuario us;
         
         
         if (jTable1.getSelectedRow()!=-1){ //Borramos el usuario anterior al editar..
             us = mu.obtenerUsuario(jTable1.getSelectedRow()); //Usuario seleccionado
-            for (Acolito iu: fa.obtenerUsuarios())
+            for (Usuario iu: fa.obtenerUsuarios())
                 if (iu.getIdUsuario().equals(u.getIdUsuario()) && !iu.getIdUsuario().equals(us.getIdUsuario())){
                     jLabel9.setVisible(true);
                     return;
                 }
             fa.borrarUsuario(us);
         }
-        for (Acolito iu: fa.obtenerUsuarios())
+        for (Usuario iu: fa.obtenerUsuarios())
             if (iu.getIdUsuario().equals(u.getIdUsuario())){
                 jLabel9.setVisible(true);
                 return;
@@ -348,7 +347,7 @@ public class VUsuarios extends javax.swing.JDialog {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
-        Acolito u = mu.obtenerUsuario(jTable1.getSelectedRow());
+        Usuario u = mu.obtenerUsuario(jTable1.getSelectedRow());
         
         fa.borrarUsuario(u);
         ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios()); //Refrescar la tabla
@@ -412,7 +411,7 @@ public class VUsuarios extends javax.swing.JDialog {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private JButton btnBorrarLibro;
     private JButton btnSalir;
     private JScrollPane jScrollPane1;
@@ -437,7 +436,6 @@ public class VUsuarios extends javax.swing.JDialog {
     private JLabel jLabel8;
     private JButton btnBuscar;
     private JLabel jLabel9;
-    private JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
 
 }

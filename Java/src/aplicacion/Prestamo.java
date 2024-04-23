@@ -14,15 +14,15 @@ import java.util.Date;
 public class Prestamo {
 
     private Libro libro;
-    private Ejemplar ejemplar;
-    private Acolito acolito;
+    private Evento evento;
+    private Usuario usuario;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
 
-    public Prestamo (Libro libro, Ejemplar ejemplar, Acolito acolito, Date fechaPrestamo){
+    public Prestamo (Libro libro, Evento evento, Usuario usuario, Date fechaPrestamo){
         this.libro = libro;
-        this.ejemplar = ejemplar;
-        this.acolito = acolito;
+        this.evento = evento;
+        this.usuario = usuario;
         this.fechaPrestamo = fechaPrestamo;
     }
 
@@ -30,12 +30,12 @@ public class Prestamo {
         return libro;
     }
 
-    public Ejemplar getEjemplar() {
-        return ejemplar;
+    public Evento getEjemplar() {
+        return evento;
     }
 
-    public Acolito getUsuario() {
-        return acolito;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Date getFechaPrestamo() {
@@ -50,12 +50,12 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public void setEjemplar(Ejemplar ejemplar) {
-        this.ejemplar = ejemplar;
+    public void setEjemplar(Evento evento) {
+        this.evento = evento;
     }
 
-    public void setUsuario(Acolito acolito) {
-        this.acolito = acolito;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void setFechaPrestamo(Date fechaPrestamo) {

@@ -18,7 +18,6 @@ FachadaAplicacion {
     GesionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
-    Acolito currentUser;
     
     
  public FachadaAplicacion(){
@@ -52,21 +51,21 @@ public java.util.List<Categoria> obtenerCategorias(){
   return cl.obtenerCategorias();
 };
 
-public java.util.List<Acolito> obtenerUsuarios(){
+public java.util.List<Usuario> obtenerUsuarios(){
     return cu.obtenerUsuarios();
 }
-public java.util.List<Acolito> obtenerUsuariosPretamos(){
+public java.util.List<Usuario> obtenerUsuariosPretamos(){
     return cu.obtenerUsuariosPrestamos();
 }
 
-public void anadirPrestamo (Acolito acolito, Ejemplar ejemplar){
-    cl.anadirPrestamo(acolito,ejemplar);
+public void anadirPrestamo (Usuario usuario, Evento evento){
+    cl.anadirPrestamo(usuario, evento);
 }
 
-public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre){
+public java.util.List<Usuario> buscarUsuarios(String IDUsuario, String Nombre){
     return cu.buscarUsuarios(IDUsuario, Nombre);
 }
-public java.util.List<Acolito> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
+public java.util.List<Usuario> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
     return cu.buscarUsuariosPrestamos(IDUsuario, Nombre);
 }
 
@@ -80,8 +79,8 @@ public void nuevoLibro(){
 }
 
 
-public void nuevoUsuario(Acolito acolito){
-    cu.nuevoUsuario(acolito);
+public void nuevoUsuario(Usuario usuario){
+    cu.nuevoUsuario(usuario);
 }
 
 public void nuevaCategoria(Categoria categoria){
@@ -99,11 +98,11 @@ public void categorias(){
     cl.categorias();
 }
 
-public void prestar(Ejemplar ejemplar){
-    cl.prestar(ejemplar);
+public void prestar(Evento evento){
+    cl.prestar(evento);
 }
-public void devolver(Ejemplar ejemplar){
-    cl.devolver(ejemplar);
+public void devolver(Evento evento){
+    cl.devolver(evento);
 }
 
 
@@ -115,8 +114,8 @@ public void borrarLibro(Integer idLibro){
    cl.borrarLibro(idLibro);
 }
 
-public void borrarUsuario(Acolito acolito){
-    cu.borrarUsuario(acolito);
+public void borrarUsuario(Usuario usuario){
+    cu.borrarUsuario(usuario);
 }
 
 public void borrarEjemplar(Integer idLibro, Integer numEjemplar){
@@ -127,18 +126,18 @@ public void actualizarCategoriasLibro(Integer idLibro, java.util.List<String> ca
  cl.actualizarCategoriasLibro(idLibro, categorias);
 }
 
-public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Ejemplar> ejemplares, java.util.List<Integer> borrar){
+public java.util.List<Evento> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Evento> ejemplares, java.util.List<Integer> borrar){
   return cl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
 }
 
 
 public Boolean comprobarAutentificacion(String idUsuario, String clave){
-    return cu.comprobarAutentificacion(idUsuario, clave, this);
-    //return true;
+  //return cu.comprobarAutentificacion(idUsuario, clave);
+    return true;
 }
+ 
 
 
-    public void setCurrentUser(Acolito u) {
-    currentUser = u;
-    }
+
+
 }

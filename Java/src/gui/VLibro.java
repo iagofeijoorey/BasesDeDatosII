@@ -16,7 +16,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import aplicacion.Libro;
-import aplicacion.Ejemplar;
+import aplicacion.Evento;
 import java.util.ArrayList;
 
 /**
@@ -93,7 +93,7 @@ public class VLibro extends javax.swing.JDialog {
             btnIzquierda.setEnabled(true);
         } else btnIzquierda.setEnabled(false);
 
-        ModeloTablaEjemplares mTEjemplares = new ModeloTablaEjemplares();
+        ModeloTablaEventos mTEjemplares = new ModeloTablaEventos();
         tablaEjemplares.setModel(mTEjemplares);
         mTEjemplares.setFilas(libro.getEjemplares());
         if (mTEjemplares.getRowCount()>0) {
@@ -406,7 +406,7 @@ public class VLibro extends javax.swing.JDialog {
                 {
 
                     //---- tablaEjemplares ----
-                    tablaEjemplares.setModel(new ModeloTablaEjemplares());
+                    tablaEjemplares.setModel(new ModeloTablaEventos());
                     tablaEjemplares.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -593,9 +593,9 @@ public class VLibro extends javax.swing.JDialog {
     }//GEN-LAST:event_btnActualizarCategoriasLibroActionPerformed
 
     public void actualizarEjemplares(){
-        java.util.List<Ejemplar> ejemplares;
+        java.util.List<Evento> ejemplares;
         
-        ModeloTablaEjemplares me= (ModeloTablaEjemplares)tablaEjemplares.getModel();
+        ModeloTablaEventos me= (ModeloTablaEventos)tablaEjemplares.getModel();
         
         ejemplares=fa.actualizarEjemplaresLibro(idLibro, me.getFilas(), ejemplaresBorrados);
         me.setFilas(ejemplares);
@@ -611,11 +611,11 @@ public class VLibro extends javax.swing.JDialog {
 
     private void btnNuevoEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEjemplarActionPerformed
         // TODO add your handling code here:
-        ModeloTablaEjemplares me;
-        Ejemplar e;
+        ModeloTablaEventos me;
+        Evento e;
 
-        me=(ModeloTablaEjemplares) tablaEjemplares.getModel();
-        e=new Ejemplar(null, null, null, null,null,null);
+        me=(ModeloTablaEventos) tablaEjemplares.getModel();
+        e=new Evento(null, null, null, null,null,null);
         me.nuevoEjemplar(e);
         tablaEjemplares.setRowSelectionInterval(me.getRowCount()-1, me.getRowCount()-1);
         
@@ -623,28 +623,28 @@ public class VLibro extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNuevoEjemplarActionPerformed
 
     private void btnPrestarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarEjemplarActionPerformed
-       fa.prestar(((ModeloTablaEjemplares)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()));
+       fa.prestar(((ModeloTablaEventos)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()));
        actualizarEjemplares();
     }//GEN-LAST:event_btnPrestarEjemplarActionPerformed
 
     private void btnBorrarEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarEjemplarActionPerformed
         //fa.borrarEjemplar(idLibro,((ModeloTablaEjemplares)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()).getNumEjemplar());
-        ArrayList<Ejemplar> aux = new ArrayList(((ModeloTablaEjemplares)tablaEjemplares.getModel()).getFilas());
+        ArrayList<Evento> aux = new ArrayList(((ModeloTablaEventos)tablaEjemplares.getModel()).getFilas());
         ejemplaresBorrados.add(aux.get(tablaEjemplares.getSelectedRow()).getNumEjemplar());
         aux.remove(tablaEjemplares.getSelectedRow());
         
-        ((ModeloTablaEjemplares)tablaEjemplares.getModel()).setFilas(aux);
+        ((ModeloTablaEventos)tablaEjemplares.getModel()).setFilas(aux);
     }//GEN-LAST:event_btnBorrarEjemplarActionPerformed
 
     private void btnDevolverEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverEjemplarActionPerformed
         // TODO add your handling code here:
-        fa.devolver(((ModeloTablaEjemplares)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()));
-        ((ModeloTablaEjemplares)tablaEjemplares.getModel()).setFilas(libro.getEjemplares());
+        fa.devolver(((ModeloTablaEventos)tablaEjemplares.getModel()).obtenerEjemplar(tablaEjemplares.getSelectedRow()));
+        ((ModeloTablaEventos)tablaEjemplares.getModel()).setFilas(libro.getEjemplares());
     }//GEN-LAST:event_btnDevolverEjemplarActionPerformed
 
     private void tablaEjemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEjemplaresMouseClicked
         // TODO add your handling code here:
-        if (((ModeloTablaEjemplares)tablaEjemplares.getModel()).getFilas().get(tablaEjemplares.getSelectedRow()).getFechaPrestamo() != null)
+        if (((ModeloTablaEventos)tablaEjemplares.getModel()).getFilas().get(tablaEjemplares.getSelectedRow()).getFechaPrestamo() != null)
             btnPrestarEjemplar.setEnabled(false);
         else
             btnPrestarEjemplar.setEnabled(true);
