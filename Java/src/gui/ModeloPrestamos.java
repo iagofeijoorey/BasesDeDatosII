@@ -65,8 +65,8 @@ public class ModeloPrestamos extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= acolitos.get(row).getIdUsuario(); break;
-            case 1: resultado= acolitos.get(row).getNombre(); break;
+            case 0: resultado= acolitos.get(row).getAlias(); break;
+            case 1: resultado= acolitos.get(row).getNombreCompleto(); break;
             case 2: resultado= acolitos.get(row).getEmail();break;
             case 3: resultado= acolitos.get(row).getPrestamosVencidos(); break;
 

@@ -6,6 +6,7 @@
 package baseDatos;
 
 import aplicacion.Acolito;
+import aplicacion.Contacto;
 import aplicacion.TipoAcolito;
 
 import java.sql.Connection;
@@ -24,80 +25,31 @@ public class DAOContactos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public Acolito validarUsuario(String idUsuario, String clave){
-        Acolito resultado=null;
-        Connection con;
-        PreparedStatement stmUsuario=null;
-        ResultSet rsUsuario;
 
-        con=this.getConexion();
-
-        try {
-        stmUsuario=con.prepareStatement("select id_usuario, clave, nombre, direccion, email, tipo_usuario "+
-                                        "from usuario "+
-                                        "where id_usuario = ? and clave = ?");
-        stmUsuario.setString(1, idUsuario);
-        stmUsuario.setString(2, clave);
-        rsUsuario=stmUsuario.executeQuery();
-        if (rsUsuario.next())
-        {
-            resultado = new Acolito(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"),
-                                      rsUsuario.getString("nombre"), rsUsuario.getString("direccion"),
-                                      rsUsuario.getString("email"), TipoAcolito.valueOf(rsUsuario.getString("tipo_usuario")));
-
-        }
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-        return resultado;
-    }
-    
-    public void insertarUsuario(Acolito acolito){
+    public void insertarContacto(Contacto contacto, Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;
         ResultSet rsIdUsuario;
         String idUsuario=null;
 
         con=super.getConexion();
-
         try {
-        stmUsuario=con.prepareStatement("insert into usuario(id_usuario, nombre, clave, direccion, email, tipo_usuario) "+
-                                      "values (?,?,?,?,?,?)");
-        stmUsuario.setString(1, acolito.getIdUsuario());
-        stmUsuario.setString(2, acolito.getNombre());
-        stmUsuario.setString(3, acolito.getClave());
-        stmUsuario.setString(4, acolito.getDireccion());
-        stmUsuario.setString(5, acolito.getEmail());
-        stmUsuario.setString(6, acolito.getTipoUsuario().toString());
-        stmUsuario.executeUpdate();
-/*
-        try{
-        stmIdLibro=con.prepareStatement("select currval('seq_libro_id_libro') as idLibro");
-        rsIdUsuario=stmIdLibro.executeQuery();
-        rsIdUsuario.next();
-        idUsuario=rsIdUsuario.getInt("idLibro");
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-        }finally{stmIdLibro.close();}
-
-        try{
-        stmAutores=con.prepareStatement("insert into autor(libro, nombre, orden) "+
-                                      "values (?,?,?)");
-        numAutor=1;
-        for (String s:libro.getAutores()){
-            stmAutores.setInt(1, idUsuario);
-            stmAutores.setString(2, s);
-            stmAutores.setInt(3, numAutor);
-            stmAutores.executeUpdate();
-            numAutor=numAutor+1;
-        }
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{stmAutores.close();}*/
+            stmUsuario=con.prepareStatement("insert into contactos(pseudonimo, nombre, telefono, descripcion) "+
+                                          "values (?,?,?,?)");
+            stmUsuario.setString(1, contacto.getPseudonimo());
+            stmUsuario.setString(2, contacto.getNombre());
+            stmUsuario.setInt(3, contacto.getTelefono());
+            stmUsuario.setString(4, contacto.getDescripcion());
+            stmUsuario.executeUpdate();
+            if (contacto.getTratos().isEmpty()) {
+                stmUsuario = con.prepareStatement("insert into sersolocontacto(contacto, acólito) values (?,?)");
+                stmUsuario.setString(1, contacto.getPseudonimo());
+                stmUsuario.setString(1, contacto.getPseudonimo());
+            }
+            else{
+                //todo implementación de tratos entera
+                System.out.println("Easter egg");
+            }
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
@@ -105,132 +57,22 @@ public class DAOContactos extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
-    public java.util.List<Acolito> consultarUsuarios(){
-    java.util.List<Acolito> resultado = new java.util.ArrayList<>();
-    Acolito acolitoActual;
-    Connection con;
-    PreparedStatement stmUsuarios=null;
-    ResultSet rsUsuarios;
 
-    con=this.getConexion();
+    /**
+     * Consultar contacto genérico (creo que no se usa, no la voy a implementar aún)
+     */
+    public void consultarContacto(){
+   }
 
-    String consulta = "select *" +
-                                     "from usuario";
-
-    try  {
-     stmUsuarios=con.prepareStatement(consulta);
-     rsUsuarios=stmUsuarios.executeQuery();
-    while (rsUsuarios.next())
-    {
-        acolitoActual = new Acolito(rsUsuarios.getString("id_usuario"), rsUsuarios.getString("clave"),
-                                  rsUsuarios.getString("nombre"), rsUsuarios.getString("direccion"),
-                                  rsUsuarios.getString("email"), TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo_usuario")));
-
-        resultado.add(acolitoActual);
+    /**
+     * Consultar contacto dado el acólito del que es contacto
+     */
+    public void consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre){
     }
-    } catch (SQLException e){
-      System.out.println(e.getMessage());
-      this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-    }finally{
-      try {stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+
+    /**
+     * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
+     */
+    public void consultarContactosDeAcolito(String aliasAcolito, String nombreAcolito, String pseudonimoContacto, String nombreContacto){
     }
-    return resultado;
-}
-
-    public java.util.List<Acolito> consultarUsuarios(String IDUsuario, String Nombre){
-        java.util.List<Acolito> resultado = new java.util.ArrayList<Acolito>();
-        Acolito acolitoActual;
-        Connection con;
-        PreparedStatement stmUsuarios=null;
-        ResultSet rsUsuarios;
-
-        con=this.getConexion();
-        
-        String consulta = "select * " +
-                                         "from usuario as l "+
-                                         "where id_usuario like ?"+
-                                         "  and nombre like ?";
-       
-        try  {
-         stmUsuarios=con.prepareStatement(consulta);
-         stmUsuarios.setString(1, "%"+IDUsuario+"%");
-         stmUsuarios.setString(2, "%"+Nombre+"%");
-         
-         rsUsuarios=stmUsuarios.executeQuery();
-        while (rsUsuarios.next())
-        {
-            acolitoActual = new Acolito(rsUsuarios.getString("id_usuario"), rsUsuarios.getString("clave"),
-                                      rsUsuarios.getString("nombre"), rsUsuarios.getString("direccion"),
-                                      rsUsuarios.getString("email"), TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo_usuario")));
-            resultado.add(acolitoActual);
-        }
-
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-        return resultado;
-    }
-    
-    public java.util.List<Acolito> consultarUsuariosPrestamos(String IDUsuario, String Nombre){ //Consulta para los casos en los que nos importan los préstamos y préstamos vencidos
-        java.util.List<Acolito> resultado = new java.util.ArrayList<Acolito>();
-        Acolito acolitoActual;
-        Connection con;
-        PreparedStatement stmUsuarios=null;
-        ResultSet rsUsuarios;
-
-        con=this.getConexion();
-        
-        String consulta = "select distinct u.*," +
-                          " (select count(*) from prestamo where id_usuario LIKE ? and u.nombre like ? and prestamo.id_usuario = u.id_usuario and fechaprestamo + interval '30 days' < current_date and fechadevolucion isnull)" +
-                          " from usuario  u left join prestamo on u.id_usuario = prestamo.id_usuario" +
-                          " where u.id_usuario like ? and u.nombre like ?";
-        try  {
-         stmUsuarios=con.prepareStatement(consulta);
-         stmUsuarios.setString(1, "%"+IDUsuario+"%");
-         stmUsuarios.setString(2, "%"+Nombre+"%");
-         stmUsuarios.setString(3, "%"+IDUsuario+"%");
-         stmUsuarios.setString(4, "%"+Nombre+"%");
-         
-         rsUsuarios=stmUsuarios.executeQuery();
-
-        while (rsUsuarios.next()) 
-        {
-            acolitoActual = new Acolito(rsUsuarios.getString("id_usuario"), rsUsuarios.getString("clave"),
-                    rsUsuarios.getString("nombre"), rsUsuarios.getString("direccion"), rsUsuarios.getString("email"), 
-                    TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo_usuario")),
-                    rsUsuarios.getInt("count"));
-            resultado.add(acolitoActual);
-        }
-
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-        return resultado;
-    }
-    
-    public void borrarUsuario(Acolito acolito){
-        Connection con;
-        PreparedStatement stmUsuario=null;
-
-        con=super.getConexion();
-
-        try {
-        stmUsuario=con.prepareStatement("delete from usuario where id_usuario = ?");
-        stmUsuario.setString(1, acolito.getIdUsuario());
-        stmUsuario.executeUpdate();
-
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
-   
 }

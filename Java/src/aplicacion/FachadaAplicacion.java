@@ -16,15 +16,16 @@ FachadaAplicacion {
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
     GesionLibros cl;
-    GestionUsuarios cu;
+    GestionAcolitos cu;
     GestionCategorias cc;
+    Acolito currentUser;
     
     
  public FachadaAplicacion(){
    fgui=new gui.FachadaGui(this);
    fbd= new baseDatos.FachadaBaseDatos(this);
    cl= new GesionLibros(fgui, fbd);
-   cu= new GestionUsuarios(fgui, fbd);
+   cu= new GestionAcolitos(fgui, fbd);
    cc = new GestionCategorias(fgui,fbd);
  }
 
@@ -47,48 +48,18 @@ public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isb
   return cl.obtenerLibros(id, titulo,  isbn,  autor);
 };
 
-public java.util.List<Categoria> obtenerCategorias(){
-  return cl.obtenerCategorias();
-};
 
-public java.util.List<Usuario> obtenerUsuarios(){
-    return cu.obtenerUsuarios();
-}
-public java.util.List<Usuario> obtenerUsuariosPretamos(){
-    return cu.obtenerUsuariosPrestamos();
+public java.util.List<Acolito> consultarAcolitos(){
+    return cu.consultarAcolitos();
 }
 
-public void anadirPrestamo (Usuario usuario, Evento evento){
-    cl.anadirPrestamo(usuario, evento);
-}
 
-public java.util.List<Usuario> buscarUsuarios(String IDUsuario, String Nombre){
+public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
     return cu.buscarUsuarios(IDUsuario, Nombre);
 }
-public java.util.List<Usuario> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
-    return cu.buscarUsuariosPrestamos(IDUsuario, Nombre);
-}
 
-
-public void visualizarLibro(Integer idLibro){
- cl.visualizarLibro(idLibro);
-}
-
-public void nuevoLibro(){
- cl.nuevoLibro();
-}
-
-
-public void nuevoUsuario(Usuario usuario){
+public void nuevoUsuario(Acolito usuario){
     cu.nuevoUsuario(usuario);
-}
-
-public void nuevaCategoria(Categoria categoria){
-    cc.nuevaCategoria(categoria);
-}
-
-public void borrarCategoria(Categoria categoria){
-    cc.borrarCategoria(categoria);
 }
 
 public void usuarios(){
@@ -114,8 +85,8 @@ public void borrarLibro(Integer idLibro){
    cl.borrarLibro(idLibro);
 }
 
-public void borrarUsuario(Usuario usuario){
-    cu.borrarUsuario(usuario);
+public void borrarAcolito(Acolito usuario){
+    cu.borrarAcolito(usuario);
 }
 
 public void borrarEjemplar(Integer idLibro, Integer numEjemplar){
@@ -135,9 +106,9 @@ public Boolean comprobarAutentificacion(String idUsuario, String clave){
   //return cu.comprobarAutentificacion(idUsuario, clave);
     return true;
 }
- 
 
 
-
-
+    public void setCurrentUser(Acolito u) {
+        currentUser = u;
+    }
 }

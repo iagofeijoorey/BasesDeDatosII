@@ -155,8 +155,8 @@ public class DAOEventos extends AbstractDAO {
                  Evento eaux = new Evento(resultado, rsEjemplares.getInt("num_ejemplar"),
                                                       rsEjemplares.getString("localizador"),
                                                       rsEjemplares.getString("ano_compra"),rsEjemplares.getString("fechaprestamo"), rsEjemplares.getString("fechavencimiento"));
-                 if (!this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").isEmpty())
-                     eaux.setTenedor(this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").get(0));
+                 if (!this.getFachadaAplicacion().consultarAcolitos(rsEjemplares.getString("id_usuario"),"").isEmpty())
+                     eaux.setTenedor(this.getFachadaAplicacion().consultarAcolitos(rsEjemplares.getString("id_usuario"),"").get(0));
                  
                  resultado.addEjemplar(eaux);
                  
@@ -273,8 +273,8 @@ public class DAOEventos extends AbstractDAO {
              Evento eaux = new Evento(null, rsEjemplares.getInt("num_ejemplar"),
                                                       rsEjemplares.getString("localizador"),
                                                       rsEjemplares.getString("ano_compra"),rsEjemplares.getString("fechaprestamo"), rsEjemplares.getString("fechavencimiento"));
-                 if (!this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").isEmpty()){
-                     eaux.setTenedor(this.getFachadaAplicacion().buscarUsuarios(rsEjemplares.getString("id_usuario"),"").get(0));
+                 if (!this.getFachadaAplicacion().consultarAcolitos(rsEjemplares.getString("id_usuario"),"").isEmpty()){
+                     eaux.setTenedor(this.getFachadaAplicacion().consultarAcolitos(rsEjemplares.getString("id_usuario"),"").get(0));
                      eaux.setLibro(this.getFachadaAplicacion().obtenerLibros(idLibro, "", "", "").get(0));
                  }
                  

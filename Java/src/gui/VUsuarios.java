@@ -17,6 +17,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
+import aplicacion.Acolito;
+import aplicacion.TipoAcolito;
 import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
 
@@ -34,7 +36,7 @@ public class VUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         this.fa=fa;
         initComponents();
-        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
+        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.consultarAcolitos());
         
         jComboBox1.addItem(" ");
         for (TipoUsuario i: TipoUsuario.values())
@@ -314,43 +316,43 @@ public class VUsuarios extends javax.swing.JDialog {
         jTextField4.setText("");
         jTextField3.setText("");
         jComboBox1.setSelectedItem(" ");
-        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
+        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.consultarAcolitos());
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         //Comprobación de si existe en la bd
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
-        Usuario u = new Usuario(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),jTextField5.getText(),TipoUsuario.stringToTipoUsuario(jComboBox1.getSelectedItem().toString()));
-        Usuario us;
-        
-        
+        Acolito u = new Acolito(jTextField2.getText(),jTextField4.getText(),jTextField1.getText(),jTextField3.getText(),0, TipoAcolito.stringToTipoAcolito(jComboBox1.getSelectedItem().toString()));
+        Acolito us;
+
+
         if (jTable1.getSelectedRow()!=-1){ //Borramos el usuario anterior al editar..
             us = mu.obtenerUsuario(jTable1.getSelectedRow()); //Usuario seleccionado
-            for (Usuario iu: fa.obtenerUsuarios())
-                if (iu.getIdUsuario().equals(u.getIdUsuario()) && !iu.getIdUsuario().equals(us.getIdUsuario())){
+            for (Acolito iu: fa.consultarAcolitos())
+                if (iu.getAliasAcolito().equals(u.getAliasAcolito()) && !iu.getAliasAcolito().equals(us.getAliasAcolito())){
                     jLabel9.setVisible(true);
                     return;
                 }
             fa.borrarUsuario(us);
         }
-        for (Usuario iu: fa.obtenerUsuarios())
-            if (iu.getIdUsuario().equals(u.getIdUsuario())){
+        for (Acolito iu: fa.consultarAcolitos())
+            if (iu.getAliasAcolito().equals(u.getAliasAcolito())){
                 jLabel9.setVisible(true);
                 return;
             }
         fa.nuevoUsuario(u); //Si estamos creando un usuario en vez de editar, no se borra el usuario anterior
-        
-        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
+
+        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.consultarAcolitos());
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
         ModeloUsuarios mu = (ModeloUsuarios)jTable1.getModel();
         Usuario u = mu.obtenerUsuario(jTable1.getSelectedRow());
-        
+
         fa.borrarUsuario(u);
-        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios()); //Refrescar la tabla
+        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.consultarAcolitos()); //Refrescar la tabla
 
     }//GEN-LAST:event_btnBorrarActionPerformed
 
@@ -384,7 +386,7 @@ public class VUsuarios extends javax.swing.JDialog {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.buscarUsuarios(jTextFieldIDBusqueda.getText(),jTextFieldNombreBusqueda.getText()));
+        ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.consultarAcolitos(jTextFieldIDBusqueda.getText(),jTextFieldNombreBusqueda.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -394,13 +396,13 @@ public class VUsuarios extends javax.swing.JDialog {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         if (jTable1.getSelectedRow()!=-1){
-        jTextField2.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getIdUsuario());
-        jTextField1.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getNombre());
-        jTextField4.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getClave());
+        jTextField2.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getAlias());
+        jTextField1.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getNombreCompleto());
+        jTextField4.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getContraseña());
         jTextField3.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getDireccion());
         jTextField5.setText(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getEmail());
 
-        jComboBox1.setSelectedItem(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getTipoUsuario().toString());
+        jComboBox1.setSelectedItem(((ModeloUsuarios)jTable1.getModel()).obtenerUsuario(jTable1.getSelectedRow()).getTipoAcolito().toString());
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

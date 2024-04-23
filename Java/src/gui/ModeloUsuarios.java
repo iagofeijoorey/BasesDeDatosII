@@ -66,12 +66,12 @@ public class ModeloUsuarios extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= acolitos.get(row).getIdUsuario(); break;
-            case 1: resultado= acolitos.get(row).getClave(); break;
-            case 2: resultado= acolitos.get(row).getNombre();break;
+            case 0: resultado= acolitos.get(row).getAlias(); break;
+            case 1: resultado= acolitos.get(row).getContraseña(); break;
+            case 2: resultado= acolitos.get(row).getNombreCompleto();break;
             case 4: resultado= acolitos.get(row).getEmail(); break;
             case 3: resultado= acolitos.get(row).getDireccion(); break;
-            case 5: resultado= acolitos.get(row).getTipoUsuario(); break;
+            case 5: resultado= acolitos.get(row).getTipoAcolito(); break;
         }
         return resultado;
     }

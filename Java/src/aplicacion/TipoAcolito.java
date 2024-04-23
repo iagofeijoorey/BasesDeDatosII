@@ -12,18 +12,18 @@ package aplicacion;
  * @author basesdatos
  */
 public enum TipoAcolito {
-    Administrador,
+    //Administrador,
     Cabecilla,
     JefeDivision,
     Gestor,
-
+    LiderEspiritual,
     Normal;
 
 
     public static TipoAcolito stringToTipoAcolito(String tu){
         switch (tu){
-            case ("Administrador"):
-                return Administrador;
+            case ("Cabecilla"):
+                return Cabecilla;
             default:
                 return Normal;
         }
