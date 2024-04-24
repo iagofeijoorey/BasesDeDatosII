@@ -39,7 +39,7 @@ public class GestionContactos {
      * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
      */
     public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
-        fbd.consultarContactosDeAcolito(aliasAcolito, pseudonimoContacto, nombreContacto);
+        return fbd.consultarContactosDeAcolito(aliasAcolito, pseudonimoContacto, nombreContacto);
     }
   
 }

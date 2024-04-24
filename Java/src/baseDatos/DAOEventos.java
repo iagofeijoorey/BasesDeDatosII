@@ -6,10 +6,9 @@
 package baseDatos;
 
 import aplicacion.Evento;
-import aplicacion.Categoria;
-import aplicacion.Libro;
+import aplicacion.Contacto;
 import java.sql.*;
-import aplicacion.Usuario;
+import aplicacion.Acolito;
 /**
  *
  * @author basesdatos
