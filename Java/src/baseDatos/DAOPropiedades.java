@@ -82,7 +82,6 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setInt(3, commodity.getCantidad());
                 stmUsuario.executeUpdate();
             }
-
         } catch (SQLException e){
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
