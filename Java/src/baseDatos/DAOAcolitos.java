@@ -72,7 +72,7 @@ public class DAOAcolitos extends AbstractDAO {
                 "           WHEN public.guia_espiritual.alias IS NOT NULL THEN 'LiderEspiritual' " +
                 "           ELSE 'tipo_desconocido' " +
                 "           END AS tipo\n" +
-                "FROM acólitos u\n" +
+                "FROM acólitos u " +
                 "         LEFT JOIN public.cabecillas ON u.alias = cabecillas.alias " +
                 "         LEFT JOIN public.gestor_interno ON u.alias = gestor_interno.alias " +
                 "         LEFT JOIN public.jefes_de_division ON u.alias = jefes_de_division.alias " +

@@ -7,6 +7,7 @@ package baseDatos;
 
 import aplicacion.Acolito;
 import aplicacion.Contacto;
+import aplicacion.PropiedadesYCuentas.Propiedad;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -91,5 +92,9 @@ public class FachadaBaseDatos {
     }
     public List<Contacto> consultarContactosDeAcolito(String aliasAcolito, String pseudonimo, String nombre) {
         return daoContactos.consultarContactosDeAcolito(aliasAcolito, pseudonimo, nombre);
+    }
+
+    public List<Propiedad> consultarPropiedades() {
+        return daoPropiedades.consultarPropiedades();
     }
 }

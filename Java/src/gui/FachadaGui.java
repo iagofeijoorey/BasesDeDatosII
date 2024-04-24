@@ -28,6 +28,13 @@ public class FachadaGui {
       vp.setVisible(true);
       va.setVisible(true);
     }
+
+    public void muestraExcepcion(String e) {
+        VAviso va;
+
+        va = new VAviso(vp, true, e);
+        va.setVisible(true);
+    }
     
    /*
     public void visualizaLibro(Libro l, java.util.List<String>restoCategorias){
