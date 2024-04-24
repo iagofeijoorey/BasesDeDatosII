@@ -6,9 +6,12 @@
 package baseDatos;
 
 import aplicacion.Acolito;
+import aplicacion.Contacto;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -42,7 +45,6 @@ public class FachadaBaseDatos {
 
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
-            System.out.println("HE LLEGAO");
 
             this.conexion = java.sql.DriverManager.getConnection("jdbc:" + gestor + "://" +
                             configuracion.getProperty("servidor") + ":" +
@@ -80,5 +82,14 @@ public class FachadaBaseDatos {
         return daoAcolitos.consultarAcolitos(alias, Nombre);
     }
 
+    public List<Contacto> consultarContacto(String pseudonimo, String nombre) {
+        return daoContactos.consultarContactos(pseudonimo,nombre);
+    }
 
+    public List<Contacto> consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre) {
+        return daoContactos.consultarContactosDeAcolito(acolito, pseudonimo, nombre);
+    }
+    public List<Contacto> consultarContactosDeAcolito(String aliasAcolito, String pseudonimo, String nombre) {
+        return daoContactos.consultarContactosDeAcolito(aliasAcolito, pseudonimo, nombre);
+    }
 }
