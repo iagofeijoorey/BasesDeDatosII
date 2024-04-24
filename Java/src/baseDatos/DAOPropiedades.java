@@ -200,6 +200,7 @@ public class DAOPropiedades extends AbstractDAO {
 
                 switch (rsPropiedades.getString("tipo")) {
                     case "Inmobiliario":
+                        if (!tipo.equals("Inmobiliario")) break;
                         String consulta4 = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
                                 "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
 
@@ -219,10 +220,12 @@ public class DAOPropiedades extends AbstractDAO {
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
                                         rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
                                         TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                        resultado.add(propiedadActual);
                         break;
 
 
                     case "Vehículo":
+                        if (!tipo.equals("Vehículo") && !tipo.equals("Vehiculo")) break;
                         String consulta5 = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
                                 "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
 
@@ -241,8 +244,10 @@ public class DAOPropiedades extends AbstractDAO {
                                         rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
                                         TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))), new Inmobiliario(rsAuxiliar.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                 rsTipoConcreto.getInt("capacidad"), rsTipoConcreto.getInt("valor_actual"), null));
+                        resultado.add(propiedadActual);
                         break;
                     case "Arma":
+                        if (!tipo.equals("Arma")) break;
                         String consulta7 = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
                                 "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
 
@@ -260,8 +265,10 @@ public class DAOPropiedades extends AbstractDAO {
                                 rsTipoConcreto.getInt("cantidad"), rsPropiedades.getInt("valor_actual"), rsTipoConcreto.getInt("Balas"),
                                 new Inmobiliario(rsTipoConcreto.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                         rsTipoConcreto.getInt("capacidad"), rsTipoConcreto.getInt("valor_actual"), null));
+                        resultado.add(propiedadActual);
                         break;
                     case "Commodity":
+                        if (!tipo.equals("Commodity")) break;
                         String consulta9 = "Select * from armas where idpropiedad = ?";
                         stmPropiedades = con.prepareStatement(consulta9);
                         stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
@@ -271,11 +278,11 @@ public class DAOPropiedades extends AbstractDAO {
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
                                         rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
                                         TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                        resultado.add(propiedadActual);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
                 }
-                resultado.add(propiedadActual);
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
