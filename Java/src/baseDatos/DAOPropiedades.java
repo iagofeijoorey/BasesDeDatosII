@@ -26,6 +26,70 @@ public class DAOPropiedades extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
+    public void insertarPropiedad(Propiedad propiedad){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        ResultSet rsIdUsuario;
+        String idUsuario=null;
+
+        con=super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("insert into propiedades(idpropiedad, valor_actual, gestor) " +
+                    "values (?,?,?)");
+            stmUsuario.setInt(1, propiedad.getIdPropiedad());
+            stmUsuario.setInt(2, propiedad.getValorActual());
+            stmUsuario.setString(3, propiedad.getGestor().getAlias());
+            stmUsuario.executeUpdate();
+
+            if (propiedad.getClass().equals(Inmobiliario.class)) {
+                Inmobiliario inmobiliario = (Inmobiliario) propiedad;
+                stmUsuario = con.prepareStatement("insert into inmobiliario(idpropiedad, ubicacion, tipoinmobiliario) " +
+                        "values (?,?,?)");
+                stmUsuario.setInt(1, inmobiliario.getIdPropiedad());
+                stmUsuario.setString(2, inmobiliario.getUbicacion());
+                stmUsuario.setString(3, inmobiliario.getTipo().toString());
+                stmUsuario.executeUpdate();
+            }
+            else if (propiedad.getClass().equals(Vehiculo.class)) {
+                Vehiculo vehiculo = (Vehiculo) propiedad;
+                stmUsuario = con.prepareStatement("insert into vehiculos(idpropiedad, tipovehiculo, capacidad, almacén) " +
+                        "values (?,?,?,?)");
+                stmUsuario.setInt(1, vehiculo.getIdPropiedad());
+                stmUsuario.setString(2, vehiculo.getTipo().toString());
+                stmUsuario.setInt(3, vehiculo.getCapacidad());
+                stmUsuario.setInt(4, vehiculo.getAlmacen().getIdPropiedad());
+                stmUsuario.executeUpdate();
+            }
+
+            else if (propiedad.getClass().equals(Arma.class)) {
+                Arma arma = (Arma) propiedad;
+                stmUsuario = con.prepareStatement("insert into armas(idpropiedad, tipoarmamento, cantidad, numbalas, almacén) " +
+                        "values (?,?,?,?,?)");
+                stmUsuario.setInt(1, arma.getIdPropiedad());
+                stmUsuario.setString(2, arma.getTipo().toString());
+                stmUsuario.setInt(3, arma.getCantidad());
+                stmUsuario.setInt(4, arma.getBalas());
+                stmUsuario.setInt(5, arma.getAlmacen().getIdPropiedad());
+                stmUsuario.executeUpdate();
+            }
+
+            else if (propiedad.getClass().equals(Commodity.class)) {
+                Commodity commodity = (Commodity) propiedad;
+                stmUsuario = con.prepareStatement("insert into commodities(idpropiedad, nombre, cantidad) " +
+                        "values (?,?,?)");
+                stmUsuario.setInt(1, commodity.getIdPropiedad());
+                stmUsuario.setString(2, commodity.getNombre());
+                stmUsuario.setInt(3, commodity.getCantidad());
+                stmUsuario.executeUpdate();
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
 
 
 
@@ -296,4 +360,6 @@ public class DAOPropiedades extends AbstractDAO {
                 .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
                 .collect(Collectors.toList());
     }
+
+
 }

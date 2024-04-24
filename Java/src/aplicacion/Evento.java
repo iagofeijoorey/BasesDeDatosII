@@ -13,14 +13,14 @@ import java.util.Date;
 public class Evento {
 
     private String ubicacion;
-    private Date fecha;
+    private String fecha;
     private String tipoEvento;
     private String descripcion;
     private String autorizador;
     private String organizador;
 
     //Constructor
-    public Evento(String ubicacion, Date fecha, String tipoEvento, String descripcion, String organizador) {
+    public Evento(String ubicacion, String fecha, String tipoEvento, String descripcion, String organizador) {
         this.ubicacion = ubicacion;
         this.fecha = fecha;
         this.tipoEvento = tipoEvento;
@@ -33,7 +33,7 @@ public class Evento {
     public String getUbicacion() {
         return ubicacion;
     }
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
     public String getTipoEvento() {
@@ -51,7 +51,7 @@ public class Evento {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     public void setTipoEvento(String tipoEvento) {
