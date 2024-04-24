@@ -55,7 +55,7 @@ public class ModeloTablaEventos extends AbstractTableModel{
 
     @Override
     public boolean isCellEditable(int row, int col){
-       return col>0 && col<3;
+        return col>0 && col<3;
     }
 
     public Object getValueAt(int row, int col){

@@ -48,7 +48,7 @@ public class VCategorías extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Diego
     private void initComponents() {
         btnAñadir = new JButton();
         btnSalir = new JButton();
@@ -266,7 +266,7 @@ public class VCategorías extends javax.swing.JDialog {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Diego
     private JButton btnAñadir;
     private JButton btnSalir;
     private JButton btnBorrar;
