@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * DAO de Contactos y Tratos
  * @author basesdatos
  */
 public class DAOContactos extends AbstractDAO {
@@ -29,8 +29,6 @@ public class DAOContactos extends AbstractDAO {
     public void insertarContacto(Contacto contacto, Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;
-        ResultSet rsIdUsuario;
-        String idUsuario=null;
 
         con=super.getConexion();
         try {
@@ -47,14 +45,24 @@ public class DAOContactos extends AbstractDAO {
                 stmUsuario.setString(1, contacto.getPseudonimo());
             }
             else{
-                //todo implementación de tratos entera
-                System.out.println("Easter egg");
+                for (int i = 0; i < contacto.getTratos().size(); i++) {
+                    stmUsuario = con.prepareStatement("insert into tratos(idtrato,tipotrato,contacto, acólito) values (?,?,?,?)");
+                    stmUsuario.setInt(1, contacto.getTratos().get(i).getIdTrato());
+                    stmUsuario.setString(2, contacto.getTratos().get(i).getTipoTrato().toString());
+                    stmUsuario.setString(3, contacto.getPseudonimo());
+                    stmUsuario.setString(4, contacto.getTratos().get(i).getAcolito().getAlias());
+
+                    stmUsuario.executeUpdate();
+
+                }
             }
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+          try {
+              assert stmUsuario != null;
+              stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
 

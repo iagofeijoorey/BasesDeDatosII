@@ -27,6 +27,14 @@ public class Contacto {
         this.descripcion = descripcion;
     }
 
+    public Contacto(String pseudonimo, String nombre, String descripcion, Integer telefono, Acolito acolito, ArrayList<Trato> tratos) {
+        this.pseudonimo = pseudonimo;
+        this.acolito = acolito;
+        this.telefono = telefono;
+        this.descripcion = descripcion;
+        this.tratos = tratos;
+    }
+
     public String getPseudonimo() {
         return pseudonimo;
     }
