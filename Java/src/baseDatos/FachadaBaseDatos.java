@@ -5,10 +5,7 @@
 
 package baseDatos;
 
-import aplicacion.Acolito;
-import aplicacion.Contacto;
-import aplicacion.Evento;
-import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -99,7 +96,12 @@ public class FachadaBaseDatos {
         return daoPropiedades.consultarPropiedades();
     }
 
+    /*
     public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
         return daoEventos.consultarEventos(ubicacion, fecha);
+    }
+    */
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 }

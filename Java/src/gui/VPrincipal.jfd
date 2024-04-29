@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, comp presentacion:::p:299:p, space :::x, par l:::p {comp scrollListaEventos::l:::x, seq l {space :p:17:p, par l {comp txtUbicacion:::p::p, comp txtFecha:::p::p}, space :::p, par l:::p {comp buscaUbicacion::::244:x, comp buscaFecha::::244:x}, space s:::p, comp btnBuscar:::p::p}, comp scrollPane2::l:::x}, space u:::p, par l {comp ScrollListaRituales:::p:194:p, seq {space :6:6:p, comp Desplegable:::p:194:p}}, space :::p}}"
-			"$verticalGroup": "par l {seq t {space :12::x, comp presentacion:::p:457:p}, seq {par l {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p, space :::x}, seq t {space :0:0:x, par b {comp txtUbicacion::b:p::p, comp buscaUbicacion::b:p::p}, space :::p, par b {comp txtFecha::b:p::p, comp buscaFecha::b:p::p}, space :p:6:p}}, comp scrollListaEventos:::p:255:p, space :::p, comp scrollPane2:::p:118:p}, seq {space :::p, comp ScrollListaRituales:::p:372:p, space :::p, comp Desplegable:::::x}}, space :::p}}"
+			"$horizontalGroup": "par l {seq l {space :::p, comp presentacion:::p:299:p, space :::x, par t:::p {seq l {space :p:17:p, par l {comp txtUbicacion:::p::p, comp txtFecha:::p::p}, space :::p, par l:::p {comp buscaUbicacion::::244:x, comp buscaFecha::::244:x}, space s:::p, comp btnBuscar:::p::p}, comp scrollPane2::t::428:x, comp scrollListaEventos::l::428:x}, par l {seq l {space :p:71:p, comp btnSalir:::p:111:p}, seq l {space s:::p, par t:::p {comp Desplegable::::194:x, comp ScrollListaRituales::::194:x}}}, space ::22:x}}"
+			"$verticalGroup": "par l {seq {par l {seq {space :0:12:x, comp presentacion:::p:451:p}, seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p, space ::25:x}, seq {space :0:12:x, par b {comp txtUbicacion::b:p::p, comp buscaUbicacion::b:p::p}, space :::p, par b {comp txtFecha::b:p::p, comp buscaFecha::b:p::p}, space :p:9:p}}, comp scrollListaEventos:::p:246:p, space :p:12:p, comp scrollPane2:::p:100:p, space :p:18:p}}, space :::p}, seq l {space :p:12:p, comp ScrollListaRituales:::p:304:p, space ::29:x, comp Desplegable:::p:71:p, space :::p, comp btnSalir:::p::p, space :p:17:p}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -20,27 +20,32 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "PerfilBotonDesplegable"
 					"text": "Perfil"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PerfilBotonDesplegable", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPerfil", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "ContactosBotonDesplegable"
 					"text": "Contactos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContactos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "AcólitosBotonDesplegable"
 					"text": "Acólitos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarAcolitos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "PropiedadesBotonDesplegable"
 					"text": "Propiedades"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPropiedades", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "EventosBotonDesplegable"
 					"text": "Eventos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarEventos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "RitualesBotonDesplegable"
 					"text": "Rituales"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarRituales", true ) )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -122,6 +127,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnBuscar"
 				"text": "buscar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnBuscarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "txtUbicacion"
@@ -143,8 +149,13 @@ new FormModel {
 					name: "ListaEstadísticas"
 				} )
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSalir"
+				"text": "Salir"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnSalirMouseClicked", true ) )
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 20, 90 )
+			"location": new java.awt.Point( 15, 90 )
 			"size": new java.awt.Dimension( 975, 500 )
 		} )
 	}

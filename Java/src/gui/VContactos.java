@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Sat Apr 20 11:58:40 CEST 2024
+ * Created by JFormDesigner on Mon Apr 29 18:02:36 GMT+02:00 2024
  */
 
 package gui;
@@ -9,32 +9,20 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import aplicacion.*;
 
 /**
- * @author Diego
+ * @author Usuario
  */
-public class VPerfil extends JDialog {
-
-    private aplicacion.FachadaAplicacion fa;
-
-    public VPerfil(Window owner, aplicacion.FachadaAplicacion fa) {
+public class VContactos extends JDialog {
+    public VContactos(Window owner) {
         super(owner);
         initComponents();
-        this.fa = fa;
-    }
-
-    //BOTONES
-    private void btnVolverMouseClicked(ActionEvent e) {
-        this.dispose();
     }
 
     private void btnActualizarMouseClicked(MouseEvent e) {
-        fa.actualizarAcolito(Alias_text.getText(), Nombre_text.getText(), Ciudad_text.getText(), Pais_text.getText());
-        //Estaría guay poñer aquí un textiño encima de actualizar de "¡Actualizado!"
+        // TODO add your code here
     }
 
-    //TABLAS
     private void jTable1MouseClicked(MouseEvent e) {
         // TODO add your code here
     }
@@ -54,13 +42,10 @@ public class VPerfil extends JDialog {
         Nombre = new JLabel();
         Influencia = new JLabel();
         FechaAlta = new JLabel();
-        Ciudad = new JLabel();
         Pais = new JLabel();
         Alias_text = new JTextField();
         Nombre_text = new JTextField();
         Alta_text = new JTextField();
-        Influencia_Text = new JTextField();
-        Ciudad_text = new JTextField();
         Pais_text = new JTextField();
         scrollPane1 = new JScrollPane();
         textPane2 = new JTextPane();
@@ -72,7 +57,7 @@ public class VPerfil extends JDialog {
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Perfil");
+        setTitle("Mis Contactos");
         setResizable(false);
         var contentPane = getContentPane();
 
@@ -120,19 +105,12 @@ public class VPerfil extends JDialog {
         FechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
         FechaAlta.setText("Dado de alta el:");
 
-        //---- Ciudad ----
-        Ciudad.setHorizontalAlignment(SwingConstants.RIGHT);
-        Ciudad.setText("Ciudad:");
-
         //---- Pais ----
         Pais.setHorizontalAlignment(SwingConstants.RIGHT);
         Pais.setText("Pais:");
 
         //---- Alta_text ----
         Alta_text.setEnabled(false);
-
-        //---- Influencia_Text ----
-        Influencia_Text.setEnabled(false);
 
         //======== scrollPane1 ========
         {
@@ -171,7 +149,7 @@ public class VPerfil extends JDialog {
                             .addGap(22, 22, 22)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                             .addGroup(contentPaneLayout.createParallelGroup()
                                                 .addComponent(Influencia)
@@ -181,16 +159,11 @@ public class VPerfil extends JDialog {
                                                     .addGap(122, 122, 122)
                                                     .addComponent(FechaAlta))
                                                 .addComponent(Nombre, GroupLayout.Alignment.TRAILING)))
-                                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addComponent(Ciudad)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addComponent(Influencia_Text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addComponent(Ciudad_text, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(35, 35, 35)
-                                                    .addComponent(Pais))
-                                                .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(contentPaneLayout.createParallelGroup()
+                                            .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addGap(182, 182, 182)
+                                                .addComponent(Pais))
+                                            .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
                                     .addGap(18, 18, 18)
                                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(Alta_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
@@ -238,14 +211,11 @@ public class VPerfil extends JDialog {
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(Influencia)
                                 .addComponent(Alta_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(FechaAlta, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Influencia_Text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(FechaAlta, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(Pais)
-                                .addComponent(Ciudad_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Pais_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Ciudad)))
+                                .addComponent(Pais_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addGroup(contentPaneLayout.createSequentialGroup()
@@ -277,13 +247,10 @@ public class VPerfil extends JDialog {
     private JLabel Nombre;
     private JLabel Influencia;
     private JLabel FechaAlta;
-    private JLabel Ciudad;
     private JLabel Pais;
     private JTextField Alias_text;
     private JTextField Nombre_text;
     private JTextField Alta_text;
-    private JTextField Influencia_Text;
-    private JTextField Ciudad_text;
     private JTextField Pais_text;
     private JScrollPane scrollPane1;
     private JTextPane textPane2;

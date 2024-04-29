@@ -17,9 +17,7 @@ public class FachadaGui {
    public FachadaGui(aplicacion.FachadaAplicacion fa){
         this.fa=fa;
         this.vPrincipal = new VPrincipal(fa);
-   } 
-    
-    
+   }
     
     public void iniciaVista(){
         VAutentificacion vAutentificacion;
@@ -35,8 +33,49 @@ public class FachadaGui {
         va = new VAviso(vPrincipal, true, e);
         va.setVisible(true);
     }
-    
+
+    //Abrir ventanas
+    public void ventanaPerfil(VPrincipal vP){
+        VPerfil vp;
+
+        vp = new VPerfil(vP, fa);
+        vp.setVisible(true);
+    }
+
+    /*
+    public void ventanaContactos(VPrincipal vP){
+        VContactos vc;
+
+        vc = new VPerfil(vP, fa);
+        vc.setVisible(true);
+    }
+
+    public void ventanaAcolitos(VPrincipal vP){
+        VAcolitos va;
+
+        va = new VPerfil(vP, fa);
+        va.setVisible(true);
+    }
+
+    public void ventanaPropiedades(VPrincipal vP){
+        VPropiedades vpr;
+
+        vpr = new VPerfil(vP, fa);
+        vpr.setVisible(true);
+    }
+
+    public void ventanaRituales(VPrincipal vP){
+        VRituales vr;
+
+        vr = new VPerfil(vP, fa);
+        vr.setVisible(true);
+    }
+    */
+
    /*
+
+   CÓDIGO BIBLIOTECAAAAAAAAAAAAAAAAA
+
     public void visualizaLibro(Libro l, java.util.List<String>restoCategorias){
         VLibro vl;
         java.util.List<String> categorias = new java.util.ArrayList<String>();
