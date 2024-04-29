@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, comp presentacion:::p:299:p, space :::x, par t:::p {seq l {space :p:17:p, par l {comp txtUbicacion:::p::p, comp txtFecha:::p::p}, space :::p, par l:::p {comp buscaUbicacion::::244:x, comp buscaFecha::::244:x}, space s:::p, comp btnBuscar:::p::p}, comp scrollPane2::t::428:x, comp scrollListaEventos::l::428:x}, par l {seq l {space :p:71:p, comp btnSalir:::p:111:p}, seq l {space s:::p, par t:::p {comp Desplegable::::194:x, comp ScrollListaRituales::::194:x}}}, space ::22:x}}"
-			"$verticalGroup": "par l {seq {par l {seq {space :0:12:x, comp presentacion:::p:451:p}, seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p, space ::25:x}, seq {space :0:12:x, par b {comp txtUbicacion::b:p::p, comp buscaUbicacion::b:p::p}, space :::p, par b {comp txtFecha::b:p::p, comp buscaFecha::b:p::p}, space :p:9:p}}, comp scrollListaEventos:::p:246:p, space :p:12:p, comp scrollPane2:::p:100:p, space :p:18:p}}, space :::p}, seq l {space :p:12:p, comp ScrollListaRituales:::p:304:p, space ::29:x, comp Desplegable:::p:71:p, space :::p, comp btnSalir:::p::p, space :p:17:p}}"
+			"$horizontalGroup": "par l {seq l {par l {seq {space :p:48:p, comp Logo:::p::p}, seq l {space :::p, comp presentacion:::p:299:p}}, par t:::p {seq l {space :p:17:p, par l {seq {comp txtUbicacion:::p::p, space :::p, comp buscaUbicacion:::::x}, seq {comp txtFecha:::p::p, space ::35:x, comp buscaFecha:::p:244:p}}, space s:::p, comp btnBuscar:::p::p}, seq t {space :::p, comp scrollListaEventos::::434:x}, seq t {space :::p, comp scrollPane2:::::x}}, par l {seq {space s:::p, par l {comp ScrollListaRituales:::p:194:p, comp Desplegable:::::x}, space ::16:x}, seq t {space ::60:x, comp btnSalir:::p:111:p, space :p:57:p}}}}"
+			"$verticalGroup": "par l {seq l {par t {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp txtFecha:::p::p, comp buscaFecha:::p::p}}}, space s:::p, comp scrollListaEventos:::p:246:p, space u:::p, comp scrollPane2:::p:100:p}, seq {space ::8:x, par t {seq t {comp Logo:::p:113:p, space :::p, comp presentacion:::p:329:p}, seq {comp ScrollListaRituales:::p:304:p, space u:::p, comp Desplegable:::p:71:p, space :p:13:p, comp btnSalir:::p::p, space :p:12:p}}}}, space ::8:x}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -17,6 +17,7 @@ new FormModel {
 				"text": "Opciones"
 				"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/gui/flechaI.jpg" )
 				"icon": new com.jformdesigner.model.SwingIcon( 2, "FileView.hardDriveIcon" )
+				"background": new java.awt.Color( 255, 255, 204, 255 )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "PerfilBotonDesplegable"
 					"text": "Perfil"
@@ -154,9 +155,13 @@ new FormModel {
 				"text": "Salir"
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnSalirMouseClicked", true ) )
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "Logo"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/logoPequeño1.jpg" )
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 15, 90 )
-			"size": new java.awt.Dimension( 975, 500 )
+			"location": new java.awt.Point( 15, 40 )
+			"size": new java.awt.Dimension( 975, 495 )
 		} )
 	}
 }
