@@ -21,8 +21,14 @@ public class FachadaAplicacion {
     private GestionContactos gc;
     private GestionAcolitos ga;
     private Acolito currentUser;
-    
-    
+
+    public static void main(String args[]) {
+        FachadaAplicacion fa;
+
+        fa= new FachadaAplicacion();
+        fa.iniciaInterfazUsuario();
+    }
+
     public FachadaAplicacion(){
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
@@ -30,14 +36,6 @@ public class FachadaAplicacion {
         gp = new GestionPropiedades(fgui, fbd);
         gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
-    }
-
-
-    public static void main(String args[]) {
-        FachadaAplicacion fa;
-     
-        fa= new FachadaAplicacion();
-        fa.iniciaInterfazUsuario();
     }
  
     public void iniciaInterfazUsuario(){
@@ -47,11 +45,11 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
- 
+ /*
 public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
   return cl.obtenerLibros(id, titulo,  isbn,  autor);
-}
-
+}*/
+/*
 public java.util.List<Acolito> consultarAcolitos(){
     return ga.consultarAcolitos();
 }
@@ -80,11 +78,11 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void setCurrentUser(Acolito u) {
         currentUser = u;
     }
+*/
 
-
-    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
-        return ge.obtenerEventos(ubicacion, fecha);
-    }
+   // public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
+   //     return ge.obtenerEventos(ubicacion, fecha);
+   // }
 
     //Abrir ventanas
     public void ventanaPerfil(VPrincipal vp){
@@ -104,7 +102,7 @@ public java.util.List<Acolito> consultarAcolitos(){
     }
 
     public void ventanaEventos(){
-        fgui.ventanaEventos();
+        //fgui.ventanaEventos();
     }
 
     public void ventanaRituales(){
@@ -113,7 +111,7 @@ public java.util.List<Acolito> consultarAcolitos(){
 
     //Métodos de VPerfil
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-        ga.actualizarAcolito(alias, nombre, ciudad, pais);
+        //ga.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 }
 

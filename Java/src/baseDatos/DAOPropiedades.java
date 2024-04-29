@@ -18,14 +18,16 @@ import java.util.stream.Collectors;
  *
  * @author basesdatos
  */
+
 public class DAOPropiedades extends AbstractDAO {
-   
-    
-    public DAOPropiedades(Connection conexion, FachadaAplicacion fa){
+
+
+    public DAOPropiedades(Connection conexion, FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-
+}
+/*
     public void insertarPropiedad(Propiedad propiedad){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -225,7 +227,7 @@ public class DAOPropiedades extends AbstractDAO {
      * todo añadir condiciones sobre el tipo en cada consulta y jugar con el switch
      * @param tipo
      * @return
-     */
+
     public List<Propiedad> consultarPropiedades(String tipo) {
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
@@ -364,3 +366,4 @@ public class DAOPropiedades extends AbstractDAO {
 
 
 }
+*/

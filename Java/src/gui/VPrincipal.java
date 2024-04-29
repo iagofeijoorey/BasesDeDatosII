@@ -331,7 +331,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private JButton btnSalir;
     // End of variables declaration//GEN-END:variables
 
-
+/*
     public void buscarEventos(){
         ModeloTablaEventos m;
 
@@ -339,5 +339,6 @@ public class VPrincipal extends javax.swing.JFrame {
         m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
         tablaEventos.setRowSelectionInterval(0, 0);
     }
+    */
 
 }

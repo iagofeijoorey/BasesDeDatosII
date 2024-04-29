@@ -89,7 +89,7 @@ public class VPerfil extends JDialog {
         {
 
             //---- jTable1 ----
-            jTable1.setModel(new ModeloUsuarios());
+            //jTable1.setModel(new ModeloUsuarios());
             jTable1.setPreferredSize(new Dimension(500, 80));
             jTable1.addMouseListener(new MouseAdapter() {
                 @Override
