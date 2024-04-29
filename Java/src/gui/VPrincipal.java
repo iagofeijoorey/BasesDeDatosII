@@ -12,6 +12,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
@@ -25,12 +26,13 @@ import javax.swing.table.*;
 public class VPrincipal extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
-    
-    /** Creates new form VPrincipal */
-    public VPrincipal(aplicacion.FachadaAplicacion fa) {
+
+
+    public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
     }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -39,65 +41,72 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
-        menu1 = new JMenu();
-        button1 = new JButton();
-        button5 = new JButton();
-        button6 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
-        scrollEventos = new JScrollPane();
-        eventosFuturos = new JTable();
+        Desplegable = new JMenu();
+        PerfilBotonDesplegable = new JButton();
+        ContactosBotonDesplegable = new JButton();
+        AcólitosBotonDesplegable = new JButton();
+        PropiedadesBotonDesplegable = new JButton();
+        EventosBotonDesplegable = new JButton();
+        RitualesBotonDesplegable = new JButton();
+        scrollListaEventos = new JScrollPane();
+        tablaEventos = new JTable();
         presentacion = new JTextPane();
-        insertUbicacion = new JTextField();
-        insertFecha = new JTextField();
+        buscaUbicacion = new JTextField();
+        buscaFecha = new JTextField();
         btnBuscar = new JButton();
         txtUbicacion = new JLabel();
         txtFecha = new JLabel();
+        ScrollListaRituales = new JScrollPane();
+        TablaRituales = new JTable();
+        scrollPane2 = new JScrollPane();
+        ListaEstadísticas = new JList();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
-        //======== menu1 ========
+        //======== Desplegable ========
         {
-            menu1.setText("Opciones");
+            Desplegable.setText("Opciones");
+            Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
+            Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
 
-            //---- button1 ----
-            button1.setText("text");
-            menu1.add(button1);
+            //---- PerfilBotonDesplegable ----
+            PerfilBotonDesplegable.setText("Perfil");
+            PerfilBotonDesplegable.addActionListener(e -> PerfilBotonDesplegable(e));
+            Desplegable.add(PerfilBotonDesplegable);
 
-            //---- button5 ----
-            button5.setText("text");
-            menu1.add(button5);
+            //---- ContactosBotonDesplegable ----
+            ContactosBotonDesplegable.setText("Contactos");
+            Desplegable.add(ContactosBotonDesplegable);
 
-            //---- button6 ----
-            button6.setText("text");
-            menu1.add(button6);
+            //---- AcólitosBotonDesplegable ----
+            AcólitosBotonDesplegable.setText("Ac\u00f3litos");
+            Desplegable.add(AcólitosBotonDesplegable);
 
-            //---- button2 ----
-            button2.setText("text");
-            menu1.add(button2);
+            //---- PropiedadesBotonDesplegable ----
+            PropiedadesBotonDesplegable.setText("Propiedades");
+            Desplegable.add(PropiedadesBotonDesplegable);
 
-            //---- button3 ----
-            button3.setText("text");
-            menu1.add(button3);
+            //---- EventosBotonDesplegable ----
+            EventosBotonDesplegable.setText("Eventos");
+            Desplegable.add(EventosBotonDesplegable);
 
-            //---- button4 ----
-            button4.setText("text");
-            menu1.add(button4);
+            //---- RitualesBotonDesplegable ----
+            RitualesBotonDesplegable.setText("Rituales");
+            Desplegable.add(RitualesBotonDesplegable);
         }
 
-        //======== scrollEventos ========
+        //======== scrollListaEventos ========
         {
 
-            //---- eventosFuturos ----
-            eventosFuturos.setModel(new DefaultTableModel(
+            //---- tablaEventos ----
+            tablaEventos.setModel(new DefaultTableModel(
                 new Object[][] {
                     {null, null, null, null},
                     {null, null, null, null},
@@ -109,12 +118,13 @@ public class VPrincipal extends javax.swing.JFrame {
                     null, null, null, null
                 }
             ));
-            scrollEventos.setViewportView(eventosFuturos);
+            scrollListaEventos.setViewportView(tablaEventos);
         }
 
         //---- presentacion ----
         presentacion.setText("La diosa Imyr, una figura misteriosa que emergi\u00f3 de los oc\u00e9anos en tiempos antiguos, es reverenciada por su sabidur\u00eda y su capacidad para dar forma a la tierra y las aguas. Aunque enfrent\u00f3 desaf\u00edos y conflictos, Imyr siempre mostr\u00f3 compasi\u00f3n por aquellos que la adoraban. Su culto gan\u00f3 seguidores devotos en todo el mundo, quienes comparten su creencia en la armon\u00eda, la prosperidad y la justicia. Imyr se convirti\u00f3 en un s\u00edmbolo de esperanza y redenci\u00f3n, inspirando a generaciones futuras a seguir sus ense\u00f1anzas de sabidur\u00eda y valent\u00eda");
-        presentacion.setEditable(false);
+        presentacion.setForeground(new Color(0x999999));
+        presentacion.setFont(presentacion.getFont().deriveFont(presentacion.getFont().getStyle() | Font.BOLD));
 
         //---- btnBuscar ----
         btnBuscar.setText("buscar");
@@ -125,138 +135,154 @@ public class VPrincipal extends javax.swing.JFrame {
         //---- txtFecha ----
         txtFecha.setText("Fecha:");
 
+        //======== ScrollListaRituales ========
+        {
+            ScrollListaRituales.setViewportView(TablaRituales);
+        }
+
+        //======== scrollPane2 ========
+        {
+            scrollPane2.setViewportView(ListaEstadísticas);
+        }
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(presentacion, GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                    .addGroup(contentPaneLayout.createParallelGroup()
+                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(scrollListaEventos)
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(536, 536, 536)
-                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
+                            .addGap(17, 17, 17)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(scrollEventos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(txtUbicacion)
-                                        .addComponent(txtFecha))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(insertUbicacion, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                        .addComponent(insertFecha, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnBuscar)))))
-                    .addGap(58, 58, 58))
+                                .addComponent(txtUbicacion)
+                                .addComponent(txtFecha))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(buscaUbicacion, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                .addComponent(buscaFecha, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBuscar))
+                        .addComponent(scrollPane2))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(Desplegable, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(presentacion)
-                    .addContainerGap())
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 457, GroupLayout.PREFERRED_SIZE))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 6, Short.MAX_VALUE)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtUbicacion)
-                                .addComponent(insertUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
+                                    .addComponent(btnBuscar)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUbicacion)
+                                        .addComponent(buscaUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtFecha)
+                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(6, 6, 6)))
+                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtFecha)
-                                .addComponent(insertFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6))
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(btnBuscar)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
-                    .addComponent(scrollEventos, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
-                    .addGap(117, 117, 117)
-                    .addComponent(menu1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()
+                            .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 372, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(Desplegable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap())
         );
         pack();
         setLocationRelativeTo(getOwner());
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaAutorActionPerformed
+    private void btnSalirActionPerformed(ActionEvent evt) { System.exit(0); }
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-                // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
+    private void btnBuscarActionPerformed(ActionEvent evt) { buscarEventos(); }
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        buscarLibros();
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnEditarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLibroActionPerformed
-        // TODO add your handling code here:
-        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
-        int idLibro;
-        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);
-    }//GEN-LAST:event_btnEditarLibroActionPerformed
+    ///DESPLEGABLE
+    private void Desplegable(ActionEvent e) { // TODO add your code here }
 
-    private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
-        // TODO add your handling code here:
-        fa.nuevoLibro();
-    }//GEN-LAST:event_btnNuevoLibroActionPerformed
 
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        // TODO add your handling code here:
-        fa.usuarios();
-    }//GEN-LAST:event_btnUsuariosActionPerformed
 
-    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        // TODO add your handling code here:
-        fa.categorias();
-    }//GEN-LAST:event_btnCategoriasActionPerformed
+    ///Codigo Botones desplegable
+    private void PerfilBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.perfil();
+    }
 
-    private void buscaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaTituloActionPerformed
+    private void contactosBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.contactos();
+    }
 
-   
-    /**
-    * @param args the command line arguments
-    */
+    private void acolitosBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.acolitos();
+    }
+
+    private void propiedadesBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.propiedades();
+    }
+
+    private void eventosBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.eventos();
+    }
+
+    private void ritualesBotonDesplegable(ActionEvent evt) {
+        // TODO add your code here
+        fa.rituales();
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
-    private JMenu menu1;
-    private JButton button1;
-    private JButton button5;
-    private JButton button6;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JScrollPane scrollEventos;
-    private JTable eventosFuturos;
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    private JMenu Desplegable;
+    private JButton PerfilBotonDesplegable;
+    private JButton ContactosBotonDesplegable;
+    private JButton AcólitosBotonDesplegable;
+    private JButton PropiedadesBotonDesplegable;
+    private JButton EventosBotonDesplegable;
+    private JButton RitualesBotonDesplegable;
+    private JScrollPane scrollListaEventos;
+    private JTable tablaEventos;
     private JTextPane presentacion;
-    private JTextField insertUbicacion;
-    private JTextField insertFecha;
+    private JTextField buscaUbicacion;
+    private JTextField buscaFecha;
     private JButton btnBuscar;
     private JLabel txtUbicacion;
     private JLabel txtFecha;
+    private JScrollPane ScrollListaRituales;
+    private JTable TablaRituales;
+    private JScrollPane scrollPane2;
+    private JList ListaEstadísticas;
     // End of variables declaration//GEN-END:variables
 
-    public void buscarLibros(){
-        ModeloTablaLibros m;
+    public void buscarEventos(){
+        ModeloTablaEventos m;
 
-        m=(ModeloTablaLibros) tablaLibros.getModel();
-        m.setFilas(fa.obtenerLibros((buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText()), buscaTitulo.getText(), buscaIsbn.getText(), buscaAutor.getText()));
-        if (m.getRowCount() > 0) {
-            tablaLibros.setRowSelectionInterval(0, 0);
-            btnEditarLibro.setEnabled(true);
-        }
-        else btnEditarLibro.setEnabled(false);
+        m=(ModeloTablaEventos) tablaEventos.getModel();
+        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        tablaEventos.setRowSelectionInterval(0, 0);
     }
 }

@@ -7,6 +7,7 @@ package baseDatos;
 
 import aplicacion.Acolito;
 import aplicacion.Contacto;
+import aplicacion.Evento;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 
 import java.io.FileInputStream;
@@ -96,5 +97,9 @@ public class FachadaBaseDatos {
 
     public List<Propiedad> consultarPropiedades() {
         return daoPropiedades.consultarPropiedades();
+    }
+
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+        return daoEventos.consultarEventos(ubicacion, fecha);
     }
 }

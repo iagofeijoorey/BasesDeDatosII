@@ -53,8 +53,7 @@ public class VAutentificacion extends javax.swing.JDialog {
         btnCancelar = new JButton();
         etiquetaFallo = new JLabel();
         textoClave = new JTextField();
-        label1 = new JLabel();
-        checkBox1 = new JCheckBox();
+        cajaGuardarUser = new JCheckBox();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,10 +113,8 @@ public class VAutentificacion extends javax.swing.JDialog {
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(checkBox1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(label1)
-                            .addGap(0, 49, Short.MAX_VALUE)))
+                                    .addComponent(cajaGuardarUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap())
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(0, 81, Short.MAX_VALUE)
@@ -132,8 +129,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                     .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label1)
-                        .addComponent(checkBox1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cajaGuardarUser, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGap(18, 18, 18)
                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(33, 33, 33)
@@ -157,30 +153,26 @@ public class VAutentificacion extends javax.swing.JDialog {
         else etiquetaFallo.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-     System.exit(0);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) { System.exit(0); }
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formKeyPressed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) { /* TODO add your handling code here: */  }
 
+        
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         // TODO add your handling code here:
         if(evt.getKeyCode()==10) System.out.printf("ENTER");
     }//GEN-LAST:event_formKeyTyped
 
-    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyTyped
+    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         //System.out.println(evt.getKeyChar());
         //if (evt.getKeyChar() == '\n') System.out.println("BARRAN");
         if (evt.getKeyChar() == '\n') //btnAceptarActionPerformed(null); //todo, devolver al original
             this.dispose();
-    }//GEN-LAST:event_textoClaveKeyTyped
-
-    /**
-    * @param args the command line arguments
-    */
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
@@ -189,8 +181,8 @@ public class VAutentificacion extends javax.swing.JDialog {
     private JButton btnCancelar;
     private JLabel etiquetaFallo;
     private JTextField textoClave;
-    private JLabel label1;
-    private JCheckBox checkBox1;
+    private JCheckBox cajaGuardarUser;
     // End of variables declaration//GEN-END:variables
 
 }
+
