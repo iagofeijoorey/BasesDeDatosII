@@ -18,7 +18,6 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import javax.swing.table.*;
 
-
 /**
  *
  * @author basesdatos
@@ -77,7 +76,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -99,13 +98,14 @@ public class VPrincipal extends javax.swing.JFrame {
         scrollPane2 = new JScrollPane();
         ListaEstadísticas = new JList();
         btnSalir = new JButton();
+        Logo = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== Desplegable ========
         {
@@ -232,14 +232,21 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
+        //---- Logo ----
+        Logo.setIcon(new ImageIcon("C:\\1. IAGO\\0. Proyectos y c\u00f3digos\\0. GitHub\\BasesDeDatosII\\Auxiliares\\Contenido minimo ejecuta bien\\Dise\u00f1osInterfaz\\logoPeque\u00f1o1.jpg"));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(48, 48, 48)
+                            .addComponent(Logo)))
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                         .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
                             .addGap(17, 17, 17)
@@ -252,8 +259,8 @@ public class VPrincipal extends javax.swing.JFrame {
                                 .addComponent(buscaFecha, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                             .addGap(18, 18, 18)
                             .addComponent(btnBuscar))
-                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                        .addComponent(scrollListaEventos, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                        .addComponent(scrollListaEventos, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(71, 71, 71)
@@ -270,37 +277,37 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 12, Short.MAX_VALUE)
-                            .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE))
+                            .addGap(32, 32, 32)
+                            .addComponent(btnBuscar)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(32, 32, 32)
-                                    .addComponent(btnBuscar)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(0, 12, Short.MAX_VALUE)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtUbicacion)
-                                        .addComponent(buscaUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtFecha)
-                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(9, 9, 9)))
-                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
-                            .addGap(12, 12, 12)
-                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)))
-                    .addContainerGap())
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtUbicacion)
+                                .addComponent(buscaUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtFecha)
+                                .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGap(9, 9, 9)))
+                    .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                    .addGap(24, 24, 24))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(12, 12, 12)
                     .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Desplegable, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnSalir)
                     .addGap(17, 17, 17))
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Logo, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+                    .addGap(93, 93, 93))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -308,7 +315,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;
@@ -329,6 +336,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private JScrollPane scrollPane2;
     private JList ListaEstadísticas;
     private JButton btnSalir;
+    private JLabel Logo;
     // End of variables declaration//GEN-END:variables
 
 /*
