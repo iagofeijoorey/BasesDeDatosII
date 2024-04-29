@@ -10,8 +10,9 @@ import gui.VPrincipal;
 
 /**
  *
- * @author Mateo Bodenlle
+ * @author basesdatos
  */
+
 public class FachadaAplicacion {
     private gui.FachadaGui fgui;
     private baseDatos.FachadaBaseDatos fbd;
@@ -25,11 +26,12 @@ public class FachadaAplicacion {
     public FachadaAplicacion(){
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
-        ge= new GestionEventos(fgui, fbd);
-        gp= new GestionPropiedades(fgui, fbd);
-        gc= new GestionContactos(fgui, fbd);
+        ge = new GestionEventos(fgui, fbd);
+        gp = new GestionPropiedades(fgui, fbd);
+        gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
     }
+
 
     public static void main(String args[]) {
         FachadaAplicacion fa;
@@ -45,8 +47,12 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
+ 
+public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
+  return cl.obtenerLibros(id, titulo,  isbn,  autor);
+}
 
-    public java.util.List<Acolito> consultarAcolitos(){
+public java.util.List<Acolito> consultarAcolitos(){
     return ga.consultarAcolitos();
 }
 
@@ -110,3 +116,4 @@ public class FachadaAplicacion {
         ga.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 }
+
