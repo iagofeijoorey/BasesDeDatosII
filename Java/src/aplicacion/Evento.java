@@ -64,4 +64,6 @@ public class Evento {
     public void setOrganizador(Acolito organizador) {
         this.organizador = organizador;
     }
+
+    //OTRAS FUNCIONES
 }
