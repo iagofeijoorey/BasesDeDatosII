@@ -17,8 +17,8 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
-import aplicacion.TipoAcolito;
-import aplicacion.Acolito;
+import aplicacion.TipoUsuario;
+import aplicacion.Usuario;
 
 /**
  *

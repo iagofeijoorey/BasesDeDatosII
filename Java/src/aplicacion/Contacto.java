@@ -35,6 +35,7 @@ public class Contacto {
         this.tratos = tratos;
     }
 
+    //Getters
     public String getPseudonimo() {
         return pseudonimo;
     }
@@ -59,6 +60,8 @@ public class Contacto {
         return tratos;
     }
 
+    //Setters
+
     public void setPseudonimo(String pseudonimo) {
         this.pseudonimo = pseudonimo;
     }
@@ -82,4 +85,6 @@ public class Contacto {
     public void setTratos(ArrayList<Trato> tratos) {
         this.tratos = tratos;
     }
+
+    //OTRAS FUNCIONES
 }
