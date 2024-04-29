@@ -4,8 +4,6 @@
  */
 package aplicacion;
 
-import java.util.Date;
-
 /**
  *
  * @author basesdatos
@@ -13,14 +11,14 @@ import java.util.Date;
 public class Evento {
 
     private String ubicacion;
-    private Date fecha;
+    private String fecha;
     private String tipoEvento;
     private String descripcion;
-    private String autorizador;
-    private String organizador;
+    private Acolito autorizador;
+    private Acolito organizador;
 
     //Constructor
-    public Evento(String ubicacion, Date fecha, String tipoEvento, String descripcion, String organizador) {
+    public Evento(String ubicacion, String fecha, String tipoEvento, String descripcion, Acolito organizador) {
         this.ubicacion = ubicacion;
         this.fecha = fecha;
         this.tipoEvento = tipoEvento;
@@ -33,17 +31,17 @@ public class Evento {
     public String getUbicacion() {
         return ubicacion;
     }
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
     public String getTipoEvento() {
         return tipoEvento;
     }
     public String getDescripcion(){ return descripcion; }
-    public String getAutorizador() {
+    public Acolito getAutorizador() {
         return autorizador;
     }
-    public String getOrganizador() {
+    public Acolito getOrganizador() {
         return organizador;
     }
 
@@ -51,7 +49,7 @@ public class Evento {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     public void setTipoEvento(String tipoEvento) {
@@ -60,10 +58,10 @@ public class Evento {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public void setAutorizador(String autorizador) {
+    public void setAutorizador(Acolito autorizador) {
         this.autorizador = autorizador;
     }
-    public void setOrganizador(String organizador) {
+    public void setOrganizador(Acolito organizador) {
         this.organizador = organizador;
     }
 }
