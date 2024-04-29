@@ -45,7 +45,7 @@ public class VPerfil extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
+        // Generated using JFormDesigner Evaluation license - Diego
         btnActualizar = new JButton();
         jScrollPane1 = new JScrollPane();
         jTable1 = new JTable();
@@ -89,7 +89,7 @@ public class VPerfil extends JDialog {
         {
 
             //---- jTable1 ----
-            //jTable1.setModel(new ModeloUsuarios());
+            jTable1.setModel(new ModeloUsuarios());
             jTable1.setPreferredSize(new Dimension(500, 80));
             jTable1.addMouseListener(new MouseAdapter() {
                 @Override
@@ -268,7 +268,7 @@ public class VPerfil extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Diego
     private JButton btnActualizar;
     private JScrollPane jScrollPane1;
     private JTable jTable1;
