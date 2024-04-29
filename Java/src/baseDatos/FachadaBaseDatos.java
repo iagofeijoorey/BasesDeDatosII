@@ -149,23 +149,16 @@ public class FachadaBaseDatos {
     public java.util.List<Categoria> consultarCategorias(){
         return daoCategorias.consultarCategorias();
     }
-    
-    public java.util.List<Usuario> consultarUsuarios(){
-        return daoUsuarios.consultarUsuarios();
-    }
-    
-    public java.util.List<Usuario> consultarUsuariosPrestamos(){
-        return daoUsuarios.consultarUsuariosPrestamos("",""); //Sin filtros
-    }
-    
-    public java.util.List<Usuario> consultarUsuariosPrestamos(String IDUsuario, String Nombre) {
-        return daoUsuarios.consultarUsuariosPrestamos(IDUsuario,Nombre);
-     }
-         
-    public java.util.List<Usuario> consultarUsuarios(String IDUsuario, String Nombre){
-        //System.out.println("Iniciando consulta de ID: "+IDUsuario +" y Nombre: "+Nombre);
-        return daoUsuarios.consultarUsuarios(IDUsuario, Nombre);
+
+
+    /*
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+        return daoEventos.consultarEventos(ubicacion, fecha);
     }
     */
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
 
 }

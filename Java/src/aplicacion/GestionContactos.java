@@ -41,5 +41,5 @@ public class GestionContactos {
     public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
         return fbd.consultarContactosDeAcolito(aliasAcolito, pseudonimoContacto, nombreContacto);
     }
-  
+
 }

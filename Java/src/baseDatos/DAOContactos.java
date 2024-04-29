@@ -8,11 +8,15 @@ package baseDatos;
 import aplicacion.Acolito;
 import aplicacion.Contacto;
 import aplicacion.TipoAcolito;
+import aplicacion.Trato;
+import aplicacion.TipoTrato;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.util.List;
 
 /**
  * DAO de Contactos y Tratos
@@ -268,5 +272,39 @@ public class DAOContactos extends AbstractDAO {
         }finally{
             try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
+    }
+
+    public List<Trato> consultarTratosContacto(Contacto contacto){
+        java.util.ArrayList<Trato> resultado = new java.util.ArrayList<Trato>();
+        Trato tratoActual;
+        Connection con;
+        PreparedStatement stmTratos=null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta =   "SELECT t.* " +
+                "FROM tratos t " +
+                "WHERE t.contacto = ?";
+        try  {
+            stmTratos=con.prepareStatement(consulta);
+            stmTratos.setString(1, contacto.getPseudonimo());
+
+            rsTratos=stmTratos.executeQuery();
+            while (rsTratos.next())
+            {
+                tratoActual = new Trato(rsTratos.getInt("idtrato"), TipoTrato.valueOf(rsTratos.getString("tipotrato")),
+                        contacto, null);
+                resultado.add(tratoActual);
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmTratos != null;
+                stmTratos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        return resultado;
     }
 }

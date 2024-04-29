@@ -47,5 +47,8 @@ public class GestionAcolitos {
      public void nuevoUsuario(Acolito acolito){
          fbd.insertarAcolito(acolito);
      }
-  
+
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        fbd.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
 }

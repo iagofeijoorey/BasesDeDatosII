@@ -6,138 +6,114 @@
 package aplicacion;
 
 
+import gui.VPrincipal;
+
 /**
  *
  * @author basesdatos
  */
-public class
 
-FachadaAplicacion {
-    gui.FachadaGui fgui;
-    baseDatos.FachadaBaseDatos fbd;
-    GesionLibros cl;
-    GestionUsuarios cu;
-    GestionCategorias cc;
+public class FachadaAplicacion {
+    private gui.FachadaGui fgui;
+    private baseDatos.FachadaBaseDatos fbd;
+    private GestionEventos ge;
+    private GestionPropiedades gp;
+    private GestionContactos gc;
+    private GestionAcolitos ga;
+    private Acolito currentUser;
     
     
- public FachadaAplicacion(){
-   fgui=new gui.FachadaGui(this);
-   fbd= new baseDatos.FachadaBaseDatos(this);
-   cl= new GesionLibros(fgui, fbd);
-   cu= new GestionUsuarios(fgui, fbd);
-   cc = new GestionCategorias(fgui,fbd);
- }
+    public FachadaAplicacion(){
+        fgui=new gui.FachadaGui(this);
+        fbd= new baseDatos.FachadaBaseDatos(this);
+        ge = new GestionEventos(fgui, fbd);
+        gp = new GestionPropiedades(fgui, fbd);
+        gc = new GestionContactos(fgui, fbd);
+        ga = new GestionAcolitos(fgui, fbd);
+    }
 
- public static void main(String args[]) {
-     FachadaAplicacion fa;
+
+    public static void main(String args[]) {
+        FachadaAplicacion fa;
      
-     fa= new FachadaAplicacion();
-     fa.iniciaInterfazUsuario();
- }
+        fa= new FachadaAplicacion();
+        fa.iniciaInterfazUsuario();
+    }
  
- public void iniciaInterfazUsuario(){
+    public void iniciaInterfazUsuario(){
      fgui.iniciaVista();
  }
 
- public void muestraExcepcion(String e){
+    public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
  
 public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
   return cl.obtenerLibros(id, titulo,  isbn,  autor);
-};
-
-public java.util.List<Categoria> obtenerCategorias(){
-  return cl.obtenerCategorias();
-};
-
-public java.util.List<Usuario> obtenerUsuarios(){
-    return cu.obtenerUsuarios();
-}
-public java.util.List<Usuario> obtenerUsuariosPretamos(){
-    return cu.obtenerUsuariosPrestamos();
 }
 
-public void anadirPrestamo (Usuario usuario, Evento evento){
-    cl.anadirPrestamo(usuario, evento);
-}
-
-public java.util.List<Usuario> buscarUsuarios(String IDUsuario, String Nombre){
-    return cu.buscarUsuarios(IDUsuario, Nombre);
-}
-public java.util.List<Usuario> buscarUsuariosPrestamos(String IDUsuario, String Nombre){
-    return cu.buscarUsuariosPrestamos(IDUsuario, Nombre);
+public java.util.List<Acolito> consultarAcolitos(){
+    return ga.consultarAcolitos();
 }
 
 
-public void visualizarLibro(Integer idLibro){
- cl.visualizarLibro(idLibro);
-}
+    public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
+        return ga.buscarUsuarios(IDUsuario, Nombre);
+    }
 
-public void nuevoLibro(){
- cl.nuevoLibro();
-}
-
-
-public void nuevoUsuario(Usuario usuario){
-    cu.nuevoUsuario(usuario);
-}
-
-public void nuevaCategoria(Categoria categoria){
-    cc.nuevaCategoria(categoria);
-}
-
-public void borrarCategoria(Categoria categoria){
-    cc.borrarCategoria(categoria);
-}
-
-public void usuarios(){
-    cl.usuarios();
-}
-public void categorias(){
-    cl.categorias();
-}
-
-public void prestar(Evento evento){
-    cl.prestar(evento);
-}
-public void devolver(Evento evento){
-    cl.devolver(evento);
+    public void nuevoUsuario(Acolito usuario){
+    ga.nuevoUsuario(usuario);
 }
 
 
-public Integer actualizarLibro(Libro l){
-  return cl.actualizarLibro(l);
-}
-
-public void borrarLibro(Integer idLibro){
-   cl.borrarLibro(idLibro);
-}
-
-public void borrarUsuario(Usuario usuario){
-    cu.borrarUsuario(usuario);
-}
-
-public void borrarEjemplar(Integer idLibro, Integer numEjemplar){
-    cl.borrarEjemplar(idLibro, numEjemplar);
-}
-
-public void actualizarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
- cl.actualizarCategoriasLibro(idLibro, categorias);
-}
-
-public java.util.List<Evento> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Evento> ejemplares, java.util.List<Integer> borrar){
-  return cl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
+    public void borrarAcolito(Acolito usuario){
+    ga.borrarAcolito(usuario);
 }
 
 
-public Boolean comprobarAutentificacion(String idUsuario, String clave){
-  //return cu.comprobarAutentificacion(idUsuario, clave);
-    return true;
+    public Boolean comprobarAutentificacion(String idUsuario, String clave){
+        //return cu.comprobarAutentificacion(idUsuario, clave);
+        return true;
+    }
+
+
+    public void setCurrentUser(Acolito u) {
+        currentUser = u;
+    }
+
+
+    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
+        return ge.obtenerEventos(ubicacion, fecha);
+    }
+
+    //Abrir ventanas
+    public void ventanaPerfil(VPrincipal vp){
+        fgui.ventanaPerfil(vp);
+    }
+
+    public void ventanaContactos(){
+        //fgui.ventanaContactos();
+    }
+
+    public void ventanaAcolitos(){
+        //fgui.ventanaAcolitos();
+    }
+
+    public void ventanaPropiedades(){
+        //fgui.ventanaPropiedades();
+    }
+
+    public void ventanaEventos(){
+        fgui.ventanaEventos();
+    }
+
+    public void ventanaRituales(){
+        //fgui.ventanaRituales();
+    }
+
+    //Métodos de VPerfil
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        ga.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
 }
- 
 
-
-
-
-}
