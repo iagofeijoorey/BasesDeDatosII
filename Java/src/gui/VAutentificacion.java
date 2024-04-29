@@ -22,7 +22,7 @@ import javax.swing.LayoutStyle;
  * @author basesdatos
  */
 public class VAutentificacion extends javax.swing.JDialog {
-
+    
     aplicacion.FachadaAplicacion fa;
     
     /** Creates new form VAutentificacion */
@@ -56,6 +56,8 @@ public class VAutentificacion extends javax.swing.JDialog {
         cajaGuardarUser = new JCheckBox();
         label1 = new JLabel();
         label2 = new JLabel();
+        dialog1 = new JDialog();
+        Fondo = new JPanel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -152,6 +154,52 @@ public class VAutentificacion extends javax.swing.JDialog {
         );
         pack();
         setLocationRelativeTo(getOwner());
+
+        //======== dialog1 ========
+        {
+            var dialog1ContentPane = dialog1.getContentPane();
+
+            //======== Fondo ========
+            {
+                Fondo.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
+                javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax
+                . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
+                . awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
+                . Color .red ) ,Fondo. getBorder () ) ); Fondo. addPropertyChangeListener( new java. beans .
+                PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .
+                equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+
+                GroupLayout FondoLayout = new GroupLayout(Fondo);
+                Fondo.setLayout(FondoLayout);
+                FondoLayout.setHorizontalGroup(
+                    FondoLayout.createParallelGroup()
+                        .addGap(0, 286, Short.MAX_VALUE)
+                );
+                FondoLayout.setVerticalGroup(
+                    FondoLayout.createParallelGroup()
+                        .addGap(0, 212, Short.MAX_VALUE)
+                );
+            }
+
+            GroupLayout dialog1ContentPaneLayout = new GroupLayout(dialog1ContentPane);
+            dialog1ContentPane.setLayout(dialog1ContentPaneLayout);
+            dialog1ContentPaneLayout.setHorizontalGroup(
+                dialog1ContentPaneLayout.createParallelGroup()
+                    .addGroup(dialog1ContentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Fondo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+            );
+            dialog1ContentPaneLayout.setVerticalGroup(
+                dialog1ContentPaneLayout.createParallelGroup()
+                    .addGroup(dialog1ContentPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Fondo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+            );
+            dialog1.pack();
+            dialog1.setLocationRelativeTo(dialog1.getOwner());
+        }
     }// </editor-fold>//GEN-END:initComponents
 
     private void textoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoUsuarioActionPerformed
@@ -196,6 +244,8 @@ public class VAutentificacion extends javax.swing.JDialog {
     private JCheckBox cajaGuardarUser;
     private JLabel label1;
     private JLabel label2;
+    private JDialog dialog1;
+    private JPanel Fondo;
     // End of variables declaration//GEN-END:variables
 
 }

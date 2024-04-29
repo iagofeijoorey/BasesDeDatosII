@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq l {space :p:23:p, par l {comp label2::l:p::p, comp label1::l:p::p}, space :::p, par l:::p {comp textoUsuario::::230:x:1, comp textoClave::::230:x:1}, space :::p, comp cajaGuardarUser:::p::p, space :0:9:x}}, space :::p}, seq t {space :0:81:x, comp btnAceptar:::p:213:p, space :p:79:p}}</string>
+        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq l {space :p:23:p, par l {comp label2::l:p::p, comp label1::l:p::p}, space :::p, par l:::p {comp textoUsuario::::230:x:1, comp textoClave::::230:x:1}, space :::p, comp cajaGuardarUser:::p::p, space :0:8:x}}, space :::p}, seq t {space :0:81:x, comp btnAceptar:::p:213:p, space :p:79:p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:28:p, par b {comp label1::b:p::p, comp textoUsuario::b:p::p}, space :p:23:p, par b {comp label2::b:p::p, comp textoClave::b:p::p, comp cajaGuardarUser::b:p:30:p}, space ::28:x, comp btnAceptar:::p:56:p, space :p:33:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :p:28:p, par b {comp label1::b:p::p, comp textoUsuario::b:p::p}, space :p:23:p, par b {comp label2::b:p::p, comp textoClave::b:p::p, comp cajaGuardarUser::l:p::p}, space ::28:x, comp btnAceptar:::p:56:p, space :p:33:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -207,6 +207,61 @@
        <object class="java.awt.Dimension">
         <int>375</int>
         <int>295</int>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>javax.swing.JDialog</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>org.jdesktop.layout.GroupLayout</class>
+       <void method="setProperty">
+        <string>$horizontalGroup</string>
+        <string>par l {seq l {space :::p, comp Fondo:::::x, space :::p}}</string>
+       </void>
+       <void method="setProperty">
+        <string>$verticalGroup</string>
+        <string>par l {seq l {space :::p, comp Fondo:::::x, space :::p}}</string>
+       </void>
+      </object>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JPanel</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>org.jdesktop.layout.GroupLayout</class>
+         <void method="setProperty">
+          <string>$horizontalGroup</string>
+          <string>par l {space :0:286:x}</string>
+         </void>
+         <void method="setProperty">
+          <string>$verticalGroup</string>
+          <string>par l {space :0:212:x}</string>
+         </void>
+        </object>
+        <void property="name">
+         <string>Fondo</string>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>dialog1</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>10</int>
+        <int>305</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>300</int>
+        <int>255</int>
        </object>
       </void>
      </object>

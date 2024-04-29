@@ -9,13 +9,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import javax.swing.border.*;
 import aplicacion.*;
 
 /**
  * @author Diego
  */
 public class VPerfil extends JDialog {
-
+/*
     private aplicacion.FachadaAplicacion fa;
 
     public VPerfil(Window owner, aplicacion.FachadaAplicacion fa) {
@@ -145,9 +146,6 @@ public class VPerfil extends JDialog {
 
         //---- label2 ----
         label2.setText("Foto de perfil");
-
-        //---- label3 ----
-        label3.setText("(imagen)");
 
         //---- label4 ----
         label4.setText("Jefe de divisi\u00f3n:");
@@ -292,5 +290,5 @@ public class VPerfil extends JDialog {
     private JLabel label3;
     private JLabel label4;
     private JTextField textField1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on*/
 }

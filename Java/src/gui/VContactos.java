@@ -33,7 +33,7 @@ public class VContactos extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
+        // Generated using JFormDesigner Evaluation license - Diego
         btnRomperTrato = new JButton();
         Alias = new JLabel();
         btnVolver = new JButton();
@@ -251,7 +251,7 @@ public class VContactos extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Diego
     private JButton btnRomperTrato;
     private JLabel Alias;
     private JButton btnVolver;
