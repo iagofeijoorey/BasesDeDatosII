@@ -46,7 +46,7 @@ public class VAutentificacion extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         textoUsuario = new JTextField();
         btnAceptar = new JButton();
@@ -73,7 +73,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                 formKeyTyped(e);
             }
         });
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- textoUsuario ----
         textoUsuario.setForeground(Color.gray);
@@ -187,7 +187,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JTextField textoUsuario;
     private JButton btnAceptar;
     private JButton btnCancelar;

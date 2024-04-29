@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.8" class="java.beans.XMLDecoder">
+ <object class="com.jformdesigner.model.FormModel">
+  <void property="contentType">
+   <string>form/swing</string>
+  </void>
+  <void property="root">
+   <object class="com.jformdesigner.model.FormRoot">
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>javax.swing.JDialog</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>org.jdesktop.layout.GroupLayout</class>
+       <void method="setProperty">
+        <string>$horizontalGroup</string>
+        <string>par l {seq {par l {seq l {space :p:34:p, par l {seq {comp btnVolver:::p:110:p, space :::p, comp label2:::p::p}, par t {comp Teléfono:::p::p, comp Alias:::p::p}}}, seq l {space :p:22:p, par l {comp Descripcion:::p::p, par t {comp scrollPane1::t:p:310:p, seq t {comp Nombre:::p::p, space u:::p, par l:::p {comp Pais_text::l:p:229:p, comp Alta_text::l:p:229:p, comp Alias_text::l:p:229:p, seq l {space :p:36:p, comp label3:::p:153:p}}}}}}}, space s::19:x, par l {seq {space :p:3:p, comp btnProponerTrato:::p:205:p}, comp btnGuardar::l:p:205:p, comp btnRomperTrato::t:p::p, comp scrollPane2::t:p:205:p}, space :::p, par l {comp btnGuardar2:::::x, seq {par l {comp scrollPane3:::p:409:p, comp btnGuardar3:::p:426:p}, space :0:1:x}}, space :::p}}</string>
+       </void>
+       <void method="setProperty">
+        <string>$verticalGroup</string>
+        <string>par l {seq t {space :p:29:p, par l {seq {par l {seq l {par t {seq t {comp btnVolver:::::x, space :p:279:p}, seq {space :p:19:p, comp label2:::p::p, space u:::p, comp label3:::p:95:p, space :p:28:p, par b {comp Alias::b:p::p, comp Alias_text::b:p::p}, space :p:13:p, par b {comp Alta_text::b:p::p, comp Teléfono::b:p::p}, space u:::p, par b {comp Pais_text::b:p::p, comp Nombre::b:p::p}, space u:::p, comp Descripcion:::p::p}}, space :p:2:p, comp scrollPane1:::p:147:p}, seq l {space :p:17:p, comp scrollPane2:::p:295:p, space :::p, comp btnRomperTrato:::p::p, space s:::p, par b {comp btnProponerTrato::b:p::p, comp btnGuardar2::b:p::p}, space s:::p, par b {comp btnGuardar::b:p::p, comp btnGuardar3::b:p::p}}}, space :::x}, seq {space :p:13:p, comp scrollPane3:::p:340:p, space :p:117:p}}}}</string>
+       </void>
+      </object>
+      <void method="setProperty">
+       <string>defaultCloseOperation</string>
+       <int>2</int>
+      </void>
+      <void method="setProperty">
+       <string>title</string>
+       <string>Mis Contactos</string>
+      </void>
+      <void method="setProperty">
+       <string>resizable</string>
+       <boolean>false</boolean>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Romper trato seleccinonado</string>
+        </void>
+        <void property="name">
+         <string>btnRomperTrato</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>horizontalAlignment</string>
+         <int>4</int>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Alias:</string>
+        </void>
+        <void property="name">
+         <string>Alias</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Volver</string>
+        </void>
+        <void property="name">
+         <string>btnVolver</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnBuscarActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void property="name">
+         <string>Alias_text</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>enabled</string>
+         <boolean>false</boolean>
+        </void>
+        <void property="name">
+         <string>Alta_text</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void property="name">
+         <string>Pais_text</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollPane1</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JTextPane</string>
+          <void property="name">
+           <string>textPane2</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>horizontalAlignment</string>
+         <int>4</int>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Descripcion:</string>
+        </void>
+        <void property="name">
+         <string>Descripcion</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void property="name">
+         <string>label2</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>(imagen)</string>
+        </void>
+        <void property="name">
+         <string>label3</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollPane2</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JList</string>
+          <void property="name">
+           <string>list1</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Proponer tato</string>
+        </void>
+        <void property="name">
+         <string>btnProponerTrato</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Guardar edición</string>
+        </void>
+        <void property="name">
+         <string>btnGuardar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>horizontalAlignment</string>
+         <int>4</int>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Teléfono:</string>
+        </void>
+        <void property="name">
+         <string>Teléfono</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>horizontalAlignment</string>
+         <int>4</int>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Nombre:</string>
+        </void>
+        <void property="name">
+         <string>Nombre</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollPane3</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JList</string>
+          <void property="name">
+           <string>list2</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Añadir contacto</string>
+        </void>
+        <void property="name">
+         <string>btnGuardar2</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Borrar contacto</string>
+        </void>
+        <void property="name">
+         <string>btnGuardar3</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>this</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>20</int>
+        <int>5</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>1000</int>
+        <int>530</int>
+       </object>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
