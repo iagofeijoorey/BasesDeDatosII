@@ -1,8 +1,7 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- *//*
-
+ */
 
 package baseDatos;
 import aplicacion.Acolito;
@@ -15,12 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-*/
 /**
  *
  * @author basesdatos
- *//*
-
+ */
 
 public class DAOPropiedades extends AbstractDAO {
 
@@ -150,8 +147,8 @@ public class DAOPropiedades extends AbstractDAO {
                         propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                 rsPropiedades.getInt("capacidad"), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))));
                         break;
 
 
@@ -171,8 +168,8 @@ public class DAOPropiedades extends AbstractDAO {
                         propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"),
                                 TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipo_vehiculo")), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))), new Inmobiliario(rsAuxiliar.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))), new Inmobiliario(rsAuxiliar.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                 rsTipoConcreto.getInt("capacidad"), rsTipoConcreto.getInt("valor_actual"), null));
                         break;
                     case "Arma":
@@ -202,8 +199,8 @@ public class DAOPropiedades extends AbstractDAO {
                         new Commodity(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("nombre"),
                                 rsTipoConcreto.getInt("cantidad"), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))));
                 break;
                     default:
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
@@ -222,16 +219,14 @@ public class DAOPropiedades extends AbstractDAO {
     }
 
 
-    */
-/**
+    /**
      * Tipo debe ser el nombre exacto rollo "Arma, Inmobiliario, Vehiculo, Commodity"
      * Está implementado de la forma más ineficiente posible (literalmente cojo todos los resultados y filtro con Java,
      * habría que cambiar las consultas, pero ahora mismo me da pereza ->
      * todo añadir condiciones sobre el tipo en cada consulta y jugar con el switch
      * @param tipo
      * @return
-*//*
-
+*/
     public List<Propiedad> consultarPropiedades(String tipo) {
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
@@ -287,8 +282,8 @@ public class DAOPropiedades extends AbstractDAO {
                         propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                 rsPropiedades.getInt("capacidad"), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))));
                         resultado.add(propiedadActual);
                         break;
 
@@ -310,8 +305,8 @@ public class DAOPropiedades extends AbstractDAO {
                         propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"),
                                 TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipo_vehiculo")), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))), new Inmobiliario(rsAuxiliar.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))), new Inmobiliario(rsAuxiliar.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
                                 rsTipoConcreto.getInt("capacidad"), rsTipoConcreto.getInt("valor_actual"), null));
                         resultado.add(propiedadActual);
                         break;
@@ -345,8 +340,8 @@ public class DAOPropiedades extends AbstractDAO {
                         new Commodity(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("nombre"),
                                 rsTipoConcreto.getInt("cantidad"), rsPropiedades.getInt("valor_actual"),
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), 0,
-                                        TipoAcolito.valueOf(rsGestor.getString("tipo_usuario"))));
+                                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))));
                         resultado.add(propiedadActual);
                         break;
                     default:
@@ -370,4 +365,3 @@ public class DAOPropiedades extends AbstractDAO {
 
 
 }
-*/
