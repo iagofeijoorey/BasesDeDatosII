@@ -12,7 +12,7 @@ public class Evento {
 
     private String ubicacion;
     private String fecha;
-    private String tipoEvento;
+    private TipoEvento tipoEvento;
     private String descripcion;
     private Acolito autorizador;
     private Acolito organizador;
@@ -20,7 +20,7 @@ public class Evento {
     //y la consulta correspondiente definida en el DAOEvento cuando se necesite
 
     //Constructor
-    public Evento(String ubicacion, String fecha, String tipoEvento, String descripcion, Acolito organizador) {
+    public Evento(String ubicacion, String fecha, TipoEvento tipoEvento, String descripcion, Acolito organizador) {
         this.ubicacion = ubicacion;
         this.fecha = fecha;
         this.tipoEvento = tipoEvento;
@@ -36,7 +36,7 @@ public class Evento {
     public String getFecha() {
         return fecha;
     }
-    public String getTipoEvento() {
+    public TipoEvento getTipoEvento() {
         return tipoEvento;
     }
     public String getDescripcion(){ return descripcion; }
@@ -54,7 +54,7 @@ public class Evento {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    public void setTipoEvento(String tipoEvento) {
+    public void setTipoEvento(TipoEvento tipoEvento) {
         this.tipoEvento = tipoEvento;
     }
     public void setDescripcion(String descripcion) {

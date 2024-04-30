@@ -1,7 +1,8 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
+ *//*
+
 
 package baseDatos;
 import aplicacion.Acolito;
@@ -14,10 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+*/
 /**
  *
  * @author basesdatos
- */
+ *//*
+
 
 public class DAOPropiedades extends AbstractDAO {
 
@@ -26,8 +29,7 @@ public class DAOPropiedades extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-}
-/*
+
     public void insertarPropiedad(Propiedad propiedad){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -220,13 +222,15 @@ public class DAOPropiedades extends AbstractDAO {
     }
 
 
-    /**
+    */
+/**
      * Tipo debe ser el nombre exacto rollo "Arma, Inmobiliario, Vehiculo, Commodity"
      * Está implementado de la forma más ineficiente posible (literalmente cojo todos los resultados y filtro con Java,
      * habría que cambiar las consultas, pero ahora mismo me da pereza ->
      * todo añadir condiciones sobre el tipo en cada consulta y jugar con el switch
      * @param tipo
      * @return
+*//*
 
     public List<Propiedad> consultarPropiedades(String tipo) {
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();

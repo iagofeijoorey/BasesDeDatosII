@@ -20,7 +20,7 @@ public enum TipoEvento {
     Normal;
 
 
-    public static TipoEvento stringToTipoAcolito(String tu){
+    public static TipoEvento stringToTipoEvento(String tu){
         switch (tu){
             case ("Cabecilla"):
                 return Yoquese;
