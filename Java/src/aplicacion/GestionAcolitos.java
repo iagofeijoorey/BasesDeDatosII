@@ -21,7 +21,7 @@ public class GestionAcolitos {
      this.fbd=fbd;
     }  
     
-    
+    /*
   public Boolean comprobarAutentificacion(String idUsuario, String clave, FachadaAplicacion faABD){
       Acolito u;
 
@@ -31,7 +31,7 @@ public class GestionAcolitos {
           return true;
       } else return false;
   }
-  
+
      public java.util.List<Acolito> consultarAcolitos(){
         return fbd.consultarAcolitos();
     }
@@ -51,4 +51,5 @@ public class GestionAcolitos {
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         fbd.actualizarAcolito(alias, nombre, ciudad, pais);
     }
+    */
 }

@@ -33,27 +33,28 @@ public class VContactos extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
-        btnActualizar = new JButton();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        // Generated using JFormDesigner Evaluation license - Diego
+        btnRomperTrato = new JButton();
         Alias = new JLabel();
         btnVolver = new JButton();
-        Nombre = new JLabel();
-        Influencia = new JLabel();
-        FechaAlta = new JLabel();
-        Pais = new JLabel();
         Alias_text = new JTextField();
+        Telefono_text = new JTextField();
         Nombre_text = new JTextField();
-        Alta_text = new JTextField();
-        Pais_text = new JTextField();
         scrollPane1 = new JScrollPane();
         textPane2 = new JTextPane();
         Descripcion = new JLabel();
         label2 = new JLabel();
         label3 = new JLabel();
-        label4 = new JLabel();
-        textField1 = new JTextField();
+        scrollPane2 = new JScrollPane();
+        lista_tratos = new JList();
+        btnProponerTrato = new JButton();
+        btnGuardar = new JButton();
+        Teléfono = new JLabel();
+        Nombre = new JLabel();
+        scrollPane3 = new JScrollPane();
+        lista_contactos = new JList();
+        btnGuardar2 = new JButton();
+        btnGuardar3 = new JButton();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -61,29 +62,14 @@ public class VContactos extends JDialog {
         setResizable(false);
         var contentPane = getContentPane();
 
-        //---- btnActualizar ----
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addMouseListener(new MouseAdapter() {
+        //---- btnRomperTrato ----
+        btnRomperTrato.setText("Romper trato seleccinonado");
+        btnRomperTrato.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 btnActualizarMouseClicked(e);
             }
         });
-
-        //======== jScrollPane1 ========
-        {
-
-            //---- jTable1 ----
-            jTable1.setModel(new ModeloUsuarios());
-            jTable1.setPreferredSize(new Dimension(500, 80));
-            jTable1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    jTable1MouseClicked(e);
-                }
-            });
-            jScrollPane1.setViewportView(jTable1);
-        }
 
         //---- Alias ----
         Alias.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -92,25 +78,6 @@ public class VContactos extends JDialog {
         //---- btnVolver ----
         btnVolver.setText("Volver");
         btnVolver.addActionListener(e -> btnBuscarActionPerformed(e));
-
-        //---- Nombre ----
-        Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
-        Nombre.setText("Nombre:");
-
-        //---- Influencia ----
-        Influencia.setHorizontalAlignment(SwingConstants.RIGHT);
-        Influencia.setText("Influencia:");
-
-        //---- FechaAlta ----
-        FechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
-        FechaAlta.setText("Dado de alta el:");
-
-        //---- Pais ----
-        Pais.setHorizontalAlignment(SwingConstants.RIGHT);
-        Pais.setText("Pais:");
-
-        //---- Alta_text ----
-        Alta_text.setEnabled(false);
 
         //======== scrollPane1 ========
         {
@@ -121,116 +88,162 @@ public class VContactos extends JDialog {
         Descripcion.setHorizontalAlignment(SwingConstants.RIGHT);
         Descripcion.setText("Descripcion:");
 
-        //---- label2 ----
-        label2.setText("Foto de perfil");
-
         //---- label3 ----
         label3.setText("(imagen)");
 
-        //---- label4 ----
-        label4.setText("Jefe de divisi\u00f3n:");
+        //======== scrollPane2 ========
+        {
+            scrollPane2.setViewportView(lista_tratos);
+        }
 
-        //---- textField1 ----
-        textField1.setEnabled(false);
+        //---- btnProponerTrato ----
+        btnProponerTrato.setText("Proponer tato");
+        btnProponerTrato.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnActualizarMouseClicked(e);
+            }
+        });
+
+        //---- btnGuardar ----
+        btnGuardar.setText("Guardar edici\u00f3n");
+        btnGuardar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnActualizarMouseClicked(e);
+            }
+        });
+
+        //---- Teléfono ----
+        Teléfono.setHorizontalAlignment(SwingConstants.RIGHT);
+        Teléfono.setText("Tel\u00e9fono:");
+
+        //---- Nombre ----
+        Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
+        Nombre.setText("Nombre:");
+
+        //======== scrollPane3 ========
+        {
+            scrollPane3.setViewportView(lista_contactos);
+        }
+
+        //---- btnGuardar2 ----
+        btnGuardar2.setText("A\u00f1adir contacto");
+        btnGuardar2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnActualizarMouseClicked(e);
+            }
+        });
+
+        //---- btnGuardar3 ----
+        btnGuardar3.setText("Borrar contacto");
+        btnGuardar3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnActualizarMouseClicked(e);
+            }
+        });
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                    .addGap(162, 162, 162)
-                    .addComponent(label2)
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createParallelGroup()
+                            .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(label2))
+                            .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(Alias)
+                                .addGap(77, 77, 77)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(22, 22, 22)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addComponent(Influencia)
-                                                .addComponent(Alias))
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addGap(122, 122, 122)
-                                                    .addComponent(FechaAlta))
-                                                .addComponent(Nombre, GroupLayout.Alignment.TRAILING)))
-                                        .addGroup(contentPaneLayout.createParallelGroup()
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(contentPaneLayout.createSequentialGroup()
+                                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Nombre)
+                                            .addComponent(Teléfono))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(Nombre_text, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Telefono_text, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
                                             .addGroup(contentPaneLayout.createSequentialGroup()
-                                                .addGap(182, 182, 182)
-                                                .addComponent(Pais))
-                                            .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Alta_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                        .addComponent(Nombre_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                        .addComponent(Pais_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)))
-                                .addComponent(Descripcion, GroupLayout.Alignment.LEADING)
-                                .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 521, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                            .addGap(150, 150, 150)))
+                                                .addGap(36, 36, 36)
+                                                .addComponent(label3, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(contentPaneLayout.createSequentialGroup()
+                                        .addComponent(Descripcion)
+                                        .addGap(233, 233, 233))
+                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(label4)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)))
-                            .addGap(21, 21, 21))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(btnActualizar, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(285, Short.MAX_VALUE))))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(btnProponerTrato, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGuardar, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnRomperTrato))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(contentPaneLayout.createParallelGroup()
+                        .addComponent(btnGuardar3, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 407, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnGuardar2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                            .addComponent(scrollPane3, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)))
+                    .addContainerGap(25, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addComponent(label2))
-                    .addGap(30, 30, 30)
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(0, 6, Short.MAX_VALUE)
+                            .addComponent(label2)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(label3, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                            .addGap(25, 25, 25)
+                            .addGap(28, 28, 28)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Nombre)
+                                .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Alias))
+                            .addGap(13, 13, 13)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(Telefono_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Teléfono))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(Nombre_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Alias)
-                                .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Influencia)
-                                .addComponent(Alta_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(FechaAlta, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Pais)
-                                .addComponent(Pais_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                .addComponent(Nombre))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Descripcion)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(52, 52, 52)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 283, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnRomperTrato))
+                                .addComponent(scrollPane3, GroupLayout.PREFERRED_SIZE, 317, GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label4)
-                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                            .addComponent(btnActualizar)))
-                    .addGap(15, 15, 15))
+                                .addComponent(btnProponerTrato)
+                                .addComponent(btnGuardar2))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnGuardar)
+                                .addComponent(btnGuardar3))
+                            .addContainerGap())))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -238,26 +251,27 @@ public class VContactos extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
-    private JButton btnActualizar;
-    private JScrollPane jScrollPane1;
-    private JTable jTable1;
+    // Generated using JFormDesigner Evaluation license - Diego
+    private JButton btnRomperTrato;
     private JLabel Alias;
     private JButton btnVolver;
-    private JLabel Nombre;
-    private JLabel Influencia;
-    private JLabel FechaAlta;
-    private JLabel Pais;
     private JTextField Alias_text;
+    private JTextField Telefono_text;
     private JTextField Nombre_text;
-    private JTextField Alta_text;
-    private JTextField Pais_text;
     private JScrollPane scrollPane1;
     private JTextPane textPane2;
     private JLabel Descripcion;
     private JLabel label2;
     private JLabel label3;
-    private JLabel label4;
-    private JTextField textField1;
+    private JScrollPane scrollPane2;
+    private JList lista_tratos;
+    private JButton btnProponerTrato;
+    private JButton btnGuardar;
+    private JLabel Teléfono;
+    private JLabel Nombre;
+    private JScrollPane scrollPane3;
+    private JList lista_contactos;
+    private JButton btnGuardar2;
+    private JButton btnGuardar3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

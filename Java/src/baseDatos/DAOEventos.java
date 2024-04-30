@@ -15,13 +15,14 @@ import aplicacion.Acolito;
  *
  * @author basesdatos
  */
+
 public class DAOEventos extends AbstractDAO {
 
     public DAOEventos(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-
+}/*
     public void insertarEvento(Evento evento){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -162,3 +163,4 @@ public class DAOEventos extends AbstractDAO {
 
 
 }
+*/

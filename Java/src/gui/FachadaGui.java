@@ -38,8 +38,8 @@ public class FachadaGui {
     public void ventanaPerfil(VPrincipal vP){
         VPerfil vp;
 
-        vp = new VPerfil(vP, fa);
-        vp.setVisible(true);
+//        vp = new VPerfil(vP, fa);
+//        vp.setVisible(true);
     }
 
     /*

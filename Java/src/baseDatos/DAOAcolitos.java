@@ -13,13 +13,14 @@ import java.util.ArrayList;
  *
  * @author basesdatos
  */
+
 public class DAOAcolitos extends AbstractDAO {
 
    public DAOAcolitos(Connection conexion, aplicacion.FachadaAplicacion fa){
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-
+}/*
     public Acolito validarLogin(String alias, String contraseña) {
         Acolito resultado = null;
         Connection con;
@@ -202,3 +203,4 @@ public class DAOAcolitos extends AbstractDAO {
        //HACER DAO
     }
 }
+*/

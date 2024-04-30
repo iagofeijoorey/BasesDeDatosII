@@ -22,6 +22,7 @@ import java.util.List;
  * DAO de Contactos y Tratos
  * @author basesdatos
  */
+
 public class DAOContactos extends AbstractDAO {
 
    public DAOContactos(Connection conexion, aplicacion.FachadaAplicacion fa){
@@ -29,7 +30,7 @@ public class DAOContactos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-
+}/*
     public void insertarContacto(Contacto contacto, Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -72,7 +73,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto genérico (creo que no se usa, no la voy a implementar aún)
-     */
+
     public java.util.List<Contacto>  consultarContactos(String pseudonimo, String nombre){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -135,7 +136,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto dado el acólito del que es contacto
-     */
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -183,7 +184,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
-     */
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -308,3 +309,4 @@ public class DAOContactos extends AbstractDAO {
         return resultado;
     }
 }
+*/

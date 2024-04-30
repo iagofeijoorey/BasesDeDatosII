@@ -5,6 +5,7 @@ package aplicacion;
  * @author basesdatos
  */
 
+/*
 public class MiembroBasico extends Acolito {
     private JefeDivision jefe;
 
@@ -25,3 +26,4 @@ public class MiembroBasico extends Acolito {
     }
 
 }
+*/
