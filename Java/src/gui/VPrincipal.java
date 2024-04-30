@@ -32,13 +32,6 @@ public class VPrincipal extends javax.swing.JFrame {
     }
 
     //EVENTOS DE LA BARRA DE OPCIONES
-    private void entrarPerfil(MouseEvent e) {
-        fa.ventanaPerfil(this);
-    }
-
-    private void entrarContactos(MouseEvent e) {
-        fa.ventanaContactos();
-    }
 
     private void entrarPropiedades(MouseEvent e) {
         fa.ventanaPropiedades();
@@ -48,17 +41,25 @@ public class VPrincipal extends javax.swing.JFrame {
         fa.ventanaEventos();
     }
 
-    private void entrarRituales(MouseEvent e) {
-        fa.ventanaRituales();
-    }
-
-    private void entrarAcolitos(MouseEvent e) {
-        fa.ventanaAcolitos();
-    }
-
 
     //BOTONES
     private void btnBuscarMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarPerfil(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarContactos(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarAcolitos(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarRituales(MouseEvent e) {
         // TODO add your code here
     }
 
@@ -76,7 +77,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Diego
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -105,7 +106,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //======== Desplegable ========
         {
@@ -250,24 +251,23 @@ public class VPrincipal extends javax.swing.JFrame {
                             .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)))
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                         .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
-                            .addGap(17, 17, 17)
+                            .addGap(11, 11, 11)
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(txtUbicacion)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buscaUbicacion))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addComponent(txtFecha)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                    .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                    .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(txtUbicacion)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(buscaUbicacion)))
                             .addGap(18, 18, 18)
                             .addComponent(btnBuscar))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollListaEventos, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane2)))
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(scrollListaEventos, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                                .addComponent(scrollPane2))))
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(18, 18, 18)
@@ -295,8 +295,8 @@ public class VPrincipal extends javax.swing.JFrame {
                                         .addComponent(txtUbicacion))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(txtFecha)
-                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtFecha))))
                             .addGap(18, 18, 18)
                             .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -323,7 +323,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Diego
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;

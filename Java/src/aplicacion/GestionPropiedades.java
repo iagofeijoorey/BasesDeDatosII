@@ -5,10 +5,8 @@
 
 package aplicacion;
 
-import aplicacion.PropiedadesYCuentas.Propiedad;
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
-
 /**
  *
  * @author basesdatos
