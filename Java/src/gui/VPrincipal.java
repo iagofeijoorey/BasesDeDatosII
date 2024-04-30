@@ -76,7 +76,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -105,7 +105,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //======== Desplegable ========
         {
@@ -323,7 +323,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;
