@@ -153,6 +153,34 @@ public class DAOAcolitos extends AbstractDAO {
             try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+
+    public void actualizarAcolito(Acolito acolito){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+
+        con=super.getConexion();
+
+        try {
+        stmUsuario=con.prepareStatement("update acólitos "+
+                                      "set nombrecompleto=?, telefono=?, direccion=?, influencia=?, dinero=?, contraseña=? "+
+                                      "where alias=?");
+        stmUsuario.setString(1, acolito.getNombreCompleto());
+        stmUsuario.setInt(2, acolito.getTelefono());
+        stmUsuario.setString(3, acolito.getDireccion());
+        stmUsuario.setInt(4, acolito.getInfluencia());
+        stmUsuario.setInt(5, acolito.getDinero());
+        stmUsuario.setString(6, acolito.getContraseña());
+        stmUsuario.setString(7, acolito.getAlias());
+        stmUsuario.executeUpdate();
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {
+              assert stmUsuario != null;
+              stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
     
     public void borrarAcolito(Acolito acolito){
         Connection con;
@@ -169,7 +197,9 @@ public class DAOAcolitos extends AbstractDAO {
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+          try {
+              assert stmUsuario != null;
+              stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
 

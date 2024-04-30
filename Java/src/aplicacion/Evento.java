@@ -16,6 +16,8 @@ public class Evento {
     private String descripcion;
     private Acolito autorizador;
     private Acolito organizador;
+    private Recompensa recompensa = null; //Sin inicializar, se cargan las recompensas con el método setRecompensa,
+    //y la consulta correspondiente definida en el DAOEvento cuando se necesite
 
     //Constructor
     public Evento(String ubicacion, String fecha, String tipoEvento, String descripcion, Acolito organizador) {

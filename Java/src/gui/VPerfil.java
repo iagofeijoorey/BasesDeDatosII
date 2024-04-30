@@ -46,7 +46,7 @@ public class VPerfil extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Diego
+        // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
         btnActualizar = new JButton();
         jScrollPane1 = new JScrollPane();
         jTable1 = new JTable();
@@ -266,7 +266,7 @@ public class VPerfil extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
     private JButton btnActualizar;
     private JScrollPane jScrollPane1;
     private JTable jTable1;
