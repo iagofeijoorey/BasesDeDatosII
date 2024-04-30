@@ -61,7 +61,7 @@ public class Evento {
     public void setAutorizador(Acolito autorizador) {
         this.autorizador = autorizador;
     }
-    public void setOrganizador(Acolito organizador) {
+    public void setOrganizador(String organizador) {
         this.organizador = organizador;
     }
 }
