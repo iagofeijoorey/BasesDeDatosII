@@ -22,7 +22,7 @@ public class DAOEventos extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-}/*
+}
     public void insertarEvento(Evento evento){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -31,7 +31,7 @@ public class DAOEventos extends AbstractDAO {
 
         con=super.getConexion();
         try {
-            stmUsuario=con.prepareStatement("insert into public.eventos(ubicacion, fecha, tipoevento, descripcion, autorizador, organizador) "+
+            stmUsuario=con.prepareStatement("insert into eventos(ubicacion, fecha, tipoevento, descripcion, autorizador, organizador) "+
                     "values (?,?,?,?,?,?)");
             stmUsuario.setString(1, evento.getUbicacion());
             stmUsuario.setString(2, evento.getFecha());
@@ -162,7 +162,48 @@ public class DAOEventos extends AbstractDAO {
     }
 
 
+    public List<Evento> consultarEventos(String ubicacion, String fecha){
+        //Datos
+        List<Evento> resultado = new ArrayList<Evento>() {
+        };
+        Evento eventoActual;
+        Connection con;
+        PreparedStatement stmEventos = null;
+        ResultSet rsEventos;
+
+
+        //Código
+        con = this.getConexion();
+        resultado = new java.util.ArrayList<Evento>();
+        try {
+        stmEventos = con.prepareStatement("select ubicacion, fecha, descripcion, organizador " +
+                "from eventos " +
+                "where ubicacion = ? or fecha = ?");
+        stmEventos.setString(1, ubicacion);
+        stmEventos.setString(2, fecha);
+        rsEventos = stmEventos.executeQuery();
+        while (rsEventos.next()) {
+            eventoActual = new Evento(ubicacion, fecha, TipoEvento.stringToTipoAcolito(rsEventos.getString("tipo_evento")), rsEventos.getString("descripcion"), null); //todo meter aquí lo de acolito pero ya lo
+            //Cosas de acólitos
+
+            resultado.add(eventoActual);
+        }
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                try {
+                    if (stmEventos != null) {
+                        stmEventos.close();
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Imposible cerrar cursores");
+                }
+        }
+        return resultado;
+    }
+
+
 
 
 }
-*/

@@ -29,6 +29,8 @@ public class VPrincipal extends javax.swing.JFrame {
     public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
+        buscarRituales();
+        buscaEstadisticas();
     }
 
     //EVENTOS DE LA BARRA DE OPCIONES
@@ -59,7 +61,11 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //BOTONES
     private void btnBuscarMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        buscarEventos();
+    }
+
+    private void ScrollListaRitualesMouseClicked(MouseEvent e) {
+        buscarRituales();
     }
 
     private void btnSalirMouseClicked(MouseEvent e) {
@@ -76,7 +82,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -105,7 +111,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== Desplegable ========
         {
@@ -205,6 +211,7 @@ public class VPrincipal extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 btnBuscarMouseClicked(e);
+                btnBuscarMouseClicked(e);
             }
         });
 
@@ -216,6 +223,26 @@ public class VPrincipal extends javax.swing.JFrame {
 
         //======== ScrollListaRituales ========
         {
+            ScrollListaRituales.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ScrollListaRitualesMouseClicked(e);
+                }
+            });
+
+            //---- TablaRituales ----
+            TablaRituales.setModel(new DefaultTableModel(
+                new Object[][] {
+                    {null, null},
+                    {null, null},
+                    {null, null},
+                    {null, null},
+                    {null, null},
+                },
+                new String[] {
+                    null, null
+                }
+            ));
             ScrollListaRituales.setViewportView(TablaRituales);
         }
 
@@ -252,14 +279,12 @@ public class VPrincipal extends javax.swing.JFrame {
                         .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
                             .addGap(17, 17, 17)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(txtUbicacion)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buscaUbicacion))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(txtFecha)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                    .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtUbicacion)
+                                .addComponent(txtFecha))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(buscaFecha, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                .addComponent(buscaUbicacion))
                             .addGap(18, 18, 18)
                             .addComponent(btnBuscar))
                         .addGroup(contentPaneLayout.createSequentialGroup()
@@ -323,7 +348,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;
@@ -347,14 +372,27 @@ public class VPrincipal extends javax.swing.JFrame {
     private JLabel Logo;
     // End of variables declaration//GEN-END:variables
 
-/*
+
     public void buscarEventos(){
         ModeloTablaEventos m;
 
         m=(ModeloTablaEventos) tablaEventos.getModel();
-        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        tablaEventos.setRowSelectionInterval(0, 0);
+        m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        if (m.getRowCount() > 0) tablaEventos.setRowSelectionInterval(0, 0);
     }
-    */
+
+    public void buscarRituales(){
+        ModeloTablaRituales m;
+
+        m=(ModeloTablaRituales) TablaRituales.getModel();
+        m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        if (m.getRowCount() > 0) TablaRituales.setRowSelectionInterval(0, 0);
+    }
+
+
+    public void buscaEstadisticas(){
+        //ModeloEstadisticas me= (ModeloEstadisticas)lstEstadisticas.getModel();
+        //fa.actualizarEstadisticas();
+    }
 
 }

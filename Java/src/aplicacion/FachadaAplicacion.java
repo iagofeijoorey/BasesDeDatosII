@@ -78,11 +78,6 @@ public java.util.List<Acolito> consultarAcolitos(){
         currentUser = u;
     }
 */
-
-   // public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
-   //     return ge.obtenerEventos(ubicacion, fecha);
-   // }
-
     //Abrir ventanas
     public void ventanaPerfil(VPrincipal vp){
         fgui.ventanaPerfil(vp);
@@ -111,6 +106,13 @@ public java.util.List<Acolito> consultarAcolitos(){
     //Métodos de VPerfil
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         //ga.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
+
+    ///Código VPrincipla
+    //////////////////////////////////////////
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha){
+        return ge.consultarEventos(ubicacion, fecha);
     }
 }
 

@@ -152,13 +152,16 @@ public class FachadaBaseDatos {
 
 
     /*
-    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
-        return daoEventos.consultarEventos(ubicacion, fecha);
-    }
+
     */
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
     //    daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
+
+    //Código VPrincipal
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+        return daoEventos.consultarEventos(ubicacion, fecha);
+    }
 
 }
