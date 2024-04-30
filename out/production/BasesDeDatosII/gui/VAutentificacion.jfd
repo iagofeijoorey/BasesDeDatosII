@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {space :61:61:p, par l:::p {comp textoUsuario:::p:251:p:1, seq l {comp textoClave:::p:218:p:1, space :::p, comp checkBox1:::::x}}, space :::p, comp label1:::p::p, space :0:49:x}}, space :::p}, seq t {space :0:81:x, comp btnAceptar:::p:213:p, space :p:79:p}}</string>
+        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq l {space :p:23:p, par l {comp label2::l:p::p, comp label1::l:p::p}, space :::p, par l:::p {comp textoUsuario::::230:x:1, comp textoClave::::230:x:1}, space :::p, comp cajaGuardarUser:::p::p, space :0:2:x}}, space :::p}, seq t {space :0:81:x, comp btnAceptar:::p:213:p, space :p:79:p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:31:p, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp label1::b:p::p, comp checkBox1::l:::x}, space s:::p, comp btnAceptar:::p:56:p, space :p:33:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :p:28:p, par b {comp label1::b:p::p, comp textoUsuario::b:p::p}, space :p:23:p, par b {comp label2::b:p::p, comp textoClave::b:p::p, comp cajaGuardarUser::l:p::p}, space ::16:x, comp btnAceptar:::p:56:p, space :p:33:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -59,10 +59,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>text</string>
-         <string>Usuario...</string>
-        </void>
         <void method="setProperty">
          <string>foreground</string>
          <object class="java.awt.Color" field="gray"/>
@@ -145,10 +141,6 @@
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
-         <string>text</string>
-         <string>Contraseña...</string>
-        </void>
-        <void method="setProperty">
          <string>foreground</string>
          <object class="java.awt.Color" field="gray"/>
         </void>
@@ -167,7 +159,19 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JCheckBox</string>
+        <void property="name">
+         <string>cajaGuardarUser</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Usuario:</string>
+        </void>
         <void property="name">
          <string>label1</string>
         </void>
@@ -175,9 +179,13 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
-        <string>javax.swing.JCheckBox</string>
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Contraseña:</string>
+        </void>
         <void property="name">
-         <string>checkBox1</string>
+         <string>label2</string>
         </void>
        </object>
       </void>
@@ -190,8 +198,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>5</int>
-        <int>65</int>
+        <int>0</int>
+        <int>0</int>
        </object>
       </void>
       <void method="setProperty">

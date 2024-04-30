@@ -28,10 +28,7 @@ public class FachadaGui {
     }
 
     public void muestraExcepcion(String e) {
-        VAviso va;
 
-        va = new VAviso(vPrincipal, true, e);
-        va.setVisible(true);
     }
 
     //Abrir ventanas

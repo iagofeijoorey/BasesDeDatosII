@@ -19,10 +19,7 @@ public class FachadaBaseDatos {
     // Hola, esta es la branch de prueba
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
-    private DAOAcolitos daoAcolitos;
-    private DAOContactos daoContactos;
     private DAOEventos daoEventos;
-    private DAOPropiedades daoPropiedades;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa) {
 
@@ -50,10 +47,7 @@ public class FachadaBaseDatos {
                             configuracion.getProperty("baseDatos"),
                     usuario);
 
-            daoAcolitos = new DAOAcolitos(conexion, fa);
-            daoContactos = new DAOContactos(conexion, fa);
             daoEventos = new DAOEventos(conexion, fa);
-            daoPropiedades = new DAOPropiedades(conexion, fa);
 
 
         } catch (FileNotFoundException f) {
@@ -152,13 +146,16 @@ public class FachadaBaseDatos {
 
 
     /*
+
+    */
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+    //    daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
+
+    //Código VPrincipal
     public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
         return daoEventos.consultarEventos(ubicacion, fecha);
     }
-    */
-    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
-    }
-
 
 }

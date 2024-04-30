@@ -55,7 +55,8 @@ public class ModeloTablaEventos extends AbstractTableModel{
 
     @Override
     public boolean isCellEditable(int row, int col){
-        return col>0 && col<3;
+        //return col>0 && col<3;
+        return false;
     }
 
     public Object getValueAt(int row, int col){
@@ -68,16 +69,6 @@ public class ModeloTablaEventos extends AbstractTableModel{
             case 3: resultado= eventos.get(row).getOrganizador();break;
         }
         return resultado;
-    }
-
-    @Override
-    public void setValueAt(Object v, int row, int col){
-        switch (col){
-            case 0: eventos.get(row).setUbicacion((String) v); break;
-            case 1: eventos.get(row).setFecha((Date) v); break;
-            case 2: eventos.get(row).setDescripcion((String) v);break;
-            case 3: eventos.get(row).setOrganizador((String) v);break;
-        }
     }
 
     public void setFilas(java.util.List<Evento> ejemplares){
