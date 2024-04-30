@@ -27,13 +27,13 @@ public class DAOPropiedades extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public void insertarPropiedad(Propiedad propiedad){
+    public void insertarPropiedad(Propiedad propiedad) {
         Connection con;
-        PreparedStatement stmUsuario=null;
+        PreparedStatement stmUsuario = null;
         ResultSet rsIdUsuario;
-        String idUsuario=null;
+        String idUsuario = null;
 
-        con=super.getConexion();
+        con = super.getConexion();
         try {
             stmUsuario = con.prepareStatement("insert into propiedades(idpropiedad, valor_actual, gestor) " +
                     "values (?,?,?)");
@@ -50,8 +50,7 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setString(2, inmobiliario.getUbicacion());
                 stmUsuario.setString(3, inmobiliario.getTipo().toString());
                 stmUsuario.executeUpdate();
-            }
-            else if (propiedad.getClass().equals(Vehiculo.class)) {
+            } else if (propiedad.getClass().equals(Vehiculo.class)) {
                 Vehiculo vehiculo = (Vehiculo) propiedad;
                 stmUsuario = con.prepareStatement("insert into vehiculos(idpropiedad, tipovehiculo, capacidad, almacén) " +
                         "values (?,?,?,?)");
@@ -60,9 +59,7 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setInt(3, vehiculo.getCapacidad());
                 stmUsuario.setInt(4, vehiculo.getAlmacen().getIdPropiedad());
                 stmUsuario.executeUpdate();
-            }
-
-            else if (propiedad.getClass().equals(Arma.class)) {
+            } else if (propiedad.getClass().equals(Arma.class)) {
                 Arma arma = (Arma) propiedad;
                 stmUsuario = con.prepareStatement("insert into armas(idpropiedad, tipoarmamento, cantidad, numbalas, almacén) " +
                         "values (?,?,?,?,?)");
@@ -72,9 +69,7 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setInt(4, arma.getBalas());
                 stmUsuario.setInt(5, arma.getAlmacen().getIdPropiedad());
                 stmUsuario.executeUpdate();
-            }
-
-            else if (propiedad.getClass().equals(Commodity.class)) {
+            } else if (propiedad.getClass().equals(Commodity.class)) {
                 Commodity commodity = (Commodity) propiedad;
                 stmUsuario = con.prepareStatement("insert into commodities(idpropiedad, nombre, cantidad) " +
                         "values (?,?,?)");
@@ -83,26 +78,29 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setInt(3, commodity.getCantidad());
                 stmUsuario.executeUpdate();
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
     }
-
 
 
     public List<Propiedad> consultarPropiedades() {
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
         Connection con;
-        PreparedStatement stmPropiedades=null;
+        PreparedStatement stmPropiedades = null;
         ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAuxiliar;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
-        String consulta =   "SELECT u.idpropiedad, u.valor_actual, u.gestor ,\n" +
+        String consulta = "SELECT u.idpropiedad, u.valor_actual, u.gestor ,\n" +
                 "       CASE\n" +
                 "           WHEN public.inmobiliario.idpropiedad IS NOT NULL THEN 'Inmobiliario' " +
                 "           WHEN public.vehiculos.idpropiedad IS NOT NULL THEN 'Vehículo' " +
@@ -117,9 +115,9 @@ public class DAOPropiedades extends AbstractDAO {
                 "         LEFT JOIN public.commodities ON u.idpropiedad = public.commodities.idpropiedad";
 
 
-        try  {
-            stmPropiedades=con.prepareStatement(consulta);
-            rsPropiedades=stmPropiedades.executeQuery();
+        try {
+            stmPropiedades = con.prepareStatement(consulta);
+            rsPropiedades = stmPropiedades.executeQuery();
             while (rsPropiedades.next()) {
                 String consulta2 = "SELECT * FROM acólitos " +
                         "WHERE alias = ? ";
@@ -201,59 +199,72 @@ public class DAOPropiedades extends AbstractDAO {
                                 new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
                                         rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
                                         rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario"))));
-                break;
+                        break;
                     default:
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
-            }
+                }
                 resultado.add(propiedadActual);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
+        } finally {
             try {
                 assert stmPropiedades != null;
-                stmPropiedades.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+                stmPropiedades.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
 
 
     /**
-     * Tipo debe ser el nombre exacto rollo "Arma, Inmobiliario, Vehiculo, Commodity"
+     * Tipo entre Inmobiliario, Vehículo, Arma, Commodity, o subtipos
      * Está implementado de la forma más ineficiente posible (literalmente cojo todos los resultados y filtro con Java,
      * habría que cambiar las consultas, pero ahora mismo me da pereza ->
      * todo añadir condiciones sobre el tipo en cada consulta y jugar con el switch
+     *
      * @param tipo
      * @return
-*/
+     */
     public List<Propiedad> consultarPropiedades(String tipo) {
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
         Connection con;
-        PreparedStatement stmPropiedades=null;
+        PreparedStatement stmPropiedades = null;
         ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAuxiliar;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
-        String consulta =   "SELECT u.idpropiedad, u.valor_actual, u.gestor ,\n" +
-                "       CASE\n" +
-                "           WHEN public.inmobiliario.idpropiedad IS NOT NULL THEN 'Inmobiliario' " +
-                "           WHEN public.vehiculos.idpropiedad IS NOT NULL THEN 'Vehículo' " +
-                "           WHEN public.armas.idpropiedad IS NOT NULL THEN 'Arma' " +
-                "           WHEN public.commodities.idpropiedad IS NOT NULL THEN 'Commodity' " +
-                "           ELSE 'tipo_desconocido' " +
-                "           END AS tipo\n" +
-                "FROM propiedades u " +
-                "         LEFT JOIN public.inmobiliario ON u.idpropiedad = public.inmobiliario.idpropiedad " +
-                "         LEFT JOIN public.vehiculos ON u.idpropiedad = public.vehiculos.idpropiedad " +
-                "         LEFT JOIN public.armas ON u.idpropiedad = public.armas.idpropiedad " +
-                "         LEFT JOIN public.commodities ON u.idpropiedad = public.commodities.idpropiedad";
+        String consulta = "SELECT propFiltradas.idpropiedad from\n" +
+                "    (\n" +
+                "        select u.* ,\n" +
+                "               CASE\n" +
+                "                   WHEN i.idpropiedad IS NOT NULL THEN 'Inmobiliario'\n" +
+                "                   WHEN v.idpropiedad IS NOT NULL THEN 'Vehículo'\n" +
+                "                   WHEN a.idpropiedad IS NOT NULL THEN 'Arma'\n" +
+                "                   WHEN c.idpropiedad IS NOT NULL THEN 'Commodity'\n" +
+                "                   ELSE 'tipo_desconocido'\n" +
+                "                   END AS tipo, i.tipoinmobiliario, v.tipovehiculo, a.tipoarmamento, c.nombre\n" +
+                "        FROM propiedades u\n" +
+                "                 LEFT JOIN public.inmobiliario i ON u.idpropiedad = i.idpropiedad\n" +
+                "                 LEFT JOIN public.vehiculos v ON u.idpropiedad = v.idpropiedad\n" +
+                "                 LEFT JOIN public.armas a ON u.idpropiedad = a.idpropiedad\n" +
+                "                 LEFT JOIN public.commodities c ON u.idpropiedad = c.idpropiedad) as propFiltradas\n" +
+                "where tipo = ? or tipoinmobiliario = ? or tipovehiculo = ? or nombre = ? or tipoarmamento = ?";
 
 
-        try  {
-            stmPropiedades=con.prepareStatement(consulta);
-            rsPropiedades=stmPropiedades.executeQuery();
+        try {
+            stmPropiedades = con.prepareStatement(consulta);
+            stmPropiedades.setString(1, "%" + tipo + "%");
+            stmPropiedades.setString(2, "%" + tipo + "%");
+            stmPropiedades.setString(3, "%" + tipo + "%");
+            stmPropiedades.setString(4, "%" + tipo + "%");
+            stmPropiedades.setString(5, "%" + tipo + "%");
+
+            rsPropiedades = stmPropiedades.executeQuery();
             while (rsPropiedades.next()) {
                 String consulta2 = "SELECT * FROM acólitos " +
                         "WHERE alias = ? ";
@@ -348,20 +359,19 @@ public class DAOPropiedades extends AbstractDAO {
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
+        } finally {
             try {
                 assert stmPropiedades != null;
-                stmPropiedades.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+                stmPropiedades.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado.stream()
                 .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
                 .collect(Collectors.toList());
     }
-
-
-
-
 }
