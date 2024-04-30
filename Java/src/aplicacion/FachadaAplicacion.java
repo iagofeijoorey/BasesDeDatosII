@@ -21,7 +21,7 @@ public class FachadaAplicacion {
     private GestionAcolitos ga;
     private Acolito currentUser;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         FachadaAplicacion fa;
 
         fa= new FachadaAplicacion();

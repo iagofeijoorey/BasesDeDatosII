@@ -15,7 +15,7 @@ import java.sql.Date;
  * @author basesdatos
  */
 public class ModeloTablaRituales extends AbstractTableModel{
-    private java.util.List<Evento> Rituales;
+    private java.util.List<Evento> eventos;
 
     public ModeloTablaRituales(){
         this.eventos=new java.util.ArrayList<Evento>();

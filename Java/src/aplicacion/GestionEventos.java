@@ -20,17 +20,17 @@ public class GestionEventos {
 
 
 
-    //public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha) {
-    //    return fbd.obtenerEventos(ubicacion, fecha);
-    //}
+    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha) {
+        return fbd.consultarEventos(ubicacion, fecha);
+    }
 
-   // public void borrarEvento(Acolito acolito){
-   //     fbd.borrarAcolito(acolito);
-   // }
+    public void borrarEvento(Evento evento){
+        fbd.borrarEvento(evento);
+    }
 
-   // public void nuevoEvento(Acolito acolito){
-   //     fbd.insertarAcolito(acolito);
-   // }
+    public void nuevoEvento(Evento evento){
+        fbd.insertarEvento(evento);
+    }
 
 
     //Código VPrincipal

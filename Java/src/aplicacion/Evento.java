@@ -4,6 +4,9 @@
  */
 package aplicacion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author basesdatos
@@ -16,7 +19,7 @@ public class Evento {
     private String descripcion;
     private Acolito autorizador;
     private Acolito organizador;
-    private Recompensa recompensa = null; //Sin inicializar, se cargan las recompensas con el método setRecompensa,
+    private List<Recompensa> recompensa = new ArrayList<>(); //Sin inicializar, se cargan las recompensas con el método setRecompensa,
     //y la consulta correspondiente definida en el DAOEvento cuando se necesite
 
     //Constructor
@@ -46,6 +49,9 @@ public class Evento {
     public Acolito getOrganizador() {
         return organizador;
     }
+    public List<Recompensa> getRecompensa() {
+        return recompensa;
+    }
 
     //Setters
     public void setUbicacion(String ubicacion) {
@@ -65,6 +71,9 @@ public class Evento {
     }
     public void setOrganizador(Acolito organizador) {
         this.organizador = organizador;
+    }
+    public void setRecompensa(List<Recompensa> recompensa) {
+        this.recompensa = recompensa;
     }
 
     //OTRAS FUNCIONES

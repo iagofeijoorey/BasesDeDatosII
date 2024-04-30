@@ -117,6 +117,15 @@ public class Acolito {
        this.fechaingreso = fechaingreso;
     }
 
+    public void addDinero(Integer dinero){
+        this.dinero+=dinero;
+    }
+
+    public void addInfluencia(Integer influencia){
+        this.influencia+=influencia;
+    }
+
+
 
     //OTRAS FUNCIONES
 

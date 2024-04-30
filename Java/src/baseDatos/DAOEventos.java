@@ -226,6 +226,28 @@ public class DAOEventos extends AbstractDAO {
         return resultado;
     }
 
+    public void borrarEvento(Evento evento) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("delete from eventos where ubicacion = ? and fecha = ?");
+            stmUsuario.setString(1, evento.getUbicacion());
+            stmUsuario.setString(2, evento.getFecha());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+
 }
 
 
