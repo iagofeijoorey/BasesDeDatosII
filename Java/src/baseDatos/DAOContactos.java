@@ -8,16 +8,21 @@ package baseDatos;
 import aplicacion.Acolito;
 import aplicacion.Contacto;
 import aplicacion.TipoAcolito;
+import aplicacion.Trato;
+import aplicacion.TipoTrato;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.List;
+
 /**
  * DAO de Contactos y Tratos
  * @author basesdatos
  */
+
 public class DAOContactos extends AbstractDAO {
 
    public DAOContactos(Connection conexion, aplicacion.FachadaAplicacion fa){
@@ -25,7 +30,7 @@ public class DAOContactos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-
+}/*
     public void insertarContacto(Contacto contacto, Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -68,7 +73,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto genérico (creo que no se usa, no la voy a implementar aún)
-     */
+
     public java.util.List<Contacto>  consultarContactos(String pseudonimo, String nombre){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -131,7 +136,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto dado el acólito del que es contacto
-     */
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -179,7 +184,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
-     */
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -269,4 +274,39 @@ public class DAOContactos extends AbstractDAO {
             try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+
+    public List<Trato> consultarTratosContacto(Contacto contacto){
+        java.util.ArrayList<Trato> resultado = new java.util.ArrayList<Trato>();
+        Trato tratoActual;
+        Connection con;
+        PreparedStatement stmTratos=null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta =   "SELECT t.* " +
+                "FROM tratos t " +
+                "WHERE t.contacto = ?";
+        try  {
+            stmTratos=con.prepareStatement(consulta);
+            stmTratos.setString(1, contacto.getPseudonimo());
+
+            rsTratos=stmTratos.executeQuery();
+            while (rsTratos.next())
+            {
+                tratoActual = new Trato(rsTratos.getInt("idtrato"), TipoTrato.valueOf(rsTratos.getString("tipotrato")),
+                        contacto, null);
+                resultado.add(tratoActual);
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmTratos != null;
+                stmTratos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        return resultado;
+    }
 }
+*/
