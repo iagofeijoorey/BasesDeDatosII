@@ -9,65 +9,34 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import javax.swing.border.*;
+import aplicacion.*;
 
 /**
  * @author Diego
  */
 public class VPerfil extends JDialog {
-    public VPerfil(Window owner) {
+/*
+    private aplicacion.FachadaAplicacion fa;
+
+    public VPerfil(Window owner, aplicacion.FachadaAplicacion fa) {
         super(owner);
         initComponents();
+        this.fa = fa;
     }
 
-    private void btnNuevoActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    //BOTONES
+    private void btnVolverMouseClicked(ActionEvent e) {
+        this.dispose();
     }
 
-    private void btnSalirActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void btnActualizarMouseClicked(MouseEvent e) {
+        fa.actualizarAcolito(Alias_text.getText(), Nombre_text.getText(), Ciudad_text.getText(), Pais_text.getText());
+        //Estaría guay poñer aquí un textiño encima de actualizar de "¡Actualizado!"
     }
 
+    //TABLAS
     private void jTable1MouseClicked(MouseEvent e) {
-        // TODO add your code here
-    }
-
-    private void btnGuardarActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btnBorrarActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextField1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextField2ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextField3ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextField4ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextField5ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jComboBox1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextFieldIDBusquedaActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void jTextFieldNombreBusquedaActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
 
@@ -82,7 +51,7 @@ public class VPerfil extends JDialog {
         jScrollPane1 = new JScrollPane();
         jTable1 = new JTable();
         Alias = new JLabel();
-        btnBuscar = new JButton();
+        btnVolver = new JButton();
         Nombre = new JLabel();
         Influencia = new JLabel();
         FechaAlta = new JLabel();
@@ -93,7 +62,7 @@ public class VPerfil extends JDialog {
         Alta_text = new JTextField();
         Influencia_Text = new JTextField();
         Ciudad_text = new JTextField();
-        Pais_text2 = new JTextField();
+        Pais_text = new JTextField();
         scrollPane1 = new JScrollPane();
         textPane2 = new JTextPane();
         Descripcion = new JLabel();
@@ -110,6 +79,12 @@ public class VPerfil extends JDialog {
 
         //---- btnActualizar ----
         btnActualizar.setText("Actualizar");
+        btnActualizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnActualizarMouseClicked(e);
+            }
+        });
 
         //======== jScrollPane1 ========
         {
@@ -130,9 +105,9 @@ public class VPerfil extends JDialog {
         Alias.setHorizontalAlignment(SwingConstants.RIGHT);
         Alias.setText("Alias:");
 
-        //---- btnBuscar ----
-        btnBuscar.setText("Volver");
-        btnBuscar.addActionListener(e -> btnBuscarActionPerformed(e));
+        //---- btnVolver ----
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(e -> btnBuscarActionPerformed(e));
 
         //---- Nombre ----
         Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -154,23 +129,11 @@ public class VPerfil extends JDialog {
         Pais.setHorizontalAlignment(SwingConstants.RIGHT);
         Pais.setText("Pais:");
 
-        //---- Alias_text ----
-        Alias_text.setEnabled(false);
-
-        //---- Nombre_text ----
-        Nombre_text.setEnabled(false);
-
         //---- Alta_text ----
         Alta_text.setEnabled(false);
 
         //---- Influencia_Text ----
         Influencia_Text.setEnabled(false);
-
-        //---- Ciudad_text ----
-        Ciudad_text.setEnabled(false);
-
-        //---- Pais_text2 ----
-        Pais_text2.setEnabled(false);
 
         //======== scrollPane1 ========
         {
@@ -184,11 +147,11 @@ public class VPerfil extends JDialog {
         //---- label2 ----
         label2.setText("Foto de perfil");
 
-        //---- label3 ----
-        label3.setText("(imagen)");
-
         //---- label4 ----
         label4.setText("Jefe de divisi\u00f3n:");
+
+        //---- textField1 ----
+        textField1.setEnabled(false);
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -196,7 +159,7 @@ public class VPerfil extends JDialog {
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(18, 18, 18)
-                    .addComponent(btnBuscar, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
                     .addGap(162, 162, 162)
                     .addComponent(label2)
                     .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -230,7 +193,7 @@ public class VPerfil extends JDialog {
                                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(Alta_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                                         .addComponent(Nombre_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                        .addComponent(Pais_text2, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)))
+                                        .addComponent(Pais_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)))
                                 .addComponent(Descripcion, GroupLayout.Alignment.LEADING)
                                 .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 521, GroupLayout.PREFERRED_SIZE)))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
@@ -257,7 +220,7 @@ public class VPerfil extends JDialog {
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(17, 17, 17)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBuscar, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                         .addComponent(label2))
                     .addGap(30, 30, 30)
                     .addGroup(contentPaneLayout.createParallelGroup()
@@ -279,7 +242,7 @@ public class VPerfil extends JDialog {
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(Pais)
                                 .addComponent(Ciudad_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Pais_text2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Pais_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(Ciudad)))
                         .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -308,7 +271,7 @@ public class VPerfil extends JDialog {
     private JScrollPane jScrollPane1;
     private JTable jTable1;
     private JLabel Alias;
-    private JButton btnBuscar;
+    private JButton btnVolver;
     private JLabel Nombre;
     private JLabel Influencia;
     private JLabel FechaAlta;
@@ -319,7 +282,7 @@ public class VPerfil extends JDialog {
     private JTextField Alta_text;
     private JTextField Influencia_Text;
     private JTextField Ciudad_text;
-    private JTextField Pais_text2;
+    private JTextField Pais_text;
     private JScrollPane scrollPane1;
     private JTextPane textPane2;
     private JLabel Descripcion;
@@ -327,5 +290,5 @@ public class VPerfil extends JDialog {
     private JLabel label3;
     private JLabel label4;
     private JTextField textField1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on*/
 }

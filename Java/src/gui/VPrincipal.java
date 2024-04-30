@@ -12,11 +12,11 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import javax.swing.table.*;
-
 
 /**
  *
@@ -25,12 +25,49 @@ import javax.swing.table.*;
 public class VPrincipal extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
-    
-    /** Creates new form VPrincipal */
-    public VPrincipal(aplicacion.FachadaAplicacion fa) {
+
+    public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
     }
+
+    //EVENTOS DE LA BARRA DE OPCIONES
+    private void entrarPerfil(MouseEvent e) {
+        fa.ventanaPerfil(this);
+    }
+
+    private void entrarContactos(MouseEvent e) {
+        fa.ventanaContactos();
+    }
+
+    private void entrarPropiedades(MouseEvent e) {
+        fa.ventanaPropiedades();
+    }
+
+    private void entrarEventos(MouseEvent e) {
+        fa.ventanaEventos();
+    }
+
+    private void entrarRituales(MouseEvent e) {
+        fa.ventanaRituales();
+    }
+
+    private void entrarAcolitos(MouseEvent e) {
+        fa.ventanaAcolitos();
+    }
+
+
+    //BOTONES
+    private void btnBuscarMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void btnSalirMouseClicked(MouseEvent e) {
+        System.exit(0);
+    }
+
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -39,65 +76,110 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
-        menu1 = new JMenu();
-        button1 = new JButton();
-        button5 = new JButton();
-        button6 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
-        scrollEventos = new JScrollPane();
-        eventosFuturos = new JTable();
+        Desplegable = new JMenu();
+        PerfilBotonDesplegable = new JButton();
+        ContactosBotonDesplegable = new JButton();
+        AcólitosBotonDesplegable = new JButton();
+        PropiedadesBotonDesplegable = new JButton();
+        EventosBotonDesplegable = new JButton();
+        RitualesBotonDesplegable = new JButton();
+        scrollListaEventos = new JScrollPane();
+        tablaEventos = new JTable();
         presentacion = new JTextPane();
-        insertUbicacion = new JTextField();
-        insertFecha = new JTextField();
+        buscaUbicacion = new JTextField();
+        buscaFecha = new JTextField();
         btnBuscar = new JButton();
         txtUbicacion = new JLabel();
         txtFecha = new JLabel();
+        ScrollListaRituales = new JScrollPane();
+        TablaRituales = new JTable();
+        scrollPane2 = new JScrollPane();
+        ListaEstadísticas = new JList();
+        btnSalir = new JButton();
+        Logo = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
-        //======== menu1 ========
+        //======== Desplegable ========
         {
-            menu1.setText("Opciones");
+            Desplegable.setText("Opciones");
+            Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
+            Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
+            Desplegable.setBackground(new Color(0xffffcc));
 
-            //---- button1 ----
-            button1.setText("text");
-            menu1.add(button1);
+            //---- PerfilBotonDesplegable ----
+            PerfilBotonDesplegable.setText("Perfil");
+            PerfilBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarPerfil(e);
+                }
+            });
+            Desplegable.add(PerfilBotonDesplegable);
 
-            //---- button5 ----
-            button5.setText("text");
-            menu1.add(button5);
+            //---- ContactosBotonDesplegable ----
+            ContactosBotonDesplegable.setText("Contactos");
+            ContactosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarContactos(e);
+                }
+            });
+            Desplegable.add(ContactosBotonDesplegable);
 
-            //---- button6 ----
-            button6.setText("text");
-            menu1.add(button6);
+            //---- AcólitosBotonDesplegable ----
+            AcólitosBotonDesplegable.setText("Ac\u00f3litos");
+            AcólitosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarAcolitos(e);
+                }
+            });
+            Desplegable.add(AcólitosBotonDesplegable);
 
-            //---- button2 ----
-            button2.setText("text");
-            menu1.add(button2);
+            //---- PropiedadesBotonDesplegable ----
+            PropiedadesBotonDesplegable.setText("Propiedades");
+            PropiedadesBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarPropiedades(e);
+                }
+            });
+            Desplegable.add(PropiedadesBotonDesplegable);
 
-            //---- button3 ----
-            button3.setText("text");
-            menu1.add(button3);
+            //---- EventosBotonDesplegable ----
+            EventosBotonDesplegable.setText("Eventos");
+            EventosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarEventos(e);
+                }
+            });
+            Desplegable.add(EventosBotonDesplegable);
 
-            //---- button4 ----
-            button4.setText("text");
-            menu1.add(button4);
+            //---- RitualesBotonDesplegable ----
+            RitualesBotonDesplegable.setText("Rituales");
+            RitualesBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarRituales(e);
+                }
+            });
+            Desplegable.add(RitualesBotonDesplegable);
         }
 
-        //======== scrollEventos ========
+        //======== scrollListaEventos ========
         {
 
-            //---- eventosFuturos ----
-            eventosFuturos.setModel(new DefaultTableModel(
+            //---- tablaEventos ----
+            tablaEventos.setModel(new DefaultTableModel(
                 new Object[][] {
                     {null, null, null, null},
                     {null, null, null, null},
@@ -109,15 +191,22 @@ public class VPrincipal extends javax.swing.JFrame {
                     null, null, null, null
                 }
             ));
-            scrollEventos.setViewportView(eventosFuturos);
+            scrollListaEventos.setViewportView(tablaEventos);
         }
 
         //---- presentacion ----
         presentacion.setText("La diosa Imyr, una figura misteriosa que emergi\u00f3 de los oc\u00e9anos en tiempos antiguos, es reverenciada por su sabidur\u00eda y su capacidad para dar forma a la tierra y las aguas. Aunque enfrent\u00f3 desaf\u00edos y conflictos, Imyr siempre mostr\u00f3 compasi\u00f3n por aquellos que la adoraban. Su culto gan\u00f3 seguidores devotos en todo el mundo, quienes comparten su creencia en la armon\u00eda, la prosperidad y la justicia. Imyr se convirti\u00f3 en un s\u00edmbolo de esperanza y redenci\u00f3n, inspirando a generaciones futuras a seguir sus ense\u00f1anzas de sabidur\u00eda y valent\u00eda");
-        presentacion.setEditable(false);
+        presentacion.setForeground(new Color(0x999999));
+        presentacion.setFont(presentacion.getFont().deriveFont(presentacion.getFont().getStyle() | Font.BOLD));
 
         //---- btnBuscar ----
         btnBuscar.setText("buscar");
+        btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnBuscarMouseClicked(e);
+            }
+        });
 
         //---- txtUbicacion ----
         txtUbicacion.setText("Ubicaci\u00f3n:");
@@ -125,138 +214,147 @@ public class VPrincipal extends javax.swing.JFrame {
         //---- txtFecha ----
         txtFecha.setText("Fecha:");
 
+        //======== ScrollListaRituales ========
+        {
+            ScrollListaRituales.setViewportView(TablaRituales);
+        }
+
+        //======== scrollPane2 ========
+        {
+            scrollPane2.setViewportView(ListaEstadísticas);
+        }
+
+        //---- btnSalir ----
+        btnSalir.setText("Salir");
+        btnSalir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSalirMouseClicked(e);
+            }
+        });
+
+        //---- Logo ----
+        Logo.setIcon(new ImageIcon(getClass().getResource("/gui/logoPeque\u00f1o1.jpg")));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(presentacion, GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(536, 536, 536)
-                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                            .addGap(48, 48, 48)
+                            .addComponent(Logo))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
+                            .addGap(17, 17, 17)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(txtUbicacion)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(buscaUbicacion))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(txtFecha)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                    .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBuscar))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scrollListaEventos, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scrollPane2)))
+                    .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(18, 18, 18)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(scrollEventos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(txtUbicacion)
-                                        .addComponent(txtFecha))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(insertUbicacion, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                                        .addComponent(insertFecha, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnBuscar)))))
-                    .addGap(58, 58, 58))
+                                .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Desplegable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap(16, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                            .addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+                            .addGap(57, 57, 57))))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(presentacion)
-                    .addContainerGap())
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGroup(contentPaneLayout.createParallelGroup()
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 6, Short.MAX_VALUE)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtUbicacion)
-                                .addComponent(insertUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtFecha)
-                                .addComponent(insertFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGap(6, 6, 6))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
+                                    .addComponent(btnBuscar))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(buscaUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtUbicacion))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(contentPaneLayout.createParallelGroup()
+                                        .addComponent(txtFecha)
+                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                            .addGap(18, 18, 18)
+                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(btnBuscar)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
-                    .addComponent(scrollEventos, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
-                    .addGap(117, 117, 117)
-                    .addComponent(menu1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap(8, Short.MAX_VALUE)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(Logo, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Desplegable, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(13, 13, 13)
+                                    .addComponent(btnSalir)
+                                    .addGap(12, 12, 12)))))
+                    .addContainerGap(8, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaAutorActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-                // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        buscarLibros();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnEditarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLibroActionPerformed
-        // TODO add your handling code here:
-        /*ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
-        int idLibro;
-        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);*/
-    }//GEN-LAST:event_btnEditarLibroActionPerformed
-
-    private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
-        // TODO add your handling code here:
-        //fa.nuevoLibro();
-    }//GEN-LAST:event_btnNuevoLibroActionPerformed
-
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        // TODO add your handling code here:
-        //fa.usuarios();
-    }//GEN-LAST:event_btnUsuariosActionPerformed
-
-    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        // TODO add your handling code here:
-        //fa.categorias();
-    }//GEN-LAST:event_btnCategoriasActionPerformed
-
-    private void buscaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaTituloActionPerformed
-
-   
-    /**
-    * @param args the command line arguments
-    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
-    private JMenu menu1;
-    private JButton button1;
-    private JButton button5;
-    private JButton button6;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JScrollPane scrollEventos;
-    private JTable eventosFuturos;
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    private JMenu Desplegable;
+    private JButton PerfilBotonDesplegable;
+    private JButton ContactosBotonDesplegable;
+    private JButton AcólitosBotonDesplegable;
+    private JButton PropiedadesBotonDesplegable;
+    private JButton EventosBotonDesplegable;
+    private JButton RitualesBotonDesplegable;
+    private JScrollPane scrollListaEventos;
+    private JTable tablaEventos;
     private JTextPane presentacion;
-    private JTextField insertUbicacion;
-    private JTextField insertFecha;
+    private JTextField buscaUbicacion;
+    private JTextField buscaFecha;
     private JButton btnBuscar;
     private JLabel txtUbicacion;
     private JLabel txtFecha;
+    private JScrollPane ScrollListaRituales;
+    private JTable TablaRituales;
+    private JScrollPane scrollPane2;
+    private JList ListaEstadísticas;
+    private JButton btnSalir;
+    private JLabel Logo;
     // End of variables declaration//GEN-END:variables
 
-    public void buscarLibros(){
-       /* ModeloTablaLibros m;
+/*
+    public void buscarEventos(){
+        ModeloTablaEventos m;
 
-        m=(ModeloTablaLibros) tablaLibros.getModel();
-        m.setFilas(fa.obtenerLibros((buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText()), buscaTitulo.getText(), buscaIsbn.getText(), buscaAutor.getText()));
-        if (m.getRowCount() > 0) {
-            tablaLibros.setRowSelectionInterval(0, 0);
-            btnEditarLibro.setEnabled(true);
-        }
-        else btnEditarLibro.setEnabled(false);*/
+        m=(ModeloTablaEventos) tablaEventos.getModel();
+        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        tablaEventos.setRowSelectionInterval(0, 0);
     }
+    */
+
 }

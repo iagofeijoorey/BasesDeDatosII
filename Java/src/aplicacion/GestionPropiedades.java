@@ -25,20 +25,20 @@ public class GestionPropiedades {
     }  
 
   
-     public java.util.List<Propiedad> consultarPropiedades(){
-         return fbd.consultarPropiedades();
-    }
+     //public java.util.List<Propiedad> consultarPropiedades(){
+     //    return fbd.consultarPropiedades();
+   // }
 
-     public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
-         return fbd.consultarAcolitos(IDUsuario,Nombre);
-     }
+     //public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
+     //    return fbd.consultarAcolitos(IDUsuario,Nombre);
+    // }
 
-     public void borrarAcolito(Acolito acolito){
-         fbd.borrarAcolito(acolito);
-     }
+     //public void borrarAcolito(Acolito acolito){
+    //     fbd.borrarAcolito(acolito);
+    // }
      
-     public void nuevoUsuario(Acolito acolito){
-         fbd.insertarAcolito(acolito);
-     }
+  //   public void nuevoUsuario(Acolito acolito){
+   //      fbd.insertarAcolito(acolito);
+     //}
   
 }

@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq t {space :p:18:p, comp btnBuscar:::p:110:p, space :p:162:p, comp label2:::p::p, space :::x}, seq {par l {seq {space :p:22:p, par t {seq {par t:::p {seq {par l {comp Influencia:::p::p, comp Alias:::p::p}, par l {seq {space :p:122:p, comp FechaAlta:::p::p}, comp Nombre::t:p::p}}, seq {comp Ciudad:::p::p, space :::x, par l {comp Influencia_Text:::p::p, seq {comp Ciudad_text:::p:147:p, space :p:35:p, comp Pais:::p::p}, comp Alias_text::l:p:136:p}}}, space s:::p, par l:::p {comp Alta_text::::223:x, comp Nombre_text::l::223:x, comp Pais_text2::l::223:x}}, comp Descripcion::l:p::p, comp scrollPane1::l:p:521:p}}, seq t {space :::p, comp label3:::p:153:p, space :p:150:p}}, par l {seq {space ::46:x, par l {comp jScrollPane1:::p:388:p, seq l {comp label4:::p::p, space u:::p, comp textField1:::p:269:p}}, space :p:21:p}, seq l {space :p:31:p, comp btnActualizar:::p:139:p, space ::285:x}}}}</string>
+        <string>par l {seq t {space :p:18:p, comp btnVolver:::p:110:p, space :p:162:p, comp label2:::p::p, space :::x}, seq {par l {seq {space :p:22:p, par t {seq {par t:::p {seq {par l {comp Influencia:::p::p, comp Alias:::p::p}, par l {seq {space :p:122:p, comp FechaAlta:::p::p}, comp Nombre::t:p::p}}, seq {comp Ciudad:::p::p, space :::x, par l {comp Influencia_Text:::p::p, seq {comp Ciudad_text:::p:147:p, space :p:35:p, comp Pais:::p::p}, comp Alias_text::l:p:136:p}}}, space s:::p, par l:::p {comp Alta_text::::223:x, comp Nombre_text::l::223:x, comp Pais_text::l::223:x}}, comp Descripcion::l:p::p, comp scrollPane1::l:p:521:p}}, seq t {space :::p, comp label3:::p:153:p, space :p:150:p}}, par l {seq {space ::46:x, par l {comp jScrollPane1:::p:388:p, seq l {comp label4:::p::p, space u:::p, comp textField1:::p:269:p}}, space :p:21:p}, seq l {space :p:31:p, comp btnActualizar:::p:139:p, space ::285:x}}}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:17:p, par b {comp btnBuscar::b::33:x, comp label2::b:p::p}, space :p:30:p, par l {seq {comp label3:::p:95:p, space :p:25:p, par b {comp Nombre::b:p::p, comp Nombre_text::b:p::p, comp Alias::b:p::p, comp Alias_text::b:p::p}, space :::p, par b {comp Influencia::b:p::p, comp Alta_text::b:p::p, comp FechaAlta::b:p:17:p, comp Influencia_Text::b:p::p}, space s:::p, par b {comp Pais::b:p::p, comp Ciudad_text::b:p::p, comp Pais_text2::b:p::p, comp Ciudad::b:p::p}}, comp jScrollPane1:::p:203:p}, par t {seq {space ::20:x, comp Descripcion:::p::p, space :::p, comp scrollPane1:::p:147:p}, seq {space :p:52:p, par b {comp label4::b:p::p, comp textField1::b:p::p}, space ::78:x, comp btnActualizar:::p::p}}, space :p:15:p}}</string>
+        <string>par l {seq l {space :p:17:p, par b {comp btnVolver::b::33:x, comp label2::b:p::p}, space :p:30:p, par l {seq {comp label3:::p:95:p, space :p:25:p, par b {comp Nombre::b:p::p, comp Nombre_text::b:p::p, comp Alias::b:p::p, comp Alias_text::b:p::p}, space :::p, par b {comp Influencia::b:p::p, comp Alta_text::b:p::p, comp FechaAlta::b:p:17:p, comp Influencia_Text::b:p::p}, space s:::p, par b {comp Pais::b:p::p, comp Ciudad_text::b:p::p, comp Pais_text::b:p::p, comp Ciudad::b:p::p}}, comp jScrollPane1:::p:203:p}, par t {seq {space ::20:x, comp Descripcion:::p::p, space :::p, comp scrollPane1:::p:147:p}, seq {space :p:52:p, par b {comp label4::b:p::p, comp textField1::b:p::p}, space ::78:x, comp btnActualizar:::p::p}}, space :p:15:p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -41,6 +41,14 @@
         </void>
         <void property="name">
          <string>btnActualizar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.MouseListener</string>
+          <string>mouseClicked</string>
+          <string>btnActualizarMouseClicked</string>
+          <boolean>true</boolean>
+         </object>
         </void>
        </object>
       </void>
@@ -108,7 +116,7 @@
          <string>Volver</string>
         </void>
         <void property="name">
-         <string>btnBuscar</string>
+         <string>btnVolver</string>
         </void>
         <void method="addEvent">
          <object class="com.jformdesigner.model.FormEvent">
@@ -203,10 +211,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>enabled</string>
-         <boolean>false</boolean>
-        </void>
         <void property="name">
          <string>Alias_text</string>
         </void>
@@ -215,10 +219,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>enabled</string>
-         <boolean>false</boolean>
-        </void>
         <void property="name">
          <string>Nombre_text</string>
         </void>
@@ -251,10 +251,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>enabled</string>
-         <boolean>false</boolean>
-        </void>
         <void property="name">
          <string>Ciudad_text</string>
         </void>
@@ -263,12 +259,8 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>enabled</string>
-         <boolean>false</boolean>
-        </void>
         <void property="name">
-         <string>Pais_text2</string>
+         <string>Pais_text</string>
         </void>
        </object>
       </void>
@@ -322,10 +314,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JLabel</string>
-        <void method="setProperty">
-         <string>text</string>
-         <string>(imagen)</string>
-        </void>
         <void property="name">
          <string>label3</string>
         </void>
@@ -346,6 +334,10 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>enabled</string>
+         <boolean>false</boolean>
+        </void>
         <void property="name">
          <string>textField1</string>
         </void>
