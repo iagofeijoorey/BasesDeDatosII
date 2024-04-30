@@ -18,6 +18,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import javax.swing.table.*;
 
+
 /**
  *
  * @author basesdatos
@@ -25,49 +26,44 @@ import javax.swing.table.*;
 public class VPrincipal extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
-
-    public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
-        this.fa=fa;
-        initComponents();
-    }
-
-    //EVENTOS DE LA BARRA DE OPCIONES
+    
+    /** Creates new form VPrincipal */
     private void entrarPerfil(MouseEvent e) {
-        fa.ventanaPerfil(this);
+        // TODO add your code here
     }
 
     private void entrarContactos(MouseEvent e) {
-        fa.ventanaContactos();
-    }
-
-    private void entrarPropiedades(MouseEvent e) {
-        fa.ventanaPropiedades();
-    }
-
-    private void entrarEventos(MouseEvent e) {
-        fa.ventanaEventos();
-    }
-
-    private void entrarRituales(MouseEvent e) {
-        fa.ventanaRituales();
+        // TODO add your code here
     }
 
     private void entrarAcolitos(MouseEvent e) {
-        fa.ventanaAcolitos();
+        // TODO add your code here
     }
 
+    private void entrarPropiedades(MouseEvent e) {
+        // TODO add your code here
+    }
 
-    //BOTONES
+    private void entrarEventos(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarRituales(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void btnBuscarMouseClicked(MouseEvent e) {
         // TODO add your code here
     }
 
     private void btnSalirMouseClicked(MouseEvent e) {
-        System.exit(0);
+        // TODO add your code here
     }
 
-
-
+    public VPrincipal(aplicacion.FachadaAplicacion fa) {
+        this.fa=fa;
+        initComponents();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -76,7 +72,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -321,9 +317,54 @@ public class VPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(getOwner());
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buscaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaAutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaAutorActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+                // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        buscarLibros();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLibroActionPerformed
+        // TODO add your handling code here:
+        /*ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
+        int idLibro;
+        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
+        fa.visualizarLibro(idLibro);*/
+    }//GEN-LAST:event_btnEditarLibroActionPerformed
+
+    private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
+        // TODO add your handling code here:
+        //fa.nuevoLibro();
+    }//GEN-LAST:event_btnNuevoLibroActionPerformed
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        // TODO add your handling code here:
+        //fa.usuarios();
+    }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        // TODO add your handling code here:
+        //fa.categorias();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
+
+    private void buscaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscaTituloActionPerformed
+
+   
+    /**
+    * @param args the command line arguments
+    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;
@@ -347,14 +388,15 @@ public class VPrincipal extends javax.swing.JFrame {
     private JLabel Logo;
     // End of variables declaration//GEN-END:variables
 
-/*
-    public void buscarEventos(){
-        ModeloTablaEventos m;
+    public void buscarLibros(){
+       /* ModeloTablaLibros m;
 
-        m=(ModeloTablaEventos) tablaEventos.getModel();
-        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        tablaEventos.setRowSelectionInterval(0, 0);
+        m=(ModeloTablaLibros) tablaLibros.getModel();
+        m.setFilas(fa.obtenerLibros((buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText()), buscaTitulo.getText(), buscaIsbn.getText(), buscaAutor.getText()));
+        if (m.getRowCount() > 0) {
+            tablaLibros.setRowSelectionInterval(0, 0);
+            btnEditarLibro.setEnabled(true);
+        }
+        else btnEditarLibro.setEnabled(false);*/
     }
-    */
-
 }
