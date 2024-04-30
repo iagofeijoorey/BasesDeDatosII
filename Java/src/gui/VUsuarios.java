@@ -40,7 +40,7 @@ public class VUsuarios extends javax.swing.JDialog {
         for (TipoUsuario i: TipoUsuario.values())
             jComboBox1.addItem(i.toString());
         */
-    }
+   // }
 
     /** This method is called from within the constructor to
      * initialize the form.categoria
