@@ -22,7 +22,7 @@ import javax.swing.LayoutStyle;
  * @author basesdatos
  */
 public class VAutentificacion extends javax.swing.JDialog {
-
+    
     aplicacion.FachadaAplicacion fa;
     
     /** Creates new form VAutentificacion */
@@ -46,7 +46,7 @@ public class VAutentificacion extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         textoUsuario = new JTextField();
         btnAceptar = new JButton();
@@ -56,8 +56,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         cajaGuardarUser = new JCheckBox();
         label1 = new JLabel();
         label2 = new JLabel();
-        dialog1 = new JDialog();
-        Fondo = new JPanel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,7 +73,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                 formKeyTyped(e);
             }
         });
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- textoUsuario ----
         textoUsuario.setForeground(Color.gray);
@@ -125,7 +123,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                                 .addComponent(textoClave, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cajaGuardarUser)
-                            .addGap(0, 8, Short.MAX_VALUE)))
+                            .addGap(0, 2, Short.MAX_VALUE)))
                     .addContainerGap())
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(0, 81, Short.MAX_VALUE)
@@ -144,7 +142,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                         .addComponent(label2)
                         .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(cajaGuardarUser))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                     .addGap(33, 33, 33)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -154,52 +152,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         );
         pack();
         setLocationRelativeTo(getOwner());
-
-        //======== dialog1 ========
-        {
-            var dialog1ContentPane = dialog1.getContentPane();
-
-            //======== Fondo ========
-            {
-                Fondo.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-                javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax
-                . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-                .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
-                . Color. red) ,Fondo. getBorder( )) ); Fondo. addPropertyChangeListener (new java. beans.
-                PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .
-                equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
-
-                GroupLayout FondoLayout = new GroupLayout(Fondo);
-                Fondo.setLayout(FondoLayout);
-                FondoLayout.setHorizontalGroup(
-                    FondoLayout.createParallelGroup()
-                        .addGap(0, 286, Short.MAX_VALUE)
-                );
-                FondoLayout.setVerticalGroup(
-                    FondoLayout.createParallelGroup()
-                        .addGap(0, 212, Short.MAX_VALUE)
-                );
-            }
-
-            GroupLayout dialog1ContentPaneLayout = new GroupLayout(dialog1ContentPane);
-            dialog1ContentPane.setLayout(dialog1ContentPaneLayout);
-            dialog1ContentPaneLayout.setHorizontalGroup(
-                dialog1ContentPaneLayout.createParallelGroup()
-                    .addGroup(dialog1ContentPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Fondo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-            );
-            dialog1ContentPaneLayout.setVerticalGroup(
-                dialog1ContentPaneLayout.createParallelGroup()
-                    .addGroup(dialog1ContentPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Fondo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-            );
-            dialog1.pack();
-            dialog1.setLocationRelativeTo(dialog1.getOwner());
-        }
     }// </editor-fold>//GEN-END:initComponents
 
     private void textoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoUsuarioActionPerformed
@@ -208,38 +160,34 @@ public class VAutentificacion extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         etiquetaFallo.setVisible(false);
-        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
+        if (true)//fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
            this.dispose();
         else etiquetaFallo.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-     System.exit(0);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) { System.exit(0); }
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formKeyPressed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) { /* TODO add your handling code here: */  }
 
+        
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         // TODO add your handling code here:
         if(evt.getKeyCode()==10) System.out.printf("ENTER");
     }//GEN-LAST:event_formKeyTyped
 
-    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyTyped
+    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         //System.out.println(evt.getKeyChar());
         //if (evt.getKeyChar() == '\n') System.out.println("BARRAN");
         if (evt.getKeyChar() == '\n') //btnAceptarActionPerformed(null); //todo, devolver al original
             this.dispose();
-    }//GEN-LAST:event_textoClaveKeyTyped
-
-    /**
-    * @param args the command line arguments
-    */
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JTextField textoUsuario;
     private JButton btnAceptar;
     private JButton btnCancelar;
@@ -248,8 +196,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     private JCheckBox cajaGuardarUser;
     private JLabel label1;
     private JLabel label2;
-    private JDialog dialog1;
-    private JPanel Fondo;
     // End of variables declaration//GEN-END:variables
 
 }
+

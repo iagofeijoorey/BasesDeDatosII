@@ -43,7 +43,7 @@ public class VPropiedades extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Propiedades");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- IDPropiedad ----
         IDPropiedad.setHorizontalAlignment(SwingConstants.RIGHT);
