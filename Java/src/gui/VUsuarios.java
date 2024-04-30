@@ -31,7 +31,7 @@ public class VUsuarios extends javax.swing.JDialog {
 
     /** Creates new form VLibro */
     public VUsuarios(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+        /*super(parent, modal);
         this.fa=fa;
         initComponents();
         ((ModeloUsuarios)jTable1.getModel()).setFilas(fa.obtenerUsuarios());
@@ -39,7 +39,7 @@ public class VUsuarios extends javax.swing.JDialog {
         jComboBox1.addItem(" ");
         for (TipoUsuario i: TipoUsuario.values())
             jComboBox1.addItem(i.toString());
-        
+        */
     }
 
     /** This method is called from within the constructor to
