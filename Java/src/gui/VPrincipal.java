@@ -105,7 +105,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== Desplegable ========
         {

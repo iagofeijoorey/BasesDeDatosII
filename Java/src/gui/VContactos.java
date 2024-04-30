@@ -60,7 +60,7 @@ public class VContactos extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mis Contactos");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- btnRomperTrato ----
         btnRomperTrato.setText("Romper trato seleccinonado");
