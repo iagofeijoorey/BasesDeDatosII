@@ -6,67 +6,114 @@
 package aplicacion;
 
 
+import gui.VPrincipal;
+
 /**
  *
- * @author Mateo Bodenlle
+ * @author basesdatos
  */
-public class FachadaAplicacion {
-    gui.FachadaGui fgui;
-    baseDatos.FachadaBaseDatos fbd;
-    GestionAcolitos gAcolitos;
-    GestionContactos gContactos;
-    Acolito currentUser;
-    
-    
- public FachadaAplicacion(){
-   fgui=new gui.FachadaGui(this);
-   fbd= new baseDatos.FachadaBaseDatos(this);
-   gAcolitos = new GestionAcolitos(fgui, fbd);
- }
 
- public static void main(String args[]) {
-     FachadaAplicacion fa;
+public class FachadaAplicacion {
+    private gui.FachadaGui fgui;
+    private baseDatos.FachadaBaseDatos fbd;
+    private GestionEventos ge;
+    private GestionPropiedades gp;
+    private GestionContactos gc;
+    private GestionAcolitos ga;
+    private Acolito currentUser;
+    
+    
+    public FachadaAplicacion(){
+        fgui=new gui.FachadaGui(this);
+        fbd= new baseDatos.FachadaBaseDatos(this);
+        ge = new GestionEventos(fgui, fbd);
+        gp = new GestionPropiedades(fgui, fbd);
+        gc = new GestionContactos(fgui, fbd);
+        ga = new GestionAcolitos(fgui, fbd);
+    }
+
+
+    public static void main(String args[]) {
+        FachadaAplicacion fa;
      
-     fa= new FachadaAplicacion();
-     fa.iniciaInterfazUsuario();
- }
+        fa= new FachadaAplicacion();
+        fa.iniciaInterfazUsuario();
+    }
  
- public void iniciaInterfazUsuario(){
+    public void iniciaInterfazUsuario(){
      fgui.iniciaVista();
  }
 
- public void muestraExcepcion(String e){
+    public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
-
-
+ 
+public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
+  return cl.obtenerLibros(id, titulo,  isbn,  autor);
+}
 
 public java.util.List<Acolito> consultarAcolitos(){
-    return gAcolitos.consultarAcolitos();
+    return ga.consultarAcolitos();
 }
 
 
-public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
-    return gAcolitos.buscarUsuarios(IDUsuario, Nombre);
-}
+    public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
+        return ga.buscarUsuarios(IDUsuario, Nombre);
+    }
 
-public void nuevoUsuario(Acolito usuario){
-    gAcolitos.nuevoUsuario(usuario);
-}
-
-
-public void borrarAcolito(Acolito usuario){
-    gAcolitos.borrarAcolito(usuario);
+    public void nuevoUsuario(Acolito usuario){
+    ga.nuevoUsuario(usuario);
 }
 
 
-public Boolean comprobarAutentificacion(String idUsuario, String clave){
-  //return cu.comprobarAutentificacion(idUsuario, clave);
-    return true;
+    public void borrarAcolito(Acolito usuario){
+    ga.borrarAcolito(usuario);
 }
+
+
+    public Boolean comprobarAutentificacion(String idUsuario, String clave){
+        //return cu.comprobarAutentificacion(idUsuario, clave);
+        return true;
+    }
 
 
     public void setCurrentUser(Acolito u) {
         currentUser = u;
     }
+
+
+    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
+        return ge.obtenerEventos(ubicacion, fecha);
+    }
+
+    //Abrir ventanas
+    public void ventanaPerfil(VPrincipal vp){
+        fgui.ventanaPerfil(vp);
+    }
+
+    public void ventanaContactos(){
+        //fgui.ventanaContactos();
+    }
+
+    public void ventanaAcolitos(){
+        //fgui.ventanaAcolitos();
+    }
+
+    public void ventanaPropiedades(){
+        //fgui.ventanaPropiedades();
+    }
+
+    public void ventanaEventos(){
+        fgui.ventanaEventos();
+    }
+
+    public void ventanaRituales(){
+        //fgui.ventanaRituales();
+    }
+
+    //Métodos de VPerfil
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        ga.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
 }
+

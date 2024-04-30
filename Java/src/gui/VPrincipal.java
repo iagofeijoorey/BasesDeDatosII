@@ -12,6 +12,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
@@ -25,12 +26,49 @@ import javax.swing.table.*;
 public class VPrincipal extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
-    
-    /** Creates new form VPrincipal */
-    public VPrincipal(aplicacion.FachadaAplicacion fa) {
+
+    public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
     }
+
+    //EVENTOS DE LA BARRA DE OPCIONES
+    private void entrarPerfil(MouseEvent e) {
+        fa.ventanaPerfil(this);
+    }
+
+    private void entrarContactos(MouseEvent e) {
+        fa.ventanaContactos();
+    }
+
+    private void entrarPropiedades(MouseEvent e) {
+        fa.ventanaPropiedades();
+    }
+
+    private void entrarEventos(MouseEvent e) {
+        fa.ventanaEventos();
+    }
+
+    private void entrarRituales(MouseEvent e) {
+        fa.ventanaRituales();
+    }
+
+    private void entrarAcolitos(MouseEvent e) {
+        fa.ventanaAcolitos();
+    }
+
+
+    //BOTONES
+    private void btnBuscarMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void btnSalirMouseClicked(MouseEvent e) {
+        System.exit(0);
+    }
+
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -41,334 +79,265 @@ public class VPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     // Generated using JFormDesigner Evaluation license - Laura Antelo González
     private void initComponents() {
-        buscaTitulo = new JTextField();
-        etiquetaTitulo = new JLabel();
-        buscaIsbn = new JTextField();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        buscaAutor = new JTextField();
-        jScrollPane1 = new JScrollPane();
-        tablaLibros = new JTable();
+        Desplegable = new JMenu();
+        PerfilBotonDesplegable = new JButton();
+        ContactosBotonDesplegable = new JButton();
+        AcólitosBotonDesplegable = new JButton();
+        PropiedadesBotonDesplegable = new JButton();
+        EventosBotonDesplegable = new JButton();
+        RitualesBotonDesplegable = new JButton();
+        scrollListaEventos = new JScrollPane();
+        tablaEventos = new JTable();
+        presentacion = new JTextPane();
+        buscaUbicacion = new JTextField();
+        buscaFecha = new JTextField();
         btnBuscar = new JButton();
+        txtUbicacion = new JLabel();
+        txtFecha = new JLabel();
+        ScrollListaRituales = new JScrollPane();
+        TablaRituales = new JTable();
+        scrollPane2 = new JScrollPane();
+        ListaEstadísticas = new JList();
         btnSalir = new JButton();
-        btnNuevoLibro = new JButton();
-        btnEditarLibro = new JButton();
-        jLabel3 = new JLabel();
-        buscaId = new JTextField();
-        jPanel1 = new JPanel();
-        jLabel4 = new JLabel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
-        menu1 = new JMenu();
-        button1 = new JButton();
-        button5 = new JButton();
-        button6 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Biblioteca de Inform\u00e1tica");
+        setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
         var contentPane = getContentPane();
 
-        //---- buscaTitulo ----
-        buscaTitulo.setToolTipText("Titulo a buscar");
-        buscaTitulo.addActionListener(e -> buscaTituloActionPerformed(e));
-
-        //---- etiquetaTitulo ----
-        etiquetaTitulo.setText("T\u00edtulo:");
-
-        //---- jLabel1 ----
-        jLabel1.setText("Isbn:");
-
-        //---- jLabel2 ----
-        jLabel2.setText("Autor:");
-
-        //---- buscaAutor ----
-        buscaAutor.addActionListener(e -> buscaAutorActionPerformed(e));
-
-        //======== jScrollPane1 ========
+        //======== Desplegable ========
         {
+            Desplegable.setText("Opciones");
+            Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
+            Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
 
-            //---- tablaLibros ----
-            tablaLibros.setModel(new ModeloTablaLibros());
-            tablaLibros.setColumnSelectionAllowed(true);
-            tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            jScrollPane1.setViewportView(tablaLibros);
+            //---- PerfilBotonDesplegable ----
+            PerfilBotonDesplegable.setText("Perfil");
+            PerfilBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarPerfil(e);
+                }
+            });
+            Desplegable.add(PerfilBotonDesplegable);
+
+            //---- ContactosBotonDesplegable ----
+            ContactosBotonDesplegable.setText("Contactos");
+            ContactosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarContactos(e);
+                }
+            });
+            Desplegable.add(ContactosBotonDesplegable);
+
+            //---- AcólitosBotonDesplegable ----
+            AcólitosBotonDesplegable.setText("Ac\u00f3litos");
+            AcólitosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarAcolitos(e);
+                }
+            });
+            Desplegable.add(AcólitosBotonDesplegable);
+
+            //---- PropiedadesBotonDesplegable ----
+            PropiedadesBotonDesplegable.setText("Propiedades");
+            PropiedadesBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarPropiedades(e);
+                }
+            });
+            Desplegable.add(PropiedadesBotonDesplegable);
+
+            //---- EventosBotonDesplegable ----
+            EventosBotonDesplegable.setText("Eventos");
+            EventosBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarEventos(e);
+                }
+            });
+            Desplegable.add(EventosBotonDesplegable);
+
+            //---- RitualesBotonDesplegable ----
+            RitualesBotonDesplegable.setText("Rituales");
+            RitualesBotonDesplegable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarRituales(e);
+                }
+            });
+            Desplegable.add(RitualesBotonDesplegable);
         }
 
+        //======== scrollListaEventos ========
+        {
+
+            //---- tablaEventos ----
+            tablaEventos.setModel(new DefaultTableModel(
+                new Object[][] {
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                },
+                new String[] {
+                    null, null, null, null
+                }
+            ));
+            scrollListaEventos.setViewportView(tablaEventos);
+        }
+
+        //---- presentacion ----
+        presentacion.setText("La diosa Imyr, una figura misteriosa que emergi\u00f3 de los oc\u00e9anos en tiempos antiguos, es reverenciada por su sabidur\u00eda y su capacidad para dar forma a la tierra y las aguas. Aunque enfrent\u00f3 desaf\u00edos y conflictos, Imyr siempre mostr\u00f3 compasi\u00f3n por aquellos que la adoraban. Su culto gan\u00f3 seguidores devotos en todo el mundo, quienes comparten su creencia en la armon\u00eda, la prosperidad y la justicia. Imyr se convirti\u00f3 en un s\u00edmbolo de esperanza y redenci\u00f3n, inspirando a generaciones futuras a seguir sus ense\u00f1anzas de sabidur\u00eda y valent\u00eda");
+        presentacion.setForeground(new Color(0x999999));
+        presentacion.setFont(presentacion.getFont().deriveFont(presentacion.getFont().getStyle() | Font.BOLD));
+
         //---- btnBuscar ----
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(e -> btnBuscarActionPerformed(e));
+        btnBuscar.setText("buscar");
+        btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnBuscarMouseClicked(e);
+            }
+        });
+
+        //---- txtUbicacion ----
+        txtUbicacion.setText("Ubicaci\u00f3n:");
+
+        //---- txtFecha ----
+        txtFecha.setText("Fecha:");
+
+        //======== ScrollListaRituales ========
+        {
+            ScrollListaRituales.setViewportView(TablaRituales);
+        }
+
+        //======== scrollPane2 ========
+        {
+            scrollPane2.setViewportView(ListaEstadísticas);
+        }
 
         //---- btnSalir ----
         btnSalir.setText("Salir");
-        btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
-
-        //---- btnNuevoLibro ----
-        btnNuevoLibro.setText("Nuevo");
-        btnNuevoLibro.addActionListener(e -> btnNuevoLibroActionPerformed(e));
-
-        //---- btnEditarLibro ----
-        btnEditarLibro.setText("Editar");
-        btnEditarLibro.setEnabled(false);
-        btnEditarLibro.addActionListener(e -> btnEditarLibroActionPerformed(e));
-
-        //---- jLabel3 ----
-        jLabel3.setText("Id:");
-
-        //======== jPanel1 ========
-        {
-            jPanel1.setBackground(new Color(0xdcdcdc));
-            jPanel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
-            . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder
-            . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .
-            awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,jPanel1. getBorder () ) )
-            ; jPanel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
-            ) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
-            ;
-
-            //---- jLabel4 ----
-            jLabel4.setBackground(new Color(0xdcdcdc));
-            jLabel4.setFont(new Font("sansserif", Font.BOLD, 14));
-            jLabel4.setText("Administraci\u00f3n");
-
-            GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-            jPanel1.setLayout(jPanel1Layout);
-            jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup()
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                        .addGap(260, 260, 260))
-            );
-            jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))
-            );
-        }
-
-        //---- jButton1 ----
-        jButton1.setFont(new Font("sansserif", Font.BOLD, 13));
-        jButton1.setText("Usuarios");
-        jButton1.setMaximumSize(new Dimension(120, 23));
-        jButton1.setMinimumSize(new Dimension(120, 23));
-        jButton1.setPreferredSize(new Dimension(125, 23));
-        jButton1.addActionListener(e -> btnUsuariosActionPerformed(e));
-
-        //---- jButton2 ----
-        jButton2.setFont(new Font("sansserif", Font.BOLD, 13));
-        jButton2.setText("Categor\u00edas");
-        jButton2.setMaximumSize(new Dimension(120, 23));
-        jButton2.setMinimumSize(new Dimension(120, 23));
-        jButton2.setPreferredSize(new Dimension(125, 23));
-        jButton2.addActionListener(e -> btnCategoriasActionPerformed(e));
-
-        //======== menu1 ========
-        {
-            menu1.setText("text");
-
-            //---- button1 ----
-            button1.setText("text");
-            menu1.add(button1);
-
-            //---- button5 ----
-            button5.setText("text");
-            menu1.add(button5);
-
-            //---- button6 ----
-            button6.setText("text");
-            menu1.add(button6);
-
-            //---- button2 ----
-            button2.setText("text");
-            menu1.add(button2);
-
-            //---- button3 ----
-            button3.setText("text");
-            menu1.add(button3);
-
-            //---- button4 ----
-            button4.setText("text");
-            menu1.add(button4);
-        }
+        btnSalir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnSalirMouseClicked(e);
+            }
+        });
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(jPanel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(GroupLayout.Alignment.LEADING, contentPaneLayout.createSequentialGroup()
+                            .addGap(17, 17, 17)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(etiquetaTitulo)
-                                .addComponent(jLabel1))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(buscaIsbn, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buscaAutor))
-                                .addComponent(buscaTitulo)))
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addComponent(jLabel3)
+                                .addComponent(txtUbicacion)
+                                .addComponent(txtFecha))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buscaId, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscar))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 516, GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(btnNuevoLibro)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(buscaUbicacion, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                .addComponent(buscaFecha, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                             .addGap(18, 18, 18)
-                            .addComponent(btnEditarLibro)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                            .addComponent(btnSalir)
-                            .addGap(110, 110, 110)
-                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap())
-                .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(btnBuscar))
+                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                        .addComponent(scrollListaEventos, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(71, 71, 71)
+                            .addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(Desplegable, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                .addComponent(ScrollListaRituales, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))))
+                    .addContainerGap(22, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(buscaTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(etiquetaTitulo))
-                            .addGap(21, 21, 21)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(buscaAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(buscaIsbn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(0, 12, Short.MAX_VALUE)
+                            .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
                                     .addComponent(btnBuscar)
-                                    .addComponent(jLabel3))
-                                .addComponent(buscaId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(0, 12, Short.MAX_VALUE)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUbicacion)
+                                        .addComponent(buscaUbicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtFecha)
+                                        .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(9, 9, 9)))
+                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
                             .addGap(12, 12, 12)
-                            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnNuevoLibro)
-                                .addComponent(btnEditarLibro)
-                                .addComponent(btnSalir))
-                            .addContainerGap())
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(menu1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)))
+                    .addContainerGap())
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addComponent(Desplegable, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnSalir)
+                    .addGap(17, 17, 17))
         );
         pack();
         setLocationRelativeTo(getOwner());
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscaAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaAutorActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-                // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        buscarLibros();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnEditarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLibroActionPerformed
-        // TODO add your handling code here:
-        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
-        int idLibro;
-        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);
-    }//GEN-LAST:event_btnEditarLibroActionPerformed
-
-    private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
-        // TODO add your handling code here:
-        fa.nuevoLibro();
-    }//GEN-LAST:event_btnNuevoLibroActionPerformed
-
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        // TODO add your handling code here:
-        fa.usuarios();
-    }//GEN-LAST:event_btnUsuariosActionPerformed
-
-    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        // TODO add your handling code here:
-        fa.categorias();
-    }//GEN-LAST:event_btnCategoriasActionPerformed
-
-    private void buscaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaTituloActionPerformed
-
-   
-    /**
-    * @param args the command line arguments
-    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Laura Antelo González
-    private JTextField buscaTitulo;
-    private JLabel etiquetaTitulo;
-    private JTextField buscaIsbn;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JTextField buscaAutor;
-    private JScrollPane jScrollPane1;
-    private JTable tablaLibros;
+    private JMenu Desplegable;
+    private JButton PerfilBotonDesplegable;
+    private JButton ContactosBotonDesplegable;
+    private JButton AcólitosBotonDesplegable;
+    private JButton PropiedadesBotonDesplegable;
+    private JButton EventosBotonDesplegable;
+    private JButton RitualesBotonDesplegable;
+    private JScrollPane scrollListaEventos;
+    private JTable tablaEventos;
+    private JTextPane presentacion;
+    private JTextField buscaUbicacion;
+    private JTextField buscaFecha;
     private JButton btnBuscar;
+    private JLabel txtUbicacion;
+    private JLabel txtFecha;
+    private JScrollPane ScrollListaRituales;
+    private JTable TablaRituales;
+    private JScrollPane scrollPane2;
+    private JList ListaEstadísticas;
     private JButton btnSalir;
-    private JButton btnNuevoLibro;
-    private JButton btnEditarLibro;
-    private JLabel jLabel3;
-    private JTextField buscaId;
-    private JPanel jPanel1;
-    private JLabel jLabel4;
-    private JButton jButton1;
-    private JButton jButton2;
-    private JMenu menu1;
-    private JButton button1;
-    private JButton button5;
-    private JButton button6;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
     // End of variables declaration//GEN-END:variables
 
-    public void buscarLibros(){
-        ModeloTablaLibros m;
 
-        m=(ModeloTablaLibros) tablaLibros.getModel();
-        m.setFilas(fa.obtenerLibros((buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText()), buscaTitulo.getText(), buscaIsbn.getText(), buscaAutor.getText()));
-        if (m.getRowCount() > 0) {
-            tablaLibros.setRowSelectionInterval(0, 0);
-            btnEditarLibro.setEnabled(true);
-        }
-        else btnEditarLibro.setEnabled(false);
+    public void buscarEventos(){
+        ModeloTablaEventos m;
+
+        m=(ModeloTablaEventos) tablaEventos.getModel();
+        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        tablaEventos.setRowSelectionInterval(0, 0);
     }
+
 }

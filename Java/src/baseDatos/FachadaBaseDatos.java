@@ -5,14 +5,10 @@
 
 package baseDatos;
 
-import aplicacion.Acolito;
-import aplicacion.Contacto;
-import aplicacion.PropiedadesYCuentas.Propiedad;
-
+import aplicacion.*;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -23,10 +19,10 @@ public class FachadaBaseDatos {
     // Hola, esta es la branch de prueba
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
+    private DAOAcolitos daoAcolitos;
+    private DAOContactos daoContactos;
     private DAOEventos daoEventos;
     private DAOPropiedades daoPropiedades;
-    private DAOContactos daoContactos;
-    private DAOAcolitos daoAcolitos;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa) {
 
@@ -46,6 +42,7 @@ public class FachadaBaseDatos {
 
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
+            System.out.println("HE LLEGAO");
 
             this.conexion = java.sql.DriverManager.getConnection("jdbc:" + gestor + "://" +
                             configuracion.getProperty("servidor") + ":" +
@@ -53,48 +50,115 @@ public class FachadaBaseDatos {
                             configuracion.getProperty("baseDatos"),
                     usuario);
 
-            daoEventos = new DAOEventos(conexion, fa);
-            daoPropiedades = new DAOPropiedades(conexion, fa);
             daoAcolitos = new DAOAcolitos(conexion, fa);
             daoContactos = new DAOContactos(conexion, fa);
+            daoEventos = new DAOEventos(conexion, fa);
+            daoPropiedades = new DAOPropiedades(conexion, fa);
 
-        } catch (IOException | SQLException i) {
+
+        } catch (FileNotFoundException f) {
+            System.out.println(f.getMessage());
+            fa.muestraExcepcion(f.getMessage());
+        } catch (IOException i) {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
+        } catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+            fa.muestraExcepcion(e.getMessage());
+
         }
     }
-    public void insertarAcolito(Acolito usuario){
-        daoAcolitos.insertarAcolito(usuario);
+
+    /*
+
+    MÉTODOS DA BIBLIOTECA
+
+
+    public void anadirPrestamo (Usuario usuario, Evento evento){
+    daoLibros.anadirPrestamo(usuario, evento);
     }
 
-    public void borrarAcolito(Acolito usuario){
-        daoAcolitos.borrarAcolito(usuario);
+
+    public void devolver(Evento evento){
+        daoLibros.devolver(evento);
     }
 
-    public Acolito validarLogin(String idUsuario, String clave){
-        return daoAcolitos.validarLogin(idUsuario, clave);
+
+    public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor){
+        return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
     }
 
-    public java.util.List<Acolito> consultarAcolitos(){
-        return daoAcolitos.consultarAcolitos("","");
+    public Libro consultarLibro(Integer idLibro){
+        return daoLibros.consultarLibro(idLibro);
+    }
+    public java.util.List<Evento> consultarEjemplaresLibro(Integer idLibro){
+        return daoLibros.consultarEjemplaresLibro(idLibro);
+    }
+    
+    public Integer consultarMaxEjemplarLibro(Integer idLibro){
+        return daoLibros.consultarMaxEjemplarLibro(idLibro);
+    }
+                
+            
+    public java.util.List<String> obtenerRestoCategorias(Integer idLibro){
+        return daoLibros.obtenerRestoCategorias(idLibro);
+    }
+    public void insertarCategoria(Categoria categoria){
+        daoCategorias.insertarCategoria(categoria);
+    }
+    public void borrarCategoria(Categoria categoria){
+        daoCategorias.borrarCategoria(categoria);
+    }
+    
+    public Integer insertarLibro(Libro libro){
+       return daoLibros.insertarLibro(libro);
+    }
+    
+    public void insertarUsuario(Usuario usuario){
+        daoUsuarios.insertarUsuario(usuario);
+    }
+    
+    public void borrarLibro(Integer idLibro){
+        daoLibros.borrarLibro(idLibro);
+    }
+    
+    public void borrarUsuario(Usuario usuario){
+        daoUsuarios.borrarUsuario(usuario);
+    }
+    public void modificarLibro(Libro libro){
+         daoLibros.modificarLibro(libro);
+    }
+    public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
+       daoLibros.modificarCategoriasLibro(idLibro, categorias);
+    }
+    public void insertarEjemplarLibro(Integer idLibro, Evento evento){
+        evento.setNumEjemplar(daoLibros.consultarMaxEjemplarLibro(idLibro)+1);
+        daoLibros.insertarEjemplarLibro(idLibro, evento);
+    }
+    public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar){
+        daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
+    }
+    public void modificarEjemplarLibro(Integer idLibro, Evento evento){
+        daoLibros.modificarEjemplarLibro(idLibro, evento);
     }
 
-    public java.util.List<Acolito> consultarAcolitos(String alias, String Nombre){
-        return daoAcolitos.consultarAcolitos(alias, Nombre);
+    public Usuario validarUsuario(String idUsuario, String clave){
+        return daoUsuarios.validarUsuario(idUsuario, clave);
+    }
+   
+    public java.util.List<Categoria> consultarCategorias(){
+        return daoCategorias.consultarCategorias();
     }
 
-    public List<Contacto> consultarContacto(String pseudonimo, String nombre) {
-        return daoContactos.consultarContactos(pseudonimo,nombre);
+
+    /*
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+        return daoEventos.consultarEventos(ubicacion, fecha);
+    }
+    */
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
-    public List<Contacto> consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre) {
-        return daoContactos.consultarContactosDeAcolito(acolito, pseudonimo, nombre);
-    }
-    public List<Contacto> consultarContactosDeAcolito(String aliasAcolito, String pseudonimo, String nombre) {
-        return daoContactos.consultarContactosDeAcolito(aliasAcolito, pseudonimo, nombre);
-    }
 
-    public List<Propiedad> consultarPropiedades() {
-        return daoPropiedades.consultarPropiedades();
-    }
 }

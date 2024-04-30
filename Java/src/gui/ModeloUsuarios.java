@@ -4,19 +4,17 @@
  */
 
 package gui;
-import aplicacion.Acolito;
-import aplicacion.TipoAcolito;
-
+import aplicacion.Usuario;
 import javax.swing.table.*;
 /**
  *
  * @author basesdatos
  */
 public class ModeloUsuarios extends AbstractTableModel{
-    private java.util.List<Acolito> acolitos;
+    private java.util.List<Usuario> usuarios;
 
     public ModeloUsuarios(){
-        this.acolitos =new java.util.ArrayList<Acolito>();
+        this.usuarios=new java.util.ArrayList<Usuario>();
     }
 
     public int getColumnCount (){
@@ -24,7 +22,7 @@ public class ModeloUsuarios extends AbstractTableModel{
     }
 
     public int getRowCount(){
-        return acolitos.size();
+        return usuarios.size();
     }
 
     @Override
@@ -52,7 +50,7 @@ public class ModeloUsuarios extends AbstractTableModel{
             case 2: clase=java.lang.String.class; break;
             case 3: clase=java.lang.String.class; break;
             case 4: clase=java.lang.String.class; break;
-            case 5: clase= TipoAcolito.class; break;
+            case 5: clase=aplicacion.TipoUsuario.class; break;
         }
         return clase;
     }
@@ -66,23 +64,23 @@ public class ModeloUsuarios extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= acolitos.get(row).getAlias(); break;
-            case 1: resultado= acolitos.get(row).getContraseña(); break;
-            case 2: resultado= acolitos.get(row).getNombreCompleto();break;
-            case 4: resultado= acolitos.get(row).getEmail(); break;
-            case 3: resultado= acolitos.get(row).getDireccion(); break;
-            case 5: resultado= acolitos.get(row).getTipoAcolito(); break;
+            case 0: resultado= usuarios.get(row).getIdUsuario(); break;
+            case 1: resultado= usuarios.get(row).getClave(); break;
+            case 2: resultado=usuarios.get(row).getNombre();break;
+            case 4: resultado=usuarios.get(row).getEmail(); break;
+            case 3: resultado=usuarios.get(row).getDireccion(); break;
+            case 5: resultado=usuarios.get(row).getTipoUsuario(); break;
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Acolito> acolitos){
-        this.acolitos = acolitos;
+    public void setFilas(java.util.List<Usuario> usuarios){
+        this.usuarios=usuarios;
         fireTableDataChanged();
     }
 
-    public Acolito obtenerUsuario(int i){
-        return this.acolitos.get(i);
+    public Usuario obtenerUsuario(int i){
+        return this.usuarios.get(i);
     }
 
 }
