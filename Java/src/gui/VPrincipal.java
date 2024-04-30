@@ -199,25 +199,25 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void btnEditarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarLibroActionPerformed
         // TODO add your handling code here:
-        ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
+        /*ModeloTablaLibros mtl = (ModeloTablaLibros) tablaLibros.getModel();
         int idLibro;
         idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);
+        fa.visualizarLibro(idLibro);*/
     }//GEN-LAST:event_btnEditarLibroActionPerformed
 
     private void btnNuevoLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoLibroActionPerformed
         // TODO add your handling code here:
-        fa.nuevoLibro();
+        //fa.nuevoLibro();
     }//GEN-LAST:event_btnNuevoLibroActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         // TODO add your handling code here:
-        fa.usuarios();
+        //fa.usuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        fa.categorias();
+        //fa.categorias();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void buscaTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaTituloActionPerformed
@@ -249,7 +249,7 @@ public class VPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void buscarLibros(){
-        ModeloTablaLibros m;
+       /* ModeloTablaLibros m;
 
         m=(ModeloTablaLibros) tablaLibros.getModel();
         m.setFilas(fa.obtenerLibros((buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText()), buscaTitulo.getText(), buscaIsbn.getText(), buscaAutor.getText()));
@@ -257,6 +257,6 @@ public class VPrincipal extends javax.swing.JFrame {
             tablaLibros.setRowSelectionInterval(0, 0);
             btnEditarLibro.setEnabled(true);
         }
-        else btnEditarLibro.setEnabled(false);
+        else btnEditarLibro.setEnabled(false);*/
     }
 }

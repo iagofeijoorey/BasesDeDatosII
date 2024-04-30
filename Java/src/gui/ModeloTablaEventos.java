@@ -76,7 +76,7 @@ public class ModeloTablaEventos extends AbstractTableModel{
             case 0: eventos.get(row).setUbicacion((String) v); break;
             case 1: eventos.get(row).setFecha((String) v); break;
             case 2: eventos.get(row).setDescripcion((String) v);break;
-            case 3: eventos.get(row).setOrganizador((String) v);break;
+            //case 3: eventos.get(row).setOrganizador((Acolito) v);break; todo arreglar esto
         }
     }
 
