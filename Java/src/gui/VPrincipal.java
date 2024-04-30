@@ -76,7 +76,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -323,7 +323,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;
