@@ -2,27 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+
 package gui;
-import aplicacion.Usuario;
 import javax.swing.table.*;
+import aplicacion.PropiedadesYCuentas.Propiedad;
 /**
  *
  * @author basesdatos
-
-public class ModeloUsuarios extends AbstractTableModel{
-    private java.util.List<Usuario> usuarios;
+*/
+public class ModeloTablaPropiedades extends AbstractTableModel{
+    private java.util.List<Propiedad> propiedades;
 
     public ModeloTablaPropiedades(){
         this.propiedades =new java.util.ArrayList<Propiedad>();
     }
 
     public int getColumnCount (){
-        return 6;
+        return 3;
     }
 
     public int getRowCount(){
-        return usuarios.size();
+        return propiedades.size();
     }
 
     @Override
@@ -30,12 +30,9 @@ public class ModeloUsuarios extends AbstractTableModel{
         String nombre="";
 
         switch (col){
-            case 0: nombre= "IdUsuario"; break;
-            case 1: nombre= "Clave"; break;
-            case 2: nombre="Nombre"; break;
-            case 3: nombre="Dirección"; break;
-            case 4: nombre="Email"; break;
-            case 5: nombre="tipoUsuario";break;
+            case 0: nombre= "IdPropiedad"; break;
+            case 1: nombre= "Tipo"; break;
+            case 2: nombre="Subtipo"; break;
         }
         return nombre;
     }
@@ -45,12 +42,9 @@ public class ModeloUsuarios extends AbstractTableModel{
         Class clase=null;
 
         switch (col){
-            case 0: clase= java.lang.String.class; break;
+            case 0: clase= java.lang.Integer.class; break;
             case 1: clase= java.lang.String.class; break;
             case 2: clase=java.lang.String.class; break;
-            case 3: clase=java.lang.String.class; break;
-            case 4: clase=java.lang.String.class; break;
-            case 5: clase=aplicacion.TipoUsuario.class; break;
         }
         return clase;
     }
@@ -64,24 +58,20 @@ public class ModeloUsuarios extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= usuarios.get(row).getIdUsuario(); break;
-            case 1: resultado= usuarios.get(row).getClave(); break;
-            case 2: resultado=usuarios.get(row).getNombre();break;
-            case 4: resultado=usuarios.get(row).getEmail(); break;
-            case 3: resultado=usuarios.get(row).getDireccion(); break;
-            case 5: resultado=usuarios.get(row).getTipoUsuario(); break;
+            case 0: resultado= propiedades.get(row).getIdPropiedad(); break;
+            case 1: resultado= propiedades.get(row).getTipoGeneral(); break;
+            case 2: resultado= propiedades.get(row).getTipoString();break;
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Usuario> usuarios){
-        this.usuarios=usuarios;
+    public void setFilas(java.util.List<Propiedad> propiedades){
+        this.propiedades = propiedades;
         fireTableDataChanged();
     }
 
-    public Usuario obtenerUsuario(int i){
-        return this.usuarios.get(i);
+    public Propiedad obtenerPropiedad(int i){
+        return this.propiedades.get(i);
     }
 
 }
-*/
