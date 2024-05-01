@@ -387,6 +387,9 @@ public class DAOPropiedades extends AbstractDAO {
                         stmPropiedades = con.prepareStatement(consulta);
                         stmPropiedades.setInt(1, rsPropiedades.getInt("almacen"));
                         rsAlmacen = stmPropiedades.executeQuery();
+                        if (rsAlmacen.next()) {
+                            System.out.println("No hay almacen asociado al arma");
+                        }
                         rsAlmacen.next();
 
                         // Setea el tipo de inmobiliario del almacen
