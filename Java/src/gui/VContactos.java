@@ -33,7 +33,7 @@ public class VContactos extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
+        // Generated using JFormDesigner Evaluation license - Sara Castro
         btnActualizar = new JButton();
         jScrollPane1 = new JScrollPane();
         jTable1 = new JTable();
@@ -238,7 +238,7 @@ public class VContactos extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private JButton btnActualizar;
     private JScrollPane jScrollPane1;
     private JTable jTable1;

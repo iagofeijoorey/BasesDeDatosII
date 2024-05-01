@@ -26,6 +26,7 @@ import javax.swing.table.*;
 public class VPrincipal extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
+    aplicacion.Acolito acolito;
 
     public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
@@ -77,7 +78,7 @@ public class VPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private void initComponents() {
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -308,7 +309,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
     private JButton ContactosBotonDesplegable;

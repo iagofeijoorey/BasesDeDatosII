@@ -29,17 +29,33 @@ public class DAOAcolitos extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select alias, contraseña " +
-                    "from acólitos " +
-                    "where alias = ? and contraseña = ?");
+            String sql = "select a.*, " +
+                    "       case " +
+                    "           when c.alias is not null then 'Cabecilla' " +
+                    "           when g.alias is not null then 'Gestor' " +
+                    "           when gd.alias is not null then 'GuiaEspiritual' " +
+                    "           when jd.alias is not null then 'JefeDivision' " +
+                    "           when mb.alias is not null then 'Normal' " +
+                    "           end as tipo, " +
+                    "       mb.jefe as jefeDivision, " +
+                    "       jd.nombreDivision as nombreDivision " +
+                    "from acólitos a " +
+                    "         left join cabecillas c on a.alias = c.alias " +
+                    "         left join gestor_interno g on a.alias = g.alias " +
+                    "         left join guia_espiritual gd on a.alias = gd.alias " +
+                    "         left join jefes_de_division jd on a.alias = jd.alias " +
+                    "         left join miembros_basicos mb on a.alias = mb.alias " +
+                    "where a.alias = ? and contraseña = ?";
+
+            stmUsuario = con.prepareStatement(sql);
             stmUsuario.setString(1, alias);
             stmUsuario.setString(2, contraseña);
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
-                resultado = new Acolito(rsUsuario.getString("alias"), rsUsuario.getString("contraseña"),
-                        rsUsuario.getString("nombrecompleto"), rsUsuario.getString("direccion"), 0
-                        , TipoAcolito.valueOf(rsUsuario.getString("tipo_usuario")));
-
+                resultado = new Acolito(alias, contraseña, rsUsuario.getString("fechaingreso"), rsUsuario.getString("nombreCompleto"),
+                        rsUsuario.getDouble("dinero"), rsUsuario.getInt("telefono"), rsUsuario.getString("direccion"),
+                        rsUsuario.getInt("influencia"), TipoAcolito.stringToTipoAcolito("tipo"), rsUsuario.getBoolean("primeraEntrada"),
+                        rsUsuario.getString("jefeDivision"), rsUsuario.getString("nombreDivision"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -54,60 +70,10 @@ public class DAOAcolitos extends AbstractDAO {
         }
         return resultado;
     }
-    public ArrayList<Acolito> consultarAcolitos(String alias, String nombre){
-        java.util.ArrayList<Acolito> resultado = new java.util.ArrayList<Acolito>();
-        Acolito acolitoActual;
-        Connection con;
-        PreparedStatement stmUsuarios=null;
-        ResultSet rsUsuarios;
 
-        con=this.getConexion();
-
-        String consulta =   "SELECT u.nombrecompleto, u.alias,\n" +
-                "       CASE\n" +
-                "           WHEN public.cabecillas.alias IS NOT NULL THEN 'Cabecilla' " +
-                "           WHEN public.gestor_interno.alias IS NOT NULL THEN 'Gestor' " +
-                "           WHEN public.jefes_de_division.alias IS NOT NULL THEN 'JefeDivision' " +
-                "           WHEN public.miembros_basicos.alias IS NOT NULL THEN 'Normal' " +
-                "           WHEN public.guia_espiritual.alias IS NOT NULL THEN 'LiderEspiritual' " +
-                "           ELSE 'tipo_desconocido' " +
-                "           END AS tipo\n" +
-                "FROM acólitos u " +
-                "         LEFT JOIN public.cabecillas ON u.alias = cabecillas.alias " +
-                "         LEFT JOIN public.gestor_interno ON u.alias = gestor_interno.alias " +
-                "         LEFT JOIN public.jefes_de_division ON u.alias = jefes_de_division.alias " +
-                "         LEFT JOIN public.miembros_basicos ON u.alias = miembros_basicos.alias " +
-                "         LEFT JOIN public.guia_espiritual ON u.alias = guia_espiritual.alias " +
-                "WHERE u.alias LIKE ? OR u.nombrecompleto LIKE ?";
-
-
-        try  {
-            stmUsuarios=con.prepareStatement(consulta);
-            stmUsuarios.setString(1, "%"+alias+"%");
-            stmUsuarios.setString(2, "%"+nombre+"%");
-
-            rsUsuarios=stmUsuarios.executeQuery();
-            while (rsUsuarios.next())
-            {
-                acolitoActual = new Acolito(rsUsuarios.getString("alias"), rsUsuarios.getString("contraseña"),
-                        rsUsuarios.getString("nombrecompleto"), rsUsuarios.getString("direccion"),
-                        rsUsuarios.getInt("influencia"),  TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo")));
-
-
-                resultado.add(acolitoActual);
-            }
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-            try {
-                assert stmUsuarios != null;
-                stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-        return resultado;
-    }
     
     public void insertarAcolito(Acolito acolito){
+
         Connection con;
         PreparedStatement stmUsuario=null;
 
@@ -122,7 +88,7 @@ public class DAOAcolitos extends AbstractDAO {
         stmUsuario.setString(3,acolito.getFechaingreso());
         stmUsuario.setInt(4,acolito.getTelefono());
         stmUsuario.setInt(5,acolito.getInfluencia());
-        stmUsuario.setInt(6, acolito.getDinero());
+        stmUsuario.setDouble(6, acolito.getDinero());
         stmUsuario.setString(7, acolito.getContraseña());
         stmUsuario.setBoolean(8,true);
         stmUsuario.executeUpdate();
@@ -137,11 +103,11 @@ public class DAOAcolitos extends AbstractDAO {
         // AÑADIR A LA TABLA DE TIPO CORRESPONDIENTE
         try {
             switch (acolito.getTipo()){
-                case TipoAcolito.Cabecilla -> stmUsuario=con.prepareStatement("insert into cabecillas(alias) values (?)");
-                case TipoAcolito.JefeDivision -> stmUsuario=con.prepareStatement("insert into jefes_de_division(alias) values (?)");
-                case TipoAcolito.Normal -> stmUsuario=con.prepareStatement("insert into miembros_basicos(alias) values (?)");
-                case TipoAcolito.LiderEspiritual -> stmUsuario=con.prepareStatement("insert into guia_espiritual(alias) values (?)");
-                case TipoAcolito.Gestor -> stmUsuario=con.prepareStatement("insert into gestor_interno(alias) values (?)");
+                case Cabecilla -> stmUsuario=con.prepareStatement("insert into cabecillas(alias) values (?)");
+                case JefeDivision -> stmUsuario=con.prepareStatement("insert into jefes_de_division(alias) values (?)");
+                case Normal -> stmUsuario=con.prepareStatement("insert into miembros_basicos(alias) values (?)");
+                case GuiaEspiritual -> stmUsuario=con.prepareStatement("insert into guia_espiritual(alias) values (?)");
+                case Gestor -> stmUsuario=con.prepareStatement("insert into gestor_interno(alias) values (?)");
             }
             stmUsuario.setString(1,acolito.getAlias());
             stmUsuario.executeUpdate();
@@ -186,7 +152,7 @@ public class DAOAcolitos extends AbstractDAO {
             stmUsuario.setInt(2, acolito.getTelefono());
             stmUsuario.setString(3, acolito.getDireccion());
             stmUsuario.setInt(4, acolito.getInfluencia());
-            stmUsuario.setInt(5, acolito.getDinero());
+            stmUsuario.setDouble(5, acolito.getDinero());
             stmUsuario.setString(6, acolito.getContraseña());
             stmUsuario.setString(7, acolito.getAlias());
             stmUsuario.executeUpdate();
@@ -197,8 +163,90 @@ public class DAOAcolitos extends AbstractDAO {
             try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
-
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
        //HACER DAO
+    }
+
+    // VENTANA VACOLITOS
+    public ArrayList<String> obtenerAliasAcolitos() {
+
+        ArrayList<String> listaAlias = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmUsuario = null;
+        ResultSet rs = null;
+
+        try {
+            con = super.getConexion();
+            stmUsuario = con.prepareStatement("select alias from acólitos");
+            rs = stmUsuario.executeQuery();
+
+            while (rs.next()) {
+                String alias = rs.getString("alias");
+                listaAlias.add(alias);
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmUsuario != null;
+                stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return listaAlias;
+    }
+
+    public Acolito obtenerAcolito(String alias) {
+
+        Acolito acolito = null;
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = super.getConexion();
+
+            // Consulta para obtener información del acólito y su tipo, el nombre de la división si es un jefe de división y el jefe asociado
+            // si es un miembro básico (y si es que está asociado, que puede no estarlo)
+            String sql = "select a.*, " +
+                    "       case " +
+                    "           when c.alias is not null then 'Cabecilla' " +
+                    "           when g.alias is not null then 'Gestor' " +
+                    "           when gd.alias is not null then 'GuiaEspiritual' " +
+                    "           when jd.alias is not null then 'JefeDivision' " +
+                    "           when mb.alias is not null then 'Normal' " +
+                    "           end as tipo, " +
+                    "       mb.jefe as jefeDivision, " +
+                    "       jd.nombreDivision as nombreDivision " +
+                    "from acólitos a " +
+                    "         left join cabecillas c on a.alias = c.alias " +
+                    "         left join gestor_interno g on a.alias = g.alias " +
+                    "         left join guia_espiritual gd on a.alias = gd.alias " +
+                    "         left join jefes_de_division jd on a.alias = jd.alias " +
+                    "         left join miembros_basicos mb on a.alias = mb.alias " +
+                    "where a.alias like ?";
+
+            stm = con.prepareStatement(sql);
+            stm.setString(1, "%"+alias+"%");
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+                // Crear un objeto Acolito recuperando los datos de la base de datos
+                acolito = new Acolito(alias, rs.getString("contraseña"), rs.getString("fechaingreso"), rs.getString("nombreCompleto"),
+                        rs.getDouble("dinero"), rs.getInt("telefono"), rs.getString("direccion"),
+                        rs.getInt("influencia"), TipoAcolito.stringToTipoAcolito("tipo"), rs.getBoolean("primeraEntrada"),
+                        rs.getString("jefeDivision"), rs.getString("nombreDivision"));
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stm != null;
+                stm.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return acolito;
     }
 }

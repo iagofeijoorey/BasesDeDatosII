@@ -6,6 +6,9 @@
 package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author basesdatos
@@ -23,6 +26,7 @@ public class GestionAcolitos {
     
     
   public Boolean comprobarAutentificacion(String idUsuario, String clave, FachadaAplicacion faABD){
+
       Acolito u;
 
       u=fbd.validarLogin(idUsuario, clave);
@@ -51,4 +55,14 @@ public class GestionAcolitos {
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         fbd.actualizarAcolito(alias, nombre, ciudad, pais);
     }
+
+    // VENTANA VACOLITOS
+    public ArrayList<String> obtenerAliasAcolitos() {
+        return fbd.obtenerAliasAcolitos();
+    }
+
+    public Acolito obtenerAcolito(String alias) {
+        return fbd.obtenerAcolito(alias);
+    }
+
 }

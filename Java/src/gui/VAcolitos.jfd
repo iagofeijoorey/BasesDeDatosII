@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {space :p:18:p, par l {seq t {par l {seq {par l {seq {par l {comp txtInfluencia:::::x, comp txtAlias:::::x}, space u:::p, par l {comp txtTelefono::::354:x, comp txtNombre::::354:x}}, seq l {comp scrollDescripcion:::p:230:p, space s:::p, comp scrollPane3:::p:205:p}, seq l {par t:::p {comp txtNombreDivision::::206:x, comp txtDireccion::::206:x}, space s:::p, par l:::p {comp txtAltaDivision::::234:x, comp txtJefe::::234:x}}}, space :p:25:p}, seq l {space :p:127:p, comp imagenAcolito:::p:122:p, space ::234:x}}, par l {seq {comp scrollAcolitos:::p:216:p, space :p:23:p}, seq t {comp labelAcolitos:::p::p, space :p:63:p}}}, seq {par l {comp btnVolver::l:p::p, seq l {comp bntEliminar:::p:163:p, space :p:29:p, comp btnGuardar:::p::p, space s:::p, comp btnGuardar2:::p:145:p, space s:::p, comp btnAnadir:::p:169:p}}, space ::41:x}}}}</string>
+        <string>par l {seq {space :p:18:p, par l {seq {par t {seq {space :0:530:x, comp btnAnadir:::p:169:p}, seq {par l {seq {par l {comp txtInfluencia::::94:x, comp txtAlias:::::x}, space u:::p, par l {comp txtNombre:::::x, seq {comp txtTelefono:::p:158:p, space :::p, comp txtContraseña:::p:188:p}}}, seq {par l {seq l {par t:::p {comp txtNombreDivision::::206:x, comp txtDireccion::::206:x}, space s:::p, par l:::p {comp txtAltaDivision::::234:x, comp txtJefe::::234:x}}, par t:l::p {seq {comp bntEliminar:::p:163:p, space :::x, comp btnGuardar:::p::p}, seq {comp scrollDescripcion:::p:230:p, space s:::p, comp scrollEventos:::p:205:p}}}, space :0:0:x}, seq t {space ::140:x, comp imagenAcolito:::p:122:p, space :p:51:p, par l {comp btnBuscar:::p:145:p, comp txtBuscarPorAlias:::::x}}}, space :p:25:p, comp scrollAcolitos:::p:216:p}}, space :p:16:p}, seq {comp btnVolver:::p::p, space ::395:x, comp labelAcolitos:::p::p, space :p:58:p}}}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {par l {seq l {space :p:14:p, comp btnVolver:::p:22:p, space :p:27:p, comp imagenAcolito:::p:79:p, space s:::p, par b {comp txtAlias::b:p:36:p, comp txtNombre::b:p::p}, space u:::p, par b {comp txtInfluencia::b:p::p, comp txtTelefono::b:p::p}, space :::p, par b {comp txtNombreDivision::b:p::p, comp txtJefe::b:p::p}, space :::p, par b {comp txtDireccion::b:p::p, comp txtAltaDivision::b:p::p}, space :::p, par l {comp scrollDescripcion:::p:160:p, comp scrollPane3:::p:164:p}, space ::28:x}, seq l {space ::62:x, comp labelAcolitos:::p::p, space :::p, comp scrollAcolitos:::p:404:p, space s:::p}}, par b {comp bntEliminar::b:::x, comp btnGuardar::b:p:22:p, comp btnGuardar2::b:p:22:p, comp btnAnadir::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :p:18:p, comp labelAcolitos:::p::p, space s:::p, comp scrollAcolitos:::::x, space :::p, comp btnAnadir:::p:36:p, space :p:12:p}, seq l {space :p:14:p, comp btnVolver:::p::p, space :p:40:p, par t {seq {comp txtBuscarPorAlias:::p::p, space :::p, comp btnBuscar:::p:22:p}, comp imagenAcolito:::p:79:p}, space s:::p, par b {comp txtNombre::b:p::p, comp txtAlias::b::0:x}, space u:::p, par b {comp txtInfluencia::b:p::p, comp txtTelefono::b:p::p, comp txtContraseña::b:p::p}, space :::p, par b {comp txtNombreDivision::b:p::p, comp txtJefe::b:p::p}, space :::p, par b {comp txtDireccion::b:p::p, comp txtAltaDivision::b:p::p}, space :::p, par l {comp scrollDescripcion:::p:160:p, comp scrollEventos:::p:164:p}, space :::p, par l {seq {comp btnGuardar:::p:22:p, space :::x}, seq t {comp bntEliminar:::::x, space :p:14:p}}}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -39,6 +39,10 @@
          <string>text</string>
          <string>Alias...</string>
         </void>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
         <void property="name">
          <string>txtAlias</string>
         </void>
@@ -47,10 +51,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
         <void method="setProperty">
          <string>text</string>
          <string>Influencia...</string>
@@ -64,10 +64,6 @@
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
-        <void method="setProperty">
          <string>text</string>
          <string>Nombre completo...</string>
         </void>
@@ -79,10 +75,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
         <void method="setProperty">
          <string>text</string>
          <string>Teléfono...</string>
@@ -96,10 +88,6 @@
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
-        <void method="setProperty">
          <string>text</string>
          <string>Nombre división...</string>
         </void>
@@ -111,10 +99,6 @@
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
-        <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
         <void method="setProperty">
          <string>text</string>
          <string>Jefe a cargo...</string>
@@ -140,10 +124,6 @@
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
-         <string>editable</string>
-         <boolean>false</boolean>
-        </void>
-        <void method="setProperty">
          <string>text</string>
          <string>Dirección...</string>
         </void>
@@ -158,6 +138,10 @@
         <void method="setProperty">
          <string>text</string>
          <string>Alta división...</string>
+        </void>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
         </void>
         <void property="name">
          <string>txtAltaDivision</string>
@@ -225,6 +209,14 @@
         <void property="name">
          <string>btnGuardar</string>
         </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnGuardar</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
        </object>
       </void>
       <void method="add">
@@ -234,7 +226,7 @@
          <class>javax.swing.JScrollPane</class>
         </object>
         <void property="name">
-         <string>scrollPane3</string>
+         <string>scrollEventos</string>
         </void>
         <void method="add">
          <object class="com.jformdesigner.model.FormComponent">
@@ -265,6 +257,14 @@
         <void property="name">
          <string>btnAnadir</string>
         </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnAnadir</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
        </object>
       </void>
       <void method="add">
@@ -285,6 +285,14 @@
         </void>
         <void property="name">
          <string>bntEliminar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>bntEliminar</string>
+          <boolean>true</boolean>
+         </object>
         </void>
        </object>
       </void>
@@ -328,14 +336,52 @@
        </object>
       </void>
       <void method="add">
-       <object class="com.jformdesigner.model.FormComponent">
+       <object class="com.jformdesigner.model.FormComponent" id="FormComponent0">
         <string>javax.swing.JButton</string>
         <void method="setProperty">
          <string>text</string>
-         <string>Guardar edición</string>
+         <string>BUSCAR</string>
         </void>
         <void property="name">
-         <string>btnGuardar2</string>
+         <string>btnBuscar</string>
+        </void>
+        <void method="auxiliary">
+         <void method="setProperty">
+          <string>JavaCodeGenerator.customCreate</string>
+          <boolean>true</boolean>
+         </void>
+         <void method="setProperty">
+          <string>JavaCodeGenerator.customCreateCode</string>
+          <string>miJTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+    public void focusGained(java.awt.event.FocusEvent evt) {
+        txtbuscarPorAlias.setText(&quot;&quot;);
+    }
+});</string>
+         </void>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Buscar por alias...</string>
+        </void>
+        <void property="name">
+         <string>txtBuscarPorAlias</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Contraseña...</string>
+        </void>
+        <void property="name">
+         <string>txtContraseña</string>
         </void>
        </object>
       </void>
@@ -348,7 +394,7 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>20</int>
+        <int>25</int>
         <int>5</int>
        </object>
       </void>
@@ -356,7 +402,7 @@
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>735</int>
-        <int>575</int>
+        <int>590</int>
        </object>
       </void>
      </object>

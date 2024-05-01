@@ -16,16 +16,17 @@ public enum TipoAcolito {
     Cabecilla,
     JefeDivision,
     Gestor,
-    LiderEspiritual,
+    GuiaEspiritual,
     Normal;
 
 
     public static TipoAcolito stringToTipoAcolito(String tu){
-        switch (tu){
-            case ("Cabecilla"):
-                return Cabecilla;
-            default:
-                return Normal;
-        }
+        return switch (tu) {
+            case ("Cabecilla") -> Cabecilla;
+            case ("JefeDivision") -> JefeDivision;
+            case ("Gestor") -> Gestor;
+            case ("GuiaEspiritual") -> GuiaEspiritual;
+            default -> Normal;
+        };
     }
 }

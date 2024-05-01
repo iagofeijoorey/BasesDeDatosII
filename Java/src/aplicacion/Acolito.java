@@ -16,23 +16,30 @@ public class Acolito {
     private String contraseña;
     private String fechaingreso;
     private String nombreCompleto;
-    private Integer dinero;
+    private double dinero;
     private Integer telefono;
     private String direccion;
-    private String email;
     private int influencia;
     private TipoAcolito tipo;
     private boolean primeraEntrada;
+    private String nombreDivision; // Atributo por si el acólito es un jefe de división/gestor/guía
+    private String jefeDivision; // Atributo por si el acólito es un miembro base y está asociado a una división
 
-   public Acolito(String alias, String contraseña, String nombreCompleto, String direccion, String email, int influencia, TipoAcolito tipo){
-    this.alias = alias;
-    this.contraseña = contraseña;
-    this.nombreCompleto = nombreCompleto;
-    this.direccion = direccion;
-    this.email = email;
-    this.influencia = influencia;
-    this.tipo=tipo;
-   }
+    /* Constructor para cuando queremos extraer toda la info de un acólito */
+    public Acolito(String alias, String contraseña, String fechaingreso, String nombreCompleto, double dinero, Integer telefono, String direccion, int influencia, TipoAcolito tipo, boolean primeraEntrada, String jefeDivision, String nombreDivision) {
+        this.alias = alias;
+        this.contraseña = contraseña;
+        this.fechaingreso = fechaingreso;
+        this.nombreCompleto = nombreCompleto;
+        this.dinero = dinero;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.influencia = influencia;
+        this.tipo = tipo;
+        this.primeraEntrada = primeraEntrada;
+        this.nombreDivision = nombreDivision;
+        this.jefeDivision = jefeDivision;
+    }
 
     public String getAlias() {
         return alias;
@@ -53,13 +60,13 @@ public class Acolito {
     public int getInfluencia() {
         return influencia;
     }
-    public String getEmail() { return email; }
+
 
     public TipoAcolito getTipo() {
         return tipo;
     }
 
-    public Integer getDinero() {
+    public double getDinero() {
         return dinero;
     }
 
@@ -69,6 +76,14 @@ public class Acolito {
 
     public String getFechaingreso() {
         return fechaingreso;
+    }
+
+    public String getNombreDivision() {
+        return nombreDivision;
+    }
+
+    public String getJefeDivision() {
+        return jefeDivision;
     }
 
     //Setters
@@ -89,10 +104,6 @@ public class Acolito {
         this.direccion = direccion;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setInfluencia(int influencia) {
         this.influencia = influencia;
     }
@@ -105,7 +116,7 @@ public class Acolito {
         this.primeraEntrada = primeraEntrada;
     }
 
-    public void setDinero(Integer dinero) {
+    public void setDinero(double dinero) {
         this.dinero = dinero;
     }
 
@@ -117,6 +128,13 @@ public class Acolito {
        this.fechaingreso = fechaingreso;
     }
 
+    public void setNombreDivision(String nombreDivision) {
+        this.nombreDivision = nombreDivision;
+    }
+
+    public void setJefeDivision(String jefeDivision) {
+        this.jefeDivision = jefeDivision;
+    }
 
     //OTRAS FUNCIONES
 
