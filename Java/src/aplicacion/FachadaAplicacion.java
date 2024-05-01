@@ -79,9 +79,9 @@ public java.util.List<Acolito> consultarAcolitos(){
     }
 */
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vp){
-        fgui.ventanaPerfil(vp);
-    }
+//    public void ventanaPerfil(VPrincipal vp){
+//        fgui.ventanaPerfil(vp);
+//    }
 
     public void ventanaContactos(){
         //fgui.ventanaContactos();

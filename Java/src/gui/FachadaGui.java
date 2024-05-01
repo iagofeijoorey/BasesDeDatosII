@@ -35,12 +35,6 @@ public class FachadaGui {
     }
 
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vP){
-        VPerfil vp;
-
-//        vp = new VPerfil(vP, fa);
-//        vp.setVisible(true);
-    }
 
     /*
     public void ventanaContactos(VPrincipal vP){
