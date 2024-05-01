@@ -1,15 +1,15 @@
 package aplicacion;
 
-public class Recompensa {
+import java.util.ArrayList;
+
+public abstract class Recompensa {
     private int idRecompensa;
-    private int cantidad;
     private int idObjetivo;
     private String fecha;
     private String ubicacion;
 
-    public Recompensa(int idRecompensa, int cantidad, int idObjetivo, String fecha, String ubicacion) {
+    public Recompensa(int idRecompensa, int idObjetivo, String fecha, String ubicacion) {
         this.idRecompensa = idRecompensa;
-        this.cantidad = cantidad;
         this.idObjetivo = idObjetivo;
         this.fecha = fecha;
         this.ubicacion = ubicacion;
@@ -19,9 +19,6 @@ public class Recompensa {
         return idRecompensa;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
 
     public int getIdObjetivo() {
         return idObjetivo;
@@ -39,9 +36,6 @@ public class Recompensa {
         this.idRecompensa = idRecompensa;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 
     public void setIdObjetivo(int idObjetivo) {
         this.idObjetivo = idObjetivo;
@@ -54,6 +48,8 @@ public class Recompensa {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
+
+    public abstract void realizarRecompensa(ArrayList<Acolito> acolitos);
 
 
 

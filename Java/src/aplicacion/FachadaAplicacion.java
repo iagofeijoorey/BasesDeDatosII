@@ -17,6 +17,9 @@ public class FachadaAplicacion {
     private baseDatos.FachadaBaseDatos fbd;
     private GestionEventos ge;
     private GestionPropiedades gp;
+    private GestionContactos gc;
+    private GestionAcolitos ga;
+    private Acolito currentUser;
 
     public static void main(String args[]) {
         FachadaAplicacion fa;
@@ -30,6 +33,8 @@ public class FachadaAplicacion {
         fbd= new baseDatos.FachadaBaseDatos(this);
         ge = new GestionEventos(fgui, fbd);
         gp = new GestionPropiedades(fgui, fbd);
+        gc = new GestionContactos(fgui, fbd);
+        ga = new GestionAcolitos(fgui, fbd);
     }
  
     public void iniciaInterfazUsuario(){
@@ -79,13 +84,33 @@ public java.util.List<Acolito> consultarAcolitos(){
    // }
 
     //Abrir ventanas
+    public void ventanaPerfil(VPrincipal vp){
+        fgui.ventanaPerfil(vp);
+    }
+
+    public void ventanaContactos(){
+        //fgui.ventanaContactos();
+    }
+
+    public void ventanaAcolitos(){
+        //fgui.ventanaAcolitos();
+    }
 
     public void ventanaPropiedades(){
-        fgui.ventanaPropiedades();
+        //fgui.ventanaPropiedades();
     }
 
     public void ventanaEventos(){
         //fgui.ventanaEventos();
+    }
+
+    public void ventanaRituales(){
+        //fgui.ventanaRituales();
+    }
+
+    //Métodos de VPerfil
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        //ga.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 }
 
