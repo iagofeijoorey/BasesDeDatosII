@@ -11,7 +11,6 @@ public class Inmobiliario extends Propiedad{
      * Constructor para propiedades inmobiliarias de tipo almacen, indicando la capacidad
      * @param idPropiedad
      * @param ubicacion
-     * @param tipo
      * @param capacidad
      * @param valorActual
      * @param gestor

@@ -44,15 +44,13 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void entrarPropiedades(MouseEvent e) {
         //fa.ventanaPropiedades();
-        System.exit(0);
+        //System.exit(0);
         System.out.println("HE CLICKADO");
     }
 
     private void entrarEventos(MouseEvent e) {
         // TODO add your code here
     }
-
-
 
 
     private void btnSalirMouseClicked(MouseEvent e) {
