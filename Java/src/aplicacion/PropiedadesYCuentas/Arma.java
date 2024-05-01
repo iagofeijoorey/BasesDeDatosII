@@ -47,4 +47,8 @@ public class Arma extends Propiedad{
     public void setAlmacen(Inmobiliario almacen) {
         this.almacen = almacen;
     }
+
+
+
+
 }

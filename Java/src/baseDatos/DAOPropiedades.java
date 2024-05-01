@@ -90,8 +90,9 @@ public class DAOPropiedades extends AbstractDAO {
         }
     }
 
-
-    public List<Propiedad> consultarPropiedades() {
+// No hace falta porque el de abajo ya busca todas si no se pone nada en el tipo
+/*    public List<Propiedad> consultarPropiedades() {
+        String consulta;
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
         Connection con;
@@ -255,7 +256,7 @@ public class DAOPropiedades extends AbstractDAO {
             }
         }
         return resultado;
-    }
+    }*/
 
 
     /**
@@ -313,11 +314,15 @@ public class DAOPropiedades extends AbstractDAO {
                 stmPropiedades = con.prepareStatement(consulta2);
                 stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
                 rsGestor = stmPropiedades.executeQuery();
-                rsGestor.next();
+
+                if (!rsGestor.next()) {
+                    System.out.println("No se ha encontrado el gestor de la propiedad");
+                    continue;
+                }
 
                 // Crea al gestor relacionado
                 gestorAux = new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
+                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"),
                         rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario")));
 
                 switch (rsPropiedades.getString("tipo")) {
@@ -440,5 +445,26 @@ public class DAOPropiedades extends AbstractDAO {
         return resultado.stream()
                 .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
                 .collect(Collectors.toList());
+    }
+
+    public void borrarPropiedad(String idPropiedad) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("delete from propiedades where idpropiedad = ?");
+            stmUsuario.setString(1, idPropiedad);
+            stmUsuario.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
 }

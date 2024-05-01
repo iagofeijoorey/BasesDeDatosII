@@ -20,11 +20,7 @@ public class GestionEventos {
 
 
 
-    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha) {
-        return fbd.consultarEventos(ubicacion, fecha);
-    }
-
-    public void borrarEvento(Evento evento){
+    /*public void borrarEvento(Evento evento){
         fbd.borrarEvento(evento);
     }
 
@@ -36,6 +32,6 @@ public class GestionEventos {
     //Código VPrincipal
     public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
         return fbd.consultarEventos(ubicacion, fecha);
-    }
+    }*/
 
 }

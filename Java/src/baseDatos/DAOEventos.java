@@ -25,7 +25,7 @@ public class DAOEventos extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-
+/*
     public void insertarEvento(Evento evento) {
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -246,7 +246,7 @@ public class DAOEventos extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-    }
+    }*/
 
 }
 

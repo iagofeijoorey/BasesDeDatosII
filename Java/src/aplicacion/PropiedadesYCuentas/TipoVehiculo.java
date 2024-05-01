@@ -6,6 +6,8 @@ package aplicacion.PropiedadesYCuentas;
  */
 
 
+import java.util.ArrayList;
+
 /**
  *
  * @author basesdatos
@@ -26,5 +28,13 @@ public enum TipoVehiculo {
             default:
                 return Normal;
         }
+    }
+    public static ArrayList<String> valuesString(){
+        ArrayList<String> res = new ArrayList<>();
+
+        for (TipoVehiculo ta: TipoVehiculo.values()){
+            res.add(ta.toString());
+        }
+        return res;
     }
 }

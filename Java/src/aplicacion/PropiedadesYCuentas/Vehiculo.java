@@ -56,4 +56,5 @@ public class Vehiculo extends Propiedad{
     public void setAlmacen(Inmobiliario almacen) {
         this.almacen = almacen;
     }
+
 }

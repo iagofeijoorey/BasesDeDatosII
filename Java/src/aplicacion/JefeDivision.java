@@ -9,7 +9,7 @@ public class JefeDivision extends Acolito {
     private String nombreDivision;
 
    public JefeDivision(String idUsuario, String clave, String nombre, String direccion, String email, int influencia, TipoAcolito tipo, String nombreDivision){
-       super(idUsuario, clave, nombre, direccion, email, influencia, tipo);
+       super(idUsuario, clave, nombre, direccion, influencia, tipo);
        this.nombreDivision = nombreDivision;
    }
 

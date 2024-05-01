@@ -11,15 +11,14 @@ public class Inmobiliario extends Propiedad{
      * Constructor para propiedades inmobiliarias de tipo almacen, indicando la capacidad
      * @param idPropiedad
      * @param ubicacion
-     * @param tipo
      * @param capacidad
      * @param valorActual
      * @param gestor
      */
-    public Inmobiliario(Integer idPropiedad, String ubicacion, int capacidad, int valorActual, Acolito gestor){
+    public Inmobiliario(Integer idPropiedad, String ubicacion, Integer capacidad, TipoInmobiliario tipo, int valorActual, Acolito gestor){
         super(idPropiedad, valorActual , gestor);
         this.ubicacion = ubicacion;
-        this.tipo = TipoInmobiliario.Almacen;
+        this.tipo = tipo;
         this.capacidad = capacidad;
     }
 
