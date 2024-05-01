@@ -97,7 +97,7 @@ public class VDetalles_NewProp extends JDialog {
     }
 
     private void entrarContenido(MouseEvent e) {
-        fa.ventanaContenido();
+        fa.ventanaContenido((Inmobiliario) propiedad);
     }
 
     private void BoxTipoItemStateChanged(ItemEvent e) {
@@ -135,7 +135,6 @@ public class VDetalles_NewProp extends JDialog {
         TextAlmacen = new JLabel();
         TextBalas = new JLabel();
         Balas = new JTextField();
-        TextNameType = new JLabel();
         AmountCapacity = new JTextField();
         TextEvento = new JLabel();
         TextValor = new JLabel();
@@ -148,12 +147,15 @@ public class VDetalles_NewProp extends JDialog {
         BoxGestor = new JComboBox();
         TextAmountCapacity = new JLabel();
         BtnActualizar = new JButton();
-        BoxString = new JComboBox();
         BoxAlmacen = new JComboBox();
         TextUbicacion = new JLabel();
         Ubicacion = new JTextField();
         scrollPane1 = new JScrollPane();
         tablaEventos = new JTable();
+        TextNameType = new JLabel();
+        BoxString = new JComboBox();
+        TipoCommodity = new JTextField();
+        TextTipoCommodity = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -161,12 +163,12 @@ public class VDetalles_NewProp extends JDialog {
         //======== panel1 ========
         {
             panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
-            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
             , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-            , new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 )
+            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 )
             , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
             new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
             ; }} );
 
             //---- BtnContent ----
@@ -183,9 +185,6 @@ public class VDetalles_NewProp extends JDialog {
 
             //---- TextBalas ----
             TextBalas.setText("Numero de balas:");
-
-            //---- TextNameType ----
-            TextNameType.setText("String");
 
             //---- TextEvento ----
             TextEvento.setText("Evento:");
@@ -225,29 +224,27 @@ public class VDetalles_NewProp extends JDialog {
                 scrollPane1.setViewportView(tablaEventos);
             }
 
+            //---- TextNameType ----
+            TextNameType.setText("String");
+
+            //---- TextTipoCommodity ----
+            TextTipoCommodity.setText("Tipo Commodity");
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(TextUbicacion)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(324, Short.MAX_VALUE))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextNameType)
-                                        .addGap(9, 9, 9)
-                                        .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(TextAmountCapacity)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                         .addComponent(TextId)
                                         .addGap(56, 56, 56)
                                         .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
@@ -255,7 +252,7 @@ public class VDetalles_NewProp extends JDialog {
                                         .addComponent(TextTipo)
                                         .addGap(45, 45, 45)
                                         .addComponent(BoxTipo, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addGroup(panel1Layout.createSequentialGroup()
                                         .addComponent(TextValor)
                                         .addGap(35, 35, 35)
                                         .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
@@ -263,29 +260,45 @@ public class VDetalles_NewProp extends JDialog {
                                         .addComponent(TextGestor)
                                         .addGap(30, 30, 30)
                                         .addComponent(BoxGestor, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addGroup(panel1Layout.createSequentialGroup()
                                         .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
-                                .addGap(0, 34, Short.MAX_VALUE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup()
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextAlmacen)
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(TextAlmacen)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(TextBalas)
+                                                .addGap(28, 28, 28)
+                                                .addComponent(Balas, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                                .addComponent(BtnActualizar)
+                                                .addGap(72, 72, 72))
+                                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                                .addComponent(BtnContent)
+                                                .addGap(61, 61, 61))))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                        .addComponent(TextAmountCapacity)
                                         .addGap(18, 18, 18)
-                                        .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextBalas)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(Balas, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                        .addComponent(BtnContent)
-                                        .addGap(95, 95, 95))
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                        .addComponent(BtnActualizar)
-                                        .addGap(106, 106, 106))))))
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addGap(0, 196, Short.MAX_VALUE)
+                                                .addComponent(TextTipoCommodity))
+                                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                                .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                                                .addComponent(TextNameType)))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TipoCommodity, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(42, 42, 42)))
+                                .addGap(0, 6, Short.MAX_VALUE))))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -308,23 +321,30 @@ public class VDetalles_NewProp extends JDialog {
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(TextValor)
                                     .addComponent(TextGestor))))
-                        .addGap(25, 25, 25)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(TextEvento)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                .addGap(25, 25, 25)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextEvento)
+                                .addGap(38, 38, 38)))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TextNameType)
-                                    .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextNameType))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextAmountCapacity))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)))
+                                    .addComponent(TextTipoCommodity)
+                                    .addComponent(TipoCommodity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(3, 3, 3))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TextAmountCapacity)
+                                    .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)))
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup()
@@ -377,7 +397,6 @@ public class VDetalles_NewProp extends JDialog {
     private JLabel TextAlmacen;
     private JLabel TextBalas;
     private JTextField Balas;
-    private JLabel TextNameType;
     private JTextField AmountCapacity;
     private JLabel TextEvento;
     private JLabel TextValor;
@@ -390,11 +409,14 @@ public class VDetalles_NewProp extends JDialog {
     private JComboBox BoxGestor;
     private JLabel TextAmountCapacity;
     private JButton BtnActualizar;
-    private JComboBox BoxString;
     private JComboBox BoxAlmacen;
     private JLabel TextUbicacion;
     private JTextField Ubicacion;
     private JScrollPane scrollPane1;
     private JTable tablaEventos;
+    private JLabel TextNameType;
+    private JComboBox BoxString;
+    private JTextField TipoCommodity;
+    private JLabel TextTipoCommodity;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

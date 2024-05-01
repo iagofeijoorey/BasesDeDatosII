@@ -18,12 +18,11 @@ public class Vehiculo extends Propiedad{
 
     /**
      * @param idPropiedad
-     * @param ubicacion
      * @param tipo
      * @param valorActual
      */
-    public Vehiculo(Integer idPropiedad, String ubicacion, TipoVehiculo tipo, int valorActual, Integer capacidad,Inmobiliario almacen){
-        super(idPropiedad, valorActual , almacen.getGestor());
+    public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad, Inmobiliario almacen){
+        super(idPropiedad, valorActual, almacen.getGestor());
         this.tipo = tipo;
         this.almacen = almacen;
         this.capacidad = capacidad;

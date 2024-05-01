@@ -140,7 +140,7 @@ public class DAOPropiedades extends AbstractDAO {
                 switch (rsPropiedades.getString("tipo")) {
                     case "Inmobiliario":
 
-                        if (rsPropiedades.getString("tipo_inmobiliario").equals("Almacen")  || rsPropiedades.getString("tipo_inmobiliario").equals("almacen")) {
+                        if (rsPropiedades.getString("tipoinmobiliario").equals("Almacen")  || rsPropiedades.getString("tipoinmobiliario").equals("almacen")) {
 
                             // Busca la capacidad del almacen
                             consulta = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
@@ -153,13 +153,13 @@ public class DAOPropiedades extends AbstractDAO {
 
                             // Crea el almacen
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
-                                    rsTipoConcreto.getInt("capacidad"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipo_inmobiliario")), rsPropiedades.getInt("valor_actual"),
+                                    rsTipoConcreto.getInt("capacidad"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
                                     gestorAux);
                         }
 
                         else {
                             // Crea el inmobiliario
-                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipo_inmobiliario")), rsPropiedades.getInt("valor_actual"),
+                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
                                     gestorAux);
 
                         }
@@ -256,7 +256,7 @@ public class DAOPropiedades extends AbstractDAO {
             }
         }
         return resultado;
-    }*/
+    }
 
 
     /**
@@ -314,21 +314,17 @@ public class DAOPropiedades extends AbstractDAO {
                 stmPropiedades = con.prepareStatement(consulta2);
                 stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
                 rsGestor = stmPropiedades.executeQuery();
-
-                if (!rsGestor.next()) {
-                    System.out.println("No se ha encontrado el gestor de la propiedad");
-                    continue;
-                }
+                rsGestor.next();
 
                 // Crea al gestor relacionado
                 gestorAux = new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
                         rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"),
-                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario")));
+                        rsGestor.getInt("influencia"), TipoAcolito.Gestor);
 
                 switch (rsPropiedades.getString("tipo")) {
                     case "Inmobiliario":
 
-                        if (rsPropiedades.getString("tipo_inmobiliario").equals("Almacen")  || rsPropiedades.getString("tipo_inmobiliario").equals("almacen")) {
+                        if (rsPropiedades.getString("tipoinmobiliario").equals("Almacen")  || rsPropiedades.getString("tipoinmobiliario").equals("almacen")) {
 
                             // Busca la capacidad del almacen
                             consulta = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
@@ -341,13 +337,13 @@ public class DAOPropiedades extends AbstractDAO {
 
                             // Crea el almacen
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
-                                    rsTipoConcreto.getInt("capacidad"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipo_inmobiliario")), rsPropiedades.getInt("valor_actual"),
+                                    rsTipoConcreto.getInt("capacidad"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
                                     gestorAux);
                         }
 
                         else {
                             // Crea el inmobiliario
-                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipo_inmobiliario")), rsPropiedades.getInt("valor_actual"),
+                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
                                     gestorAux);
 
                         }
@@ -379,7 +375,7 @@ public class DAOPropiedades extends AbstractDAO {
                                 gestorAux);
 
                         // Crea al vehículo
-                        propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"),
+                        propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"),
                                 TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipo_vehiculo")), rsPropiedades.getInt("valor_actual"),
                                 rsTipoConcreto.getInt("capacidad"), almacenAux);
                         break;
