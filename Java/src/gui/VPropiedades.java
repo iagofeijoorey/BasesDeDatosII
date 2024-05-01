@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -118,7 +119,7 @@ public class VPropiedades extends JDialog {
         createUIComponents();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {

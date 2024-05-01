@@ -120,7 +120,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== menuBar1 ========
         {
@@ -128,7 +128,7 @@ public class VPrincipal extends javax.swing.JFrame {
             //======== Desplegable ========
             {
                 Desplegable.setText("Opciones");
-                Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
+                Desplegable.setSelectedIcon(new ImageIcon(null)));
                 Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
                 Desplegable.setBackground(new Color(0xffffcc));
 
