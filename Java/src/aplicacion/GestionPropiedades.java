@@ -9,6 +9,8 @@ import aplicacion.PropiedadesYCuentas.Propiedad;
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author basesdatos
@@ -22,7 +24,7 @@ public class GestionPropiedades {
     public GestionPropiedades(FachadaGui fgui, FachadaBaseDatos fbd){
      this.fgui=fgui;
      this.fbd=fbd;
-    }  
+    }
 
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
         return fbd.consultarPropiedades(tipo);
@@ -33,16 +35,16 @@ public class GestionPropiedades {
 //         return fbd.consultarPropiedades();
 //    }
 
-     //public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
-     //    return fbd.consultarAcolitos(IDUsuario,Nombre);
-    // }
+//     public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
+//         return fbd.consultarPropiedades(IDUsuario,Nombre);
+//     }
 
-     //public void borrarAcolito(Acolito acolito){
-    //     fbd.borrarAcolito(acolito);
-    // }
+     public void borrarPropiedad(String propiedad){
+         fbd.borrarPropiedad(propiedad);
+     }
      
-  //   public void nuevoUsuario(Acolito acolito){
-   //      fbd.insertarAcolito(acolito);
-     //}
+//     public void nuevoUsuario(Acolito acolito){
+//         fbd.insertarAcolito(acolito);
+//     }
   
 }

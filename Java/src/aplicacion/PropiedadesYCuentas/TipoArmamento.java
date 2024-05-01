@@ -6,6 +6,8 @@ package aplicacion.PropiedadesYCuentas;
  */
 
 
+import java.util.ArrayList;
+
 /**
  *
  * @author basesdatos
@@ -28,5 +30,14 @@ public enum TipoArmamento {
             default:
                 return Normal;
         }
+    }
+
+    public static ArrayList<String> valuesString(){
+        ArrayList<String> res = new ArrayList<>();
+
+        for (TipoArmamento ta: TipoArmamento.values()){
+            res.add(ta.toString());
+        }
+        return res;
     }
 }
