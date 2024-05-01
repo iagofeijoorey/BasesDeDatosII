@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {par l {seq {space :p:48:p, comp Logo:::p::p}, seq l {space :::p, comp presentacion:::p:299:p}}, par t:::p {seq l {space :p:11:p, par l {seq {comp txtFecha:::p::p, space ::48:x, comp buscaFecha:::p:244:p}, seq {comp txtUbicacion:::p::p, space u:::p, comp buscaUbicacion:::::x}}, space s:::p, comp btnBuscar:::p::p}, seq {space :::p, par t {comp scrollListaEventos::t::434:x, comp scrollPane2::t:::x}}}, par l {seq {space s:::p, comp ScrollListaRituales:::p:194:p, space ::16:x}, seq t {space ::60:x, comp btnSalir:::p:111:p, space :p:57:p}}}}"
-			"$verticalGroup": "par l {seq l {par t {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp buscaFecha:::p::p, comp txtFecha:::p::p}}}, space s:::p, comp scrollListaEventos:::p:246:p, space u:::p, comp scrollPane2:::p:100:p}, seq {space :::x, par t {seq t {comp Logo:::p:113:p, space :::p, comp presentacion:::p:329:p}, seq {comp ScrollListaRituales:::p:304:p, space :p:96:p, comp btnSalir:::p::p, space :p:12:p}}}}, space :::x}}"
+			"$horizontalGroup": "par l {seq l {space :::p, comp presentacion:::p:299:p, par t:::p {seq l {space :p:11:p, par l {seq {comp txtFecha:::p::p, space ::69:x, comp buscaFecha:::p:244:p}, seq {comp txtUbicacion:::p::p, space u:::p, comp buscaUbicacion:::::x}}, space s:::p, comp btnBuscar:::p::p}, seq {space :::p, par t {comp scrollListaEventos::t::441:x, comp scrollPane2::t:::x}}}, par l {seq {space s:::p, comp ScrollListaRituales:::p:194:p, space ::9:x}, seq t {space ::56:x, comp btnSalir:::p:111:p, space :p:57:p}}}}"
+			"$verticalGroup": "par l {seq l {par t {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp buscaFecha:::p::p, comp txtFecha:::p::p}}}, space s:::p, comp scrollListaEventos:::p:246:p, space u:::p, comp scrollPane2:::p:100:p}, seq {space :::x, par t {comp presentacion::t:p:329:p, seq {comp ScrollListaRituales:::p:304:p, space :p:96:p, comp btnSalir:::p::p, space :p:12:p}}}}, space :::x}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -117,10 +117,6 @@ new FormModel {
 				name: "btnSalir"
 				"text": "Salir"
 				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnSalirMouseClicked", true ) )
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "Logo"
-				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/logoPequeño1.jpg" )
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"

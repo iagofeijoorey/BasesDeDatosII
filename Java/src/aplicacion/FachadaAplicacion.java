@@ -6,9 +6,7 @@
 package aplicacion;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
-import gui.VPrincipal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -144,6 +142,34 @@ public java.util.List<Acolito> consultarAcolitos(){
 
     public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
         return gp.consultarVehiculosAlmacen(almacen);
+    }
+
+    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
+        return ge.consultarObjetivosEvento(evento);
+    }
+
+    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        ge.actualizarObjetivo(objetivoSeleccionado);
+    }
+
+    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
+        ge.actualizarRecompensaDinero(recompensa);
+    }
+
+    public void borrarRecompensaDinero(RecompensaDinero recompensa) {
+        ge.borrarRecompensaDinero(recompensa);
+    }
+
+    public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        ge.actualizarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        ge.borrarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarObjetivo(Objetivo objetivoSeleccionado) {
+        ge.borrarObjetivo(objetivoSeleccionado);
     }
 }
 
