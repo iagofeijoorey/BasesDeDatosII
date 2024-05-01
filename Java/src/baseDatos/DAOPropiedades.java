@@ -269,7 +269,7 @@ public class DAOPropiedades extends AbstractDAO {
      * @return
      */
     public List<Propiedad> consultarPropiedades(String tipo) {
-        ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
+        ArrayList<Propiedad> resultado = new ArrayList<>();
         Propiedad propiedadActual = null;
         Connection con;
         PreparedStatement stmPropiedades = null;
