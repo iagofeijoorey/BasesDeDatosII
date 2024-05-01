@@ -1,0 +1,93 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {comp panel1::t:::x}"
+		} ) {
+			name: "this"
+			"title": "Eventos"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {par l {seq {space :p:21:p, par l {comp TextEvento:::p:61:p, comp TextValor::l:p::p, seq l {comp Evento4:::p:195:p, space :::p, comp Evento5:::p:195:p}, comp BtnEraseProp::l:p:105:p}, space :::x}, seq t {space ::19:x, comp Evento7:::p:195:p, space :::p, comp Evento6:::p:195:p, space ::12:x}, seq l {space :::p, comp btnVolver:::p::p, space :::x}}, par l {seq {par l {comp BotonVerPropiedades::l:p:119:p, comp BotonVerObjetivos::l:p:119:p}, space :p:49:p, par l:::p {comp BotonVerAcolitos:::::x, comp BtnMasInfo:::::x}, space :::x, par l {comp BotonGuardarEvento:::p:118:p, comp BotonNuevoEvento:::p:118:p}, space :p:15:p}, seq {comp scrollPane1:::p:468:p, space :::p}}}}"
+				"$verticalGroup": "par l {seq {space :::p, par l {seq {comp btnVolver:::p::p, space :p:69:p, par b {comp Evento7::b:p::p, comp Evento6::b:p::p}, space :::p, par b {comp Evento4::b:p::p, comp Evento5::b:p::p}, space :p:11:p, comp TextValor:::p::p, space :p:21:p, comp TextEvento:::p::p, space :0:0:x}, comp scrollPane1::::378:x}, space s:::p, par l {seq {par b {comp BotonVerObjetivos::b:p::p, comp BotonNuevoEvento::b:p::p, comp BtnMasInfo::b:p::p}, space u:::p, par b {comp BotonGuardarEvento::b:p::p, comp BotonVerPropiedades::b:p::p, comp BotonVerAcolitos::b:p::p}}, comp BtnEraseProp::l:p:47:p}, space :p:20:p}}"
+			} ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnVolver"
+					"text": "volver"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "volver", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextValor"
+					"text": "Valor:"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BotonVerAcolitos"
+					"text": "Ver Aólitos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "seleccionarPropiedad", true ) )
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tablaPropiedades"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextEvento"
+					"text": "Evento:"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnMasInfo"
+					"text": "Detalles"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarDetalles", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BotonGuardarEvento"
+					"text": "Guardar"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarNewProp", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnEraseProp"
+					"text": "Borrar"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "borrarPropiedad", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Evento4"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Evento5"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Evento6"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Evento7"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BotonVerPropiedades"
+					"text": "Ver propiedades"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BotonVerObjetivos"
+					"text": "Ver objetivos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BotonNuevoEvento"
+					"text": "Nuevo"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarNewProp", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 915, 525 )
+		} )
+	}
+}
