@@ -13,8 +13,8 @@ import javax.swing.table.*;
 public class ModeloUsuarios extends AbstractTableModel{
     private java.util.List<Usuario> usuarios;
 
-    public ModeloUsuarios(){
-        this.usuarios=new java.util.ArrayList<Usuario>();
+    public ModeloTablaPropiedades(){
+        this.propiedades =new java.util.ArrayList<Propiedad>();
     }
 
     public int getColumnCount (){

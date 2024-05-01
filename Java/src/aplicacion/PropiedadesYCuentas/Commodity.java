@@ -12,14 +12,21 @@ public class Commodity extends Propiedad{
         this.cantidad = cantidad;
     }
 
+    // Getters
     public String getNombre() {
         return nombre;
     }
-
     public Integer getCantidad() {
         return cantidad;
     }
+    public String getTipoGeneral(){
+        return "Commodity";
+    };
+    public String getTipoString(){
+        return nombre;
+    };
 
+    // Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -27,4 +34,6 @@ public class Commodity extends Propiedad{
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+
+
 }

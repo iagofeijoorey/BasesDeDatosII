@@ -70,7 +70,7 @@ public class FachadaBaseDatos {
     }
 
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
+        //daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
 

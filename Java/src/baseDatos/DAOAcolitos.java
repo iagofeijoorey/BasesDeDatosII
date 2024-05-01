@@ -21,7 +21,7 @@ public class DAOAcolitos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public Acolito validarLogin(String alias, String contraseña) {
+    /*public Acolito validarLogin(String alias, String contraseña) {
         Acolito resultado = null;
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -201,5 +201,5 @@ public class DAOAcolitos extends AbstractDAO {
 
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
        //HACER DAO
-    }
+    }*/
 }

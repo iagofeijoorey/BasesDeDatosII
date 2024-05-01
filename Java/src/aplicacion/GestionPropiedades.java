@@ -24,10 +24,14 @@ public class GestionPropiedades {
      this.fbd=fbd;
     }  
 
-  
-     //public java.util.List<Propiedad> consultarPropiedades(){
-     //    return fbd.consultarPropiedades();
-   // }
+    public java.util.List<Propiedad> consultarPropiedades(String tipo){
+        return fbd.consultarPropiedades(tipo);
+    }
+
+//
+//     public java.util.List<Propiedad> consultarPropiedades(){
+//         return fbd.consultarPropiedades();
+//    }
 
      //public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
      //    return fbd.consultarAcolitos(IDUsuario,Nombre);

@@ -21,35 +21,38 @@ public class Vehiculo extends Propiedad{
      * @param ubicacion
      * @param tipo
      * @param valorActual
-     * @param gestor
      */
-    public Vehiculo(Integer idPropiedad, String ubicacion, TipoVehiculo tipo, int valorActual, Acolito gestor, Inmobiliario almacen){
-        super(idPropiedad, valorActual , gestor);
+    public Vehiculo(Integer idPropiedad, String ubicacion, TipoVehiculo tipo, int valorActual, Integer capacidad,Inmobiliario almacen){
+        super(idPropiedad, valorActual , almacen.getGestor());
         this.tipo = tipo;
         this.almacen = almacen;
-    }
-
-
-    public TipoVehiculo getTipo() {
-        return tipo;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public Inmobiliario getAlmacen() {
-        return almacen;
-    }
-
-    public void setTipo(TipoVehiculo tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
+    // Getters
+    public TipoVehiculo getTipo() {
+        return tipo;
+    }
+    public int getCapacidad() {
+        return capacidad;
+    }
+    public Inmobiliario getAlmacen() {
+        return almacen;
+    }
+    public String getTipoGeneral(){
+        return "Vehículo";
+    };
+    public String getTipoString(){
+        return tipo.toString();
+    };
+
+    // Setters
+    public void setTipo(TipoVehiculo tipo) {
+        this.tipo = tipo;
+    }
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
     public void setAlmacen(Inmobiliario almacen) {
         this.almacen = almacen;
     }

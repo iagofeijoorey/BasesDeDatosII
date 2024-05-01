@@ -4,7 +4,9 @@
 
 package gui;
 
-import java.awt.*;
+import aplicacion.PropiedadesYCuentas.*;
+
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -12,9 +14,113 @@ import javax.swing.GroupLayout;
  * @author Diego
  */
 public class VDetalles_NewProp extends JDialog {
-    public VDetalles_NewProp(Window owner) {
-        super(owner);
+    Propiedad propiedad;
+    aplicacion.FachadaAplicacion fa;
+
+    // Constructor para añadir propiedad
+    public VDetalles_NewProp(aplicacion.FachadaAplicacion fa) {
+        this.fa=fa;
         initComponents();
+        BtnActualizar.setText("Añadir");
+        BoxTipo.addItem("Armamento");
+        BoxTipo.addItem("Commodities");
+        BoxTipo.addItem("Inmobiliario");
+        BoxTipo.addItem("Vehiculos");
+
+        TextId.setText("");
+        TextValor.setText("");
+        AmountCapacity.setText("");
+        TextBalas.setText("");
+        TextUbicacion.setText("");
+    }
+
+    // Constructor para mostrar detalles
+    public VDetalles_NewProp(aplicacion.FachadaAplicacion fa, Propiedad propiedad) {
+        this.fa=fa;
+        initComponents();
+        BtnActualizar.setText("Actualizar");
+        BoxTipo.addItem("Armamento");
+        BoxTipo.addItem("Commodities");
+        BoxTipo.addItem("Inmobiliario");
+        BoxTipo.addItem("Vehiculos");
+
+        //Textos
+        Id.setText(propiedad.getIdPropiedad().toString());
+        Valor.setText(propiedad.getValorActual().toString());
+        switch (propiedad.getTipoGeneral()){
+            case "arma":
+                Arma arma = (Arma) propiedad;
+                //1
+                Balas.setText(arma.getBalas().toString());
+                //2
+                AmountCapacity.setText(arma.getCantidad().toString());
+                //3
+                BoxTipo.setSelectedItem("Armamento");
+                //4
+                for (String tipo : TipoArmamento.valuesString()) {
+                    BoxString.addItem(tipo);
+                }
+                BoxString.setSelectedItem(arma.getTipoString());
+                break;
+
+
+            case "inmobiliario":
+                Inmobiliario inmobiliario = (Inmobiliario) propiedad;
+                //1
+                Ubicacion.setText(inmobiliario.getUbicacion());
+                //2
+                BoxTipo.setSelectedItem("Inmobiliario");
+                //3
+                for (String tipo : TipoInmobiliario.valuesString()) {
+                    BoxString.addItem(tipo);
+                }
+                BoxString.setSelectedItem(inmobiliario.getTipoString());
+                //4
+                if (inmobiliario.getTipoString().equals("Almacen"))
+                    AmountCapacity.setText(inmobiliario.getCapacidad().toString());
+                else AmountCapacity.setText("");
+                break;
+
+            case "commodities":
+                //Caso3
+                break;
+
+            case "vehiculos":
+                //Caso 4
+                break;
+
+
+            default:
+                //Default
+                break;
+        }
+    }
+
+    private void entrarContenido(MouseEvent e) {
+        fa.ventanaContenido();
+    }
+    
+    private void BoxTipoItemStateChanged(ItemEvent e) {
+        // Obtener el tipo seleccionado en el BoxTipo
+        String tipoSeleccionado = (String) BoxTipo.getSelectedItem();
+
+        // Limpiar los elementos actuales del BoxString
+        BoxString.removeAllItems();
+
+        // Llenar el BoxString con los tipos correspondientes al tipo seleccionado en el BoxTipo
+        switch (tipoSeleccionado) {
+            case "Armamento":
+                for (String tipo : TipoArmamento.valuesString()) {
+                    BoxString.addItem(tipo);
+                }
+                break;
+            case "Inmobiliario":
+                for (String tipo : TipoInmobiliario.valuesString()) {
+                    BoxString.addItem(tipo);
+                }
+                break;
+            // Agregar más casos según sea necesario para otros tipos
+        }
     }
 
     private void initComponents() {
@@ -28,36 +134,45 @@ public class VDetalles_NewProp extends JDialog {
         TextNameType = new JLabel();
         AmountCapacity = new JTextField();
         TextEvento = new JLabel();
-        Evento = new JTextField();
         TextValor = new JLabel();
         Valor = new JTextField();
         TextId = new JLabel();
         Id = new JTextField();
         TextTipo = new JLabel();
-        Tipo = new JComboBox();
+        BoxTipo = new JComboBox();
         TextGestor = new JLabel();
-        Gestor = new JComboBox();
+        BoxGestor = new JComboBox();
         TextAmountCapacity = new JLabel();
-        button1 = new JButton();
-        String = new JComboBox();
-        comboBox1 = new JComboBox();
+        BtnActualizar = new JButton();
+        BoxString = new JComboBox();
+        BoxAlmacen = new JComboBox();
         TextUbicacion = new JLabel();
         Ubicacion = new JTextField();
+        scrollPane1 = new JScrollPane();
+        tablaEventos = new JTable();
 
         //======== this ========
         var contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
-            EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing
-            .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
-            java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener()
-            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))
-            throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
+            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 )
+            , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //---- BtnContent ----
             BtnContent.setText("Ver contenido");
+            BtnContent.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarContenido(e);
+                }
+            });
 
             //---- TextAlmacen ----
             TextAlmacen.setText("Almacen:");
@@ -80,77 +195,92 @@ public class VDetalles_NewProp extends JDialog {
             //---- TextTipo ----
             TextTipo.setText("Tipo:");
 
+            //---- BoxTipo ----
+            BoxTipo.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    BoxTipoMouseClicked(e);
+                }
+            });
+
             //---- TextGestor ----
             TextGestor.setText("Gestor:");
 
             //---- TextAmountCapacity ----
             TextAmountCapacity.setText("Integer:");
 
-            //---- button1 ----
-            button1.setText("Actualizar");
+            //---- BtnActualizar ----
+            BtnActualizar.setText("Actualizar");
 
             //---- TextUbicacion ----
             TextUbicacion.setText("Ubicaci\u00f3n:");
+
+            //======== scrollPane1 ========
+            {
+                scrollPane1.setViewportView(tablaEventos);
+            }
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap(11, Short.MAX_VALUE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextBalas)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(Balas, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextAlmacen)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(comboBox1)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(BtnContent)
-                                    .addComponent(button1))
-                                .addGap(59, 59, 59))
+                                .addComponent(TextUbicacion)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(324, Short.MAX_VALUE))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup()
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(TextNameType)
+                                        .addGap(9, 9, 9)
+                                        .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TextAmountCapacity)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                         .addComponent(TextId)
                                         .addGap(56, 56, 56)
                                         .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
                                         .addGap(20, 20, 20)
                                         .addComponent(TextTipo)
                                         .addGap(45, 45, 45)
-                                        .addComponent(Tipo, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(BoxTipo, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                         .addComponent(TextValor)
                                         .addGap(35, 35, 35)
                                         .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
                                         .addGap(20, 20, 20)
                                         .addComponent(TextGestor)
                                         .addGap(30, 30, 30)
-                                        .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(BoxGestor, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                        .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                                .addGap(0, 34, Short.MAX_VALUE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup()
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGroup(panel1Layout.createParallelGroup()
-                                            .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TextNameType))
-                                        .addGap(9, 9, 9)
-                                        .addGroup(panel1Layout.createParallelGroup()
-                                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                .addComponent(String, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(42, 42, 42)
-                                                .addComponent(TextAmountCapacity)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(TextAlmacen)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextUbicacion)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(26, 26, 26))
+                                        .addComponent(TextBalas)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(Balas, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                                .addGroup(panel1Layout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                        .addComponent(BtnContent)
+                                        .addGap(95, 95, 95))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                        .addComponent(BtnActualizar)
+                                        .addGap(106, 106, 106))))))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -158,7 +288,7 @@ public class VDetalles_NewProp extends JDialog {
                         .addGap(19, 19, 19)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addComponent(Id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BoxTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(panel1Layout.createParallelGroup()
@@ -167,30 +297,30 @@ public class VDetalles_NewProp extends JDialog {
                         .addGap(10, 10, 10)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addComponent(Valor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BoxGestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(TextValor)
                                     .addComponent(TextGestor))))
-                        .addGap(15, 15, 15)
+                        .addGap(25, 25, 25)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(TextEvento)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(TextEvento))
-                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(TextAmountCapacity)
-                                .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextNameType)
-                                    .addComponent(String, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup()
+                                    .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextAmountCapacity))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)))
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addGroup(panel1Layout.createSequentialGroup()
@@ -200,18 +330,17 @@ public class VDetalles_NewProp extends JDialog {
                                 .addGap(23, 23, 23)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextAlmacen)
-                                    .addComponent(comboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TextUbicacion)
-                                    .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(12, Short.MAX_VALUE))
+                                    .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(0, 32, Short.MAX_VALUE)
                                 .addComponent(BtnContent)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(button1)
-                                .addGap(39, 39, 39))))
+                                .addComponent(BtnActualizar)
+                                .addGap(8, 8, 8)))
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextUbicacion)
+                            .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
             );
         }
 
@@ -246,20 +375,21 @@ public class VDetalles_NewProp extends JDialog {
     private JLabel TextNameType;
     private JTextField AmountCapacity;
     private JLabel TextEvento;
-    private JTextField Evento;
     private JLabel TextValor;
     private JTextField Valor;
     private JLabel TextId;
     private JTextField Id;
     private JLabel TextTipo;
-    private JComboBox Tipo;
+    private JComboBox BoxTipo;
     private JLabel TextGestor;
-    private JComboBox Gestor;
+    private JComboBox BoxGestor;
     private JLabel TextAmountCapacity;
-    private JButton button1;
-    private JComboBox String;
-    private JComboBox comboBox1;
+    private JButton BtnActualizar;
+    private JComboBox BoxString;
+    private JComboBox BoxAlmacen;
     private JLabel TextUbicacion;
     private JTextField Ubicacion;
+    private JScrollPane scrollPane1;
+    private JTable tablaEventos;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

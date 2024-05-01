@@ -12,8 +12,10 @@ import javax.swing.GroupLayout;
  * @author Diego
  */
 public class VContenidoAlmacen extends JDialog {
-    public VContenidoAlmacen(Window owner) {
-        super(owner);
+    aplicacion.FachadaAplicacion fa;
+
+    public VContenidoAlmacen(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+        this.fa=fa;
         initComponents();
     }
 
