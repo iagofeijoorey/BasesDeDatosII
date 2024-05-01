@@ -6,6 +6,7 @@
 package aplicacion;
 
 
+import aplicacion.PropiedadesYCuentas.GestionRituales;
 import gui.VPrincipal;
 
 /**
@@ -20,6 +21,7 @@ public class FachadaAplicacion {
     private GestionPropiedades gp;
     private GestionContactos gc;
     private GestionAcolitos ga;
+    private GestionRituales gr
     private Acolito currentUser;
     
     
@@ -30,6 +32,7 @@ public class FachadaAplicacion {
         gp = new GestionPropiedades(fgui, fbd);
         gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
+        gr = new GestionRituales(fgui, fbd);
     }
 
 
