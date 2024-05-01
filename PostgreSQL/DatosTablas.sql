@@ -12,11 +12,11 @@ VALUES ('mat', 'mateo', 'Mateo Bodenlle', '2024-04-18', 123456789, 'Avenida Vill
 INSERT INTO Cabecillas (alias)
 VALUES ('mat');
 
-INSERT INTO jefes_de_division (alias)
-VALUES ('cristo27'), ('joselu'), ('iago');
+INSERT INTO jefes_de_division (alias, nombredivision)
+VALUES ('cristo27', 'Division tortuga'), ('joselu', 'Division mexicana'), ('iago', 'Division gamer');
 
-INSERT INTO miembros_basicos (alias)
-VALUES ('minilauri'), ('saracas'), ('sebastian');
+INSERT INTO miembros_basicos (alias, jefe)
+VALUES ('minilauri',  'joselu'), ('saracas', 'cristo27'), ('sebastian', 'iago');
 
 INSERT INTO gestor_interno (alias)
 VALUES ('iago'), ('cristo27');
