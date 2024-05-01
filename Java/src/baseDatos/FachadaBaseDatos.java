@@ -6,6 +6,8 @@
 package baseDatos;
 
 import aplicacion.*;
+import aplicacion.PropiedadesYCuentas.Propiedad;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -87,4 +89,11 @@ public class FachadaBaseDatos {
         daoEventos.insertarEvento(evento);
     }
 
+    public java.util.List<Propiedad> consultarPropiedades(String tipo){
+         return daoPropiedades.consultarPropiedades(tipo);
+    }
+
+    public void borrarPropiedad(String idPropiedad){
+        daoPropiedades.borrarPropiedad(idPropiedad);
+    }
 }

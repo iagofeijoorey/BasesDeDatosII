@@ -90,8 +90,9 @@ public class DAOPropiedades extends AbstractDAO {
         }
     }
 
-
-    public List<Propiedad> consultarPropiedades() {
+// No hace falta porque el de abajo ya busca todas si no se pone nada en el tipo
+/*    public List<Propiedad> consultarPropiedades() {
+        String consulta;
         ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
         Propiedad propiedadActual = null;
         Connection con;
@@ -255,7 +256,7 @@ public class DAOPropiedades extends AbstractDAO {
             }
         }
         return resultado;
-    }
+    }*/
 
 
     /**
@@ -440,5 +441,26 @@ public class DAOPropiedades extends AbstractDAO {
         return resultado.stream()
                 .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
                 .collect(Collectors.toList());
+    }
+
+    public void borrarPropiedad(String idPropiedad) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = super.getConexion();
+        try {
+            stmUsuario = con.prepareStatement("delete from propiedades where idpropiedad = ?");
+            stmUsuario.setString(1, idPropiedad);
+            stmUsuario.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmUsuario.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
 }
