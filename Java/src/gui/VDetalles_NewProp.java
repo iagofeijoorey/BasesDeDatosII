@@ -6,6 +6,7 @@ package gui;
 
 import aplicacion.PropiedadesYCuentas.*;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -27,6 +28,11 @@ public class VDetalles_NewProp extends JDialog {
         BoxTipo.addItem("Inmobiliario");
         BoxTipo.addItem("Vehiculos");
 
+        TextTipoCommodity.setVisible(false);
+        TipoCommodity.setVisible(false);
+        BoxString.setVisible(true);
+        TextNameType.setVisible(true);
+
         TextId.setText("");
         TextValor.setText("");
         AmountCapacity.setText("");
@@ -43,6 +49,11 @@ public class VDetalles_NewProp extends JDialog {
         BoxTipo.addItem("Commodities");
         BoxTipo.addItem("Inmobiliario");
         BoxTipo.addItem("Vehiculos");
+
+        TextTipoCommodity.setVisible(false);
+        TipoCommodity.setVisible(false);
+        BoxString.setVisible(true);
+        TextNameType.setVisible(true);
 
         //Textos
         Id.setText(propiedad.getIdPropiedad().toString());
@@ -82,6 +93,8 @@ public class VDetalles_NewProp extends JDialog {
                 break;
 
             case "commodities":
+
+
                 //Caso3
                 break;
 
@@ -110,14 +123,37 @@ public class VDetalles_NewProp extends JDialog {
         // Llenar el BoxString con los tipos correspondientes al tipo seleccionado en el BoxTipo
         switch (tipoSeleccionado) {
             case "Armamento":
+                TextTipoCommodity.setVisible(false);
+                TipoCommodity.setVisible(false);
+                BoxString.setVisible(true);
+                TextNameType.setVisible(true);
                 for (String tipo : TipoArmamento.valuesString()) {
                     BoxString.addItem(tipo);
                 }
                 break;
             case "Inmobiliario":
+                TextTipoCommodity.setVisible(false);
+                TipoCommodity.setVisible(false);
+                BoxString.setVisible(true);
+                TextNameType.setVisible(true);
                 for (String tipo : TipoInmobiliario.valuesString()) {
                     BoxString.addItem(tipo);
                 }
+                break;
+            case "Vehiculos":
+                TextTipoCommodity.setVisible(false);
+                TipoCommodity.setVisible(false);
+                BoxString.setVisible(true);
+                TextNameType.setVisible(true);
+                for (String tipo : TipoVehiculo.valuesString()) {
+                    BoxString.addItem(tipo);
+                }
+                break;
+            case "Commodities":
+                TextTipoCommodity.setVisible(true);
+                TipoCommodity.setVisible(true);
+                BoxString.setVisible(false);
+                TextNameType.setVisible(false);
                 break;
             // Agregar más casos según sea necesario para otros tipos
         }
@@ -158,7 +194,7 @@ public class VDetalles_NewProp extends JDialog {
         TextTipoCommodity = new JLabel();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {

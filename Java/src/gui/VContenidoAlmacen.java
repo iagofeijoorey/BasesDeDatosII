@@ -4,6 +4,8 @@
 
 package gui;
 
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -13,10 +15,20 @@ import javax.swing.GroupLayout;
  */
 public class VContenidoAlmacen extends JDialog {
     aplicacion.FachadaAplicacion fa;
+    Inmobiliario almacen;
 
-    public VContenidoAlmacen(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+    public VContenidoAlmacen(aplicacion.FachadaAplicacion fa, Inmobiliario almacen) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
+
+        //Vehículos - Vehículos
+        this.almacen = almacen;
+
+
+
+
+
+        //Arma - Armas
     }
 
     private void initComponents() {
@@ -31,7 +43,7 @@ public class VContenidoAlmacen extends JDialog {
         Armas = new JList();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {

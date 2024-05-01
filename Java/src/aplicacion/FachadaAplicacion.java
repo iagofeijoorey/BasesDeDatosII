@@ -4,6 +4,7 @@
  */
 
 package aplicacion;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 import gui.VPrincipal;
 
@@ -104,8 +105,8 @@ public java.util.List<Acolito> consultarAcolitos(){
         fgui.ventanaDetalles();
     }
 
-    public void ventanaContenido(){
-        fgui.ventanaContenido();
+    public void ventanaContenido(Inmobiliario almacen){
+        fgui.ventanaContenido(almacen);
     }
 
     public void ventanaEventos(){

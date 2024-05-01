@@ -27,7 +27,7 @@ public class VEliminacion extends JDialog {
         btnNo = new JButton();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {
