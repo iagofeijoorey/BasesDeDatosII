@@ -1,0 +1,152 @@
+JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {par l {seq {space :p:48:p, comp Logo:::p::p}, seq l {space :::p, comp presentacion:::p:299:p}}, par t:::p {seq l {space :p:11:p, par l {seq {comp txtFecha:::p::p, space ::48:x, comp buscaFecha:::p:244:p}, seq {comp txtUbicacion:::p::p, space u:::p, comp buscaUbicacion:::::x}}, space s:::p, comp btnBuscar:::p::p}, seq {space :::p, par l {comp scrollPane2:::::x, comp scrollListaEventos::::441:x}}}, par l {seq {space s:::p, comp ScrollListaRituales:::p:194:p, space ::9:x}, seq t {space ::56:x, comp btnSalir:::p:111:p, space :p:57:p}}}}"
+			"$verticalGroup": "par l {seq l {par t {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp buscaFecha:::p::p, comp txtFecha:::p::p}}}, space :p:376:p}, seq {space :::x, par t {seq t {comp Logo:::p:113:p, space :::p, comp presentacion:::p:329:p}, seq t {par t:::p {seq {space :p:78:p, comp scrollListaEventos:::p:246:p, space :::x, comp scrollPane2:::p:100:p}, seq {comp ScrollListaRituales:::p:304:p, space :p:96:p, comp btnSalir:::p::p}}, space :p:12:p}}}}, space :::x}}"
+		} ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"title": "Bienvenido a la Comunidad Imyriano"
+			"name": "vPrincipal"
+			"resizable": false
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollListaEventos"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "TablaEventosVPrincipal"
+					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+						add( new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+						add( new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					}, new java.util.Vector {
+						add( null )
+						add( null )
+						add( null )
+						add( null )
+					} )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextPane" ) {
+				name: "presentacion"
+				"text": "La diosa Imyr, una figura misteriosa que emergió de los océanos en tiempos antiguos, es reverenciada por su sabiduría y su capacidad para dar forma a la tierra y las aguas. Aunque enfrentó desafíos y conflictos, Imyr siempre mostró compasión por aquellos que la adoraban. Su culto ganó seguidores devotos en todo el mundo, quienes comparten su creencia en la armonía, la prosperidad y la justicia. Imyr se convirtió en un símbolo de esperanza y redención, inspirando a generaciones futuras a seguir sus enseñanzas de sabiduría y valentía"
+				"foreground": new java.awt.Color( 153, 153, 153, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				auxiliary() {
+					"JavaCodeGenerator.variableName": "presentacion"
+				}
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaUbicacion"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "buscaFecha"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnBuscar"
+				"text": "buscar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnBuscarMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "txtUbicacion"
+				"text": "Ubicación:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "txtFecha"
+				"text": "Fecha:"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "ScrollListaRituales"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "TablaRituales"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "ListaEstadísticas"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSalir"
+				"text": "Salir"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnSalirMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "Logo"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/logoPequeño1.jpg" )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "Desplegable"
+					"text": "Opciones"
+					"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/gui/flechaI.jpg" )
+					"icon": new com.jformdesigner.model.SwingIcon( 2, "FileView.hardDriveIcon" )
+					"background": new java.awt.Color( 255, 255, 204, 255 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "PerfilBotonDesplegable"
+						"text": "Perfil"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPerfil", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "ContactosBotonDesplegable"
+						"text": "Contactos"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContactos", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "AcólitosBotonDesplegable"
+						"text": "Acólitos"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarAcolitos", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "PropiedadesBotonDesplegable"
+						"text": "Propiedades"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPropiedades", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "EventosBotonDesplegable"
+						"text": "Eventos"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarEventos", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "RitualesBotonDesplegable"
+						"text": "Rituales"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarRituales", true ) )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 15, 40 )
+			"size": new java.awt.Dimension( 975, 495 )
+		} )
+	}
+}

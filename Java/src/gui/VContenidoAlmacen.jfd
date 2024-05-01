@@ -1,0 +1,43 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:16:p, par l {seq l {comp scrollPane1:::p:159:p, space ::46:x, comp scrollPane2:::p:159:p, space :::p}, seq l {space :p:49:p, comp TextVehicle:::p::p, space ::154:x, comp TextWeapon:::p::p, space :p:68:p}}}}"
+				"$verticalGroup": "par l {seq t {space :::x, par b {comp TextVehicle::b:p::p, comp TextWeapon::b:p::p}, space :::p, par l:::p {comp scrollPane1:::::x, comp scrollPane2:::::x}, space :p:26:p}}"
+			} ) {
+				name: "panel1"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "Vehicles"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextVehicle"
+					"text": "Vehículos"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextWeapon"
+					"text": "Armas"
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "Armas"
+					} )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
+
