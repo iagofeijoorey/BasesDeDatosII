@@ -6,6 +6,8 @@ package gui;
 
 import aplicacion.Evento;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alumno
@@ -35,21 +37,40 @@ public class FachadaGui {
     }
 
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vP){
-        VPerfil vp;
 
-        vp = new VPerfil(vP, fa);
-        vp.setVisible(true);
-    }
-
-    /*
     public void ventanaContactos(VPrincipal vP){
         VContactos vc;
 
-        vc = new VPerfil(vP, fa);
+        vc = new VContactos(vP, fa);
         vc.setVisible(true);
     }
 
+    public void ventanaContactoNuevo(VContactos vc){
+        VContactoNuevo vcn;
+
+        vcn = new VContactoNuevo(vc, fa);
+        vcn.setVisible(true);
+    }
+
+    public ArrayList<String> ventanaTratoNuevo(VContactos vc){
+        VTratoNuevo vtn;
+        ArrayList<String> datosTrato = new ArrayList<>();
+
+        vtn = new VTratoNuevo(vc, fa);
+        vtn.setVisible(true);
+
+        datosTrato.add(vtn.getIdentificador());
+        datosTrato.add(vtn.getTipoTrato());
+
+        return datosTrato;
+    }
+
+
+    public void rellenarDatos(VContactos vc){
+       vc.rellenarDatos();
+    }
+
+    /*
     public void ventanaAcolitos(VPrincipal vP){
         VAcolitos va;
 

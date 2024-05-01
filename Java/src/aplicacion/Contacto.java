@@ -17,19 +17,16 @@ public class Contacto {
     private String nombre;
     private Integer telefono;
     private String descripcion;
-    private Acolito acolito;
     private ArrayList<Trato> tratos = new ArrayList<>();
 
-    public Contacto(String pseudonimo, String nombre, String descripcion, Integer telefono, Acolito acolito) {
+    public Contacto(String pseudonimo, String nombre, String descripcion, Integer telefono) {
         this.pseudonimo = pseudonimo;
-        this.acolito = acolito;
         this.telefono = telefono;
         this.descripcion = descripcion;
     }
 
-    public Contacto(String pseudonimo, String nombre, String descripcion, Integer telefono, Acolito acolito, ArrayList<Trato> tratos) {
+    public Contacto(String pseudonimo, String nombre, String descripcion, Integer telefono, ArrayList<Trato> tratos) {
         this.pseudonimo = pseudonimo;
-        this.acolito = acolito;
         this.telefono = telefono;
         this.descripcion = descripcion;
         this.tratos = tratos;
@@ -52,16 +49,12 @@ public class Contacto {
         return descripcion;
     }
 
-    public Acolito getAcolito() {
-        return acolito;
-    }
 
     public ArrayList<Trato> getTratos() {
         return tratos;
     }
 
     //Setters
-
     public void setPseudonimo(String pseudonimo) {
         this.pseudonimo = pseudonimo;
     }
@@ -78,9 +71,6 @@ public class Contacto {
         this.descripcion = descripcion;
     }
 
-    public void setAcolito(Acolito acolito) {
-        this.acolito = acolito;
-    }
 
     public void setTratos(ArrayList<Trato> tratos) {
         this.tratos = tratos;

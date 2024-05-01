@@ -7,6 +7,9 @@ package aplicacion;
 
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
+import gui.VContactos;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -23,23 +26,48 @@ public class GestionContactos {
      this.fbd=fbd;
     }
 
-
+/*
     public java.util.List<Contacto>  consultarContactos(String pseudonimo, String nombre){
         return fbd.consultarContacto(pseudonimo,nombre);
     }
+ */
 
     /**
-     * Consultar contacto dado el acólito del que es contacto
+     * Obtener una lista de todos los contactos de un acólito (con y sin tratos)
      */
-    public java.util.List<Contacto>  consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre){
-        return fbd.consultarContactosDeAcolito(acolito, pseudonimo, nombre);
+    public ArrayList<Contacto> obtenerContactos(Acolito acolito){
+        return fbd.obtenerContactos(acolito);
     }
 
-    /**
-     * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
-     */
-    public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
-        return fbd.consultarContactosDeAcolito(aliasAcolito, pseudonimoContacto, nombreContacto);
+    public void rellenarDatos(VContactos vc){
+        fgui.rellenarDatos(vc);
     }
 
+    public void actualizarContacto(String pseudonimo, String nombre, String telefono, String descripcion){
+        fbd.actualizarContacto(pseudonimo, nombre, telefono, descripcion);
+    }
+
+    public void eliminarContacto(String pseudonimo){
+        fbd.eliminarContacto(pseudonimo);
+    }
+
+    public ArrayList<Trato> obtenerTratos(String acolito, String contacto){
+        return fbd.obtenerTratos(acolito, contacto);
+    }
+
+    public boolean hayTratos(String acolito, String contacto){
+        return fbd.hayTratos(acolito, contacto);
+    }
+
+    public void proponerTrato(ArrayList<String> datosTrato, String acolito, String contacto){
+        fbd.proponerTrato(datosTrato, acolito, contacto);
+    }
+
+    public boolean existeTrato(Integer id){
+        return fbd.existeTrato(id);
+    }
+
+    public void romperTrato(Trato trato){
+        fbd.romperTrato(trato);
+    }
 }

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.8" class="java.beans.XMLDecoder">
+ <object class="com.jformdesigner.model.FormModel">
+  <void property="contentType">
+   <string>form/swing</string>
+  </void>
+  <void property="root">
+   <object class="com.jformdesigner.model.FormRoot">
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>javax.swing.JDialog</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>org.jdesktop.layout.GroupLayout</class>
+       <void method="setProperty">
+        <string>$horizontalGroup</string>
+        <string>par l {seq {space :p:18:p, par l {seq t {par l {seq {par l {seq {par l {comp txtInfluencia:::::x, comp txtAlias:::::x}, space u:::p, par l {comp txtTelefono::::354:x, comp txtNombre::::354:x}}, seq l {comp scrollDescripcion:::p:230:p, space s:::p, comp scrollPane3:::p:205:p}, seq l {par t:::p {comp txtNombreDivision::::206:x, comp txtDireccion::::206:x}, space s:::p, par l:::p {comp txtAltaDivision::::234:x, comp txtJefe::::234:x}}}, space :p:25:p}, seq l {space :p:127:p, comp imagenAcolito:::p:122:p, space ::234:x}}, par l {seq {comp scrollAcolitos:::p:216:p, space :p:23:p}, seq t {comp labelAcolitos:::p::p, space :p:63:p}}}, seq {par l {comp btnVolver::l:p::p, seq l {comp bntEliminar:::p:163:p, space :p:29:p, comp btnGuardar:::p::p, space s:::p, comp btnGuardar2:::p:145:p, space s:::p, comp btnAnadir:::p:169:p}}, space ::41:x}}}}</string>
+       </void>
+       <void method="setProperty">
+        <string>$verticalGroup</string>
+        <string>par l {seq l {par l {seq l {space :p:14:p, comp btnVolver:::p:22:p, space :p:27:p, comp imagenAcolito:::p:79:p, space s:::p, par b {comp txtAlias::b:p:36:p, comp txtNombre::b:p::p}, space u:::p, par b {comp txtInfluencia::b:p::p, comp txtTelefono::b:p::p}, space :::p, par b {comp txtNombreDivision::b:p::p, comp txtJefe::b:p::p}, space :::p, par b {comp txtDireccion::b:p::p, comp txtAltaDivision::b:p::p}, space :::p, par l {comp scrollDescripcion:::p:160:p, comp scrollPane3:::p:164:p}, space ::28:x}, seq l {space ::62:x, comp labelAcolitos:::p::p, space :::p, comp scrollAcolitos:::p:404:p, space s:::p}}, par b {comp bntEliminar::b:::x, comp btnGuardar::b:p:22:p, comp btnGuardar2::b:p:22:p, comp btnAnadir::b:p::p}, space :::p}}</string>
+       </void>
+      </object>
+      <void method="setProperty">
+       <string>defaultCloseOperation</string>
+       <int>2</int>
+      </void>
+      <void method="setProperty">
+       <string>title</string>
+       <string>Acólitos</string>
+      </void>
+      <void method="setProperty">
+       <string>resizable</string>
+       <boolean>false</boolean>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Alias...</string>
+        </void>
+        <void property="name">
+         <string>txtAlias</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Influencia...</string>
+        </void>
+        <void property="name">
+         <string>txtInfluencia</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Nombre completo...</string>
+        </void>
+        <void property="name">
+         <string>txtNombre</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Teléfono...</string>
+        </void>
+        <void property="name">
+         <string>txtTelefono</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Nombre división...</string>
+        </void>
+        <void property="name">
+         <string>txtNombreDivision</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Jefe a cargo...</string>
+        </void>
+        <void property="name">
+         <string>txtJefe</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>(Imagen del acólito)</string>
+        </void>
+        <void property="name">
+         <string>imagenAcolito</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Dirección...</string>
+        </void>
+        <void property="name">
+         <string>txtDireccion</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Alta división...</string>
+        </void>
+        <void property="name">
+         <string>txtAltaDivision</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JLabel</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>LISTA DE ACÓLITOS</string>
+        </void>
+        <void method="setProperty">
+         <string>font</string>
+         <object class="java.awt.Font">
+          <string>Inter</string>
+          <int>1</int>
+          <int>14</int>
+         </object>
+        </void>
+        <void property="name">
+         <string>labelAcolitos</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollDescripcion</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JTextArea</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>Descripción...</string>
+          </void>
+          <void method="setProperty">
+           <string>font</string>
+           <object class="java.awt.Font">
+            <string>Inter</string>
+            <int>0</int>
+            <int>13</int>
+           </object>
+          </void>
+          <void property="name">
+           <string>txtDescripcion</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Guardar edición</string>
+        </void>
+        <void property="name">
+         <string>btnGuardar</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollPane3</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JTable</string>
+          <void property="name">
+           <string>tablaEventos</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>AÑADIR ACÓLITO</string>
+        </void>
+        <void method="setProperty">
+         <string>background</string>
+         <object class="java.awt.Color">
+          <int>0</int>
+          <int>204</int>
+          <int>102</int>
+          <int>255</int>
+         </object>
+        </void>
+        <void property="name">
+         <string>btnAnadir</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>ELIMINAR</string>
+        </void>
+        <void method="setProperty">
+         <string>background</string>
+         <object class="java.awt.Color">
+          <int>153</int>
+          <int>0</int>
+          <int>0</int>
+          <int>255</int>
+         </object>
+        </void>
+        <void property="name">
+         <string>bntEliminar</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>VOLVER</string>
+        </void>
+        <void property="name">
+         <string>btnVolver</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnVolver</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormContainer">
+        <string>javax.swing.JScrollPane</string>
+        <object class="com.jformdesigner.model.FormLayoutManager">
+         <class>javax.swing.JScrollPane</class>
+        </object>
+        <void property="name">
+         <string>scrollAcolitos</string>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JList</string>
+          <void property="name">
+           <string>listaAcolitos</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Guardar edición</string>
+        </void>
+        <void property="name">
+         <string>btnGuardar2</string>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>this</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>20</int>
+        <int>5</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>735</int>
+        <int>575</int>
+       </object>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

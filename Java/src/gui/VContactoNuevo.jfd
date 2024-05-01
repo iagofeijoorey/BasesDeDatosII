@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq {space :::p, comp etiquetaFallo:::p::p, space :::x, comp btnCancelar:::p::p}, seq {space :61:61:p, par l:::p {comp textoUsuario:::p:251:p:1, seq l {comp textoClave:::p:218:p:1, space :::p, comp cajaGuardarUser:::::x}}, space :0:0:x}}, space :::p}, seq t {space :0:81:x, comp btnAceptar:::p:213:p, space :p:79:p}}</string>
+        <string>par l {seq {par t {seq {space :::x, comp txtDescripcion:::p:251:p}, seq {space :p:66:p, comp btnCancelar::::89:x, space s:::p, comp btnAceptar:::p:93:p, space :p:23:p}, seq {space :0:0:x, par t {comp textoUsuario:::p:251:p:1, comp textoClave:::p:251:p:1, comp textoClave2:::p:251:p}}}, space ::39:x}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:31:p, comp textoUsuario:::p::p, space s:::p, par b {comp textoClave::b:p::p, comp cajaGuardarUser::l:::x}, space s:::p, comp btnAceptar:::p:56:p, space :p:33:p, par b {comp btnCancelar::b:p::p, comp etiquetaFallo::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :p:23:p, comp textoUsuario:::p::p, space u:::p, comp textoClave:::p::p, space u:::p, comp textoClave2:::p::p, space u:::p, comp txtDescripcion:::p:71:p, space :::p, par b {comp btnAceptar::b:::x, comp btnCancelar::b:p::p}, space ::18:x}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -26,7 +26,7 @@
       </void>
       <void method="setProperty">
        <string>title</string>
-       <string>Autentificación de usuarios</string>
+       <string>Añadir contacto nuevo</string>
       </void>
       <void method="setProperty">
        <string>modal</string>
@@ -61,7 +61,7 @@
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
          <string>text</string>
-         <string>Usuario...</string>
+         <string>Pseudonimo...</string>
         </void>
         <void method="setProperty">
          <string>foreground</string>
@@ -122,31 +122,10 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
-        <string>javax.swing.JLabel</string>
-        <void method="setProperty">
-         <string>foreground</string>
-         <object class="java.awt.Color">
-          <int>255</int>
-          <int>51</int>
-          <int>51</int>
-          <int>255</int>
-         </object>
-        </void>
-        <void method="setProperty">
-         <string>text</string>
-         <string>Autentificación incorrecta!</string>
-        </void>
-        <void property="name">
-         <string>etiquetaFallo</string>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
          <string>text</string>
-         <string>Contraseña...</string>
+         <string>Nombre...</string>
         </void>
         <void method="setProperty">
          <string>foreground</string>
@@ -167,9 +146,41 @@
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
-        <string>javax.swing.JCheckBox</string>
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Teléfono...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
         <void property="name">
-         <string>cajaGuardarUser</string>
+         <string>textoClave2</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextPane</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Descripción...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>txtDescripcion</string>
         </void>
        </object>
       </void>
@@ -182,15 +193,15 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>5</int>
+        <int>30</int>
         <int>65</int>
        </object>
       </void>
       <void method="setProperty">
        <string>size</string>
        <object class="java.awt.Dimension">
-        <int>375</int>
-        <int>295</int>
+        <int>330</int>
+        <int>305</int>
        </object>
       </void>
      </object>

@@ -4,56 +4,163 @@
 
 package gui;
 
+import aplicacion.Contacto;
+import aplicacion.FachadaAplicacion;
+import aplicacion.Trato;
+import aplicacion.Acolito;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import javax.swing.border.*;
 
 /**
  * @author Usuario
  */
 public class VContactos extends JDialog {
-    public VContactos(Window owner) {
+
+    private FachadaAplicacion fa;
+    private Acolito acolito;
+    private Contacto contacto;
+    private Trato trato;
+
+    public VContactos(Window owner, FachadaAplicacion fa /*, Acolito acolito*/) {
         super(owner);
+        this.fa = fa;
+        //this.acolito = acolito
+        contacto = null;
+        trato = null;
         initComponents();
     }
 
-    private void btnActualizarMouseClicked(MouseEvent e) {
-        // TODO add your code here
+    //MouseClicked
+    private void btnGuardarMouseClicked(MouseEvent e) {
+        if(txtPseudonimo.getText() != "Pseudónimo..." && txtNombre.getText() != "Nombre..." && txtNombre.getText() != null
+                && txtTelefono.getText() != "Teléfono..." && txtTelefono.getText() != null && txtDescripcion.getText() != "Descripción...")
+            fa.actualizarContacto(txtPseudonimo.getText(), txtNombre.getText(), txtTelefono.getText(), txtDescripcion.getText());
+
+        //Mensajito de que se actualizou?
+
+        //Para actualizar las listas :)
+        createUIComponents();
     }
 
-    private void jTable1MouseClicked(MouseEvent e) {
-        // TODO add your code here
+    private void btnProponerTratoMouseClicked(MouseEvent e) {
+        fa.proponerTrato(acolito.getAlias(), contacto.getPseudonimo(), this);
+
+        //Mensajito de que se propuxo?
+
+        //Para actualizar las listas :)
+        createUIComponents();
     }
 
-    private void btnBuscarActionPerformed(ActionEvent e) {
-        // TODO add your code here
+    private void btnRomperTratoMouseClicked(MouseEvent e) {
+        fa.romperTrato(trato);
+
+        //Mensajito de que se rompiu?
+
+        //Para actualizar las listas :)
+        createUIComponents();
+    }
+
+    private void bntEliminarMouseClicked(MouseEvent e) {
+        if(txtPseudonimo.getText() != "Pseudónimo..."){
+            if(!fa.hayTratos(acolito.getAlias(), contacto.getPseudonimo()))
+                fa.eliminarContacto(txtPseudonimo.getText());
+            else
+                fa.muestraExcepcion("No se puede eliminar un contacto si hay tratos vigentes");
+        }
+
+        //Mensajito de que se eliminou?
+
+        //Para actualizar las listas :)
+        createUIComponents();
+    }
+
+    private void btnAnadirMouseClicked(MouseEvent e) {
+        fa.ventanaContactoNuevo(this);
+
+        //Mensajito de que se añadiu?
+
+        //Para actualizar las listas :)
+        createUIComponents();
+    }
+
+    private void ListaContactosMouseClicked(MouseEvent e) {
+        ModeloListaContactos mlc = (ModeloListaContactos) ListaContactos.getModel();
+        contacto = mlc.getElementAt(ListaContactos.getSelectedIndex());
+        fa.rellenarDatos(this);
+    }
+
+    private void ListaTratosMouseClicked(MouseEvent e) {
+        ModeloListaTratos mlc = (ModeloListaTratos) ListaTratos.getModel();
+        trato = mlc.getElementAt(ListaTratos.getSelectedIndex());
+
+        btnRomperTrato.setEnabled(true);
+    }
+
+    private void btnVolverMouseClicked(MouseEvent e) {
+        this.dispose();
+    }
+
+    //INICIALIZACIONES
+    private void inicializarListaTratos() {
+        ArrayList<Trato> tratos = fa.obtenerTratos(acolito.getAlias(), contacto.getPseudonimo());
+        ModeloListaTratos mListaT=new ModeloListaTratos();
+        ListaTratos.setModel(mListaT);
+        mListaT.setElementos(tratos);
+    }
+
+    private void inicializarListaContactos() {
+        ArrayList<Contacto> contactos = fa.obtenerContactos(acolito);
+        ModeloListaContactos mListaC=new ModeloListaContactos();
+        ListaContactos.setModel(mListaC);
+        mListaC.setElementos(contactos);
+        if (mListaC.getSize()>0) {
+            ListaContactos.setSelectedIndex(0);
+            contacto = mListaC.getElementAt(0);
+            fa.rellenarDatos(this);
+
+            bntEliminar.setEnabled(true);
+            btnProponerTrato.setEnabled(true);
+            btnGuardarEdicion.setEnabled(true);
+        } else {
+            bntEliminar.setEnabled(false);
+            btnProponerTrato.setEnabled(false);
+            btnGuardarEdicion.setEnabled(false);
+        }
+    }
+
+    private void createUIComponents() {
+        inicializarListaContactos();
+        inicializarListaTratos();
+
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Sara Castro
-        btnActualizar = new JButton();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
-        Alias = new JLabel();
+        // Generated using JFormDesigner Evaluation license - Laura Antelo González
+        createUIComponents();
+
+        btnGuardarEdicion = new JButton();
         btnVolver = new JButton();
-        Nombre = new JLabel();
-        Influencia = new JLabel();
-        FechaAlta = new JLabel();
-        Pais = new JLabel();
-        Alias_text = new JTextField();
-        Nombre_text = new JTextField();
-        Alta_text = new JTextField();
-        Pais_text = new JTextField();
+        txtPseudonimo = new JTextField();
+        txtNombre = new JTextField();
         scrollPane1 = new JScrollPane();
-        textPane2 = new JTextPane();
-        Descripcion = new JLabel();
-        label2 = new JLabel();
-        label3 = new JLabel();
-        label4 = new JLabel();
-        textField1 = new JTextField();
+        txtDescripcion = new JTextPane();
+        Imagen_texto = new JLabel();
+        Imagen = new JLabel();
+        txtTelefono = new JTextField();
+        btnProponerTrato = new JButton();
+        btnRomperTrato = new JButton();
+        scrollPane2 = new JScrollPane();
+        tratis_texto = new JLabel();
+        bntEliminar = new JButton();
+        btnAnadir = new JButton();
+        contactos_texto = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -61,176 +168,218 @@ public class VContactos extends JDialog {
         setResizable(false);
         var contentPane = getContentPane();
 
-        //---- btnActualizar ----
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addMouseListener(new MouseAdapter() {
+        //---- btnGuardarEdicion ----
+        btnGuardarEdicion.setText("Guardar edici\u00f3n");
+        btnGuardarEdicion.setEnabled(false);
+        btnGuardarEdicion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                btnActualizarMouseClicked(e);
+                btnGuardarMouseClicked(e);
             }
         });
 
-        //======== jScrollPane1 ========
-        {
-
-            //---- jTable1 ----
-            jTable1.setModel(new ModeloUsuarios());
-            jTable1.setPreferredSize(new Dimension(500, 80));
-            jTable1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    jTable1MouseClicked(e);
-                }
-            });
-            jScrollPane1.setViewportView(jTable1);
-        }
-
-        //---- Alias ----
-        Alias.setHorizontalAlignment(SwingConstants.RIGHT);
-        Alias.setText("Alias:");
-
         //---- btnVolver ----
         btnVolver.setText("Volver");
-        btnVolver.addActionListener(e -> btnBuscarActionPerformed(e));
+        btnVolver.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnVolverMouseClicked(e);
+            }
+        });
 
-        //---- Nombre ----
-        Nombre.setHorizontalAlignment(SwingConstants.RIGHT);
-        Nombre.setText("Nombre:");
+        //---- txtPseudonimo ----
+        txtPseudonimo.setText("Pseud\u00f3nimo...");
+        txtPseudonimo.setEditable(false);
+        txtPseudonimo.setForeground(Color.gray);
 
-        //---- Influencia ----
-        Influencia.setHorizontalAlignment(SwingConstants.RIGHT);
-        Influencia.setText("Influencia:");
-
-        //---- FechaAlta ----
-        FechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
-        FechaAlta.setText("Dado de alta el:");
-
-        //---- Pais ----
-        Pais.setHorizontalAlignment(SwingConstants.RIGHT);
-        Pais.setText("Pais:");
-
-        //---- Alta_text ----
-        Alta_text.setEnabled(false);
+        //---- txtNombre ----
+        txtNombre.setText("Nombre...");
+        txtNombre.setForeground(Color.gray);
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(textPane2);
+
+            //---- txtDescripcion ----
+            txtDescripcion.setText("Descripci\u00f3n...");
+            txtDescripcion.setForeground(Color.gray);
+            scrollPane1.setViewportView(txtDescripcion);
         }
 
-        //---- Descripcion ----
-        Descripcion.setHorizontalAlignment(SwingConstants.RIGHT);
-        Descripcion.setText("Descripcion:");
+        //---- Imagen_texto ----
+        Imagen_texto.setText("Foto de perfil");
 
-        //---- label2 ----
-        label2.setText("Foto de perfil");
+        //---- Imagen ----
+        Imagen.setText("(imagen)");
 
-        //---- label3 ----
-        label3.setText("(imagen)");
+        //---- txtTelefono ----
+        txtTelefono.setText("Tel\u00e9fono...");
+        txtTelefono.setForeground(Color.gray);
 
-        //---- label4 ----
-        label4.setText("Jefe de divisi\u00f3n:");
+        //---- btnProponerTrato ----
+        btnProponerTrato.setText("Proponer trato");
+        btnProponerTrato.setEnabled(false);
+        btnProponerTrato.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnProponerTratoMouseClicked(e);
+            }
+        });
 
-        //---- textField1 ----
-        textField1.setEnabled(false);
+        //---- btnRomperTrato ----
+        btnRomperTrato.setText("Romper trato");
+        btnRomperTrato.setEnabled(false);
+        btnRomperTrato.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnRomperTratoMouseClicked(e);
+            }
+        });
+
+        //======== scrollPane2 ========
+        {
+
+            //---- ListaTratos ----
+            ListaTratos.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ListaTratosMouseClicked(e);
+                }
+            });
+            scrollPane2.setViewportView(ListaTratos);
+        }
+
+        //---- tratis_texto ----
+        tratis_texto.setText("LISTA DE TRATOS");
+        tratis_texto.setFont(new Font("Inter", Font.BOLD, 14));
+
+        //---- ListaContactos ----
+        ListaContactos.setBorder(LineBorder.createBlackLineBorder());
+        ListaContactos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ListaContactosMouseClicked(e);
+            }
+        });
+
+        //---- bntEliminar ----
+        bntEliminar.setText("ELIMINAR CONTACTO");
+        bntEliminar.setBackground(new Color(0x990000));
+        bntEliminar.setEnabled(false);
+        bntEliminar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                bntEliminarMouseClicked(e);
+            }
+        });
+
+        //---- btnAnadir ----
+        btnAnadir.setText("A\u00d1ADIR CONTACTO");
+        btnAnadir.setBackground(new Color(0x00cc66));
+        btnAnadir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                btnAnadirMouseClicked(e);
+            }
+        });
+
+        //---- contactos_texto ----
+        contactos_texto.setText("LISTA DE CONTACTOS");
+        contactos_texto.setFont(new Font("Inter", Font.BOLD, 14));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                    .addGap(162, 162, 162)
-                    .addComponent(label2)
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(18, 18, 18)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addComponent(Influencia)
-                                                .addComponent(Alias))
-                                            .addGroup(contentPaneLayout.createParallelGroup()
-                                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                                    .addGap(122, 122, 122)
-                                                    .addComponent(FechaAlta))
-                                                .addComponent(Nombre, GroupLayout.Alignment.TRAILING)))
+                            .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                            .addGap(193, 193, 193)
+                            .addComponent(tratis_texto))
+                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 344, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(contentPaneLayout.createParallelGroup()
+                                    .addComponent(btnGuardarEdicion, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnProponerTrato, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRomperTrato, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addGroup(contentPaneLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                        .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtTelefono, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPseudonimo, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(contentPaneLayout.createSequentialGroup()
                                         .addGroup(contentPaneLayout.createParallelGroup()
                                             .addGroup(contentPaneLayout.createSequentialGroup()
-                                                .addGap(182, 182, 182)
-                                                .addComponent(Pais))
-                                            .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Alta_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                        .addComponent(Nombre_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                        .addComponent(Pais_text, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)))
-                                .addComponent(Descripcion, GroupLayout.Alignment.LEADING)
-                                .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 521, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
-                            .addGap(150, 150, 150)))
+                                                .addGap(21, 21, 21)
+                                                .addComponent(Imagen, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addGap(66, 66, 66)
+                                                .addComponent(Imagen_texto)))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE))))
                     .addGroup(contentPaneLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                            .addComponent(contactos_texto)
+                            .addGap(82, 82, 82))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(label4)
+                                    .addGap(58, 58, 58)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnAnadir, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bntEliminar, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)))
-                            .addGap(21, 21, 21))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(btnActualizar, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(285, Short.MAX_VALUE))))
+                                    .addComponent(ListaContactos, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(29, Short.MAX_VALUE))))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(17, 17, 17)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addComponent(label2))
-                    .addGap(30, 30, 30)
+                        .addComponent(btnVolver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tratis_texto)
+                        .addComponent(contactos_texto))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                            .addGap(25, 25, 25)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Nombre)
-                                .addComponent(Nombre_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Alias)
-                                .addComponent(Alias_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ListaContactos, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+                            .addGap(8, 8, 8)
+                            .addComponent(bntEliminar)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Influencia)
-                                .addComponent(Alta_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(FechaAlta, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(Pais)
-                                .addComponent(Pais_text, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAnadir))
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                            .addComponent(Descripcion)
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(Imagen_texto)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addComponent(Imagen, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(48, 48, 48)
+                                    .addComponent(txtPseudonimo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtTelefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGap(52, 52, 52)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label4)
-                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                            .addComponent(btnActualizar)))
-                    .addGap(15, 15, 15))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(btnRomperTrato)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnProponerTrato)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnGuardarEdicion)))))
+                    .addGap(28, 28, 28))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -238,26 +387,35 @@ public class VContactos extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Sara Castro
-    private JButton btnActualizar;
-    private JScrollPane jScrollPane1;
-    private JTable jTable1;
-    private JLabel Alias;
+    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    private JButton btnGuardarEdicion;
     private JButton btnVolver;
-    private JLabel Nombre;
-    private JLabel Influencia;
-    private JLabel FechaAlta;
-    private JLabel Pais;
-    private JTextField Alias_text;
-    private JTextField Nombre_text;
-    private JTextField Alta_text;
-    private JTextField Pais_text;
+    private JTextField txtPseudonimo;
+    private JTextField txtNombre;
     private JScrollPane scrollPane1;
-    private JTextPane textPane2;
-    private JLabel Descripcion;
-    private JLabel label2;
-    private JLabel label3;
-    private JLabel label4;
-    private JTextField textField1;
+    private JTextPane txtDescripcion;
+    private JLabel Imagen_texto;
+    private JLabel Imagen;
+    private JTextField txtTelefono;
+    private JButton btnProponerTrato;
+    private JButton btnRomperTrato;
+    private JScrollPane scrollPane2;
+    private JList ListaTratos;
+    private JLabel tratis_texto;
+    private JList ListaContactos;
+    private JButton bntEliminar;
+    private JButton btnAnadir;
+    private JLabel contactos_texto;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+
+    //OTROS MÉTODOS
+
+    //Al seleccionar un contacto, se rellenan sus datos en las celdas de texto
+    public void rellenarDatos(){
+        txtPseudonimo.setText(contacto.getPseudonimo());
+        txtNombre.setText(contacto.getNombre());
+        txtTelefono.setText(contacto.getTelefono().toString());
+        txtDescripcion.setText(contacto.getDescripcion());
+    }
+
 }

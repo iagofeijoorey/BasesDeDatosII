@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, comp presentacion::::303:x, par l {seq {space :p:536:p, comp menu1:::p:100:p}, seq l {space s:::p, par l {comp scrollEventos:::p::p, seq {space :p:17:p, par l {comp txtUbicacion:::p::p, comp txtFecha:::p::p}, space :::p, par l:::p {comp insertUbicacion::::244:x, comp insertFecha::::244:x}, space s:::p, comp btnBuscar:::p::p}}}}, space :p:58:p}}"
-			"$verticalGroup": "par l {seq {space :::p, comp presentacion:::::x, space :::p}, seq l {par l {seq {space :0:6:x, par b {comp txtUbicacion::b:p::p, comp insertUbicacion::b:p::p}, space :::p, par b {comp txtFecha::b:p::p, comp insertFecha::b:p::p}, space :p:6:p}, seq l {space :p:22:p, comp btnBuscar:::p::p, space ::26:x}}, comp scrollEventos:::p:255:p, space :p:117:p, comp menu1:::p::p}}"
+			"$horizontalGroup": "par l {seq l {space :::p, comp presentacion:::p:299:p, space :::x, par t:::p {seq l {space :p:17:p, par l {comp txtUbicacion:::p::p, comp txtFecha:::p::p}, space :::p, par l:::p {comp buscaUbicacion::::244:x, comp buscaFecha::::244:x}, space s:::p, comp btnBuscar:::p::p}, comp scrollPane2::t::428:x, comp scrollListaEventos::l::428:x}, par l {seq l {space :p:71:p, comp btnSalir:::p:111:p}, seq l {space s:::p, par t:::p {comp Desplegable::::194:x, comp ScrollListaRituales::::194:x}}}, space ::22:x}}"
+			"$verticalGroup": "par l {seq {par l {seq {space :0:12:x, comp presentacion:::p:451:p}, seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p, space ::25:x}, seq {space :0:12:x, par b {comp txtUbicacion::b:p::p, comp buscaUbicacion::b:p::p}, space :::p, par b {comp txtFecha::b:p::p, comp buscaFecha::b:p::p}, space :p:9:p}}, comp scrollListaEventos:::p:246:p, space :p:12:p, comp scrollPane2:::p:100:p, space :p:18:p}}, space :::p}, seq l {space :p:12:p, comp ScrollListaRituales:::p:304:p, space ::29:x, comp Desplegable:::p:71:p, space :::p, comp btnSalir:::p::p, space :p:17:p}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
@@ -13,37 +13,42 @@ new FormModel {
 			"name": "vPrincipal"
 			"resizable": false
 			add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-				name: "menu1"
+				name: "Desplegable"
 				"text": "Opciones"
+				"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/gui/flechaI.jpg" )
+				"icon": new com.jformdesigner.model.SwingIcon( 2, "FileView.hardDriveIcon" )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "text"
+					name: "PerfilBotonDesplegable"
+					"text": "Perfil"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button5"
-					"text": "text"
+					name: "ContactosBotonDesplegable"
+					"text": "Contactos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContactos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button6"
-					"text": "text"
+					name: "AcólitosBotonDesplegable"
+					"text": "Acólitos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarAcolitos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "text"
+					name: "PropiedadesBotonDesplegable"
+					"text": "Propiedades"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
-					"text": "text"
+					name: "EventosBotonDesplegable"
+					"text": "Eventos"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button4"
-					"text": "text"
+					name: "RitualesBotonDesplegable"
+					"text": "Rituales"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarRituales", true ) )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollEventos"
+				name: "scrollListaEventos"
 				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "eventosFuturos"
+					name: "TablaEventos"
 					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
 						add( new java.util.Vector {
 							add( null )
@@ -96,25 +101,30 @@ new FormModel {
 						add( null )
 						add( null )
 					} )
+					auxiliary() {
+						"JavaCodeGenerator.variableName": "tablaEventos"
+					}
 				} )
 			} )
 			add( new FormComponent( "javax.swing.JTextPane" ) {
 				name: "presentacion"
 				"text": "La diosa Imyr, una figura misteriosa que emergió de los océanos en tiempos antiguos, es reverenciada por su sabiduría y su capacidad para dar forma a la tierra y las aguas. Aunque enfrentó desafíos y conflictos, Imyr siempre mostró compasión por aquellos que la adoraban. Su culto ganó seguidores devotos en todo el mundo, quienes comparten su creencia en la armonía, la prosperidad y la justicia. Imyr se convirtió en un símbolo de esperanza y redención, inspirando a generaciones futuras a seguir sus enseñanzas de sabiduría y valentía"
-				"editable": false
+				"foreground": new java.awt.Color( 153, 153, 153, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				auxiliary() {
 					"JavaCodeGenerator.variableName": "presentacion"
 				}
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "insertUbicacion"
+				name: "buscaUbicacion"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "insertFecha"
+				name: "buscaFecha"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnBuscar"
 				"text": "buscar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnBuscarMouseClicked", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "txtUbicacion"
@@ -124,9 +134,26 @@ new FormModel {
 				name: "txtFecha"
 				"text": "Fecha:"
 			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "ScrollListaRituales"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "TablaRituales"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "ListaEstadísticas"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSalir"
+				"text": "Salir"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnSalirMouseClicked", true ) )
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 30 )
-			"size": new java.awt.Dimension( 1005, 500 )
+			"location": new java.awt.Point( 15, 90 )
+			"size": new java.awt.Dimension( 975, 500 )
 		} )
 	}
 }

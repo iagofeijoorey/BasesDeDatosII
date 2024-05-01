@@ -9,7 +9,6 @@ import aplicacion.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -157,22 +156,9 @@ public class FachadaBaseDatos {
         return daoEventos.consultarEventos(ubicacion, fecha);
     }
     */
-
-    public Acolito validarLogin(String idUsuario, String clave){
-        return daoAcolitos.validarLogin(idUsuario, clave);
-    }
-
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
-    // VENTANA VACOLITOS
-    public ArrayList<String> obtenerAliasAcolitos() {
-        return daoAcolitos.obtenerAliasAcolitos();
-    }
-
-    public Acolito obtenerAcolito(String alias) {
-        return daoAcolitos.obtenerAcolito(alias);
-    }
 
 }

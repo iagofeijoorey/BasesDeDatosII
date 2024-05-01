@@ -14,18 +14,24 @@ package aplicacion;
 public enum TipoTrato {
     //Administrador,
     Soborno,
-    Favor,
+    DebesFavor,
+    DebeFavor,
     Deuda,
-    Extorsion,
-    Normal;
+    Extorsion;
 
 
-    public static TipoTrato stringToTipoAcolito(String tu){
-        switch (tu){
+    public static TipoTrato stringToTipTrato(String tt){
+        switch (tt){
             case ("Soborno"):
                 return Soborno;
+            case ("DebesFavor"):
+                return DebesFavor;
+            case ("Deuda"):
+                return Deuda;
+            case ("Extorsion"):
+                return Extorsion;
             default:
-                return Normal;
+                return DebeFavor;
         }
     }
 }

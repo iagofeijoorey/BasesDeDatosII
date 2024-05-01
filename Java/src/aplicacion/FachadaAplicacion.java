@@ -8,8 +8,6 @@ package aplicacion;
 
 import gui.VPrincipal;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author basesdatos
@@ -74,7 +72,8 @@ public java.util.List<Acolito> consultarAcolitos(){
 
 
     public Boolean comprobarAutentificacion(String idUsuario, String clave){
-        return ga.comprobarAutentificacion(idUsuario, clave, this);
+        //return cu.comprobarAutentificacion(idUsuario, clave);
+        return true;
     }
 
 
@@ -82,9 +81,6 @@ public java.util.List<Acolito> consultarAcolitos(){
         currentUser = u;
     }
 
-    public Acolito getCurrentUser() {
-        return currentUser;
-    }
 
     public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
         return ge.obtenerEventos(ubicacion, fecha);
@@ -118,15 +114,6 @@ public java.util.List<Acolito> consultarAcolitos(){
     //Métodos de VPerfil
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         ga.actualizarAcolito(alias, nombre, ciudad, pais);
-    }
-
-    // Métodos de VAcolitos
-    public ArrayList<String> obtenerAliasAcolitos() {
-        return ga.obtenerAliasAcolitos();
-    }
-
-    public Acolito obtenerAcolito(String alias) {
-        return ga.obtenerAcolito(alias);
     }
 }
 

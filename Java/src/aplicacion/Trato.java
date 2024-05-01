@@ -3,10 +3,10 @@ package aplicacion;
 public class Trato {
     private Integer idTrato;
     private TipoTrato tipoTrato;
-    private Contacto contacto;
-    private Acolito acolito;
+    private String contacto;
+    private String acolito;
 
-    public Trato(Integer idTrato, TipoTrato tipoTrato, Contacto contacto, Acolito acolito){
+    public Trato(Integer idTrato, TipoTrato tipoTrato, String contacto, String acolito){
         this.idTrato = idTrato;
         this.tipoTrato = tipoTrato;
         this.contacto = contacto;
@@ -21,11 +21,11 @@ public class Trato {
         return this.tipoTrato;
     }
 
-    public Contacto getContacto(){
+    public String getContacto(){
         return this.contacto;
     }
 
-    public Acolito getAcolito(){
+    public String getAcolito(){
         return this.acolito;
     }
 
