@@ -5,43 +5,45 @@
 
 package gui;
 
+import aplicacion.Contacto;
+
 /**
  *
  * @author basesdatos
  */
-public class ModeloListaStrings extends javax.swing.AbstractListModel {
-    java.util.List<String> elementos;
+public class ModeloListaContactos extends javax.swing.AbstractListModel {
+    java.util.List<Contacto> elementos;
 
-    public ModeloListaStrings(){
-        this.elementos=new java.util.ArrayList<String>();
+    public ModeloListaContactos(){
+        this.elementos=new java.util.ArrayList<Contacto>();
     }
 
     public int getSize(){
         return this.elementos.size();
     }
 
-    public String getElementAt(int i){
+    public Contacto getElementAt(int i){
         return elementos.get(i);
     }
 
-    public void nuevoElemento(String e){
-        this.elementos.add(e);
+    public void nuevoElemento(Contacto c){
+        this.elementos.add(c);
         fireIntervalAdded(this, this.elementos.size()-1, this.elementos.size()-1);
     }
 
     public void borrarElemento(int i){
-        String e;
-        e=this.elementos.get(i);
+        Contacto c;
+        c = this.elementos.get(i);
         this.elementos.remove(i);
         fireIntervalRemoved(this,i,i);
     }
 
-    public void setElementos(java.util.List<String> elementos){
+    public void setElementos(java.util.List<Contacto> elementos){
         this.elementos=elementos;
         fireContentsChanged(this, 0, elementos.size()-1);
     }
 
-    public java.util.List<String> getElementos(){
+    public java.util.List<Contacto> getElementos(){
         return this.elementos;
     }
 }

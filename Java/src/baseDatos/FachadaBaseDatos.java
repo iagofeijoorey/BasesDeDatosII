@@ -9,6 +9,7 @@ import aplicacion.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -67,6 +68,30 @@ public class FachadaBaseDatos {
             fa.muestraExcepcion(e.getMessage());
 
         }
+    }
+
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
+    public ArrayList<Contacto> obtenerContactos(Acolito acolito){
+        return daoContactos.consultarContactos(acolito);
+    }
+
+    public void actualizarContacto(String pseudonimo, String nombre, String telefono, String descripcion){
+        daoContactos.actualizarContacto(pseudonimo, nombre, telefono, descripcion);
+    }
+
+    public void eliminarContacto(String pseudonimo){
+        daoContactos.eliminarContacto(pseudonimo);
+    }
+
+    public ArrayList<Trato> obtenerTratos(Acolito acolito, Contacto contacto){
+        return daoContactos.obtenerTratos(acolito, contacto);
+    }
+
+    public boolean hayTratos(String acolito, String contacto){
+        return daoContactos.hayTratos(acolito, contacto);
     }
 
     /*
@@ -156,9 +181,6 @@ public class FachadaBaseDatos {
         return daoEventos.consultarEventos(ubicacion, fecha);
     }
     */
-    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-        daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
-    }
 
 
 }

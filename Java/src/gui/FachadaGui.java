@@ -35,21 +35,27 @@ public class FachadaGui {
     }
 
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vP){
-        VPerfil vp;
 
-        vp = new VPerfil(vP, fa);
-        vp.setVisible(true);
-    }
-
-    /*
     public void ventanaContactos(VPrincipal vP){
         VContactos vc;
 
-        vc = new VPerfil(vP, fa);
+        vc = new VContactos(vP, fa);
         vc.setVisible(true);
     }
 
+    public void ventanaContactoNuevo(VContactos vc){
+        VContactoNuevo vcn;
+
+        vcn = new VContactoNuevo(vc, fa);
+        vcn.setVisible(true);
+    }
+
+
+    public void rellenarDatos(VContactos vc){
+       vc.rellenarDatos();
+    }
+
+    /*
     public void ventanaAcolitos(VPrincipal vP){
         VAcolitos va;
 

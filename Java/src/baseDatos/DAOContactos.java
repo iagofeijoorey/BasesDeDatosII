@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,24 +72,24 @@ public class DAOContactos extends AbstractDAO {
     }
 
     /**
-     * Consultar contacto genérico (creo que no se usa, no la voy a implementar aún)
+     * Consultar todos los contactos (con y sin tratos) de un acólito
      */
-    public java.util.List<Contacto>  consultarContactos(String pseudonimo, String nombre){
-        java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
+    public ArrayList<Contacto> consultarContactos(Acolito acolito){
+        ArrayList<Contacto> resultado = new ArrayList<Contacto>();
         Contacto contactoActual;
         Connection con;
-        PreparedStatement stmContactos=null;
+        PreparedStatement stmContactos = null;
         ResultSet rsContactos, rsAcolito;
 
         con=this.getConexion();
 
-        String consulta =   "SELECT c.* " +
-                             "FROM contactos c " +
-                            "WHERE c.pseudonimo like ? and c.nombre like ?";
+        String consulta =  "SELECT ssc.* " +
+                           "FROM sersolocontacto ssc " +
+                           "WHERE ssc.acolito like ?";
+        //FALTA MIRAR TABLA TRATOS---------------------------------------------------------------------------------------------------------
         try  {
             stmContactos=con.prepareStatement(consulta);
-            stmContactos.setString(1, "%"+pseudonimo+"%");
-            stmContactos.setString(2, "%"+nombre+"%");
+            stmContactos.setString(1, "%"+acolito.getAlias()+"%");
 
             rsContactos=stmContactos.executeQuery();
             while (rsContactos.next())
@@ -96,31 +97,7 @@ public class DAOContactos extends AbstractDAO {
                 contactoActual = new Contacto(rsContactos.getString("pseudonimo"), rsContactos.getString("nombre"),
                         rsContactos.getString("descripcion"), rsContactos.getInt("telefono"),
                          null);
-
-                consulta = "select a.*, s.contacto from acólitos a join sersolocontacto s ON a.alias = s.acólito " +
-                        "where s.contacto = ? " +
-                        "union " +
-                        "select a.*, s.contacto from acólitos a join tratos s ON a.alias = s.acólito " +
-                        "where s.contacto = ? ";
-                try  {
-                    stmContactos=con.prepareStatement(consulta);
-                    stmContactos.setString(1, contactoActual.getPseudonimo());
-                    stmContactos.setString(2, contactoActual.getPseudonimo());
-                    rsAcolito = stmContactos.executeQuery();
-                    if (rsAcolito.next())
-                    {
-                        contactoActual.setAcolito(new Acolito(rsAcolito.getString("alias"), rsAcolito.getString("contraseña"),
-                                rsAcolito.getString("nombrecompleto"), rsAcolito.getString("direccion"), rsAcolito.getInt("influencia"),
-                                TipoAcolito.valueOf(rsAcolito.getString("tipo_usuario"))));
-                    }
-                } catch (SQLException e){
-                    System.out.println(e.getMessage());
-                    this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-                }finally{
-                    try {
-                        assert stmContactos != null;
-                        stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-                }
+                resultado.add(contactoActual);
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -133,9 +110,105 @@ public class DAOContactos extends AbstractDAO {
         return resultado;
    }
 
-    /**
-     * Consultar contacto dado el acólito del que es contacto
+    /*
+     Se elimana un contacto de la base de datos (no puede tener tratos contigo)
      */
+   public void eliminarContacto(String pseudonimo){
+       Contacto contacto;
+       Connection con;
+       PreparedStatement stmContactos = null;
+
+       con=this.getConexion();
+
+       String consulta = "delete from sersolocontacto where contacto = ? ";
+       try  {
+           stmContactos=con.prepareStatement(consulta);
+           stmContactos.setString(1, pseudonimo);
+
+           stmContactos.executeUpdate();
+
+       } catch (SQLException e){
+           System.out.println(e.getMessage());
+           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+       }finally{
+           try {
+               assert stmContactos != null;
+               stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+       }
+   }
+
+   /*
+    Tras realizar cambios en un contacto, se actualiza la base de datos
+    */
+
+    public void actualizarContacto(String pseudonimo, String nombre, String telefono, String descripcion){
+        Contacto contacto;
+        Connection con;
+        PreparedStatement stmContactos = null;
+
+        con=this.getConexion();
+
+        String consulta = "update contacto " +
+                "set nombre = ?, telefono = ?, descripcion = ? " +
+                "where pseudonimo = ? ";
+        try  {
+            stmContactos=con.prepareStatement(consulta);
+            stmContactos.setString(1, nombre);
+            stmContactos.setString(2, telefono);
+            stmContactos.setString(3, descripcion);
+            stmContactos.setString(4, pseudonimo);
+
+            stmContactos.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmContactos != null;
+                stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+
+    /*
+    Comprobar si un contacto y acólito dados tiene tratos entre ellos
+     */
+    public boolean hayTratos(String acolito, String contacto){
+        Connection con;
+        PreparedStatement stmContactos = null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta = "select * " +
+                          "from tratos " +
+                          "where acolito = ? and contacto = ?";
+        try  {
+            stmContactos=con.prepareStatement(consulta);
+            stmContactos.setString(1, acolito);
+            stmContactos.setString(2, contacto);
+
+            rsTratos = stmContactos.executeQuery();
+
+            if(rsTratos.next()) return true;
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmContactos != null;
+                stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return false;
+    }
+
+
+   /*
+    /**
+     * Consultar
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(Acolito acolito, String pseudonimo, String nombre){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -167,8 +240,7 @@ public class DAOContactos extends AbstractDAO {
             while (rsContactos.next())
             {
                 resultado.add(new Contacto(rsContactos.getString("pseudonimo"), rsContactos.getString("nombre"),
-                        rsContactos.getString("descripcion"), rsContactos.getInt("telefono"),
-                        acolito));
+                        rsContactos.getString("descripcion"), rsContactos.getInt("telefono")));
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -183,7 +255,7 @@ public class DAOContactos extends AbstractDAO {
 
     /**
      * Consultar contacto dado el nombre o alias aproximado (usamos %) del acólito del que es contacto
-     */
+
     public java.util.List<Contacto>  consultarContactosDeAcolito(String aliasAcolito, String pseudonimoContacto, String nombreContacto){
         java.util.ArrayList<Contacto> resultado = new java.util.ArrayList<Contacto>();
         Contacto contactoActual;
@@ -307,4 +379,5 @@ public class DAOContactos extends AbstractDAO {
         }
         return resultado;
     }
+    */
 }

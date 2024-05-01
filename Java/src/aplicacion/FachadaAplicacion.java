@@ -6,7 +6,10 @@
 package aplicacion;
 
 
+import gui.VContactos;
 import gui.VPrincipal;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -16,18 +19,13 @@ import gui.VPrincipal;
 public class FachadaAplicacion {
     private gui.FachadaGui fgui;
     private baseDatos.FachadaBaseDatos fbd;
-    private GestionEventos ge;
-    private GestionPropiedades gp;
     private GestionContactos gc;
     private GestionAcolitos ga;
-    private Acolito currentUser;
     
     
     public FachadaAplicacion(){
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
-        ge = new GestionEventos(fgui, fbd);
-        gp = new GestionPropiedades(fgui, fbd);
         gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
     }
@@ -47,10 +45,6 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
- 
-public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
-  return cl.obtenerLibros(id, titulo,  isbn,  autor);
-}
 
 public java.util.List<Acolito> consultarAcolitos(){
     return ga.consultarAcolitos();
@@ -76,44 +70,52 @@ public java.util.List<Acolito> consultarAcolitos(){
         return true;
     }
 
-
-    public void setCurrentUser(Acolito u) {
-        currentUser = u;
-    }
-
-
-    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
-        return ge.obtenerEventos(ubicacion, fecha);
-    }
-
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vp){
-        fgui.ventanaPerfil(vp);
+
+    public void ventanaContactos(VPrincipal vP){
+        fgui.ventanaContactos(vP);
     }
 
-    public void ventanaContactos(){
-        //fgui.ventanaContactos();
+    public void ventanaContactoNuevo(VContactos vc){
+        fgui.ventanaContactoNuevo(vc);
     }
 
     public void ventanaAcolitos(){
         //fgui.ventanaAcolitos();
     }
 
-    public void ventanaPropiedades(){
-        //fgui.ventanaPropiedades();
-    }
-
-    public void ventanaEventos(){
-        fgui.ventanaEventos();
-    }
 
     public void ventanaRituales(){
         //fgui.ventanaRituales();
     }
 
-    //Métodos de VPerfil
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         ga.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
+    //Métodos que hacen falta para VContactos
+    public ArrayList<Contacto> obtenerContactos(Acolito acolito){
+        return gc.obtenerContactos(acolito);
+    }
+
+    public void rellenarDatos(VContactos vc){
+        gc.rellenarDatos(vc);
+    }
+
+    public void actualizarContacto(String pseudonimo, String nombre, String telefono, String descripcion){
+        gc.actualizarContacto(pseudonimo, nombre, telefono, descripcion);
+    }
+
+    public void eliminarContacto(String pseudonimo){
+        gc.eliminarContacto(pseudonimo);
+    }
+
+    public ArrayList<Trato> obtenerTratos(Acolito acolito, Contacto contacto){
+        return gc.obtenerTratos(acolito, contacto);
+    }
+
+    public boolean hayTratos(String acolito, String contacto){
+        return gc.hayTratos(acolito, contacto);
     }
 }
 

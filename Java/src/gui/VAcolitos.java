@@ -306,7 +306,6 @@ public class vAcolitos extends javax.swing.JDialog {
     /* btnVolver: Vuelve a la ventana principal del programa */
     private void btnVolver(ActionEvent e) {
         // TODO add your code here
-        padre.buscarEventos();
         this.dispose();
     }
 

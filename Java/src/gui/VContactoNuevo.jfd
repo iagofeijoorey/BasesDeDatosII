@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.8" class="java.beans.XMLDecoder">
+ <object class="com.jformdesigner.model.FormModel">
+  <void property="contentType">
+   <string>form/swing</string>
+  </void>
+  <void property="root">
+   <object class="com.jformdesigner.model.FormRoot">
+    <void method="add">
+     <object class="com.jformdesigner.model.FormWindow">
+      <string>javax.swing.JDialog</string>
+      <object class="com.jformdesigner.model.FormLayoutManager">
+       <class>org.jdesktop.layout.GroupLayout</class>
+       <void method="setProperty">
+        <string>$horizontalGroup</string>
+        <string>par l {seq {par t {seq {space :::x, comp txtDescripcion:::p:251:p}, seq {space :p:66:p, comp btnCancelar::::89:x, space s:::p, comp btnAceptar:::p:93:p, space :p:23:p}, seq {space :0:0:x, par t {comp textoUsuario:::p:251:p:1, comp textoClave:::p:251:p:1, comp textoClave2:::p:251:p}}}, space ::39:x}}</string>
+       </void>
+       <void method="setProperty">
+        <string>$verticalGroup</string>
+        <string>par l {seq l {space :p:23:p, comp textoUsuario:::p::p, space u:::p, comp textoClave:::p::p, space u:::p, comp textoClave2:::p::p, space u:::p, comp txtDescripcion:::p:71:p, space :::p, par b {comp btnAceptar::b:::x, comp btnCancelar::b:p::p}, space ::18:x}}</string>
+       </void>
+      </object>
+      <void method="setProperty">
+       <string>defaultCloseOperation</string>
+       <int>2</int>
+      </void>
+      <void method="setProperty">
+       <string>title</string>
+       <string>Añadir contacto nuevo</string>
+      </void>
+      <void method="setProperty">
+       <string>modal</string>
+       <boolean>true</boolean>
+      </void>
+      <void method="setProperty">
+       <string>name</string>
+       <string>VAutentificacion</string>
+      </void>
+      <void method="setProperty">
+       <string>resizable</string>
+       <boolean>false</boolean>
+      </void>
+      <void method="addEvent">
+       <object class="com.jformdesigner.model.FormEvent">
+        <string>java.awt.event.KeyListener</string>
+        <string>keyPressed</string>
+        <string>formKeyPressed</string>
+        <boolean>true</boolean>
+       </object>
+      </void>
+      <void method="addEvent">
+       <object class="com.jformdesigner.model.FormEvent">
+        <string>java.awt.event.KeyListener</string>
+        <string>keyTyped</string>
+        <string>formKeyTyped</string>
+        <boolean>true</boolean>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Pseudonimo...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>textoUsuario</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Aceptar</string>
+        </void>
+        <void property="name">
+         <string>btnAceptar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnAceptarActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Cancelar</string>
+        </void>
+        <void property="name">
+         <string>btnCancelar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnCancelarActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Nombre...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>textoClave</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Teléfono...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>textoClave2</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>textoUsuarioActionPerformed</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JTextPane</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Descripción...</string>
+        </void>
+        <void method="setProperty">
+         <string>foreground</string>
+         <object class="java.awt.Color" field="gray"/>
+        </void>
+        <void property="name">
+         <string>txtDescripcion</string>
+        </void>
+       </object>
+      </void>
+      <void property="name">
+       <string>this</string>
+      </void>
+     </object>
+     <object class="com.jformdesigner.model.FormLayoutConstraints">
+      <null/>
+      <void method="setProperty">
+       <string>location</string>
+       <object class="java.awt.Point">
+        <int>30</int>
+        <int>65</int>
+       </object>
+      </void>
+      <void method="setProperty">
+       <string>size</string>
+       <object class="java.awt.Dimension">
+        <int>330</int>
+        <int>305</int>
+       </object>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

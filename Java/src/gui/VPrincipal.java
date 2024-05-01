@@ -33,21 +33,10 @@ public class VPrincipal extends javax.swing.JFrame {
     }
 
     //EVENTOS DE LA BARRA DE OPCIONES
-    private void entrarPerfil(MouseEvent e) {
-        fa.ventanaPerfil(this);
-    }
-
     private void entrarContactos(MouseEvent e) {
-        fa.ventanaContactos();
+        fa.ventanaContactos(this);
     }
 
-    private void entrarPropiedades(MouseEvent e) {
-        fa.ventanaPropiedades();
-    }
-
-    private void entrarEventos(MouseEvent e) {
-        fa.ventanaEventos();
-    }
 
     private void entrarRituales(MouseEvent e) {
         fa.ventanaRituales();
@@ -60,6 +49,14 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //BOTONES
     private void btnBuscarMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarPropiedades(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void entrarEventos(MouseEvent e) {
         // TODO add your code here
     }
 
@@ -115,12 +112,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
             //---- PerfilBotonDesplegable ----
             PerfilBotonDesplegable.setText("Perfil");
-            PerfilBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarPerfil(e);
-                }
-            });
             Desplegable.add(PerfilBotonDesplegable);
 
             //---- ContactosBotonDesplegable ----
@@ -145,22 +136,10 @@ public class VPrincipal extends javax.swing.JFrame {
 
             //---- PropiedadesBotonDesplegable ----
             PropiedadesBotonDesplegable.setText("Propiedades");
-            PropiedadesBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarPropiedades(e);
-                }
-            });
             Desplegable.add(PropiedadesBotonDesplegable);
 
             //---- EventosBotonDesplegable ----
             EventosBotonDesplegable.setText("Eventos");
-            EventosBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarEventos(e);
-                }
-            });
             Desplegable.add(EventosBotonDesplegable);
 
             //---- RitualesBotonDesplegable ----
@@ -331,13 +310,5 @@ public class VPrincipal extends javax.swing.JFrame {
     private JButton btnSalir;
     // End of variables declaration//GEN-END:variables
 
-
-    public void buscarEventos(){
-        ModeloTablaEventos m;
-
-        m=(ModeloTablaEventos) tablaEventos.getModel();
-        m.setFilas(fa.obtenerEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        tablaEventos.setRowSelectionInterval(0, 0);
-    }
 
 }
