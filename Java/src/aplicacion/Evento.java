@@ -4,6 +4,8 @@
  */
 package aplicacion;
 
+import java.util.Date;
+
 /**
  *
  * @author basesdatos
@@ -11,14 +13,14 @@ package aplicacion;
 public class Evento {
 
     private String ubicacion;
-    private String fecha;
+    private Date fecha;
     private String tipoEvento;
     private String descripcion;
     private Acolito autorizador;
     private Acolito organizador;
 
-    //Constructor
-    public Evento(String ubicacion, String fecha, String tipoEvento, String descripcion, Acolito organizador) {
+    // Constructor
+    public Evento(String ubicacion, Date fecha, String tipoEvento, String descripcion, Acolito organizador) {
         this.ubicacion = ubicacion;
         this.fecha = fecha;
         this.tipoEvento = tipoEvento;
@@ -27,11 +29,11 @@ public class Evento {
         this.organizador = organizador;
     }
 
-    //Getters
+    // Getters
     public String getUbicacion() {
         return ubicacion;
     }
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
     public String getTipoEvento() {
@@ -45,11 +47,11 @@ public class Evento {
         return organizador;
     }
 
-    //Setters
+    // Setters
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
     public void setTipoEvento(String tipoEvento) {
@@ -65,5 +67,5 @@ public class Evento {
         this.organizador = organizador;
     }
 
-    //OTRAS FUNCIONES
+    // OTRAS FUNCIONES
 }

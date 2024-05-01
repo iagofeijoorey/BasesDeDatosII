@@ -46,7 +46,7 @@ public class VAutentificacion extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private void initComponents() {
         textoUsuario = new JTextField();
         btnAceptar = new JButton();
@@ -71,10 +71,9 @@ public class VAutentificacion extends javax.swing.JDialog {
                 formKeyTyped(e);
             }
         });
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //---- textoUsuario ----
-        textoUsuario.setText("Usuario...");
         textoUsuario.setForeground(Color.gray);
         textoUsuario.addActionListener(e -> textoUsuarioActionPerformed(e));
 
@@ -91,7 +90,6 @@ public class VAutentificacion extends javax.swing.JDialog {
         etiquetaFallo.setText("Autentificaci\u00f3n incorrecta!");
 
         //---- textoClave ----
-        textoClave.setText("Contrase\u00f1a...");
         textoClave.setForeground(Color.gray);
         textoClave.addActionListener(e -> textoUsuarioActionPerformed(e));
 
@@ -175,7 +173,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private JTextField textoUsuario;
     private JButton btnAceptar;
     private JButton btnCancelar;

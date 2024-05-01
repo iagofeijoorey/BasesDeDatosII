@@ -19,19 +19,19 @@ public class GestionEventos {
 
 
     public java.util.List<Evento> consultarEventos(){
-        return fbd.consultarAcolitos();
+        return fbd.consultarEventos();
     }
 
-    public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha) {
-        return fbd.obtenerEventos(ubicacion, fecha);
+    public java.util.List<Evento> consultarEventos(String alias) {
+        return fbd.consultarEventos(alias);
     }
 
-    public void borrarEvento(Acolito acolito){
+    /*public void borrarEvento(Acolito acolito){
         fbd.borrarAcolito(acolito);
     }
 
     public void nuevoEvento(Acolito acolito){
         fbd.insertarAcolito(acolito);
-    }
+    }*/
 
 }

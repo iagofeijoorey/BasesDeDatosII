@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8" class="java.beans.XMLDecoder">
+<java version="17.0.10" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par t {seq {space :::x, comp txtDescripcion:::p:251:p}, seq {space :p:66:p, comp btnCancelar::::89:x, space s:::p, comp btnAceptar:::p:93:p, space :p:23:p}, seq {space :0:0:x, par t {comp textoUsuario:::p:251:p:1, comp textoClave:::p:251:p:1, comp textoClave2:::p:251:p}}}, space ::39:x}}</string>
+        <string>par l {seq {par t {seq {space :::x, comp txtDescripcion:::p:251:p}, seq {space :p:66:p, comp btnCancelar::::89:x, space s:::p, comp btnAceptar:::p:93:p, space :p:23:p}, seq {space :0:0:x, par t {comp textoPseudonimo:::p:251:p:1, comp textoNombre:::p:251:p:1, comp textoTelefono:::p:251:p}}}, space ::39:x}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:23:p, comp textoUsuario:::p::p, space u:::p, comp textoClave:::p::p, space u:::p, comp textoClave2:::p::p, space u:::p, comp txtDescripcion:::p:71:p, space :::p, par b {comp btnAceptar::b:::x, comp btnCancelar::b:p::p}, space ::18:x}}</string>
+        <string>par l {seq l {space :p:23:p, comp textoPseudonimo:::p::p, space u:::p, comp textoNombre:::p::p, space u:::p, comp textoTelefono:::p::p, space u:::p, comp txtDescripcion:::p:71:p, space :::p, par b {comp btnAceptar::b:::x, comp btnCancelar::b:p::p}, space :::x}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -40,22 +40,6 @@
        <string>resizable</string>
        <boolean>false</boolean>
       </void>
-      <void method="addEvent">
-       <object class="com.jformdesigner.model.FormEvent">
-        <string>java.awt.event.KeyListener</string>
-        <string>keyPressed</string>
-        <string>formKeyPressed</string>
-        <boolean>true</boolean>
-       </object>
-      </void>
-      <void method="addEvent">
-       <object class="com.jformdesigner.model.FormEvent">
-        <string>java.awt.event.KeyListener</string>
-        <string>keyTyped</string>
-        <string>formKeyTyped</string>
-        <boolean>true</boolean>
-       </object>
-      </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormComponent">
         <string>javax.swing.JTextField</string>
@@ -68,15 +52,7 @@
          <object class="java.awt.Color" field="gray"/>
         </void>
         <void property="name">
-         <string>textoUsuario</string>
-        </void>
-        <void method="addEvent">
-         <object class="com.jformdesigner.model.FormEvent">
-          <string>java.awt.event.ActionListener</string>
-          <string>actionPerformed</string>
-          <string>textoUsuarioActionPerformed</string>
-          <boolean>true</boolean>
-         </object>
+         <string>textoPseudonimo</string>
         </void>
        </object>
       </void>
@@ -132,15 +108,7 @@
          <object class="java.awt.Color" field="gray"/>
         </void>
         <void property="name">
-         <string>textoClave</string>
-        </void>
-        <void method="addEvent">
-         <object class="com.jformdesigner.model.FormEvent">
-          <string>java.awt.event.ActionListener</string>
-          <string>actionPerformed</string>
-          <string>textoUsuarioActionPerformed</string>
-          <boolean>true</boolean>
-         </object>
+         <string>textoNombre</string>
         </void>
        </object>
       </void>
@@ -156,15 +124,7 @@
          <object class="java.awt.Color" field="gray"/>
         </void>
         <void property="name">
-         <string>textoClave2</string>
-        </void>
-        <void method="addEvent">
-         <object class="com.jformdesigner.model.FormEvent">
-          <string>java.awt.event.ActionListener</string>
-          <string>actionPerformed</string>
-          <string>textoUsuarioActionPerformed</string>
-          <boolean>true</boolean>
-         </object>
+         <string>textoTelefono</string>
         </void>
        </object>
       </void>

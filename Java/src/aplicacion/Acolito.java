@@ -6,6 +6,8 @@ package aplicacion;
  */
 
 
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +16,7 @@ package aplicacion;
 public class Acolito {
     private String alias;
     private String contraseña;
-    private String fechaingreso;
+    private Date fechaingreso;
     private String nombreCompleto;
     private double dinero;
     private Integer telefono;
@@ -25,8 +27,8 @@ public class Acolito {
     private String nombreDivision; // Atributo por si el acólito es un jefe de división/gestor/guía
     private String jefeDivision; // Atributo por si el acólito es un miembro base y está asociado a una división
 
-    /* Constructor para cuando queremos extraer toda la info de un acólito */
-    public Acolito(String alias, String contraseña, String fechaingreso, String nombreCompleto, double dinero, Integer telefono, String direccion, int influencia, TipoAcolito tipo, boolean primeraEntrada, String jefeDivision, String nombreDivision) {
+    /* Constructor para cuando queremos EXTRAER toda la info de un acólito */
+    public Acolito(String alias, String contraseña, Date fechaingreso, String nombreCompleto, double dinero, Integer telefono, String direccion, int influencia, TipoAcolito tipo, boolean primeraEntrada, String jefeDivision, String nombreDivision) {
         this.alias = alias;
         this.contraseña = contraseña;
         this.fechaingreso = fechaingreso;
@@ -39,6 +41,22 @@ public class Acolito {
         this.primeraEntrada = primeraEntrada;
         this.nombreDivision = nombreDivision;
         this.jefeDivision = jefeDivision;
+    }
+
+    /* Constructor para cuando queremos CREAR un nuevo acólito */
+    public Acolito(String alias, String contraseña, String nombreCompleto, Integer telefono, String direccion, int influencia, TipoAcolito tipo, String jefeDivision, String nombreDivision) {
+        this.alias = alias;
+        this.contraseña = contraseña;
+        this.nombreCompleto = nombreCompleto;
+        this.dinero = 0;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.influencia = influencia;
+        this.tipo = tipo;
+        this.primeraEntrada = true;
+        this.nombreDivision = nombreDivision;
+        this.jefeDivision = jefeDivision;
+        this.fechaingreso = new Date();
     }
 
     public String getAlias() {
@@ -74,7 +92,7 @@ public class Acolito {
         return telefono;
     }
 
-    public String getFechaingreso() {
+    public Date getFechaingreso() {
         return fechaingreso;
     }
 
@@ -124,7 +142,7 @@ public class Acolito {
         this.telefono = telefono;
     }
 
-    public void setFechaingreso(String fechaingreso){
+    public void setFechaingreso(Date fechaingreso){
        this.fechaingreso = fechaingreso;
     }
 

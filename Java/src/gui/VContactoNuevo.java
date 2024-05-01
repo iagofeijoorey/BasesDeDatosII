@@ -5,6 +5,7 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
+import aplicacion.Contacto;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -17,40 +18,38 @@ import javax.swing.LayoutStyle;
  */
 public class VContactoNuevo extends JDialog {
     private FachadaAplicacion fa;
+    private Contacto contacto;
+
     public VContactoNuevo(Window owner, FachadaAplicacion fa) {
         super(owner);
         this.fa = fa;
+        contacto = null;
         initComponents();
     }
 
-    private void formKeyPressed(KeyEvent e) {
-        // TODO add your code here
-    }
-
-    private void formKeyTyped(KeyEvent e) {
-        // TODO add your code here
-    }
-
-    private void textoUsuarioActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
+    public Contacto getContacto() { return contacto; }
 
     private void btnAceptarActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        if(textoPseudonimo.getText().equals("Pseudónimo...") && textoPseudonimo.getText() != null){
+            contacto = fa.crearContacto(textoPseudonimo.getText(), textoNombre.getText(), textoTelefono.getText(), txtDescripcion.getText());
+            }
+        //else //Imprimir que o valor non sirve
+
+        this.dispose();
     }
 
     private void btnCancelarActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        this.dispose();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
-        textoUsuario = new JTextField();
+        // Generated using JFormDesigner Evaluation license - Sara Castro
+        textoPseudonimo = new JTextField();
         btnAceptar = new JButton();
         btnCancelar = new JButton();
-        textoClave = new JTextField();
-        textoClave2 = new JTextField();
+        textoNombre = new JTextField();
+        textoTelefono = new JTextField();
         txtDescripcion = new JTextPane();
 
         //======== this ========
@@ -59,22 +58,11 @@ public class VContactoNuevo extends JDialog {
         setModal(true);
         setName("VAutentificacion");
         setResizable(false);
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                formKeyPressed(e);
-            }
-            @Override
-            public void keyTyped(KeyEvent e) {
-                formKeyTyped(e);
-            }
-        });
         var contentPane = getContentPane();
 
-        //---- textoUsuario ----
-        textoUsuario.setText("Pseudonimo...");
-        textoUsuario.setForeground(Color.gray);
-        textoUsuario.addActionListener(e -> textoUsuarioActionPerformed(e));
+        //---- textoPseudonimo ----
+        textoPseudonimo.setText("Pseudonimo...");
+        textoPseudonimo.setForeground(Color.gray);
 
         //---- btnAceptar ----
         btnAceptar.setText("Aceptar");
@@ -84,15 +72,13 @@ public class VContactoNuevo extends JDialog {
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(e -> btnCancelarActionPerformed(e));
 
-        //---- textoClave ----
-        textoClave.setText("Nombre...");
-        textoClave.setForeground(Color.gray);
-        textoClave.addActionListener(e -> textoUsuarioActionPerformed(e));
+        //---- textoNombre ----
+        textoNombre.setText("Nombre...");
+        textoNombre.setForeground(Color.gray);
 
-        //---- textoClave2 ----
-        textoClave2.setText("Tel\u00e9fono...");
-        textoClave2.setForeground(Color.gray);
-        textoClave2.addActionListener(e -> textoUsuarioActionPerformed(e));
+        //---- textoTelefono ----
+        textoTelefono.setText("Tel\u00e9fono...");
+        textoTelefono.setForeground(Color.gray);
 
         //---- txtDescripcion ----
         txtDescripcion.setText("Descripci\u00f3n...");
@@ -116,27 +102,27 @@ public class VContactoNuevo extends JDialog {
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textoClave2, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(textoPseudonimo, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textoNombre, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textoTelefono, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE))))
                     .addContainerGap(39, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGap(23, 23, 23)
-                    .addComponent(textoUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoPseudonimo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(textoClave, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(textoClave2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoTelefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAceptar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar))
-                    .addContainerGap(18, Short.MAX_VALUE))
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -144,12 +130,12 @@ public class VContactoNuevo extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
-    private JTextField textoUsuario;
+    // Generated using JFormDesigner Evaluation license - Sara Castro
+    private JTextField textoPseudonimo;
     private JButton btnAceptar;
     private JButton btnCancelar;
-    private JTextField textoClave;
-    private JTextField textoClave2;
+    private JTextField textoNombre;
+    private JTextField textoTelefono;
     private JTextPane txtDescripcion;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8" class="java.beans.XMLDecoder">
+<java version="17.0.10" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {space :p:18:p, par l {seq {par t {seq {space :0:530:x, comp btnAnadir:::p:169:p}, seq {par l {seq {par l {comp txtInfluencia::::94:x, comp txtAlias:::::x}, space u:::p, par l {comp txtNombre:::::x, seq {comp txtTelefono:::p:158:p, space :::p, comp txtContraseña:::p:188:p}}}, seq {par l {seq l {par t:::p {comp txtNombreDivision::::206:x, comp txtDireccion::::206:x}, space s:::p, par l:::p {comp txtAltaDivision::::234:x, comp txtJefe::::234:x}}, par t:l::p {seq {comp bntEliminar:::p:163:p, space :::x, comp btnGuardar:::p::p}, seq {comp scrollDescripcion:::p:230:p, space s:::p, comp scrollEventos:::p:205:p}}}, space :0:0:x}, seq t {space ::140:x, comp imagenAcolito:::p:122:p, space :p:51:p, par l {comp btnBuscar:::p:145:p, comp txtBuscarPorAlias:::::x}}}, space :p:25:p, comp scrollAcolitos:::p:216:p}}, space :p:16:p}, seq {comp btnVolver:::p::p, space ::395:x, comp labelAcolitos:::p::p, space :p:58:p}}}}</string>
+        <string>par l {seq {space :p:18:p, par l {seq {par t {seq {space :0:0:x, comp btnAnadir:::p:169:p}, seq {par t {seq t {par l {seq {comp txtAlias:::::x, space u:::p, comp txtNombre:::::x}, seq {par l:::p {seq l {par t:::p {comp txtNombreDivision::::206:x, comp txtDireccion::::206:x}, space s:::p, par l:::p {comp txtAltaComunidad::::234:x, comp txtJefe::::234:x}}, seq l {comp bntEliminar:::p:163:p, space :::x, comp btnGuardar:::p::p}, seq {comp txtInfluencia:::p:92:p, space :::p, comp txtTelefono:::p:150:p, space u:::p, comp txtContraseña::::198:x}}, space :0:0:x}}, space :p:25:p}, seq l {space :6:6:p, comp scrollEventos:::p:446:p, space :p:31:p}, seq t {space :0:0:x, par l {comp cbTipoAcolito:::p:122:p, seq l {comp imagenAcolito:::p:122:p, space :p:46:p, par l:::p {comp txtBuscarPorAlias::::151:x, comp btnBuscar::::151:x}}}, space :p:18:p}}, comp scrollAcolitos:::p:216:p}}, space :p:16:p}, seq {comp btnVolver:::p::p, space :::x, comp labelAcolitos:::p::p, space :p:58:p}}}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :p:18:p, comp labelAcolitos:::p::p, space s:::p, comp scrollAcolitos:::::x, space :::p, comp btnAnadir:::p:36:p, space :p:12:p}, seq l {space :p:14:p, comp btnVolver:::p::p, space :p:40:p, par t {seq {comp txtBuscarPorAlias:::p::p, space :::p, comp btnBuscar:::p:22:p}, comp imagenAcolito:::p:79:p}, space s:::p, par b {comp txtNombre::b:p::p, comp txtAlias::b::0:x}, space u:::p, par b {comp txtInfluencia::b:p::p, comp txtTelefono::b:p::p, comp txtContraseña::b:p::p}, space :::p, par b {comp txtNombreDivision::b:p::p, comp txtJefe::b:p::p}, space :::p, par b {comp txtDireccion::b:p::p, comp txtAltaDivision::b:p::p}, space :::p, par l {comp scrollDescripcion:::p:160:p, comp scrollEventos:::p:164:p}, space :::p, par l {seq {comp btnGuardar:::p:22:p, space :::x}, seq t {comp bntEliminar:::::x, space :p:14:p}}}}</string>
+        <string>par l {seq t {par l {seq l {space :p:10:p, par b {comp labelAcolitos::b:p::p, comp txtBuscarPorAlias::b:p::p}, space :::p, par l {comp scrollAcolitos:::::x, seq {par l {comp btnBuscar:::p::p, comp imagenAcolito:::p:79:p}, space :::p, comp cbTipoAcolito:::p::p, space :p:198:p, comp scrollEventos::::0:x, space :p:4:p}}, space :::p}, seq l {space :p:14:p, comp btnVolver:::p::p, space :p:143:p, par b {comp txtNombre::b:p::p, comp txtAlias::b:::x}, space u:::p, par b {comp txtTelefono::b:p::p, comp txtInfluencia::b:p::p, comp txtContraseña::b:p::p}, space :::p, par b {comp txtNombreDivision::b:p::p, comp txtJefe::b:p::p}, space :::p, par b {comp txtDireccion::b:p::p, comp txtAltaComunidad::b:p::p}, space :p:186:p}}, par t:::p {comp bntEliminar::l:::x, par b {comp btnAnadir::b:p:36:p, comp btnGuardar::b:p::p}}, space :p:12:p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -137,14 +137,14 @@
         <string>javax.swing.JTextField</string>
         <void method="setProperty">
          <string>text</string>
-         <string>Alta división...</string>
+         <string>Alta Comunidad...</string>
         </void>
         <void method="setProperty">
          <string>editable</string>
          <boolean>false</boolean>
         </void>
         <void property="name">
-         <string>txtAltaDivision</string>
+         <string>txtAltaComunidad</string>
         </void>
        </object>
       </void>
@@ -165,37 +165,6 @@
         </void>
         <void property="name">
          <string>labelAcolitos</string>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="com.jformdesigner.model.FormContainer">
-        <string>javax.swing.JScrollPane</string>
-        <object class="com.jformdesigner.model.FormLayoutManager">
-         <class>javax.swing.JScrollPane</class>
-        </object>
-        <void property="name">
-         <string>scrollDescripcion</string>
-        </void>
-        <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
-          <string>javax.swing.JTextArea</string>
-          <void method="setProperty">
-           <string>text</string>
-           <string>Descripción...</string>
-          </void>
-          <void method="setProperty">
-           <string>font</string>
-           <object class="java.awt.Font">
-            <string>Inter</string>
-            <int>0</int>
-            <int>13</int>
-           </object>
-          </void>
-          <void property="name">
-           <string>txtDescripcion</string>
-          </void>
-         </object>
         </void>
        </object>
       </void>
@@ -331,6 +300,14 @@
           <void property="name">
            <string>listaAcolitos</string>
           </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>java.awt.event.MouseListener</string>
+            <string>mouseClicked</string>
+            <string>listaAcolitosMouseClicked</string>
+            <boolean>true</boolean>
+           </object>
+          </void>
          </object>
         </void>
        </object>
@@ -359,6 +336,14 @@
 });</string>
          </void>
         </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>btnBuscar</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
        </object>
       </void>
       <void method="add">
@@ -385,6 +370,37 @@
         </void>
        </object>
       </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JComboBox</string>
+        <void method="setProperty">
+         <string>model</string>
+         <object class="javax.swing.DefaultComboBoxModel">
+          <void property="selectedItem">
+           <string>Cabecilla</string>
+          </void>
+          <void method="addElement">
+           <string>Cabecilla</string>
+          </void>
+          <void method="addElement">
+           <string>JefeDivision</string>
+          </void>
+          <void method="addElement">
+           <string>Normal</string>
+          </void>
+          <void method="addElement">
+           <string>GuiaEspiritual</string>
+          </void>
+          <void method="addElement">
+           <string>Gestor</string>
+          </void>
+         </object>
+        </void>
+        <void property="name">
+         <string>cbTipoAcolito</string>
+        </void>
+       </object>
+      </void>
       <void property="name">
        <string>this</string>
       </void>
@@ -394,7 +410,7 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>25</int>
+        <int>30</int>
         <int>5</int>
        </object>
       </void>
@@ -402,7 +418,7 @@
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>735</int>
-        <int>590</int>
+        <int>620</int>
        </object>
       </void>
      </object>

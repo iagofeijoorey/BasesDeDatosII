@@ -23,14 +23,12 @@ import javax.swing.border.*;
 public class VContactos extends JDialog {
 
     private FachadaAplicacion fa;
-    private Acolito acolito;
     private Contacto contacto;
     private Trato trato;
 
-    public VContactos(Window owner, FachadaAplicacion fa /*, Acolito acolito*/) {
+    public VContactos(Window owner, FachadaAplicacion fa) {
         super(owner);
         this.fa = fa;
-        //this.acolito = acolito
         contacto = null;
         trato = null;
         initComponents();
@@ -38,8 +36,8 @@ public class VContactos extends JDialog {
 
     //MouseClicked
     private void btnGuardarMouseClicked(MouseEvent e) {
-        if(txtPseudonimo.getText() != "Pseudónimo..." && txtNombre.getText() != "Nombre..." && txtNombre.getText() != null
-                && txtTelefono.getText() != "Teléfono..." && txtTelefono.getText() != null && txtDescripcion.getText() != "Descripción...")
+        if(!txtPseudonimo.getText().equals("Pseudónimo...") && !txtNombre.getText().equals("Nombre...") && txtNombre.getText() != null
+                && !txtTelefono.getText().equals("Teléfono...") && txtTelefono.getText() != null && !txtDescripcion.getText().equals("Descripción..."))
             fa.actualizarContacto(txtPseudonimo.getText(), txtNombre.getText(), txtTelefono.getText(), txtDescripcion.getText());
 
         //Mensajito de que se actualizou?
@@ -49,7 +47,7 @@ public class VContactos extends JDialog {
     }
 
     private void btnProponerTratoMouseClicked(MouseEvent e) {
-        fa.proponerTrato(acolito.getAlias(), contacto.getPseudonimo(), this);
+        fa.proponerTrato(fa.getCurrentUser().getAlias(), contacto.getPseudonimo(), this);
 
         //Mensajito de que se propuxo?
 
@@ -68,7 +66,7 @@ public class VContactos extends JDialog {
 
     private void bntEliminarMouseClicked(MouseEvent e) {
         if(txtPseudonimo.getText() != "Pseudónimo..."){
-            if(!fa.hayTratos(acolito.getAlias(), contacto.getPseudonimo()))
+            if(!fa.hayTratos(fa.getCurrentUser().getAlias(), contacto.getPseudonimo()))
                 fa.eliminarContacto(txtPseudonimo.getText());
             else
                 fa.muestraExcepcion("No se puede eliminar un contacto si hay tratos vigentes");
@@ -81,7 +79,7 @@ public class VContactos extends JDialog {
     }
 
     private void btnAnadirMouseClicked(MouseEvent e) {
-        fa.ventanaContactoNuevo(this);
+        fa.crearContacto(fa.getCurrentUser().getAlias(), this);
 
         //Mensajito de que se añadiu?
 
@@ -108,20 +106,24 @@ public class VContactos extends JDialog {
 
     //INICIALIZACIONES
     private void inicializarListaTratos() {
-        ArrayList<Trato> tratos = fa.obtenerTratos(acolito.getAlias(), contacto.getPseudonimo());
+        ArrayList<Trato> tratos = fa.obtenerTratos(fa.getCurrentUser().getAlias(), contacto.getPseudonimo());
         ModeloListaTratos mListaT=new ModeloListaTratos();
         ListaTratos.setModel(mListaT);
         mListaT.setElementos(tratos);
     }
 
     private void inicializarListaContactos() {
-        ArrayList<Contacto> contactos = fa.obtenerContactos(acolito);
+        ListaContactos = new JList<>();
+        ListaTratos = new JList<>();
+
+        ArrayList<Contacto> contactos = fa.obtenerContactos(fa.getCurrentUser());
         ModeloListaContactos mListaC=new ModeloListaContactos();
         ListaContactos.setModel(mListaC);
         mListaC.setElementos(contactos);
         if (mListaC.getSize()>0) {
             ListaContactos.setSelectedIndex(0);
             contacto = mListaC.getElementAt(0);
+            inicializarListaTratos();
             fa.rellenarDatos(this);
 
             bntEliminar.setEnabled(true);
@@ -136,14 +138,12 @@ public class VContactos extends JDialog {
 
     private void createUIComponents() {
         inicializarListaContactos();
-        inicializarListaTratos();
 
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Laura Antelo González
-        createUIComponents();
 
         btnGuardarEdicion = new JButton();
         btnVolver = new JButton();
@@ -161,6 +161,8 @@ public class VContactos extends JDialog {
         bntEliminar = new JButton();
         btnAnadir = new JButton();
         contactos_texto = new JLabel();
+
+        createUIComponents();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

@@ -70,4 +70,12 @@ public class GestionContactos {
     public void romperTrato(Trato trato){
         fbd.romperTrato(trato);
     }
+
+    public void crearContacto(String acolito, String contacto){
+        fbd.crearContacto(acolito, contacto);
+    }
+
+    public Contacto crearContacto(String pseudonimo, String nombre, String telefono, String descripcion){
+        return fbd.crearContacto(pseudonimo, nombre, telefono, descripcion);
+    }
 }

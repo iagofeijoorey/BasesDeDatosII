@@ -29,34 +29,14 @@ public class GestionAcolitos {
 
       Acolito u;
 
-      u=fbd.validarLogin(idUsuario, clave);
+      u = fbd.validarLogin(idUsuario, clave);
       if (u!=null){
           faABD.setCurrentUser(u);
           return true;
       } else return false;
   }
-  
-     public java.util.List<Acolito> consultarAcolitos(){
-        return fbd.consultarAcolitos();
-    }
 
-     public java.util.List<Acolito> buscarUsuarios(String IDUsuario, String Nombre) {
-         return fbd.consultarAcolitos(IDUsuario,Nombre);
-     }
-
-     public void borrarAcolito(Acolito acolito){
-         fbd.borrarAcolito(acolito);
-     }
-     
-     public void nuevoUsuario(Acolito acolito){
-         fbd.insertarAcolito(acolito);
-     }
-
-    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-        fbd.actualizarAcolito(alias, nombre, ciudad, pais);
-    }
-
-    // VENTANA VACOLITOS
+    /////////////// MÉTODOS SARA. VACOLITOS ///////////////
     public ArrayList<String> obtenerAliasAcolitos() {
         return fbd.obtenerAliasAcolitos();
     }
@@ -64,5 +44,17 @@ public class GestionAcolitos {
     public Acolito obtenerAcolito(String alias) {
         return fbd.obtenerAcolito(alias);
     }
+
+    public void nuevoAcolito(Acolito acolito){
+        fbd.nuevoAcolito(acolito);
+    }
+
+    public void actualizarAcolito(Acolito acolito){
+        fbd.actualizarAcolito(acolito);
+    }
+
+    public void eliminarAcolito(String alias){
+         fbd.eliminarAcolito(alias);
+     }
 
 }

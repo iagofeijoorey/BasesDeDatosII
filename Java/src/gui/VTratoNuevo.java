@@ -29,7 +29,7 @@ public class VTratoNuevo extends JDialog {
     public String getTipoTrato() { return tipoTrato; }
 
     private void btnAceptarActionPerformed(ActionEvent e) {
-        if(identificador != "Identificador numérco..." )
+        if(identificador != "Identificador numérico..." )
             if (!fa.existeTrato(Integer.parseInt(identificador))){
                 identificador = textoIdentificador.getText();
                 tipoTrato = comboTipoTrato.getSelectedItem().toString();
@@ -44,7 +44,7 @@ public class VTratoNuevo extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Laura Antelo González
+        // Generated using JFormDesigner Evaluation license - Sara Castro
         textoIdentificador = new JTextField();
         btnAceptar = new JButton();
         btnCancelar = new JButton();
@@ -52,14 +52,14 @@ public class VTratoNuevo extends JDialog {
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("A\u00f1adir contacto nuevo");
+        setTitle("A\u00f1adir trato nuevo");
         setModal(true);
         setName("VAutentificacion");
         setResizable(false);
         var contentPane = getContentPane();
 
         //---- textoIdentificador ----
-        textoIdentificador.setText("Identificador num\u00e9rco...");
+        textoIdentificador.setText("Identificador num\u00e9rico...");
         textoIdentificador.setForeground(Color.gray);
 
         //---- btnAceptar ----
@@ -89,7 +89,7 @@ public class VTratoNuevo extends JDialog {
                     .addComponent(btnCancelar)
                     .addGap(18, 18, 18)
                     .addComponent(btnAceptar, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(65, Short.MAX_VALUE))
+                    .addContainerGap(52, Short.MAX_VALUE))
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                     .addGap(0, 42, Short.MAX_VALUE)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -108,7 +108,7 @@ public class VTratoNuevo extends JDialog {
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAceptar)
                         .addComponent(btnCancelar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap(24, Short.MAX_VALUE))
+                    .addContainerGap(20, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -116,7 +116,7 @@ public class VTratoNuevo extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Laura Antelo González
+    // Generated using JFormDesigner Evaluation license - Sara Castro
     private JTextField textoIdentificador;
     private JButton btnAceptar;
     private JButton btnCancelar;

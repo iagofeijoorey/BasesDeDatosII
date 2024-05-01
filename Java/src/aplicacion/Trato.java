@@ -37,11 +37,11 @@ public class Trato {
         this.tipoTrato = tipoTrato;
     }
 
-    public void setContacto(Contacto contacto){
+    public void setContacto(String contacto){
         this.contacto = contacto;
     }
 
-    public void setAcolito(Acolito acolito){
+    public void setAcolito(String acolito){
         this.acolito = acolito;
     }
 }

@@ -52,7 +52,7 @@ public class DAOAcolitos extends AbstractDAO {
             stmUsuario.setString(2, contraseña);
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
-                resultado = new Acolito(alias, contraseña, rsUsuario.getString("fechaingreso"), rsUsuario.getString("nombreCompleto"),
+                resultado = new Acolito(alias, contraseña, rsUsuario.getDate("fechaingreso"), rsUsuario.getString("nombreCompleto"),
                         rsUsuario.getDouble("dinero"), rsUsuario.getInt("telefono"), rsUsuario.getString("direccion"),
                         rsUsuario.getInt("influencia"), TipoAcolito.stringToTipoAcolito("tipo"), rsUsuario.getBoolean("primeraEntrada"),
                         rsUsuario.getString("jefeDivision"), rsUsuario.getString("nombreDivision"));
@@ -71,103 +71,7 @@ public class DAOAcolitos extends AbstractDAO {
         return resultado;
     }
 
-    
-    public void insertarAcolito(Acolito acolito){
-
-        Connection con;
-        PreparedStatement stmUsuario=null;
-
-        con=super.getConexion();
-
-        // AÑADIR A ACÓLITOS
-        try {
-        stmUsuario=con.prepareStatement("insert into acólitos(alias, nombrecompleto,fechaingreso,telefono,direccion,influencia,dinero,contraseña, influencia, primeraentrada) "+
-                                      "values (?,?,?,?,?,?,?,?,?,?)");
-        stmUsuario.setString(1, acolito.getAlias());
-        stmUsuario.setString(2, acolito.getNombreCompleto());
-        stmUsuario.setString(3,acolito.getFechaingreso());
-        stmUsuario.setInt(4,acolito.getTelefono());
-        stmUsuario.setInt(5,acolito.getInfluencia());
-        stmUsuario.setDouble(6, acolito.getDinero());
-        stmUsuario.setString(7, acolito.getContraseña());
-        stmUsuario.setBoolean(8,true);
-        stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {
-              assert stmUsuario != null;
-              stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-        // AÑADIR A LA TABLA DE TIPO CORRESPONDIENTE
-        try {
-            switch (acolito.getTipo()){
-                case Cabecilla -> stmUsuario=con.prepareStatement("insert into cabecillas(alias) values (?)");
-                case JefeDivision -> stmUsuario=con.prepareStatement("insert into jefes_de_division(alias) values (?)");
-                case Normal -> stmUsuario=con.prepareStatement("insert into miembros_basicos(alias) values (?)");
-                case GuiaEspiritual -> stmUsuario=con.prepareStatement("insert into guia_espiritual(alias) values (?)");
-                case Gestor -> stmUsuario=con.prepareStatement("insert into gestor_interno(alias) values (?)");
-            }
-            stmUsuario.setString(1,acolito.getAlias());
-            stmUsuario.executeUpdate();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
-    
-    public void borrarAcolito(Acolito acolito){
-        Connection con;
-        PreparedStatement stmUsuario=null;
-
-        con=super.getConexion();
-
-        try {
-        stmUsuario=con.prepareStatement("delete from acólitos where alias = ?");
-        stmUsuario.setString(1, acolito.getAlias());
-        stmUsuario.executeUpdate();
-
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
-
-    public void actualizarAcolito(Acolito acolito){
-        Connection con;
-        PreparedStatement stmUsuario=null;
-
-        con=super.getConexion();
-
-        try {
-            stmUsuario=con.prepareStatement("update acólitos "+
-                    "set nombrecompleto = ?, telefono = ?, direccion = ?, influencia = ?, dinero = ?, contraseña = ? "+
-                    "where alias = ?");
-            stmUsuario.setString(1, acolito.getNombreCompleto());
-            stmUsuario.setInt(2, acolito.getTelefono());
-            stmUsuario.setString(3, acolito.getDireccion());
-            stmUsuario.setInt(4, acolito.getInfluencia());
-            stmUsuario.setDouble(5, acolito.getDinero());
-            stmUsuario.setString(6, acolito.getContraseña());
-            stmUsuario.setString(7, acolito.getAlias());
-            stmUsuario.executeUpdate();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
-    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-       //HACER DAO
-    }
-
-    // VENTANA VACOLITOS
+    /////////////// MÉTODOS SARA. VACOLITOS ///////////////
     public ArrayList<String> obtenerAliasAcolitos() {
 
         ArrayList<String> listaAlias = new ArrayList<>();
@@ -232,7 +136,7 @@ public class DAOAcolitos extends AbstractDAO {
 
             if (rs.next()) {
                 // Crear un objeto Acolito recuperando los datos de la base de datos
-                acolito = new Acolito(alias, rs.getString("contraseña"), rs.getString("fechaingreso"), rs.getString("nombreCompleto"),
+                acolito = new Acolito(alias, rs.getString("contraseña"), rs.getDate("fechaingreso"), rs.getString("nombreCompleto"),
                         rs.getDouble("dinero"), rs.getInt("telefono"), rs.getString("direccion"),
                         rs.getInt("influencia"), TipoAcolito.stringToTipoAcolito("tipo"), rs.getBoolean("primeraEntrada"),
                         rs.getString("jefeDivision"), rs.getString("nombreDivision"));
@@ -249,4 +153,138 @@ public class DAOAcolitos extends AbstractDAO {
 
         return acolito;
     }
+
+    public void nuevoAcolito(Acolito acolito){
+
+        Connection con;
+        PreparedStatement stmUsuario=null;
+
+        con = super.getConexion();
+
+        // AÑADIR A ACÓLITOS
+        try {
+            stmUsuario=con.prepareStatement("insert into acólitos(alias, nombrecompleto, fechaingreso, telefono, direccion, influencia, dinero, contraseña, influencia, primeraentrada) "+
+                    "values (?,?,?,?,?,?,?,?,?,?)");
+            stmUsuario.setString(1, acolito.getAlias());
+            stmUsuario.setString(2, acolito.getNombreCompleto());
+            java.sql.Date fechaIngresoSQL = new java.sql.Date(acolito.getFechaingreso().getTime()); // Convertimos el tipo java.util.Date a java.sql.Date
+            stmUsuario.setDate(3, fechaIngresoSQL);
+            stmUsuario.setInt(4,acolito.getTelefono());
+            stmUsuario.setInt(5,acolito.getInfluencia());
+            stmUsuario.setDouble(6, acolito.getDinero());
+            stmUsuario.setString(7, acolito.getContraseña());
+            stmUsuario.setBoolean(8,true);
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmUsuario != null;
+                stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        // AÑADIR A LA TABLA DEL SUBTIPO CORRESPONDIENTE
+        try {
+            switch (acolito.getTipo()) {
+                case Cabecilla:
+                    stmUsuario = con.prepareStatement("insert into cabecillas(alias) values (?)");
+                    stmUsuario.setString(1, acolito.getAlias());
+                    break;
+                case JefeDivision:
+                    stmUsuario = con.prepareStatement("insert into jefes_de_division(alias, nombreDivision) values (?, ?)");
+                    stmUsuario.setString(1, acolito.getAlias());
+                    stmUsuario.setString(2, acolito.getNombreDivision());
+                    break;
+                case Normal:
+                    stmUsuario = con.prepareStatement("insert into miembros_basicos(alias, jefe) values (?, ?)");
+                    stmUsuario.setString(1, acolito.getAlias());
+                    stmUsuario.setString(2, acolito.getJefeDivision());
+                    break;
+                case GuiaEspiritual:
+                    stmUsuario = con.prepareStatement("insert into guia_espiritual(alias) values (?)");
+                    stmUsuario.setString(1, acolito.getAlias());
+                    break;
+                case Gestor:
+                    stmUsuario = con.prepareStatement("insert into gestor_interno(alias) values (?)");
+                    stmUsuario.setString(1, acolito.getAlias());
+                    break;
+            }
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+
+    public void actualizarAcolito(Acolito acolito){
+
+        Connection con;
+        PreparedStatement stmUsuario=null;
+
+        con=super.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("update acólitos "+
+                    "set nombrecompleto = ?, telefono = ?, direccion = ?, influencia = ?, dinero = ?, contraseña = ? "+
+                    "where alias = ?");
+            stmUsuario.setString(1, acolito.getNombreCompleto());
+            stmUsuario.setInt(2, acolito.getTelefono());
+            stmUsuario.setString(3, acolito.getDireccion());
+            stmUsuario.setInt(4, acolito.getInfluencia());
+            stmUsuario.setDouble(5, acolito.getDinero());
+            stmUsuario.setString(6, acolito.getContraseña());
+            stmUsuario.setString(7, acolito.getAlias());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+        // MODIFICA LOS ATRIBUTOS DE LAS SUBCLASES (LOS QUE NO SON CLAVE PRIMARIA, YA QUE ESTA YA SE ACTUALIZA EN CASCADA CON EL UPDATE ANTERIOR)
+        try {
+            switch (acolito.getTipo()) {
+                case JefeDivision:
+                    stmUsuario = con.prepareStatement("update jefes_de_division set nombredivision = ? ");
+                    stmUsuario.setString(1, acolito.getNombreDivision());
+                    stmUsuario.executeUpdate();
+                    break;
+                case Normal:
+                    stmUsuario = con.prepareStatement("update miembros_basicos set jefe = ? ");
+                    stmUsuario.setString(1, acolito.getJefeDivision());
+                    stmUsuario.executeUpdate();
+                    break;
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+
+    public void eliminarAcolito(String alias){
+
+        Connection con;
+        PreparedStatement stmUsuario=null;
+
+        con=super.getConexion();
+
+        try {
+            stmUsuario=con.prepareStatement("delete from acólitos where alias = ?");
+            stmUsuario.setString(1, alias);
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+
+
 }

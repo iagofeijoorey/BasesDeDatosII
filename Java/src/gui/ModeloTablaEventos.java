@@ -29,13 +29,14 @@ public class ModeloTablaEventos extends AbstractTableModel{
 
     @Override
     public String getColumnName(int col){
+
         String nombre="";
 
         switch (col){
-            case 0: nombre= "Ubicación"; break;
-            case 1: nombre= "Fecha"; break;
-            case 2: nombre="Descripción"; break;
-            case 3: nombre="Jefe a cargo"; break;
+            case 0: nombre= " Ubicación"; break;
+            case 1: nombre= " Fecha"; break;
+            case 2: nombre=" Descripción"; break;
+            case 3: nombre=" Jefe a cargo"; break;
         }
         return nombre;
     }
@@ -76,7 +77,7 @@ public class ModeloTablaEventos extends AbstractTableModel{
             case 0: eventos.get(row).setUbicacion((String) v); break;
             case 1: eventos.get(row).setFecha((Date) v); break;
             case 2: eventos.get(row).setDescripcion((String) v);break;
-            case 3: eventos.get(row).setOrganizador((String) v);break;
+            case 3: eventos.get(row).setOrganizador((aplicacion.Acolito) v);break;
         }
     }
 
@@ -85,21 +86,9 @@ public class ModeloTablaEventos extends AbstractTableModel{
         fireTableDataChanged();
     }
 
-    public void nuevoEjemplar(Evento e){
-        this.eventos.add(e);
-        fireTableRowsInserted(this.eventos.size()-1, this.eventos.size()-1);
-    }
-
-    public void borrarEjemplar(int indice){
-        this.eventos.remove(indice);
-        fireTableRowsDeleted(indice, indice);
-    }
-
     public java.util.List<Evento> getFilas(){
         return this.eventos;
     }
 
-    public Evento obtenerEjemplar(int i){
-        return this.eventos.get(i);
-    }
+
 }

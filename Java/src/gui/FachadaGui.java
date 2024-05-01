@@ -4,9 +4,9 @@
  */
 package gui;
 
-import aplicacion.Evento;
 
 import java.util.ArrayList;
+import aplicacion.Contacto;
 
 /**
  *
@@ -45,11 +45,16 @@ public class FachadaGui {
         vc.setVisible(true);
     }
 
-    public void ventanaContactoNuevo(VContactos vc){
+    public Contacto ventanaContactoNuevo(VContactos vc){
         VContactoNuevo vcn;
+        Contacto contacto;
 
         vcn = new VContactoNuevo(vc, fa);
         vcn.setVisible(true);
+
+        contacto = vcn.getContacto();
+
+        return contacto;
     }
 
     public ArrayList<String> ventanaTratoNuevo(VContactos vc){
@@ -65,26 +70,14 @@ public class FachadaGui {
         return datosTrato;
     }
 
-
-    public void rellenarDatos(VContactos vc){
-       vc.rellenarDatos();
-    }
-
-    /*
     public void ventanaAcolitos(VPrincipal vP){
         VAcolitos va;
 
-        va = new VPerfil(vP, fa);
+        va = new VAcolitos(vP, fa);
         va.setVisible(true);
     }
 
-    public void ventanaPropiedades(VPrincipal vP){
-        VPropiedades vpr;
-
-        vpr = new VPerfil(vP, fa);
-        vpr.setVisible(true);
-    }
-
+    /*
     public void ventanaRituales(VPrincipal vP){
         VRituales vr;
 
@@ -92,6 +85,13 @@ public class FachadaGui {
         vr.setVisible(true);
     }
     */
+
+
+    public void rellenarDatos(VContactos vc){
+       vc.rellenarDatos();
+    }
+
+
 
    /*
 
