@@ -5,6 +5,7 @@
 package gui;
 
 import aplicacion.Evento;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 
 /**
  *
@@ -65,11 +66,13 @@ public class FachadaGui {
         vdn.setVisible(true);
     }
 
-    public void ventanaContenido(){
+    public void ventanaContenido(Inmobiliario almacen){
         VContenidoAlmacen vdn;
 
-        vdn = new VContenidoAlmacen(fa);
+        vdn = new VContenidoAlmacen(fa, almacen);
         vdn.setVisible(true);
+
+
     }
 /*
     public void ventanaRituales(VPrincipal vP){

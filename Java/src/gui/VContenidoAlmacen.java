@@ -4,6 +4,8 @@
 
 package gui;
 
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -14,9 +16,20 @@ import javax.swing.GroupLayout;
 public class VContenidoAlmacen extends JDialog {
     aplicacion.FachadaAplicacion fa;
 
-    public VContenidoAlmacen(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+    public VContenidoAlmacen(aplicacion.FachadaAplicacion fa, Inmobiliario almacen) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
+
+        Vehicles.setModel(new ModeloListaStrings());
+        ModeloListaStrings modelo = (ModeloListaStrings) Vehicles.getModel();
+
+        modelo.setElementos(fa.consultarVehiculosAlmacen(almacen));
+
+        Armas.setModel(new ModeloListaStrings());
+        ModeloListaStrings modelo2 = (ModeloListaStrings) Armas.getModel();
+        modelo.setElementos(fa.consultarArmasAlmacen(almacen));
+
+
     }
 
     private void initComponents() {

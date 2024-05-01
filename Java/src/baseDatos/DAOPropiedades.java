@@ -466,4 +466,70 @@ public class DAOPropiedades extends AbstractDAO {
             }
         }
     }
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        ArrayList<String> resultado = new ArrayList<String>();
+        Connection con;
+        PreparedStatement stmArmas = null;
+        ResultSet rsArmas;
+
+        con = this.getConexion();
+
+        String consulta = "SELECT a.tipoarmamento, a.cantidad, a.numbalas\n" +
+                "FROM armas a\n" +
+                "WHERE a.almacén = ?";
+
+        try {
+            stmArmas = con.prepareStatement(consulta);
+            stmArmas.setInt(1, almacen.getIdPropiedad());
+            rsArmas = stmArmas.executeQuery();
+            while (rsArmas.next()) {
+                resultado.add(rsArmas.getString("tipoarmamento") + " - " + rsArmas.getInt("cantidad") + " - " + rsArmas.getInt("numbalas"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmArmas != null;
+                stmArmas.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        ArrayList<String> resultado = new ArrayList<String>();
+        Connection con;
+        PreparedStatement stmVehiculos = null;
+        ResultSet rsVehiculos;
+
+        con = this.getConexion();
+
+        String consulta = "SELECT v.tipovehiculo, v.capacidad\n" +
+                "FROM vehiculos v\n" +
+                "WHERE v.almacén = ?";
+
+        try {
+            stmVehiculos = con.prepareStatement(consulta);
+            stmVehiculos.setInt(1, almacen.getIdPropiedad());
+            rsVehiculos = stmVehiculos.executeQuery();
+            while (rsVehiculos.next()) {
+                resultado.add(rsVehiculos.getString("tipovehiculo") + " - " + rsVehiculos.getInt("capacidad"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmVehiculos != null;
+                stmVehiculos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }

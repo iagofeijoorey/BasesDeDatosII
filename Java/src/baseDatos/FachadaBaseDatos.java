@@ -6,11 +6,13 @@
 package baseDatos;
 
 import aplicacion.*;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -95,5 +97,13 @@ public class FachadaBaseDatos {
 
     public void borrarPropiedad(String idPropiedad){
         daoPropiedades.borrarPropiedad(idPropiedad);
+    }
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarVehiculosAlmacen(almacen);
     }
 }

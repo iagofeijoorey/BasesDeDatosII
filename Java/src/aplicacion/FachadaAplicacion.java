@@ -4,10 +4,12 @@
  */
 
 package aplicacion;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 import gui.VPrincipal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -104,8 +106,8 @@ public java.util.List<Acolito> consultarAcolitos(){
         fgui.ventanaDetalles();
     }
 
-    public void ventanaContenido(){
-        fgui.ventanaContenido();
+    public void ventanaContenido(Inmobiliario almacen){
+        fgui.ventanaContenido(almacen);
     }
 
     public void ventanaEventos(){
@@ -134,6 +136,14 @@ public java.util.List<Acolito> consultarAcolitos(){
 
     public void borrarPropiedad(String idPropiedad){
         gp.borrarPropiedad(idPropiedad);
+    }
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return gp.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return gp.consultarVehiculosAlmacen(almacen);
     }
 }
 
