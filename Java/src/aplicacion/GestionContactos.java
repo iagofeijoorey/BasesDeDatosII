@@ -51,11 +51,23 @@ public class GestionContactos {
         fbd.eliminarContacto(pseudonimo);
     }
 
-    public ArrayList<Trato> obtenerTratos(Acolito acolito, Contacto contacto){
+    public ArrayList<Trato> obtenerTratos(String acolito, String contacto){
         return fbd.obtenerTratos(acolito, contacto);
     }
 
     public boolean hayTratos(String acolito, String contacto){
         return fbd.hayTratos(acolito, contacto);
+    }
+
+    public void proponerTrato(ArrayList<String> datosTrato, String acolito, String contacto){
+        fbd.proponerTrato(datosTrato, acolito, contacto);
+    }
+
+    public boolean existeTrato(Integer id){
+        return fbd.existeTrato(id);
+    }
+
+    public void romperTrato(Trato trato){
+        fbd.romperTrato(trato);
     }
 }

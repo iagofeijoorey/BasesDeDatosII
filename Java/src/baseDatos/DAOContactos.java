@@ -30,7 +30,7 @@ public class DAOContactos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-
+/*
     public void insertarContacto(Contacto contacto, Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -70,23 +70,26 @@ public class DAOContactos extends AbstractDAO {
               stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
-
-    /**
-     * Consultar todos los contactos (con y sin tratos) de un acólito
+*/
+    /*
+     * TRANSACCIÓN - Consultar todos los contactos (con y sin tratos) de un acólito
      */
     public ArrayList<Contacto> consultarContactos(Acolito acolito){
         ArrayList<Contacto> resultado = new ArrayList<Contacto>();
         Contacto contactoActual;
         Connection con;
         PreparedStatement stmContactos = null;
-        ResultSet rsContactos, rsAcolito;
+        ResultSet rsContactos, rsContactos2;
 
         con=this.getConexion();
 
-        String consulta =  "SELECT ssc.* " +
-                           "FROM sersolocontacto ssc " +
-                           "WHERE ssc.acolito like ?";
-        //FALTA MIRAR TABLA TRATOS---------------------------------------------------------------------------------------------------------
+        String consulta =  "SELECT contacto " +
+                           "FROM sersolocontacto " +
+                           "WHERE acólito = ? " +
+                           " UNION " +
+                           "SELECT contacto " +
+                           "FROM tratos " +
+                           "WHERE acólito = ? ";
         try  {
             stmContactos=con.prepareStatement(consulta);
             stmContactos.setString(1, "%"+acolito.getAlias()+"%");
@@ -94,10 +97,23 @@ public class DAOContactos extends AbstractDAO {
             rsContactos=stmContactos.executeQuery();
             while (rsContactos.next())
             {
-                contactoActual = new Contacto(rsContactos.getString("pseudonimo"), rsContactos.getString("nombre"),
-                        rsContactos.getString("descripcion"), rsContactos.getInt("telefono"),
-                         null);
-                resultado.add(contactoActual);
+                consulta = "SELECT * FROM contacto WHERE pseudonimo = ?"
+
+                try {
+                    stmContactos = con.prepareStatement(consulta);
+                    stmContactos.setString(1, rsContactos.getString("pseudonimo"));
+
+                    rsContactos2 = stmContactos.executeQuery();
+
+                    while(rsContactos.next()){
+                        contactoActual = new Contacto(rsContactos2.getString("pseudonimo"), rsContactos2.getString("nombre"),
+                                rsContactos2.getString("descripcion"), rsContactos2.getInt("telefono"));
+                        resultado.add(contactoActual);
+                    }
+                } catch (SQLException e){
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+                }
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -113,36 +129,38 @@ public class DAOContactos extends AbstractDAO {
     /*
      Se elimana un contacto de la base de datos (no puede tener tratos contigo)
      */
-   public void eliminarContacto(String pseudonimo){
-       Contacto contacto;
+   public void eliminarContacto(String contacto){
        Connection con;
        PreparedStatement stmContactos = null;
 
        con=this.getConexion();
 
-       String consulta = "delete from sersolocontacto where contacto = ? ";
-       try  {
-           stmContactos=con.prepareStatement(consulta);
-           stmContactos.setString(1, pseudonimo);
-
-           stmContactos.executeUpdate();
-
-       } catch (SQLException e){
-           System.out.println(e.getMessage());
-           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-       }finally{
+       if(!hayTratos(contacto)) {
+           String consulta = "delete from sersolocontacto where contacto = ? ";
            try {
-               assert stmContactos != null;
-               stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+               stmContactos = con.prepareStatement(consulta);
+               stmContactos.setString(1, contacto);
+
+               stmContactos.executeUpdate();
+
+           } catch (SQLException e) {
+               System.out.println(e.getMessage());
+               this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+           } finally {
+               try {
+                   assert stmContactos != null;
+                   stmContactos.close();
+               } catch (SQLException e) {
+                   System.out.println("Imposible cerrar cursores");
+               }
+           }
        }
    }
 
    /*
     Tras realizar cambios en un contacto, se actualiza la base de datos
     */
-
     public void actualizarContacto(String pseudonimo, String nombre, String telefono, String descripcion){
-        Contacto contacto;
         Connection con;
         PreparedStatement stmContactos = null;
 
@@ -171,7 +189,7 @@ public class DAOContactos extends AbstractDAO {
     }
 
     /*
-    Comprobar si un contacto y acólito dados tiene tratos entre ellos
+    Comprobar si un contacto y acólito dados tienen tratos entre ellos
      */
     public boolean hayTratos(String acolito, String contacto){
         Connection con;
@@ -180,9 +198,9 @@ public class DAOContactos extends AbstractDAO {
 
         con=this.getConexion();
 
-        String consulta = "select * " +
+        String consulta = "select count(*) " +
                           "from tratos " +
-                          "where acolito = ? and contacto = ?";
+                          "where acólito = ? and contacto = ?";
         try  {
             stmContactos=con.prepareStatement(consulta);
             stmContactos.setString(1, acolito);
@@ -204,6 +222,218 @@ public class DAOContactos extends AbstractDAO {
         return false;
     }
 
+    /*
+    Comprobar si un contacto tiene tratos asociados
+     */
+    public boolean hayTratos(String contacto){
+        Connection con;
+        PreparedStatement stmContactos = null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta = "select count(*) " +
+                          "from tratos " +
+                          "where contacto = ?";
+        try  {
+            stmContactos=con.prepareStatement(consulta);
+            stmContactos.setString(1, contacto);
+
+            rsTratos = stmContactos.executeQuery();
+
+            if(rsTratos.next()) return true;
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmContactos != null;
+                stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return false;
+    }
+
+    /*
+    Obtener los tratos de un contacto y acólito dados
+     */
+
+    public ArrayList<Trato> obtenerTratos(String acolito, String contacto){
+        ArrayList<Trato> resultado = new ArrayList<>();
+        Trato tratoActual;
+        Connection con;
+        PreparedStatement stmContactos = null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta = "select * " +
+                          "from tratos " +
+                          "where acolito = ? and contacto = ?";
+        try  {
+            stmContactos=con.prepareStatement(consulta);
+            stmContactos.setString(1, acolito);
+            stmContactos.setString(2, contacto);
+
+            rsTratos = stmContactos.executeQuery();
+
+            while(rsTratos.next()) {
+                TipoTrato tipoTrato = TipoTrato.stringToTipTrato(rsTratos.getString("tipoTrato"));
+                tratoActual = new Trato(rsTratos.getInt("idTrato"), tipoTrato,
+                        rsTratos.getString("contacto"), rsTratos.getString("acólito"));
+                resultado.add(tratoActual);
+            }
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmContactos != null;
+                stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return resultado;
+    }
+
+    /*
+    Comprueba si existe algún trato con el identificador dado
+     */
+
+    public boolean existeTrato(Integer id){
+        Connection con;
+        PreparedStatement stmContactos = null;
+        ResultSet rsTratos;
+
+        con=this.getConexion();
+
+        String consulta = "select * " +
+                          "from tratos " +
+                          "where idTrato = ?";
+        try  {
+            stmContactos=con.prepareStatement(consulta);
+            stmContactos.setInt(1, id);
+
+            rsTratos = stmContactos.executeQuery();
+
+            if(rsTratos.next()) return true;
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {
+                assert stmContactos != null;
+                stmContactos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+
+        return false;
+    }
+
+    /*
+    TRANSACCIÓN - Dado un acólito y un contacto, se establece un trato entre ellos.
+    Se elimina de la tabla sersolocontacto de ser el primer trato
+     */
+    public void proponerTrato(ArrayList<String> datosTratos, String acolito, String contacto){
+        Connection con;
+        PreparedStatement stmContactos = null;
+
+        con=this.getConexion();
+
+        if(!hayTratos(acolito, contacto)) {
+            //TRANSACCIÓN
+            String consulta = "DELETE FROM sersolocontacto WHERE contacto = ? and acolito = ?";
+
+            try {
+                stmContactos = con.prepareStatement(consulta);
+                stmContactos.setString(1, contacto);
+                stmContactos.setString(2, acolito);
+
+                stmContactos.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }
+
+            String consulta2 = "INSERT INTO Tratos (idTrato, tipoTrato, contacto, acólito)" +
+                    "VALUES (?, ?, ?, ?)";
+
+            try {
+                stmContactos = con.prepareStatement(consulta2);
+                stmContactos.setInt(1, Integer.parseInt(datosTratos.get(0)));
+                stmContactos.setString(2, datosTratos.get(1));
+                stmContactos.setString(3, contacto);
+                stmContactos.setString(4, acolito);
+
+                stmContactos.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                try {
+                    assert stmContactos != null;
+                    stmContactos.close();
+                } catch (SQLException e) {
+                    System.out.println("Imposible cerrar cursores");
+                }
+            }
+        }
+    }
+
+    /*
+    TRANSACCION - Rompe un trato. Si es el único que une al acólito y al contacto, se cambia a la tabla de sersolocontacto
+     */
+    public void romperTrato(Trato trato){
+        Connection con;
+        PreparedStatement stmContactos = null;
+
+        con=this.getConexion();
+
+        String consulta = "delete from tratos where idTrato = ? ";
+        try {
+            stmContactos = con.prepareStatement(consulta);
+            stmContactos.setInt(1, trato.getIdTrato());
+
+            stmContactos.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmContactos != null;
+                stmContactos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        if(!hayTratos(trato.getAcolito(), trato.getContacto())){
+            String consulta2 = "INSERT INTO sersolocontacto (contacto, acólito)" +
+                    "VALUES (?, ?)";
+            try {
+                stmContactos = con.prepareStatement(consulta2);
+                stmContactos.setString(1, trato.getContacto());
+                stmContactos.setString(2, trato.getAcolito());
+
+                stmContactos.executeUpdate();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            } finally {
+                try {
+                    assert stmContactos != null;
+                    stmContactos.close();
+                } catch (SQLException e) {
+                    System.out.println("Imposible cerrar cursores");
+                }
+            }
+        }
+    }
 
    /*
     /**

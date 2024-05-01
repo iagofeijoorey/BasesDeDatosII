@@ -25,35 +25,38 @@ public class VContactos extends JDialog {
     private FachadaAplicacion fa;
     private Acolito acolito;
     private Contacto contacto;
+    private Trato trato;
 
-    public VContactos(Window owner, FachadaAplicacion fa) {
+    public VContactos(Window owner, FachadaAplicacion fa /*, Acolito acolito*/) {
         super(owner);
         this.fa = fa;
+        //this.acolito = acolito
+        contacto = null;
+        trato = null;
         initComponents();
     }
 
-    //BOTONES
+    //MouseClicked
     private void btnGuardarMouseClicked(MouseEvent e) {
         if(txtPseudonimo.getText() != "Pseudónimo..." && txtNombre.getText() != "Nombre..." && txtNombre.getText() != null
-                && txtTelefono.getText() != "Teléfono..." && txtTelefono.getText() != null && txtDescripcion.getText() != "Descripción..."){
-            //crear método DAO----------------------------------------------------------------------------
+                && txtTelefono.getText() != "Teléfono..." && txtTelefono.getText() != null && txtDescripcion.getText() != "Descripción...")
             fa.actualizarContacto(txtPseudonimo.getText(), txtNombre.getText(), txtTelefono.getText(), txtDescripcion.getText());
-        }
-
     }
 
     private void btnProponerTratoMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        fa.proponerTrato(acolito.getAlias(), contacto.getPseudonimo(), this);
     }
 
     private void btnRomperTratoMouseClicked(MouseEvent e) {
-        // TODO add your code here
+        fa.romperTrato(trato);
     }
 
     private void bntEliminarMouseClicked(MouseEvent e) {
         if(txtPseudonimo.getText() != "Pseudónimo..."){
             if(!fa.hayTratos(acolito.getAlias(), contacto.getPseudonimo()))
                 fa.eliminarContacto(txtPseudonimo.getText());
+            else
+                fa.muestraExcepcion("No se puede eliminar un contacto si hay tratos vigentes");
         }
 
         //Para actualizar las listas :)
@@ -61,11 +64,23 @@ public class VContactos extends JDialog {
     }
 
     private void btnAnadirMouseClicked(MouseEvent e) {
-        //crear método GUI
         fa.ventanaContactoNuevo(this);
 
         //Para actualizar las listas :)
         createUIComponents();
+    }
+
+    private void ListaContactosMouseClicked(MouseEvent e) {
+        ModeloListaContactos mlc = (ModeloListaContactos) ListaContactos.getModel();
+        contacto = mlc.getElementAt(ListaContactos.getSelectedIndex());
+        fa.rellenarDatos(this);
+    }
+
+    private void ListaTratosMouseClicked(MouseEvent e) {
+        ModeloListaTratos mlc = (ModeloListaTratos) ListaTratos.getModel();
+        trato = mlc.getElementAt(ListaTratos.getSelectedIndex());
+
+        btnRomperTrato.setEnabled(true);
     }
 
     private void btnVolverMouseClicked(MouseEvent e) {
@@ -74,27 +89,28 @@ public class VContactos extends JDialog {
 
     //INICIALIZACIONES
     private void inicializarListaTratos() {
-        ArrayList<Trato> tratos = fa.obtenerTratos(acolito, contacto);
+        ArrayList<Trato> tratos = fa.obtenerTratos(acolito.getAlias(), contacto.getPseudonimo());
         ModeloListaTratos mListaT=new ModeloListaTratos();
         ListaTratos.setModel(mListaT);
         mListaT.setElementos(tratos);
     }
 
     private void inicializarListaContactos() {
-        //crear método DAO----------------------------------------------------------------------------
         ArrayList<Contacto> contactos = fa.obtenerContactos(acolito);
         ModeloListaContactos mListaC=new ModeloListaContactos();
         ListaContactos.setModel(mListaC);
         mListaC.setElementos(contactos);
         if (mListaC.getSize()>0) {
             ListaContactos.setSelectedIndex(0);
-            contacto = ListaContactos.getElementAt(0);              //¿QUÉ COÑO?
+            contacto = mListaC.getElementAt(0);
             fa.rellenarDatos(this);
 
             bntEliminar.setEnabled(true);
+            btnProponerTrato.setEnabled(true);
             btnGuardarEdicion.setEnabled(true);
         } else {
             bntEliminar.setEnabled(false);
+            btnProponerTrato.setEnabled(false);
             btnGuardarEdicion.setEnabled(false);
         }
     }
@@ -103,10 +119,6 @@ public class VContactos extends JDialog {
         inicializarListaContactos();
         inicializarListaTratos();
 
-    }
-
-    private void ListaContactosMouseClicked(MouseEvent e) {
-        // TODO add your code here
     }
 
     private void initComponents() {
@@ -206,6 +218,14 @@ public class VContactos extends JDialog {
 
         //======== scrollPane2 ========
         {
+
+            //---- ListaTratos ----
+            ListaTratos.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ListaTratosMouseClicked(e);
+                }
+            });
             scrollPane2.setViewportView(ListaTratos);
         }
 

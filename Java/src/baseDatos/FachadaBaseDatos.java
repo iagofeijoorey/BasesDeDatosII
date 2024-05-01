@@ -86,12 +86,24 @@ public class FachadaBaseDatos {
         daoContactos.eliminarContacto(pseudonimo);
     }
 
-    public ArrayList<Trato> obtenerTratos(Acolito acolito, Contacto contacto){
+    public ArrayList<Trato> obtenerTratos(String acolito, String contacto){
         return daoContactos.obtenerTratos(acolito, contacto);
     }
 
     public boolean hayTratos(String acolito, String contacto){
         return daoContactos.hayTratos(acolito, contacto);
+    }
+
+    public void proponerTrato(ArrayList<String> datosTrato, String acolito, String contacto){
+        daoContactos.proponerTrato(datosTrato, acolito, contacto);
+    }
+
+    public boolean existeTrato(Integer id){
+        return daoContactos.existeTrato(id);
+    }
+
+    public void romperTrato(Trato trato){
+        daoContactos.romperTrato(trato);
     }
 
     /*

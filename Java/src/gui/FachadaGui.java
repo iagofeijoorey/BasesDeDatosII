@@ -6,6 +6,8 @@ package gui;
 
 import aplicacion.Evento;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alumno
@@ -48,6 +50,19 @@ public class FachadaGui {
 
         vcn = new VContactoNuevo(vc, fa);
         vcn.setVisible(true);
+    }
+
+    public ArrayList<String> ventanaTratoNuevo(VContactos vc){
+        VTratoNuevo vtn;
+        ArrayList<String> datosTrato = new ArrayList<>();
+
+        vtn = new VTratoNuevo(vc, fa);
+        vtn.setVisible(true);
+
+        datosTrato.add(vtn.getIdentificador());
+        datosTrato.add(vtn.getTipoTrato());
+
+        return datosTrato;
     }
 
 

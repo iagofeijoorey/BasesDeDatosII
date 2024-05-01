@@ -9,6 +9,7 @@ package aplicacion;
 import gui.VContactos;
 import gui.VPrincipal;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 
 /**
@@ -110,12 +111,26 @@ public java.util.List<Acolito> consultarAcolitos(){
         gc.eliminarContacto(pseudonimo);
     }
 
-    public ArrayList<Trato> obtenerTratos(Acolito acolito, Contacto contacto){
+    public ArrayList<Trato> obtenerTratos(String acolito, String contacto){
         return gc.obtenerTratos(acolito, contacto);
     }
 
     public boolean hayTratos(String acolito, String contacto){
         return gc.hayTratos(acolito, contacto);
+    }
+
+    public void proponerTrato(String acolito, String contacto, VContactos vc){
+        ArrayList<String> datosTrato = fgui.ventanaTratoNuevo(vc);
+        if(datosTrato.get(0) != null)
+            gc.proponerTrato(datosTrato, acolito, contacto);
+    }
+
+    public boolean existeTrato(Integer id){
+        return gc.existeTrato(id);
+    }
+
+    public void romperTrato(Trato trato){
+        gc.romperTrato(trato);
     }
 }
 
