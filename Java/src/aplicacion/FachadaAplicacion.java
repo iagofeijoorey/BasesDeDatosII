@@ -81,7 +81,7 @@ public java.util.List<Acolito> consultarAcolitos(){
     //Abrir ventanas
 
     public void ventanaPropiedades(){
-        //fgui.ventanaPropiedades();
+        fgui.ventanaPropiedades();
     }
 
     public void ventanaEventos(){

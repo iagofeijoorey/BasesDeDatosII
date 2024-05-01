@@ -36,28 +36,14 @@ public class FachadaGui {
 
     //Abrir ventanas
 
-    /*
-    public void ventanaContactos(VPrincipal vP){
-        VContactos vc;
 
-        vc = new VPerfil(vP, fa);
-        vc.setVisible(true);
-    }
-
-    public void ventanaAcolitos(VPrincipal vP){
-        VAcolitos va;
-
-        va = new VPerfil(vP, fa);
-        va.setVisible(true);
-    }
-
-    public void ventanaPropiedades(VPrincipal vP){
+    public void ventanaPropiedades(){
         VPropiedades vpr;
 
-        vpr = new VPerfil(vP, fa);
+        vpr = new VPropiedades(fa);
         vpr.setVisible(true);
     }
-
+/*
     public void ventanaRituales(VPrincipal vP){
         VRituales vr;
 

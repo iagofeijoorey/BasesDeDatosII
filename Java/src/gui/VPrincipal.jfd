@@ -4,51 +4,14 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {par l {seq {space :p:48:p, comp Logo:::p::p}, seq l {space :::p, comp presentacion:::p:299:p}}, par t:::p {seq l {space :p:11:p, par l {seq {comp txtFecha:::p::p, space ::48:x, comp buscaFecha:::p:244:p}, seq {comp txtUbicacion:::p::p, space u:::p, comp buscaUbicacion:::::x}}, space s:::p, comp btnBuscar:::p::p}, seq {space :::p, par t {comp scrollListaEventos::t::434:x, comp scrollPane2::t:::x}}}, par l {seq {space s:::p, par l {comp ScrollListaRituales:::p:194:p, comp Desplegable:::::x}, space ::16:x}, seq t {space ::60:x, comp btnSalir:::p:111:p, space :p:57:p}}}}"
-			"$verticalGroup": "par l {seq l {par t {seq {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp buscaFecha:::p::p, comp txtFecha:::p::p}}}, space s:::p, comp scrollListaEventos:::p:246:p, space u:::p, comp scrollPane2:::p:100:p}, seq {space ::8:x, par t {seq t {comp Logo:::p:113:p, space :::p, comp presentacion:::p:329:p}, seq {comp ScrollListaRituales:::p:304:p, space u:::p, comp Desplegable:::p:71:p, space :p:13:p, comp btnSalir:::p::p, space :p:12:p}}}}, space ::8:x}}"
+			"$horizontalGroup": "par l {seq l {par l {seq {space :p:48:p, comp Logo:::p::p}, seq l {space :::p, comp presentacion:::p:299:p}}, par t:::p {seq l {space :p:11:p, par l {seq {comp txtFecha:::p::p, space ::48:x, comp buscaFecha:::p:244:p}, seq {comp txtUbicacion:::p::p, space u:::p, comp buscaUbicacion:::::x}}, space s:::p, comp btnBuscar:::p::p}, seq {space :::p, par t {comp scrollListaEventos::t::434:x, comp scrollPane2::t:::x}}}, par l {seq {space s:::p, comp ScrollListaRituales:::p:194:p, space ::21:x}, seq t {space ::67:x, comp btnSalir:::p:111:p, space :p:55:p}}}}"
+			"$verticalGroup": "par l {seq l {par t {seq {space :::x, par t {seq t {comp Logo:::p:113:p, space :::p, comp presentacion:::p:329:p}, seq {comp ScrollListaRituales:::p:304:p, space :p:67:p, comp btnSalir:::p::p, space :p:41:p}}}, seq t {par l {seq l {space :p:32:p, comp btnBuscar:::p::p}, seq {par b {comp buscaUbicacion::b:p::p, comp txtUbicacion::b:p::p}, space :::p, par l {comp buscaFecha:::p::p, comp txtFecha:::p::p}}}, space s:::p, comp scrollListaEventos:::p:246:p, space u:::p, comp scrollPane2:::p:100:p}}, space :::x}}"
 		} ) {
 			name: "this"
 			"defaultCloseOperation": 3
 			"title": "Bienvenido a la Comunidad Imyriano"
 			"name": "vPrincipal"
 			"resizable": false
-			add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-				name: "Desplegable"
-				"text": "Opciones"
-				"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/gui/flechaI.jpg" )
-				"icon": new com.jformdesigner.model.SwingIcon( 2, "FileView.hardDriveIcon" )
-				"background": new java.awt.Color( 255, 255, 204, 255 )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "PerfilBotonDesplegable"
-					"text": "Perfil"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPerfil", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "ContactosBotonDesplegable"
-					"text": "Contactos"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContactos", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "AcólitosBotonDesplegable"
-					"text": "Acólitos"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarAcolitos", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "PropiedadesBotonDesplegable"
-					"text": "Propiedades"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPropiedades", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "EventosBotonDesplegable"
-					"text": "Eventos"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarEventos", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "RitualesBotonDesplegable"
-					"text": "Rituales"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarRituales", true ) )
-				} )
-			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollListaEventos"
 				add( new FormComponent( "javax.swing.JTable" ) {
@@ -159,9 +122,34 @@ new FormModel {
 				name: "Logo"
 				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/logoPequeño1.jpg" )
 			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "Barras"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "Desplegable"
+					"text": "Opciones"
+					"selectedIcon": new com.jformdesigner.model.SwingIcon( 0, "/gui/flechaI.jpg" )
+					"icon": new com.jformdesigner.model.SwingIcon( 2, "FileView.hardDriveIcon" )
+					"background": new java.awt.Color( 255, 255, 204, 255 )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "BtnPerfil"
+						"text": "Perfil"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPerfil", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "BtnPropiedades"
+						"text": "Propiedades"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarPropiedades", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "BtnEventos"
+						"text": "Eventos"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarEventos", true ) )
+					} )
+				} )
+			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 15, 40 )
-			"size": new java.awt.Dimension( 975, 495 )
+			"size": new java.awt.Dimension( 980, 525 )
 		} )
 	}
 }

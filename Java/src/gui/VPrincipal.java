@@ -33,14 +33,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //EVENTOS DE LA BARRA DE OPCIONES
 
-    private void entrarPropiedades(MouseEvent e) {
-        fa.ventanaPropiedades();
-    }
-
-    private void entrarEventos(MouseEvent e) {
-        fa.ventanaEventos();
-    }
-
 
     //BOTONES
     private void btnBuscarMouseClicked(MouseEvent e) {
@@ -48,20 +40,20 @@ public class VPrincipal extends javax.swing.JFrame {
     }
 
     private void entrarPerfil(MouseEvent e) {
+    }
+
+    private void entrarPropiedades(MouseEvent e) {
+        //fa.ventanaPropiedades();
+        System.exit(0);
+        System.out.println("HE CLICKADO");
+    }
+
+    private void entrarEventos(MouseEvent e) {
         // TODO add your code here
     }
 
-    private void entrarContactos(MouseEvent e) {
-        // TODO add your code here
-    }
 
-    private void entrarAcolitos(MouseEvent e) {
-        // TODO add your code here
-    }
 
-    private void entrarRituales(MouseEvent e) {
-        // TODO add your code here
-    }
 
     private void btnSalirMouseClicked(MouseEvent e) {
         System.exit(0);
@@ -79,13 +71,11 @@ public class VPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     // Generated using JFormDesigner Evaluation license - Diego
     private void initComponents() {
+        Barras = new JMenuBar();
         Desplegable = new JMenu();
-        PerfilBotonDesplegable = new JButton();
-        ContactosBotonDesplegable = new JButton();
-        AcólitosBotonDesplegable = new JButton();
-        PropiedadesBotonDesplegable = new JButton();
-        EventosBotonDesplegable = new JButton();
-        RitualesBotonDesplegable = new JButton();
+        BtnPerfil = new JMenuItem();
+        BtnPropiedades = new JMenuItem();
+        BtnEventos = new JMenuItem();
         scrollListaEventos = new JScrollPane();
         tablaEventos = new JTable();
         presentacion = new JTextPane();
@@ -108,73 +98,49 @@ public class VPrincipal extends javax.swing.JFrame {
         setResizable(false);
         var contentPane = getContentPane();
 
-        //======== Desplegable ========
+        //======== Barras ========
         {
-            Desplegable.setText("Opciones");
-            Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
-            Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
-            Desplegable.setBackground(new Color(0xffffcc));
 
-            //---- PerfilBotonDesplegable ----
-            PerfilBotonDesplegable.setText("Perfil");
-            PerfilBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarPerfil(e);
-                }
-            });
-            Desplegable.add(PerfilBotonDesplegable);
+            //======== Desplegable ========
+            {
+                Desplegable.setText("Opciones");
+                Desplegable.setSelectedIcon(new ImageIcon(getClass().getResource("/gui/flechaI.jpg")));
+                Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
+                Desplegable.setBackground(new Color(0xffffcc));
 
-            //---- ContactosBotonDesplegable ----
-            ContactosBotonDesplegable.setText("Contactos");
-            ContactosBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarContactos(e);
-                }
-            });
-            Desplegable.add(ContactosBotonDesplegable);
+                //---- BtnPerfil ----
+                BtnPerfil.setText("Perfil");
+                BtnPerfil.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        entrarPerfil(e);
+                    }
+                });
+                Desplegable.add(BtnPerfil);
 
-            //---- AcólitosBotonDesplegable ----
-            AcólitosBotonDesplegable.setText("Ac\u00f3litos");
-            AcólitosBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarAcolitos(e);
-                }
-            });
-            Desplegable.add(AcólitosBotonDesplegable);
+                //---- BtnPropiedades ----
+                BtnPropiedades.setText("Propiedades");
+                BtnPropiedades.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        entrarPropiedades(e);
+                    }
+                });
+                Desplegable.add(BtnPropiedades);
 
-            //---- PropiedadesBotonDesplegable ----
-            PropiedadesBotonDesplegable.setText("Propiedades");
-            PropiedadesBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarPropiedades(e);
-                }
-            });
-            Desplegable.add(PropiedadesBotonDesplegable);
-
-            //---- EventosBotonDesplegable ----
-            EventosBotonDesplegable.setText("Eventos");
-            EventosBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarEventos(e);
-                }
-            });
-            Desplegable.add(EventosBotonDesplegable);
-
-            //---- RitualesBotonDesplegable ----
-            RitualesBotonDesplegable.setText("Rituales");
-            RitualesBotonDesplegable.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarRituales(e);
-                }
-            });
-            Desplegable.add(RitualesBotonDesplegable);
+                //---- BtnEventos ----
+                BtnEventos.setText("Eventos");
+                BtnEventos.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        entrarEventos(e);
+                    }
+                });
+                Desplegable.add(BtnEventos);
+            }
+            Barras.add(Desplegable);
         }
+        setJMenuBar(Barras);
 
         //======== scrollListaEventos ========
         {
@@ -271,19 +237,29 @@ public class VPrincipal extends javax.swing.JFrame {
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(18, 18, 18)
-                            .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Desplegable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(21, Short.MAX_VALUE))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                             .addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-                            .addGap(57, 57, 57))))
+                            .addGap(55, 55, 55))))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(Logo, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(contentPaneLayout.createSequentialGroup()
+                                    .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(67, 67, 67)
+                                    .addComponent(btnSalir)
+                                    .addGap(41, 41, 41))))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGroup(contentPaneLayout.createParallelGroup()
                                 .addGroup(contentPaneLayout.createSequentialGroup()
@@ -300,22 +276,8 @@ public class VPrincipal extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addContainerGap(8, Short.MAX_VALUE)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(Logo, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Desplegable, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(13, 13, 13)
-                                    .addComponent(btnSalir)
-                                    .addGap(12, 12, 12)))))
-                    .addContainerGap(8, Short.MAX_VALUE))
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -324,13 +286,11 @@ public class VPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Diego
+    private JMenuBar Barras;
     private JMenu Desplegable;
-    private JButton PerfilBotonDesplegable;
-    private JButton ContactosBotonDesplegable;
-    private JButton AcólitosBotonDesplegable;
-    private JButton PropiedadesBotonDesplegable;
-    private JButton EventosBotonDesplegable;
-    private JButton RitualesBotonDesplegable;
+    private JMenuItem BtnPerfil;
+    private JMenuItem BtnPropiedades;
+    private JMenuItem BtnEventos;
     private JScrollPane scrollListaEventos;
     private JTable tablaEventos;
     private JTextPane presentacion;

@@ -1,20 +1,33 @@
 /*
- * Created by JFormDesigner on Tue Apr 30 20:38:27 CEST 2024
+ * Created by JFormDesigner on Mon Apr 29 20:31:47 CEST 2024
  */
 
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
 
 /**
- * @author Diego
+ * @author Usuario
  */
 public class VPropiedades extends JDialog {
-    public VPropiedades(Window owner) {
-        super(owner);
+
+    aplicacion.FachadaAplicacion fa;
+
+    public VPropiedades(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+        this.fa=fa;
         initComponents();
+    }
+
+    private void btnActualizarMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void btnBuscarActionPerformed(ActionEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -47,11 +60,13 @@ public class VPropiedades extends JDialog {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
+            swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border
+            .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
+            ,java.awt.Font.BOLD,12),java.awt.Color.red),panel1. getBorder
+            ()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
+            .beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
+            ();}});
 
             //---- btnVolver ----
             btnVolver.setText("volver");

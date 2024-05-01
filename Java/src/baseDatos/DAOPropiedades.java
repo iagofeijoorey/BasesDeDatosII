@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 public class DAOPropiedades extends AbstractDAO {
 
-
     public DAOPropiedades(Connection conexion, FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
