@@ -384,9 +384,9 @@ public class VPrincipal extends javax.swing.JFrame {
     public void buscarRituales(){
         ModeloTablaRituales m;
 
-        m=(ModeloTablaRituales) TablaRituales.getModel();
-        m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        if (m.getRowCount() > 0) TablaRituales.setRowSelectionInterval(0, 0);
+        //m=(ModeloTablaRituales) TablaRituales.getModel();
+        //m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
+        //if (m.getRowCount() > 0) TablaRituales.setRowSelectionInterval(0, 0);
     }
 
 
