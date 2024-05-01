@@ -20,8 +20,8 @@ public class DAOAcolitos extends AbstractDAO {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-}/*
-    public Acolito validarLogin(String alias, String contraseña) {
+
+    /*public Acolito validarLogin(String alias, String contraseña) {
         Acolito resultado = null;
         Connection con;
         PreparedStatement stmUsuario = null;
@@ -30,7 +30,7 @@ public class DAOAcolitos extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select alias, contraseña " +
+            stmUsuario = con.prepareStatement("select * " +
                     "from acólitos " +
                     "where alias = ? and contraseña = ?");
             stmUsuario.setString(1, alias);
@@ -38,9 +38,8 @@ public class DAOAcolitos extends AbstractDAO {
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
                 resultado = new Acolito(rsUsuario.getString("alias"), rsUsuario.getString("contraseña"),
-                        rsUsuario.getString("nombrecompleto"), rsUsuario.getString("direccion"), 0
-                        , TipoAcolito.valueOf(rsUsuario.getString("tipo_usuario")));
-
+                        rsUsuario.getString("nombrecompleto"), rsUsuario.getString("direccion"), rsUsuario.getString("email"),
+                        rsUsuario.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsUsuario.getString("tipo_usuario")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -64,7 +63,7 @@ public class DAOAcolitos extends AbstractDAO {
 
         con=this.getConexion();
 
-        String consulta =   "SELECT u.nombrecompleto, u.alias,\n" +
+        String consulta =   "SELECT u.*,\n" +
                 "       CASE\n" +
                 "           WHEN public.cabecillas.alias IS NOT NULL THEN 'Cabecilla' " +
                 "           WHEN public.gestor_interno.alias IS NOT NULL THEN 'Gestor' " +
@@ -91,9 +90,8 @@ public class DAOAcolitos extends AbstractDAO {
             while (rsUsuarios.next())
             {
                 acolitoActual = new Acolito(rsUsuarios.getString("alias"), rsUsuarios.getString("contraseña"),
-                        rsUsuarios.getString("nombrecompleto"), rsUsuarios.getString("direccion"),
-                        rsUsuarios.getInt("influencia"),  TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo")));
-
+                        rsUsuarios.getString("nombrecompleto"), rsUsuarios.getString("direccion"), rsUsuarios.getString("email"),
+                        rsUsuarios.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo_usuario")));
 
                 resultado.add(acolitoActual);
             }
@@ -153,34 +151,6 @@ public class DAOAcolitos extends AbstractDAO {
             try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
-
-    public void actualizarAcolito(Acolito acolito){
-        Connection con;
-        PreparedStatement stmUsuario=null;
-
-        con=super.getConexion();
-
-        try {
-        stmUsuario=con.prepareStatement("update acólitos "+
-                                      "set nombrecompleto=?, telefono=?, direccion=?, influencia=?, dinero=?, contraseña=? "+
-                                      "where alias=?");
-        stmUsuario.setString(1, acolito.getNombreCompleto());
-        stmUsuario.setInt(2, acolito.getTelefono());
-        stmUsuario.setString(3, acolito.getDireccion());
-        stmUsuario.setInt(4, acolito.getInfluencia());
-        stmUsuario.setInt(5, acolito.getDinero());
-        stmUsuario.setString(6, acolito.getContraseña());
-        stmUsuario.setString(7, acolito.getAlias());
-        stmUsuario.executeUpdate();
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {
-              assert stmUsuario != null;
-              stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
     
     public void borrarAcolito(Acolito acolito){
         Connection con;
@@ -231,6 +201,5 @@ public class DAOAcolitos extends AbstractDAO {
 
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
        //HACER DAO
-    }
+    }*/
 }
-*/

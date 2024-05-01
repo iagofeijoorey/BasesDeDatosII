@@ -4,8 +4,10 @@
  */
 
 package aplicacion;
-
+import aplicacion.PropiedadesYCuentas.Propiedad;
 import gui.VPrincipal;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +23,7 @@ public class FachadaAplicacion {
     private GestionAcolitos ga;
     private Acolito currentUser;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         FachadaAplicacion fa;
 
         fa= new FachadaAplicacion();
@@ -78,16 +80,14 @@ public java.util.List<Acolito> consultarAcolitos(){
         currentUser = u;
     }
 */
-
-   // public java.util.List<Evento> obtenerEventos(String ubicacion, String fecha){
-   //     return ge.obtenerEventos(ubicacion, fecha);
-   // }
-
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vp){
-        fgui.ventanaPerfil(vp);
-    }
+//    public void ventanaPerfil(VPrincipal vp){
+//        fgui.ventanaPerfil(vp);
+//    }
 
+
+    ///Código abrir ventanas
+    //////////////////////////////////////////
     public void ventanaContactos(){
         //fgui.ventanaContactos();
     }
@@ -97,7 +97,15 @@ public java.util.List<Acolito> consultarAcolitos(){
     }
 
     public void ventanaPropiedades(){
-        //fgui.ventanaPropiedades();
+        fgui.ventanaPropiedades();
+    }
+
+    public void ventanaDetalles(){
+        fgui.ventanaDetalles();
+    }
+
+    public void ventanaContenido(){
+        fgui.ventanaContenido();
     }
 
     public void ventanaEventos(){
@@ -111,6 +119,21 @@ public java.util.List<Acolito> consultarAcolitos(){
     //Métodos de VPerfil
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         //ga.actualizarAcolito(alias, nombre, ciudad, pais);
+    }
+
+
+    ///Código consultas
+    //////////////////////////////////////////
+    /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha){
+        return ge.consultarEventos(ubicacion, fecha);
+    }*/
+
+    public java.util.List<Propiedad> consultarPropiedades(String tipo){
+        return gp.consultarPropiedades(tipo);
+    }
+
+    public void borrarPropiedad(String idPropiedad){
+        gp.borrarPropiedad(idPropiedad);
     }
 }
 

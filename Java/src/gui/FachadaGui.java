@@ -35,12 +35,6 @@ public class FachadaGui {
     }
 
     //Abrir ventanas
-    public void ventanaPerfil(VPrincipal vP){
-        VPerfil vp;
-
-//        vp = new VPerfil(vP, fa);
-//        vp.setVisible(true);
-    }
 
     /*
     public void ventanaContactos(VPrincipal vP){
@@ -56,14 +50,28 @@ public class FachadaGui {
         va = new VPerfil(vP, fa);
         va.setVisible(true);
     }
-
-    public void ventanaPropiedades(VPrincipal vP){
+*/
+    public void ventanaPropiedades(){
         VPropiedades vpr;
 
-        vpr = new VPerfil(vP, fa);
+        vpr = new VPropiedades(fa);
         vpr.setVisible(true);
     }
 
+    public void ventanaDetalles(){
+        VDetalles_NewProp vdn;
+
+        vdn = new VDetalles_NewProp(fa);
+        vdn.setVisible(true);
+    }
+
+    public void ventanaContenido(){
+        VContenidoAlmacen vdn;
+
+        vdn = new VContenidoAlmacen(fa);
+        vdn.setVisible(true);
+    }
+/*
     public void ventanaRituales(VPrincipal vP){
         VRituales vr;
 

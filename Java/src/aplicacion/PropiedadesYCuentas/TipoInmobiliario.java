@@ -6,6 +6,8 @@ package aplicacion.PropiedadesYCuentas;
  */
 
 
+import java.util.ArrayList;
+
 /**
  *
  * @author basesdatos
@@ -24,5 +26,14 @@ public enum TipoInmobiliario {
             default:
                 return Normal;
         }
+    }
+
+    public static ArrayList<String> valuesString(){
+        ArrayList<String> res = new ArrayList<>();
+
+        for (TipoInmobiliario ta: TipoInmobiliario.values()){
+            res.add(ta.toString());
+        }
+        return res;
     }
 }

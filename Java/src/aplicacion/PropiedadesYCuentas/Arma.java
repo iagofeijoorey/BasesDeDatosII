@@ -14,35 +14,41 @@ public class Arma extends Propiedad{
         this.almacen = almacen;
     }
 
+    // Getters
     public TipoArmamento getTipo() {
         return tipo;
     }
-
     public Integer getCantidad() {
         return cantidad;
     }
-
     public Integer getBalas() {
         return balas;
     }
-
     public Inmobiliario getAlmacen() {
         return almacen;
     }
+    public String getTipoString(){
+        return tipo.toString();
+    };
+    public String getTipoGeneral(){
+        return "arma";
+    };
 
+    // Setters
     public void setTipo(TipoArmamento tipo) {
         this.tipo = tipo;
     }
-
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-
     public void setBalas(Integer balas) {
         this.balas = balas;
     }
-
     public void setAlmacen(Inmobiliario almacen) {
         this.almacen = almacen;
     }
+
+
+
+
 }

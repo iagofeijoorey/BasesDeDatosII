@@ -1,0 +1,113 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp TextUbicacion:::p::p, space :::p, comp Ubicacion:::p:160:p, space :::x}, seq {par l:::p {seq l {comp TextId:::p::p, space :56:56:p, comp Id:::p:160:p, space :20:20:p, comp TextTipo:::p::p, space :45:45:p, comp BoxTipo:::p:196:p}, seq l {comp TextValor:::p::p, space :35:35:p, comp Valor:::p:160:p, space :20:20:p, comp TextGestor:::p::p, space :30:30:p, comp BoxGestor:::p:196:p}, seq l {comp TextEvento:::p:61:p, space u:::p, comp scrollPane1::::0:x}, seq l {par l {seq l {comp TextAlmacen:::p::p, space s:::p, comp BoxAlmacen:::p:156:p}, seq l {comp TextBalas:::p::p, space :28:28:p, comp Balas:::p:95:p}}, space ::152:x, par l {seq t {comp BtnActualizar:::p::p, space :p:72:p}, seq t {comp BtnContent:::p::p, space :p:61:p}}}, seq t {comp TextAmountCapacity:::p::p, space s:::p, par l {seq {space :0:196:x, comp TextTipoCommodity:::p::p}, seq t {comp AmountCapacity:::p:141:p, space ::120:x, comp TextNameType:::p::p}}, space u:::p, par t {comp BoxString:::p:148:p, comp TipoCommodity:::p:122:p}, space :p:42:p}}, space :0:6:x}}}}"
+				"$verticalGroup": "par l {seq l {space :p:19:p, par l {comp Id:::p::p, comp BoxTipo:::p::p, seq l {space :10:10:p, par l {comp TextId:::p::p, comp TextTipo:::p::p}}}, space :10:10:p, par l {comp Valor:::p::p, comp BoxGestor:::p::p, seq l {space :5:5:p, par l {comp TextValor:::p::p, comp TextGestor:::p::p}}}, par l {seq {space :p:25:p, comp scrollPane1:::p:93:p}, seq t {space :::p, comp TextEvento:::p::p, space :p:38:p}}, space ::9:x, par l {seq t {par b {comp BoxString::b:p::p, comp TextNameType::b:p::p}, space :::p, par b {comp TextTipoCommodity::b:p::p, comp TipoCommodity::b:p::p}, space :p:3:p}, seq t {par b {comp TextAmountCapacity::b:p::p, comp AmountCapacity::b:p::p}, space :p:28:p}}, par t {seq t {par l {seq l {space :10:10:p, comp TextBalas:::p::p}, comp Balas:::p::p}, space :p:23:p, par b {comp TextAlmacen::b:p::p, comp BoxAlmacen::b:p::p}, space s:::p}, seq t {comp BtnContent:::p::p, space u:::p, comp BtnActualizar:::p::p, space :p:8:p}}, par b {comp TextUbicacion::b:p::p, comp Ubicacion::b:p::p}, space :::p}}"
+			} ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnContent"
+					"text": "Ver contenido"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContenido", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextAlmacen"
+					"text": "Almacen:"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextBalas"
+					"text": "Numero de balas:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Balas"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "AmountCapacity"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextEvento"
+					"text": "Evento:"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextValor"
+					"text": "Valor:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Valor"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextId"
+					"text": "Id:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Id"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextTipo"
+					"text": "Tipo:"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxTipo"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BoxTipoMouseClicked", true ) )
+					addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "BoxTipoItemStateChanged", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextGestor"
+					"text": "Gestor:"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxGestor"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextAmountCapacity"
+					"text": "Integer:"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnActualizar"
+					"text": "Actualizar"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxAlmacen"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextUbicacion"
+					"text": "Ubicación:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Ubicacion"
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tablaEventos"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextNameType"
+					"text": "String"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxString"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TipoCommodity"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextTipoCommodity"
+					"text": "Tipo Commodity"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 590, 465 )
+			"location": new java.awt.Point( 0, 5 )
+		} )
+	}
+}

@@ -1,0 +1,37 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {space ::52:x, par t:::p {comp scrollPane2:::p:228:p, seq {comp btnSi:::p::p, space :::x, comp btnNo:::p::p}}, space :p:46:p}}"
+				"$verticalGroup": "par l {seq l {space :p:31:p, comp scrollPane2:::p:50:p, space :p:32:p, par b {comp btnSi::b:p::p, comp btnNo::b:p::p}, space ::39:x}}"
+			} ) {
+				name: "panel1"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					add( new FormComponent( "javax.swing.JTextPane" ) {
+						name: "Mensaje"
+						"text": "¿Deseas eliminar esta información de la base de datos?"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnSi"
+					"text": "Sí"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnNo"
+					"text": "No"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 340, 225 )
+		} )
+	}
+}

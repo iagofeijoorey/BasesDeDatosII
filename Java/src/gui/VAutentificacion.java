@@ -22,7 +22,7 @@ import javax.swing.LayoutStyle;
  * @author basesdatos
  */
 public class VAutentificacion extends javax.swing.JDialog {
-
+    
     aplicacion.FachadaAplicacion fa;
     
     /** Creates new form VAutentificacion */
@@ -46,7 +46,7 @@ public class VAutentificacion extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private void initComponents() {
         textoUsuario = new JTextField();
         btnAceptar = new JButton();
@@ -73,7 +73,7 @@ public class VAutentificacion extends javax.swing.JDialog {
                 formKeyTyped(e);
             }
         });
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //---- textoUsuario ----
         textoUsuario.setForeground(Color.gray);
@@ -160,38 +160,34 @@ public class VAutentificacion extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         etiquetaFallo.setVisible(false);
-        //if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
+        if (true)//fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
            this.dispose();
-       // else etiquetaFallo.setVisible(true);
+        else etiquetaFallo.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-     System.exit(0);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) { System.exit(0); }
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formKeyPressed
+    private void formKeyPressed(java.awt.event.KeyEvent evt) { /* TODO add your handling code here: */  }
 
+        
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         // TODO add your handling code here:
         if(evt.getKeyCode()==10) System.out.printf("ENTER");
     }//GEN-LAST:event_formKeyTyped
 
-    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoClaveKeyTyped
+    private void textoClaveKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         //System.out.println(evt.getKeyChar());
         //if (evt.getKeyChar() == '\n') System.out.println("BARRAN");
         if (evt.getKeyChar() == '\n') //btnAceptarActionPerformed(null); //todo, devolver al original
             this.dispose();
-    }//GEN-LAST:event_textoClaveKeyTyped
-
-    /**
-    * @param args the command line arguments
-    */
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JTextField textoUsuario;
     private JButton btnAceptar;
     private JButton btnCancelar;
@@ -203,3 +199,4 @@ public class VAutentificacion extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
 }
+

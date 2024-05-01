@@ -6,6 +6,8 @@
 package baseDatos;
 
 import aplicacion.*;
+import aplicacion.PropiedadesYCuentas.Propiedad;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -69,96 +71,29 @@ public class FachadaBaseDatos {
         }
     }
 
-    /*
-
-    MÉTODOS DA BIBLIOTECA
-
-
-    public void anadirPrestamo (Usuario usuario, Evento evento){
-    daoLibros.anadirPrestamo(usuario, evento);
+    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
+        //daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
 
-    public void devolver(Evento evento){
-        daoLibros.devolver(evento);
-    }
-
-
-    public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor){
-        return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
-    }
-
-    public Libro consultarLibro(Integer idLibro){
-        return daoLibros.consultarLibro(idLibro);
-    }
-    public java.util.List<Evento> consultarEjemplaresLibro(Integer idLibro){
-        return daoLibros.consultarEjemplaresLibro(idLibro);
-    }
-    
-    public Integer consultarMaxEjemplarLibro(Integer idLibro){
-        return daoLibros.consultarMaxEjemplarLibro(idLibro);
-    }
-                
-            
-    public java.util.List<String> obtenerRestoCategorias(Integer idLibro){
-        return daoLibros.obtenerRestoCategorias(idLibro);
-    }
-    public void insertarCategoria(Categoria categoria){
-        daoCategorias.insertarCategoria(categoria);
-    }
-    public void borrarCategoria(Categoria categoria){
-        daoCategorias.borrarCategoria(categoria);
-    }
-    
-    public Integer insertarLibro(Libro libro){
-       return daoLibros.insertarLibro(libro);
-    }
-    
-    public void insertarUsuario(Usuario usuario){
-        daoUsuarios.insertarUsuario(usuario);
-    }
-    
-    public void borrarLibro(Integer idLibro){
-        daoLibros.borrarLibro(idLibro);
-    }
-    
-    public void borrarUsuario(Usuario usuario){
-        daoUsuarios.borrarUsuario(usuario);
-    }
-    public void modificarLibro(Libro libro){
-         daoLibros.modificarLibro(libro);
-    }
-    public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
-       daoLibros.modificarCategoriasLibro(idLibro, categorias);
-    }
-    public void insertarEjemplarLibro(Integer idLibro, Evento evento){
-        evento.setNumEjemplar(daoLibros.consultarMaxEjemplarLibro(idLibro)+1);
-        daoLibros.insertarEjemplarLibro(idLibro, evento);
-    }
-    public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar){
-        daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
-    }
-    public void modificarEjemplarLibro(Integer idLibro, Evento evento){
-        daoLibros.modificarEjemplarLibro(idLibro, evento);
-    }
-
-    public Usuario validarUsuario(String idUsuario, String clave){
-        return daoUsuarios.validarUsuario(idUsuario, clave);
-    }
-   
-    public java.util.List<Categoria> consultarCategorias(){
-        return daoCategorias.consultarCategorias();
-    }
-
-
-    /*
-    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+    //Código VPrincipal
+    /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
         return daoEventos.consultarEventos(ubicacion, fecha);
     }
-    */
-    public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
-    //    daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
+
+    public void borrarEvento(Evento evento){
+        daoEventos.borrarEvento(evento);
     }
 
+    public void insertarEvento(Evento evento){
+        daoEventos.insertarEvento(evento);
+    }*/
 
+    public java.util.List<Propiedad> consultarPropiedades(String tipo){
+         return daoPropiedades.consultarPropiedades(tipo);
+    }
+
+    public void borrarPropiedad(String idPropiedad){
+        daoPropiedades.borrarPropiedad(idPropiedad);
+    }
 }
