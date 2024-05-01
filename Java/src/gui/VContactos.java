@@ -41,14 +41,29 @@ public class VContactos extends JDialog {
         if(txtPseudonimo.getText() != "Pseudónimo..." && txtNombre.getText() != "Nombre..." && txtNombre.getText() != null
                 && txtTelefono.getText() != "Teléfono..." && txtTelefono.getText() != null && txtDescripcion.getText() != "Descripción...")
             fa.actualizarContacto(txtPseudonimo.getText(), txtNombre.getText(), txtTelefono.getText(), txtDescripcion.getText());
+
+        //Mensajito de que se actualizou?
+
+        //Para actualizar las listas :)
+        createUIComponents();
     }
 
     private void btnProponerTratoMouseClicked(MouseEvent e) {
         fa.proponerTrato(acolito.getAlias(), contacto.getPseudonimo(), this);
+
+        //Mensajito de que se propuxo?
+
+        //Para actualizar las listas :)
+        createUIComponents();
     }
 
     private void btnRomperTratoMouseClicked(MouseEvent e) {
         fa.romperTrato(trato);
+
+        //Mensajito de que se rompiu?
+
+        //Para actualizar las listas :)
+        createUIComponents();
     }
 
     private void bntEliminarMouseClicked(MouseEvent e) {
@@ -59,12 +74,16 @@ public class VContactos extends JDialog {
                 fa.muestraExcepcion("No se puede eliminar un contacto si hay tratos vigentes");
         }
 
+        //Mensajito de que se eliminou?
+
         //Para actualizar las listas :)
         createUIComponents();
     }
 
     private void btnAnadirMouseClicked(MouseEvent e) {
         fa.ventanaContactoNuevo(this);
+
+        //Mensajito de que se añadiu?
 
         //Para actualizar las listas :)
         createUIComponents();

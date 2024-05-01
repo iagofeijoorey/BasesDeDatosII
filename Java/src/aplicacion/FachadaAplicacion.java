@@ -23,7 +23,6 @@ public class FachadaAplicacion {
     private GestionContactos gc;
     private GestionAcolitos ga;
     
-    
     public FachadaAplicacion(){
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
