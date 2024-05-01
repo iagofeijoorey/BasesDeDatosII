@@ -22,12 +22,12 @@ import java.util.ArrayList;
  *
  * @author basesdatos
  */
-public class vAcolitos extends javax.swing.JDialog {
+public class VAcolitos extends javax.swing.JDialog {
 
     private VPrincipal padre;
     private aplicacion.FachadaAplicacion fa;
 
-    public vAcolitos(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
+    public VAcolitos(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
         this.fa=fa;
         initComponents();

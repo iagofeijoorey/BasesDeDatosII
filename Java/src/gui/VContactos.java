@@ -88,7 +88,7 @@ public class VContactos extends JDialog {
         mListaC.setElementos(contactos);
         if (mListaC.getSize()>0) {
             ListaContactos.setSelectedIndex(0);
-            //contacto = ListaContactos.getElementAt(0);          //¿QUÉ COÑO?
+            contacto = ListaContactos.getElementAt(0);              //¿QUÉ COÑO?
             fa.rellenarDatos(this);
 
             bntEliminar.setEnabled(true);
@@ -103,6 +103,10 @@ public class VContactos extends JDialog {
         inicializarListaContactos();
         inicializarListaTratos();
 
+    }
+
+    private void ListaContactosMouseClicked(MouseEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -211,6 +215,12 @@ public class VContactos extends JDialog {
 
         //---- ListaContactos ----
         ListaContactos.setBorder(LineBorder.createBlackLineBorder());
+        ListaContactos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ListaContactosMouseClicked(e);
+            }
+        });
 
         //---- bntEliminar ----
         bntEliminar.setText("ELIMINAR CONTACTO");
