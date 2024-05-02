@@ -106,6 +106,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "BtnActualizar"
 				"text": "Actualizar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BtnActualizar_AnadirMouseClicked", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 625, 475 )

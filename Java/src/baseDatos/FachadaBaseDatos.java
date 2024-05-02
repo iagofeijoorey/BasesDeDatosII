@@ -6,7 +6,9 @@
 package baseDatos;
 
 import aplicacion.*;
+import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -95,5 +97,24 @@ public class FachadaBaseDatos {
 
     public void borrarPropiedad(String idPropiedad){
         daoPropiedades.borrarPropiedad(idPropiedad);
+    }
+
+    // Contenido Almacén
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return daoPropiedades.consultarVehiculos(idAlmacen);
+    }
+
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return daoPropiedades.consultarArmas(idAlmacen);
+    }
+
+    //Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        daoPropiedades.insertarPropiedad(p);
+    }
+
+    //Actualizar propiedad
+    public void actualizarPropiedad(Propiedad p){
+        daoPropiedades.actualizarPropiedad(p);
     }
 }

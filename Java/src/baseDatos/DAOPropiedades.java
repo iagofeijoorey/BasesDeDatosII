@@ -49,6 +49,13 @@ public class DAOPropiedades extends AbstractDAO {
                 stmUsuario.setString(2, inmobiliario.getUbicacion());
                 stmUsuario.setString(3, inmobiliario.getTipo().toString());
                 stmUsuario.executeUpdate();
+                if (inmobiliario.getTipo().equals(TipoInmobiliario.Almacen)) {
+                    stmUsuario = con.prepareStatement("insert into almacenes(idpropiedad, capacidad) " +
+                            "values (?,?)");
+                    stmUsuario.setInt(1, inmobiliario.getIdPropiedad());
+                    stmUsuario.setInt(2, inmobiliario.getCapacidad());
+                    stmUsuario.executeUpdate();
+                }
             } else if (propiedad.getClass().equals(Vehiculo.class)) {
                 Vehiculo vehiculo = (Vehiculo) propiedad;
                 stmUsuario = con.prepareStatement("insert into vehiculos(idpropiedad, tipovehiculo, capacidad, almacén) " +
@@ -89,184 +96,70 @@ public class DAOPropiedades extends AbstractDAO {
         }
     }
 
-// No hace falta porque el de abajo ya busca todas si no se pone nada en el tipo
-/*    public List<Propiedad> consultarPropiedades() {
-        String consulta;
-        ArrayList<Propiedad> resultado = new ArrayList<Propiedad>();
-        Propiedad propiedadActual = null;
+    public void actualizarPropiedad(Propiedad propiedad) {
         Connection con;
-        PreparedStatement stmPropiedades = null;
-        ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAlmacen;
+        PreparedStatement stmPropiedad = null;
 
-        Acolito gestorAux=null;
-        Inmobiliario almacenAux=null;
-        TipoInmobiliario tipoInmobiliarioAux=null;
-
-        con = this.getConexion();
-
-        consulta = "SELECT u.idpropiedad, u.valor_actual, u.gestor ,\n" +
-                "       CASE\n" +
-                "           WHEN public.inmobiliario.idpropiedad IS NOT NULL THEN 'Inmobiliario' " +
-                "           WHEN public.vehiculos.idpropiedad IS NOT NULL THEN 'Vehículo' " +
-                "           WHEN public.armas.idpropiedad IS NOT NULL THEN 'Arma' " +
-                "           WHEN public.commodities.idpropiedad IS NOT NULL THEN 'Commodity' " +
-                "           ELSE 'tipo_desconocido' " +
-                "           END AS tipo\n" +
-                "FROM propiedades u " +
-                "         LEFT JOIN public.inmobiliario ON u.idpropiedad = public.inmobiliario.idpropiedad " +
-                "         LEFT JOIN public.vehiculos ON u.idpropiedad = public.vehiculos.idpropiedad " +
-                "         LEFT JOIN public.armas ON u.idpropiedad = public.armas.idpropiedad " +
-                "         LEFT JOIN public.commodities ON u.idpropiedad = public.commodities.idpropiedad";
-
+        con = super.getConexion();
 
         try {
-            stmPropiedades = con.prepareStatement(consulta);
-            rsPropiedades = stmPropiedades.executeQuery();
-            while (rsPropiedades.next()) {
-                String consulta2 = "SELECT * FROM acólitos " +
-                        "WHERE alias = ? ";
+            // Actualizar datos en la tabla propiedades
+            stmPropiedad = con.prepareStatement("UPDATE propiedades SET valor_actual = ?, gestor = ? WHERE idpropiedad = ?");
+            stmPropiedad.setInt(1, propiedad.getValorActual());
+            stmPropiedad.setString(2, propiedad.getGestor().getAlias());
+            stmPropiedad.setInt(3, propiedad.getIdPropiedad());
+            stmPropiedad.executeUpdate();
 
-                stmPropiedades = con.prepareStatement(consulta2);
-                stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
-                rsGestor = stmPropiedades.executeQuery();
-                rsGestor.next();
-
-                // Crea al gestor relacionado
-                gestorAux = new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
-                        rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"), rsGestor.getString("email"),
-                        rsGestor.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsGestor.getString("tipo_usuario")));
-
-                switch (rsPropiedades.getString("tipo")) {
-                    case "Inmobiliario":
-
-                        if (rsPropiedades.getString("tipoinmobiliario").equals("Almacen")  || rsPropiedades.getString("tipoinmobiliario").equals("almacen")) {
-
-                            // Busca la capacidad del almacen
-                            consulta = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
-                                    "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
-
-                            stmPropiedades = con.prepareStatement(consulta);
-                            stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
-                            rsTipoConcreto = stmPropiedades.executeQuery();
-                            rsTipoConcreto.next();
-
-                            // Crea el almacen
-                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("ubicacion"),
-                                    rsTipoConcreto.getInt("capacidad"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
-                        }
-
-                        else {
-                            // Crea el inmobiliario
-                            propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
-
-                        }
-                        break;
-
-                    case "Vehículo":
-
-                        // Busca almacen entero
-                        consulta = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
-                                "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
-                        stmPropiedades = con.prepareStatement(consulta);
-                        stmPropiedades.setInt(1, rsPropiedades.getInt("almacen"));
-                        rsAlmacen = stmPropiedades.executeQuery();
-                        rsAlmacen.next();
-
-                        // Setea el tipo de inmobiliario del almacen
-                        tipoInmobiliarioAux = TipoInmobiliario.Almacen;
-
-                        // Busca info del vehículo
-                        consulta = "Select * from vehiculos where idpropiedad = ?";
-                        stmPropiedades = con.prepareStatement(consulta);
-                        stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
-                        rsTipoConcreto = stmPropiedades.executeQuery();
-                        rsTipoConcreto.next();
-
-                        // Almacen asociado al vehículo
-                        almacenAux = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
-                                rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                gestorAux);
-
-                        // Crea al vehículo
-                        propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"),
-                                TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipo_vehiculo")), rsPropiedades.getInt("valor_actual"),
-                                rsTipoConcreto.getInt("capacidad"), almacenAux);
-                        break;
-                    case "Arma":
-
-                        // Busca el almacen entero
-                        consulta = "SELECT i.*, a.capacidad FROM inmobiliario i, almacenes a\n" +
-                                "where a.idpropiedad = ? and i.idpropiedad = a.idpropiedad";
-                        stmPropiedades = con.prepareStatement(consulta);
-                        stmPropiedades.setInt(1, rsPropiedades.getInt("almacen"));
-                        rsAlmacen = stmPropiedades.executeQuery();
-                        rsAlmacen.next();
-
-                        // Setea el tipo de inmobiliario del almacen
-                        tipoInmobiliarioAux = TipoInmobiliario.Almacen;
-
-                        // Busca info especial del arma
-                        consulta = "Select * from armas where idpropiedad = ?";
-                        stmPropiedades = con.prepareStatement(consulta);
-                        stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
-                        rsTipoConcreto = stmPropiedades.executeQuery();
-                        rsTipoConcreto.next();
-
-                        // Almacen asociado al vehículo
-                        almacenAux = new Inmobiliario(rsAlmacen.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
-                                rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                gestorAux);
-
-                        // Crea el arma
-                        propiedadActual = new Arma(rsPropiedades.getInt("idpropiedad"), TipoArmamento.stringToTipoArmamento(rsPropiedades.getString("tipo_armamento")),
-                                rsTipoConcreto.getInt("cantidad"), rsTipoConcreto.getInt("Balas"), rsPropiedades.getInt("valor_actual"),
-                                almacenAux);
-                        break;
-                    case "Commodity":
-
-                        // Busca info especial del commodity
-                        consulta = "Select * from commodities where idpropiedad = ?";
-                        stmPropiedades = con.prepareStatement(consulta);
-                        stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
-                        rsTipoConcreto = stmPropiedades.executeQuery();
-                        rsTipoConcreto.next();
-
-                        // Crea el commodity
-                        new Commodity(rsPropiedades.getInt("idpropiedad"), rsTipoConcreto.getString("nombre"),
-                                rsTipoConcreto.getInt("cantidad"), rsPropiedades.getInt("valor_actual"),
-                                gestorAux);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
+            // Actualizar datos en la tabla correspondiente dependiendo del tipo de propiedad
+            if (propiedad instanceof Inmobiliario) {
+                Inmobiliario inmobiliario = (Inmobiliario) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE inmobiliario SET ubicacion = ?, tipoinmobiliario = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, inmobiliario.getUbicacion());
+                stmPropiedad.setString(2, inmobiliario.getTipo().toString());
+                stmPropiedad.setInt(3, inmobiliario.getIdPropiedad());
+                if (inmobiliario.getTipo().equals(TipoInmobiliario.Almacen)) {
+                    stmPropiedad = con.prepareStatement("UPDATE almacenes SET capacidad = ? WHERE idpropiedad = ?");
+                    stmPropiedad.setInt(1, inmobiliario.getCapacidad());
+                    stmPropiedad.setInt(2, inmobiliario.getIdPropiedad());
                 }
-                resultado.add(propiedadActual);
+            } else if (propiedad instanceof Vehiculo) {
+                Vehiculo vehiculo = (Vehiculo) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE vehiculos SET tipovehiculo = ?, capacidad = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, vehiculo.getTipo().toString());
+                stmPropiedad.setInt(2, vehiculo.getCantidad());
+                stmPropiedad.setInt(3, vehiculo.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(4, vehiculo.getIdPropiedad());
+            } else if (propiedad instanceof Arma) {
+                Arma arma = (Arma) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE armas SET tipoarmamento = ?, cantidad = ?, numbalas = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, arma.getTipoString().toString());
+                stmPropiedad.setInt(2, arma.getCantidad());
+                stmPropiedad.setInt(3, arma.getBalas());
+                stmPropiedad.setInt(4, arma.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(5, arma.getIdPropiedad());
+            } else if (propiedad instanceof Commodity) {
+                Commodity commodity = (Commodity) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE commodities SET nombre = ?, cantidad = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, commodity.getNombre());
+                stmPropiedad.setInt(2, commodity.getCantidad());
+                stmPropiedad.setInt(3, commodity.getIdPropiedad());
             }
+
+            // Ejecutar la actualización
+            stmPropiedad.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                assert stmPropiedades != null;
-                stmPropiedades.close();
+                stmPropiedad.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        return resultado;
     }
 
-
-    /**
-     * Tipo entre Inmobiliario, Vehículo, Arma, Commodity, o subtipos
-     * Está implementado de la forma más ineficiente posible (literalmente cojo todos los resultados y filtro con Java,
-     * habría que cambiar las consultas, pero ahora mismo me da pereza ->
-     * todo añadir condiciones sobre el tipo en cada consulta y jugar con el switch
-     *
-     * @param tipo
-     * @return
-     */
     public List<Propiedad> consultarPropiedades(String tipo) {
         List<Propiedad> resultado = new ArrayList<>();
         Propiedad propiedadActual = null;
@@ -324,7 +217,7 @@ public class DAOPropiedades extends AbstractDAO {
                 stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
                 rsGestor = stmPropiedades.executeQuery();
                 if(!rsGestor.next()){
-                    System.out.println("No hay vehículo asociado al almacen");
+                    System.out.println("No hay Gestor asociado a la propiedad");
                     gestorAux = null;
                 }
                 else {
@@ -519,5 +412,85 @@ public class DAOPropiedades extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
+    }
+
+    // Contenido almacén
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        List<Vehiculo> resultado = new ArrayList<>();
+        Vehiculo vehiculoActual = null;
+        Connection con;
+        PreparedStatement stmVehiculos = null;
+        ResultSet rsVehiculos;
+
+
+        con = this.getConexion();
+
+        String consulta = "SELECT v.*, p.valor_actual\n" +
+                "FROM vehiculos v\n" +
+                "         INNER JOIN propiedades p ON v.idpropiedad = p.idpropiedad\n" +
+                "WHERE v.almacén = ?";
+
+        try{
+            stmVehiculos = con.prepareStatement(consulta);
+            stmVehiculos.setInt(1, idAlmacen);
+            rsVehiculos = stmVehiculos.executeQuery();
+            while(rsVehiculos.next()){
+
+                vehiculoActual = new Vehiculo(rsVehiculos.getInt("idpropiedad"), TipoVehiculo.stringToTipoVehiculo(rsVehiculos.getString("tipovehiculo")),
+                        rsVehiculos.getInt("valor_actual"), rsVehiculos.getInt("capacidad"));
+                resultado.add(vehiculoActual);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmVehiculos != null;
+                stmVehiculos.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
+
+    }
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        List<Arma> resultado = new ArrayList<>();
+        Arma armaActual = null;
+        Connection con;
+        PreparedStatement stmArmas = null;
+        ResultSet rsArmas;
+
+        con = this.getConexion();
+
+        String consulta = "SELECT a.*, p.valor_actual\n" +
+                "FROM armas a\n" +
+                "INNER JOIN propiedades p ON a.idpropiedad = p.idpropiedad\n" +
+                "WHERE a.almacén = ?";
+
+        try{
+            stmArmas = con.prepareStatement(consulta);
+            stmArmas.setInt(1, idAlmacen);
+            rsArmas = stmArmas.executeQuery();
+            while(rsArmas.next()){
+
+                armaActual = new Arma(rsArmas.getInt("idpropiedad"), TipoArmamento.stringToTipoArmamento(rsArmas.getString("tipoarmamento")),
+                        rsArmas.getInt("valor_actual"), rsArmas.getInt("cantidad"), rsArmas.getInt("numbalas"));
+                resultado.add(armaActual);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                assert stmArmas != null;
+                stmArmas.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
     }
 }

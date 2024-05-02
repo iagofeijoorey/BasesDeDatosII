@@ -5,6 +5,7 @@
 
 package aplicacion;
 import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
 import gui.VPrincipal;
 
 import java.util.ArrayList;
@@ -121,7 +122,6 @@ public java.util.List<Acolito> consultarAcolitos(){
         //ga.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
-
     ///Código consultas
     //////////////////////////////////////////
     /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha){
@@ -135,5 +135,24 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void borrarPropiedad(String idPropiedad){
         gp.borrarPropiedad(idPropiedad);
     }
+
+    // Contenido Almacenes
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return gp.consultarVehiculos(idAlmacen);
+    }
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return gp.consultarArmas(idAlmacen);
+    }
+
+    // Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        gp.anadirPropiedad(p);
+    }
+
+    // ActualizarPropiedad
+    public void actualizarPropiedad(Propiedad p){
+        gp.actualizarPropiedad(p);
+    }
+
 }
 

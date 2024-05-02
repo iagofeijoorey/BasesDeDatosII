@@ -5,7 +5,9 @@
 
 package aplicacion;
 
+import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
 
@@ -46,5 +48,24 @@ public class GestionPropiedades {
 //     public void nuevoUsuario(Acolito acolito){
 //         fbd.insertarAcolito(acolito);
 //     }
+
+
+    // Contenido Almacén
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return fbd.consultarVehiculos(idAlmacen);
+    }
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return fbd.consultarArmas(idAlmacen);
+    }
+
+    //Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        fbd.anadirPropiedad(p);
+    }
+
+    //Actualizar propiedad
+    public void actualizarPropiedad(Propiedad p){
+        fbd.actualizarPropiedad(p);
+    }
   
 }

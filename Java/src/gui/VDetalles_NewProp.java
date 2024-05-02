@@ -16,9 +16,10 @@ import javax.swing.GroupLayout;
 public class VDetalles_NewProp extends JDialog {
     Propiedad propiedad;
     aplicacion.FachadaAplicacion fa;
-    boolean inicializador;
-    boolean continuador;
-    boolean continuador_almacen;
+    // Atributos para lógica
+    boolean inicializador; // Para controlar el cambio de tipo
+    boolean continuador; // Para controlar el cambio de tipo
+    boolean continuador_almacen; // Para controlar el cambio de subtipo
 
     // Constructor para añadir propiedad
     public VDetalles_NewProp(aplicacion.FachadaAplicacion fa) {
@@ -136,6 +137,8 @@ public class VDetalles_NewProp extends JDialog {
         }
     }
 
+    //// Gestión Visibilidad
+    // Visibilidad dependiendo del tipo de propiedad
     public void iniciarVisibilidad() {
 
         continuador = true;
@@ -160,7 +163,6 @@ public class VDetalles_NewProp extends JDialog {
         TextNameType.setVisible(true);
         BoxString.setVisible(true);
 
-        System.out.println(BoxTipo.getSelectedItem().toString() + " " + BoxTipo.getSelectedIndex());
         switch (BoxTipo.getSelectedItem().toString()){
             case "arma":
                 // Visibilidad textos
@@ -235,6 +237,7 @@ public class VDetalles_NewProp extends JDialog {
         }
     }
 
+    // Tipos
     private void BoxTipoItemStateChanged(ItemEvent e) {
 
         if (inicializador) {
@@ -249,18 +252,7 @@ public class VDetalles_NewProp extends JDialog {
         }
     }
 
-    private void entrarContenido(MouseEvent e) {
-        fa.ventanaContenido((Inmobiliario) propiedad);
-    }
-
-    private void BoxTipoMouseClicked(MouseEvent e) {
-
-    }
-
-    private void BoxStringMouseClicked(MouseEvent e) {
-
-    }
-
+    // Subtipos
     private void BoxStringItemStateChanged(ItemEvent e) {
         // TODO add your code here
         if (continuador_almacen) {
@@ -275,9 +267,6 @@ public class VDetalles_NewProp extends JDialog {
                 Ubicacion.setVisible(true);
 
                 // Datos
-                /*for (String tipo : TipoInmobiliario.valuesString()) {
-                    BoxString.addItem(tipo);
-                }*/
                 if (BoxString.getSelectedItem().toString().equals("Almacen")) {
                     AmountCapacity.setVisible(true);
                     TextAmountCapacity.setVisible(true);
@@ -288,33 +277,109 @@ public class VDetalles_NewProp extends JDialog {
                     TextAmountCapacity.setVisible(false);
                     BtnContent.setVisible(false);
                 }
-                System.out.println("Cambio");
             }
         }
     }
 
-    private void BoxTipoItemStateChanged(ItemEvent e) {
-        // Obtener el tipo seleccionado en el BoxTipo
-        String tipoSeleccionado = (String) BoxTipo.getSelectedItem();
-
-        // Limpiar los elementos actuales del BoxString
-        BoxString.removeAllItems();
-
-        // Llenar el BoxString con los tipos correspondientes al tipo seleccionado en el BoxTipo
-        switch (tipoSeleccionado) {
-            case "Armamento":
-                for (String tipo : TipoArmamento.valuesString()) {
-                    BoxString.addItem(tipo);
-                }
-                break;
-            case "Inmobiliario":
-                for (String tipo : TipoInmobiliario.valuesString()) {
-                    BoxString.addItem(tipo);
-                }
-                break;
-            // Agregar más casos según sea necesario para otros tipos
-        }
+    private void entrarContenido(MouseEvent e) {
+        fa.ventanaContenido((Inmobiliario) propiedad);
     }
+
+    private void BoxTipoMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void BoxStringMouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private boolean algunaCasillaVacia(){
+        // TODO add your code here
+        if (Valor.getText().equals("") || AmountCapacity.getText().equals("")){
+            return true;
+        }
+        switch (BoxTipo.getSelectedItem().toString()){
+            case "Inmobiliario":
+                if (Ubicacion.getText().equals(""))
+                    return true;
+                break;
+
+            case "Commodities":
+                if (TipoCommodity.getText().equals(""))
+                    return true;
+                break;
+
+            case "arma":
+                if (Balas.getText().equals(""))
+                    return true;
+                break;
+
+        }
+        return false;
+    }
+
+
+    // Añadir propiedad / modificar OJO HAY QUE PONER LA LISTA DE ALMACENES Y METER EL USUARIO EN
+    private void BtnActualizar_AnadirMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        if (algunaCasillaVacia()){
+            fa.muestraExcepcion("Rellene todos los campos");
+            return;
+        }
+        switch (BoxTipo.getSelectedItem().toString()){
+            case "arma":
+                Arma arma = new Arma(Integer.parseInt(Id.getText()), TipoArmamento.stringToTipoArmamento(BoxString.getSelectedItem().toString()),
+                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Balas.getText()), Integer.parseInt(Valor.getText()),
+                        null);
+                if (BtnActualizar.getText().equals("Actualizar")){
+                    fa.actualizarPropiedad(arma);
+                }
+                else {
+                    fa.anadirPropiedad(arma);
+                }
+                break;
+
+            case "Inmobiliario":
+                Inmobiliario inmobiliario = new Inmobiliario(Integer.parseInt(Id.getText()), Ubicacion.getText(), Integer.parseInt(AmountCapacity.getText()),
+                        TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()), Integer.parseInt(Valor.getText()), null);
+
+                if (BtnActualizar.getText().equals("Actualizar")){
+                    fa.actualizarPropiedad(inmobiliario);
+                }
+                else {
+                    fa.anadirPropiedad(inmobiliario);
+                }
+                break;
+
+            case "Commodities":
+                Commodity commodity = new Commodity(Integer.parseInt(Id.getText()), TipoCommodity.getText(),
+                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Valor.getText()), null);
+                if (BtnActualizar.getText().equals("Actualizar")){
+                    fa.actualizarPropiedad(commodity);
+                }
+                else {
+                    fa.anadirPropiedad(commodity);
+                }
+                break;
+
+            case "Vehículo":
+                Vehiculo vehiculo = new Vehiculo(Integer.parseInt(Id.getText()), TipoVehiculo.stringToTipoVehiculo(BoxString.getSelectedItem().toString()),
+                        Integer.parseInt(Valor.getText()), Integer.parseInt(AmountCapacity.getText()), null);
+                if (BtnActualizar.getText().equals("Actualizar")){
+                    fa.actualizarPropiedad(vehiculo);
+                }
+                else {
+                    fa.anadirPropiedad(vehiculo);
+                }
+                break;
+
+            default:
+                //Default
+        }
+        this.dispose();
+    }
+
+
 
 
     private void initComponents() {
@@ -352,12 +417,12 @@ public class VDetalles_NewProp extends JDialog {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
 
             //---- TextAlmacen ----
             TextAlmacen.setText("Almacen:");
@@ -546,6 +611,12 @@ public class VDetalles_NewProp extends JDialog {
 
         //---- BtnActualizar ----
         BtnActualizar.setText("Actualizar");
+        BtnActualizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                BtnActualizar_AnadirMouseClicked(e);
+            }
+        });
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);

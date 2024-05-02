@@ -74,7 +74,7 @@ public class VPropiedades extends JDialog {
         ModeloTablaPropiedades m;
         m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
 
-        m.setFilas(fa.consultarPropiedades(""));
+        m.setFilas(fa.consultarPropiedades(TipoSearch.getText()));
         if (m.getRowCount() > 0) {
             tablaPropiedades.setRowSelectionInterval(0, 0);
             actualizarCuadrosTexto();
@@ -95,19 +95,14 @@ public class VPropiedades extends JDialog {
         fa.ventanaDetalles(p, behavior);
     }
 
-    //Funciones para inicializarTablas
-    private void inicializartablaProp() {
-
-        tablaPropiedades = new JTable();
-        ModeloTablaPropiedades mtablaP = new ModeloTablaPropiedades();
-        tablaPropiedades.setModel(mtablaP);
-
-    }
 
     ///ESTA VENTANA
     private void createUIComponents() {
 
-        inicializartablaProp();
+        // Inicializa tabla propiedades
+        tablaPropiedades = new JTable();
+        ModeloTablaPropiedades mtablaP = new ModeloTablaPropiedades();
+        tablaPropiedades.setModel(mtablaP);
 
     }
 

@@ -26,6 +26,12 @@ public class Vehiculo extends Propiedad{
         this.cantidad = capacidad;
     }
 
+    public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad){
+        super(idPropiedad, valorActual, null);
+        this.tipo = tipo;
+        this.cantidad = capacidad;
+    }
+
     // Getters
     public TipoVehiculo getTipo() {
         return tipo;
