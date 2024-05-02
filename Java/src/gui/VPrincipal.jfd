@@ -16,40 +16,6 @@ new FormModel {
 				name: "scrollListaEventos"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "TablaEventosVPrincipal"
-					"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-						add( new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						} )
-						add( new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						} )
-					}, new java.util.Vector {
-						add( null )
-						add( null )
-						add( null )
-						add( null )
-					}, new java.util.Vector {
-						add( null )
-						add( null )
-						add( null )
-						add( null )
-					}, new java.util.Vector {
-						add( null )
-						add( null )
-						add( null )
-						add( null )
-					}, new java.util.Vector {
-						add( null )
-						add( null )
-						add( null )
-						add( null )
-					} )
 					auxiliary() {
 						"JavaCodeGenerator.customCreate": true
 					}
@@ -102,7 +68,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "Logo"
-				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/logoPequeño1.jpg" )
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/gui/_logoPequeño.jpg" )
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"

@@ -30,7 +30,7 @@ public class VEventos extends JDialog {
     private void BtnNuevoEventoMouseClicked(MouseEvent e) {
         TextoUbicacion.setText("");
         TextoFecha.setText("");
-        TextoTipo.setText("");
+        //TextoTipo.setText("");
         TextoOrganizador.setText("");
         TextoPanelDescripcion.setText("");
     }
@@ -157,8 +157,8 @@ public class VEventos extends JDialog {
         label1 = new JLabel();
         label2 = new JLabel();
         label4 = new JLabel();
-        TextoTipo = new JTextField();
         label3 = new JLabel();
+        TextoTipo = new JTextField();
 
         //======== this ========
         setTitle("Eventos");
@@ -166,13 +166,12 @@ public class VEventos extends JDialog {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
+            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
+            throw new RuntimeException( ) ;} } );
 
             //---- btnVolver ----
             btnVolver.setText("volver");
@@ -291,15 +290,15 @@ public class VEventos extends JDialog {
                                         .addGap(15, 15, 15)
                                         .addComponent(btnVolver))
                                     .addComponent(label4, GroupLayout.Alignment.TRAILING))
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                     .addGroup(panel1Layout.createSequentialGroup()
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(TextoOrganizador, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
+                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
                                         .addComponent(label3)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextoTipo))))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TextoTipo, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))))
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 483, GroupLayout.PREFERRED_SIZE)
@@ -339,8 +338,8 @@ public class VEventos extends JDialog {
                                         .addGap(24, 24, 24))
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(TextoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(label3))
+                                            .addComponent(label3)
+                                            .addComponent(TextoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextoOrganizador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -412,8 +411,8 @@ public class VEventos extends JDialog {
     private JLabel label1;
     private JLabel label2;
     private JLabel label4;
-    private JTextField TextoTipo;
     private JLabel label3;
+    private JTextField TextoTipo;
     // End of variables declaration//GEN-END:variables
 
 

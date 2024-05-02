@@ -4,10 +4,11 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}, seq l {space :p:109:p, comp BtnContent:::p::p, space ::183:x, comp BtnActualizar:::p::p, space :p:115:p}}"
+			"$horizontalGroup": "par l {seq l {space :p:109:p, comp BtnContent:::p::p, space ::183:x, comp BtnActualizar:::p::p, space :p:115:p}, seq l {space :::p, comp panel1:::::x, space :::p}}"
 			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::p::p, space :::p, par b {comp BtnActualizar::b:p::p, comp BtnContent::b:p::p}, space ::41:x}}"
 		} ) {
 			name: "this"
+			"title": "Detalles"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l {comp TextAmountCapacity::l:p::p, seq l {comp TextAlmacen:::p::p, space s:::p, comp BoxAlmacen:::p:187:p}, seq l {comp TextUbicacion:::p::p, space u:::p, comp Ubicacion:::p:184:p}}, space ::30:x, par l {seq l {par t {comp TextNameType:::p::p, comp TextTipoCommodity:::p::p}, space :::p, par l {comp BoxString:::p:154:p, comp TipoCommodity::l:p:154:p}}, seq l {comp TextBalas:::p::p, space :::p, comp Balas:::p:153:p}}, space :p:48:p}, seq {par l:::p {seq l {comp TextId:::p::p, space :56:56:p, comp Id:::p:160:p, space :20:20:p, comp TextTipo:::p::p, space :45:45:p, comp BoxTipo:::p:196:p}, seq l {comp TextValor:::p::p, space :35:35:p, comp Valor:::p:160:p, space :20:20:p, comp TextGestor:::p::p, space :30:30:p, comp BoxGestor:::p:196:p}, seq l {comp TextEvento:::p:61:p, space u:::p, par l {seq {space :6:6:p, comp AmountCapacity:::p:182:p}, comp scrollPane1::::0:x}}}, space :0:0:x}}}}"
 				"$verticalGroup": "par l {seq l {space :p:19:p, par l {comp Id:::p::p, comp BoxTipo:::p::p, seq l {space :10:10:p, par l {comp TextId:::p::p, comp TextTipo:::p::p}}}, space :10:10:p, par l {comp Valor:::p::p, comp BoxGestor:::p::p, seq l {space :5:5:p, par l {comp TextValor:::p::p, comp TextGestor:::p::p}}}, par l {seq {space :p:63:p, comp TextEvento:::p::p}, seq l {space :p:25:p, comp scrollPane1:::p:93:p}}, par l {seq {space :::x, par t {comp TextAmountCapacity:::p:24:p, par b:l {comp TextNameType::b:p:23:p, comp BoxString::b:p::p}}, space :::p}, seq l {space :::p, comp AmountCapacity:::p::p, space :::x}}, par l {comp TextAlmacen:::p:30:p, seq {space :p:10:p, par b {comp TipoCommodity::b:p::p, comp TextTipoCommodity::b:p:24:p}, space u:::p, par b {comp TextUbicacion::b:p:30:p, comp TextBalas::b:p::p, comp Balas::b:p::p, comp Ubicacion::b:p::p}}, comp BoxAlmacen::l:p::p}, space :p:29:p}}"
@@ -114,3 +115,4 @@ new FormModel {
 		} )
 	}
 }
+

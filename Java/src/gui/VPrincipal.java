@@ -13,6 +13,7 @@ package gui;
 
 import aplicacion.Evento;
 import aplicacion.TipoEvento;
+import javafx.scene.control.Tab;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -142,7 +143,6 @@ public class VPrincipal extends javax.swing.JFrame {
             //======== Desplegable ========
             {
                 Desplegable.setText("Opciones");
-                //Desplegable.setSelectedIcon(new ImageIcon(null)));
                 Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
                 Desplegable.setBackground(new Color(0xffffcc));
 
@@ -212,8 +212,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
         //======== scrollListaEventos ========
         {
-
-            //---- TablaEventosVPrincipal ----
             scrollListaEventos.setViewportView(TablaEventosVPrincipal);
         }
 
@@ -257,7 +255,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         //---- Logo ----
-        //Logo.setIcon(new ImageIcon(getClass().getResource("/gui/logoPeque\u00f1o1.jpg")));
+        Logo.setIcon(new ImageIcon(getClass().getResource("/gui/_logoPeque\u00f1o.jpg")));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);

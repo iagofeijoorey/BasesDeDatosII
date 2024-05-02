@@ -1,5 +1,4 @@
 package aplicacion;
-import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
@@ -7,12 +6,6 @@ import aplicacion.PropiedadesYCuentas.Vehiculo;
 import gui.VPrincipal;
 
 import java.util.ArrayList;
-import java.util.List;
-
-/**
- *
- * @author basesdatos
- */
 
 public class FachadaAplicacion {
     private gui.FachadaGui fgui;
@@ -31,6 +24,7 @@ public class FachadaAplicacion {
     }
 
     public FachadaAplicacion(){
+        currentUser = null;
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
         ge = new GestionEventos(fgui, fbd);
@@ -46,44 +40,17 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
- /*
-public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
-  return cl.obtenerLibros(id, titulo,  isbn,  autor);
-}*/
-/*
-public java.util.List<Acolito> consultarAcolitos(){
-    return ga.consultarAcolitos();
-}
 
+   
 
-    public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
-        return ga.buscarUsuarios(IDUsuario, Nombre);
+    ///Código de VAutentificacion
+    //////////////////////////////////////////
+    public void setUsuario(String alias, String clave){
+        currentUser = ga.devolverUsuario(alias, clave);
     }
-
-    public void nuevoUsuario(Acolito usuario){
-    ga.nuevoUsuario(usuario);
-}
-
-
-    public void borrarAcolito(Acolito usuario){
-    ga.borrarAcolito(usuario);
-}
-
-
-    public Boolean comprobarAutentificacion(String idUsuario, String clave){
-        //return cu.comprobarAutentificacion(idUsuario, clave);
-        return true;
+    public boolean comprobarAutentificacion(String alias, String clave){
+        return ga.comprobarAutentificacion(alias, clave);
     }
-
-
-    public void setCurrentUser(Acolito u) {
-        currentUser = u;
-    }
-*/
-    //Abrir ventanas
-//    public void ventanaPerfil(VPrincipal vp){
-//        fgui.ventanaPerfil(vp);
-//    }
 
 
     ///Código abrir ventanas
@@ -100,7 +67,6 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void ventanaDetalles(Propiedad p, int behavior){
         fgui.ventanaDetalles(p, behavior);
     }
-
     public void ventanaContenido(Inmobiliario almacen){
         fgui.ventanaContenido(almacen);
     }
@@ -141,44 +107,8 @@ public java.util.List<Acolito> consultarAcolitos(){
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
         return gp.consultarPropiedades(tipo);
     }
-    public void borrarPropiedad(String idPropiedad){
+    public void borrarPropiedad(Integer idPropiedad){
         gp.borrarPropiedad(idPropiedad);
-    }
-
-    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
-        return gp.consultarArmasAlmacen(almacen);
-    }
-
-    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
-        return gp.consultarVehiculosAlmacen(almacen);
-    }
-
-    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
-        return ge.consultarObjetivosEvento(evento);
-    }
-
-    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
-        ge.actualizarObjetivo(objetivoSeleccionado);
-    }
-
-    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
-        ge.actualizarRecompensaDinero(recompensa);
-    }
-
-    public void borrarRecompensaDinero(RecompensaDinero recompensa) {
-        ge.borrarRecompensaDinero(recompensa);
-    }
-
-    public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
-        ge.actualizarRecompensaInfluencia(recompensa);
-    }
-
-    public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
-        ge.borrarRecompensaInfluencia(recompensa);
-    }
-
-    public void borrarObjetivo(Objetivo objetivoSeleccionado) {
-        ge.borrarObjetivo(objetivoSeleccionado);
     }
 
             // Contenido Almacenes
@@ -197,6 +127,17 @@ public java.util.List<Acolito> consultarAcolitos(){
             // ActualizarPropiedad
     public void actualizarPropiedad(Propiedad p){
         gp.actualizarPropiedad(p);
+    }
+
+    // Buscar mayor id Propiedad
+    public Integer obtenerIdPropiedadMayor(){
+        return gp.obtenerIdPropiedadMayor();
+    }
+
+    // Contenido Almacén
+    public java.util.List<Inmobiliario> consultaAlmacenes(){
+        // TODO add your code here
+        return gp.consultaAlmacenes();
     }
 }
 
