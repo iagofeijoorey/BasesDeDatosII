@@ -77,7 +77,7 @@ public class FachadaBaseDatos {
 
 
     //Código VPrincipal
-    /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
+    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
         return daoEventos.consultarEventos(ubicacion, fecha);
     }
 
@@ -86,8 +86,8 @@ public class FachadaBaseDatos {
     }
 
     public void insertarEvento(Evento evento){
-        daoEventos.insertarEvento(evento);
-    }*/
+        //daoEventos.insertarEvento(evento);
+    }
 
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
          return daoPropiedades.consultarPropiedades(tipo);

@@ -58,10 +58,14 @@ public class FachadaGui {
         vpr.setVisible(true);
     }
 
-    public void ventanaDetalles(){
+    public void ventanaDetalles(Propiedad p, int behavior){
         VDetalles_NewProp vdn;
 
-        vdn = new VDetalles_NewProp(fa);
+        if (behavior==0)
+            vdn = new VDetalles_NewProp(fa, p);
+        else
+            vdn = new VDetalles_NewProp(fa);
+
         vdn.setVisible(true);
     }
 

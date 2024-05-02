@@ -74,4 +74,8 @@ public class ModeloTablaPropiedades extends AbstractTableModel{
         return this.propiedades.get(i);
     }
 
+
+    public Propiedad getPropiedad(int i){
+        return this.propiedades.get(i);
+    }
 }

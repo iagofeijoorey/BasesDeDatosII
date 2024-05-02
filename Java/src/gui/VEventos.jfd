@@ -1,0 +1,135 @@
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel1::t:::x}"
+			"$verticalGroup": "par l {seq t {space :0:0:x, comp panel1:::p::p}}"
+		} ) {
+			name: "this"
+			"title": "Eventos"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {space :::p, par l {seq l {par l {seq {space :p:15:p, comp btnVolver:::p::p}, comp label4::t:p::p}, par t:::p {seq {space :p::p, comp TextoOrganizador:::p:384:p}, seq {space :p:33:p, comp label3:::p::p, space :::p, comp TextoTipo:::::x}}}, par l {comp btnBorrar:::p:120:p, comp scrollPane2:::p:483:p, seq t {par l {comp label1:::p::p, comp label2:::p::p}, space s:::p, par l:::p {comp TextoFecha::::384:x, comp TextoUbicación::::384:x}}}}, space s:::p, par l {seq {par l {seq {comp BtnVerPropiedades:::p:175:p, space s:::p, comp BtnVerAcolitos:::::x}, comp BtnVerObjetivos:::::x}, space s:::p, par l {comp BtnGuardarEvento:::p:118:p, comp BtnNuevoEvento:::p:118:p}}, comp scrollPane1:::p:468:p}, space :p:15:p}}"
+				"$verticalGroup": "par l {seq {space :::p, par l {seq {par l {seq {comp btnVolver:::p::p, space :p:24:p}, seq t {par b {comp TextoTipo::b:p::p, comp label3::b:p::p}, space :::p}}, par b {comp TextoOrganizador::b:p::p, comp label4::b:p::p}, space :::p, par b {comp TextoUbicación::b:p::p, comp label1::b:p::p}, space :::p, par b {comp TextoFecha::b:p::p, comp label2::b:p::p}, space :::p, comp scrollPane2::::162:x}, comp scrollPane1::::0:x}, par l {seq {space s:::p, par b {comp BtnNuevoEvento::b:p::p, comp BtnVerObjetivos::b:p::p}, space :::p, par b {comp BtnGuardarEvento::b:p::p, comp BtnVerPropiedades::b:p::p, comp BtnVerAcolitos::b:p::p}}, seq {space :p:27:p, comp btnBorrar:::p:47:p}}, space :p:37:p}}"
+			} ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnVolver"
+					"text": "volver"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "volver", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnVolverMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnVerAcolitos"
+					"text": "Ver Aólitos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "seleccionarPropiedad", true ) )
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TablaEventos"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Tipo" )
+							add( "Fecha" )
+							add( "Ubicación" )
+							add( "Organizador" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnGuardarEvento"
+					"text": "Guardar"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarNewProp", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnBorrar"
+					"text": "Borrar"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "borrarPropiedad", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TextoOrganizador"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TextoFecha"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnVerPropiedades"
+					"text": "Ver propiedades"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnVerObjetivos"
+					"text": "Ver objetivos"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "BtnNuevoEvento"
+					"text": "Nuevo"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarNewProp", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BtnNuevoEventoMouseClicked", true ) )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					add( new FormComponent( "javax.swing.JTextPane" ) {
+						name: "TextoPanelDescripcion"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TextoUbicación"
+					auxiliary() {
+						"JavaCodeGenerator.variableName": "TextoUbicacion"
+					}
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Ubicación"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "Fecha"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "Organizador"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TextoTipo"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "Tipo"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 20, 0 )
+			"size": new java.awt.Dimension( 980, 480 )
+		} )
+	}
+}

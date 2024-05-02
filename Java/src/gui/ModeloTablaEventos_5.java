@@ -4,18 +4,18 @@
  */
 
 package gui;
+
 import aplicacion.Evento;
-import javax.swing.table.*;
-import java.sql.Date;
+
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author basesdatos
  */
-public class ModeloTablaEventos extends AbstractTableModel{
+public class ModeloTablaEventos_5 extends AbstractTableModel{
     private java.util.List<Evento> eventos;
-
-    public ModeloTablaEventos(){
+    public ModeloTablaEventos_5(){
         this.eventos=new java.util.ArrayList<Evento>();
     }
 
@@ -45,10 +45,10 @@ public class ModeloTablaEventos extends AbstractTableModel{
         Class clase=null;
 
         switch (col){
-            case 0: clase= java.lang.String.class; break;
+            case 0: clase= String.class; break;
             case 1: clase= java.sql.Date.class; break;
-            case 2: clase=java.lang.String.class; break;
-            case 3: clase=java.lang.String.class; break;
+            case 2: clase= String.class; break;
+            case 3: clase= String.class; break;
         }
         return clase;
     }

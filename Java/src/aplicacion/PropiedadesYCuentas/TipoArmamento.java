@@ -17,16 +17,23 @@ public enum TipoArmamento {
     Pistola,
     Rifle,
     Explosivo,
-
     ArmaBlanca,
-
+    Escopeta,
     Normal;
 
 
     public static TipoArmamento stringToTipoArmamento(String tu){
         switch (tu){
-            case ("Rifle"):
+            case ("Pistola"):
+                return Pistola;
+            case ("Explosivo"):
+                return Explosivo;
+            case ("Arma blanca"):
+                return ArmaBlanca;
+            case ("Rifle de asalto"):
                 return Rifle;
+            case ("Escopeta"):
+                return Escopeta;
             default:
                 return Normal;
         }

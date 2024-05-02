@@ -21,6 +21,14 @@ public class VPropiedades extends JDialog {
     public VPropiedades(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
+        buscarPropiedades();
+
+        Id.setEditable(false);
+        Valor.setEditable(false);
+        Tipo.setEditable(false);
+        Gestor.setEditable(false);
+        Evento.setEditable(false);
+
     }
 
     // BOTONES
@@ -34,29 +42,42 @@ public class VPropiedades extends JDialog {
         this.dispose();
     }
     private void entrarDetalles(MouseEvent e) {
-        fa.ventanaDetalles();
+        abrirVentanaDetalles(0);
     }
     private void entrarNewProp(MouseEvent e) {
-        fa.ventanaDetalles();
+        abrirVentanaDetalles(1);
     }
-
 
     //ACCIONES
-    private void seleccionarPropiedad(MouseEvent e) {
-        // TODO add your code here
-        TextId.setText(((ModeloTablaPropiedades)tablaPropiedades.getModel()).obtenerPropiedad(tablaPropiedades.getSelectedRow()).getIdPropiedad().toString());
-        TextValor.setText(((ModeloTablaPropiedades)tablaPropiedades.getModel()).obtenerPropiedad(tablaPropiedades.getSelectedRow()).getValorActual().toString());
-        TextTipo.setText(((ModeloTablaPropiedades)tablaPropiedades.getModel()).obtenerPropiedad(tablaPropiedades.getSelectedRow()).getTipoGeneral());
-        TextEvento.setText(((ModeloTablaPropiedades)tablaPropiedades.getModel()).obtenerPropiedad(tablaPropiedades.getSelectedRow()).getEventoActual().getDescripcion());
-
+    public java.util.List<Propiedad> obtenerPropiedades(String uno){
+        return fa.consultarPropiedades(uno);
     }
-    private void buscarPropiedades() {
-        ModeloTablaPropiedades m = new ModeloTablaPropiedades();
+    // Actualizar cuadros de texto
+    private void actualizarCuadrosTexto() {
+        ModeloTablaPropiedades m;
         m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
 
-        m.setFilas(fa.consultarPropiedades(TipoSearch.getText()));
+        Propiedad p = m.getPropiedad(tablaPropiedades.getSelectedRow());
+
+        Id.setText(p.getIdPropiedad().toString());
+        Valor.setText(p.getValorActual().toString());
+        Tipo.setText(p.getTipoGeneral());
+        Gestor.setText(p.getGestor().getNombreCompleto());
+        if (p.getEventoActual() != null)
+            Evento.setText(p.getEventoActual().getDescripcion());
+        else Evento.setText("No hay un evento asociado a esta propiedad.");
+
+    }
+
+    // Buscar propiedades
+    private void buscarPropiedades() {
+        ModeloTablaPropiedades m;
+        m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
+
+        m.setFilas(fa.consultarPropiedades(""));
         if (m.getRowCount() > 0) {
             tablaPropiedades.setRowSelectionInterval(0, 0);
+            actualizarCuadrosTexto();
             BtnEraseProp.setEnabled(true);
             BtnMasInfo.setEnabled(true);
         } else {
@@ -64,34 +85,49 @@ public class VPropiedades extends JDialog {
             BtnMasInfo.setEnabled(false);
         }
     }
-    public java.util.List<Propiedad> obtenerPropiedades(String uno){
-        return fa.consultarPropiedades(uno);   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-    }
 
+    private void abrirVentanaDetalles(int behavior) {
+        // TODO add your code here
+        ModeloTablaPropiedades m;
+        m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
+
+        Propiedad p = m.getPropiedad(tablaPropiedades.getSelectedRow());
+        fa.ventanaDetalles(p, behavior);
+    }
 
     //Funciones para inicializarTablas
     private void inicializartablaProp() {
 
+        tablaPropiedades = new JTable();
         ModeloTablaPropiedades mtablaP = new ModeloTablaPropiedades();
         tablaPropiedades.setModel(mtablaP);
 
     }
 
-
-
-
-
-
     ///ESTA VENTANA
     private void createUIComponents() {
 
         inicializartablaProp();
-        buscarPropiedades();
 
     }
+
+    private void tablaPropiedadesMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        actualizarCuadrosTexto();
+    }
+
+    private void seleccionarPropiedad(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void scrollPane1MouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Diego
+        createUIComponents();
 
         panel1 = new JPanel();
         btnVolver = new JButton();
@@ -109,25 +145,21 @@ public class VPropiedades extends JDialog {
         TextEvento = new JLabel();
         Evento = new JTextField();
         BtnMasInfo = new JButton();
-        Gestor = new JComboBox();
-        Tipo = new JComboBox();
         btnNewProp = new JButton();
         BtnEraseProp = new JButton();
-        tablaPropiedades = new JTable();
-
-        createUIComponents();
+        Tipo = new JTextField();
+        Gestor = new JTextField();
 
         //======== this ========
         var contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,
-            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )
-            throw new RuntimeException( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- btnVolver ----
             btnVolver.setText("volver");
@@ -168,6 +200,15 @@ public class VPropiedades extends JDialog {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         seleccionarPropiedad(e);
+                        scrollPane1MouseClicked(e);
+                    }
+                });
+
+                //---- tablaPropiedades ----
+                tablaPropiedades.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        tablaPropiedadesMouseClicked(e);
                     }
                 });
                 scrollPane1.setViewportView(tablaPropiedades);
@@ -237,27 +278,25 @@ public class VPropiedades extends JDialog {
                                                         .addComponent(TextGestor)))
                                                 .addGap(31, 31, 31)
                                                 .addGroup(panel1Layout.createParallelGroup()
-                                                    .addComponent(Gestor)
-                                                    .addComponent(Tipo)))
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                .addComponent(Evento, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                    .addComponent(Tipo)
+                                                    .addComponent(Gestor)))
+                                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(4, 4, 4))
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                         .addComponent(BtnEraseProp)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(BtnMasInfo)))
                                 .addGap(1, 1, 1)))
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createParallelGroup()
-                                .addComponent(btnNewProp, GroupLayout.Alignment.TRAILING)
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addComponent(TextTipoSearch, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TipoSearch, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buscar)))
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(38, Short.MAX_VALUE))
+                            .addComponent(btnNewProp, GroupLayout.Alignment.TRAILING)
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(TextTipoSearch, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TipoSearch, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buscar))
+                            .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -274,13 +313,13 @@ public class VPropiedades extends JDialog {
                                         .addComponent(buscar)
                                         .addComponent(TextTipoSearch))
                                     .addComponent(ImagenPropiedad, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))))
-                        .addGap(36, 36, 36)
+                        .addGap(37, 37, 37)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(TextId)
                             .addComponent(Id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addComponent(TextTipo)
                             .addComponent(Tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
+                        .addGap(7, 7, 7)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(TextValor)
                             .addComponent(Valor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -344,9 +383,9 @@ public class VPropiedades extends JDialog {
     private JLabel TextEvento;
     private JTextField Evento;
     private JButton BtnMasInfo;
-    private JComboBox Gestor;
-    private JComboBox Tipo;
     private JButton btnNewProp;
     private JButton BtnEraseProp;
+    private JTextField Tipo;
+    private JTextField Gestor;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
