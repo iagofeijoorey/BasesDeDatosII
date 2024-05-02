@@ -411,14 +411,14 @@ public class VDetalles_NewProp extends JDialog {
     // Inicializa la tabla eventos
     private void buscarEventos(){
         // TODO add your code here
-        ModeloTablaEventos_5 mtablaE = (ModeloTablaEventos_5) tablaEventos.getModel();
+        ModeloTablaEventos mtablaE = (ModeloTablaEventos) tablaEventos.getModel();
         mtablaE.setFilas(propiedad.getEventos());
     }
     private void createUIComponents() {
         // TODO: add custom component creation code here
         // Inicializa tabla propiedades
         tablaEventos = new JTable();
-        ModeloTablaEventos_5 mtablaE = new ModeloTablaEventos_5();
+        ModeloTablaEventos mtablaE = new ModeloTablaEventos();
         tablaEventos.setModel(mtablaE);
     }
 

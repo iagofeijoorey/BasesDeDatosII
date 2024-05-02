@@ -9,11 +9,10 @@ import aplicacion.Evento;
 import aplicacion.TipoEvento;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
-public class ModeloTablaEventos_5 extends AbstractTableModel {
+public class ModeloTablaEventos extends AbstractTableModel {
     private java.util.List<Evento> eventos;
-    public ModeloTablaEventos_5(){
+    public ModeloTablaEventos(){
         this.eventos=new java.util.ArrayList<Evento>();
     }
 

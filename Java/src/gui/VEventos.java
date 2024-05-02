@@ -5,11 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import javax.swing.table.*;
 
-import aplicacion.Acolito;
 import aplicacion.Evento;
-import aplicacion.PropiedadesYCuentas.Propiedad;
 import aplicacion.TipoEvento;
 
 public class VEventos extends JDialog {
@@ -43,8 +40,8 @@ public class VEventos extends JDialog {
 
         buscarTodosLosEventos();
 
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventos.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventos.getModel();
         Evento evento = m.obtenerEjemplar(TablaEventos.getSelectedRow());
 
         //BoxTipo
@@ -78,13 +75,13 @@ public class VEventos extends JDialog {
     private void createUIComponents() {
         // TODO: add custom component creation code here
         TablaEventos = new JTable();
-        ModeloTablaEventos_5 mtablaP = new ModeloTablaEventos_5();
+        ModeloTablaEventos mtablaP = new ModeloTablaEventos();
         TablaEventos.setModel(mtablaP);
     }
 
     private void actualizarCuadrosTexto() {
-        ModeloTablaEventos_5 m;
-        m = (ModeloTablaEventos_5) TablaEventos.getModel();
+        ModeloTablaEventos m;
+        m = (ModeloTablaEventos) TablaEventos.getModel();
 
 
         Evento evento = m.obtenerEjemplar(TablaEventos.getSelectedRow());
@@ -100,8 +97,8 @@ public class VEventos extends JDialog {
     }
 
     public void buscarTodosLosEventos(){
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventos.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventos.getModel();
 
         m.setFilas(fa.consultarEventosSinArgs());
         if (m.getRowCount() > 0) {
@@ -165,23 +162,23 @@ public class VEventos extends JDialog {
     }
 
     public void borrarEvento(){
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventos.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventos.getModel();
         Evento evento = m.obtenerEjemplar(TablaEventos.getSelectedRow());
         fa.borrarEvento(evento);
         buscarTodosLosEventos();
     }
 
     private void BtnGuardarEventoMouseClicked(MouseEvent e) {
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventos.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventos.getModel();
         Evento evento = new Evento(TextoUbicacion.getText(),TextoFecha.getText(), TipoEvento.stringToTipoEvento(BoxTipo.getSelectedItem().toString()), TextoPanelDescripcion.getText(), m.obtenerEjemplar(TablaEventos.getSelectedRow()).getOrganizador());
         fa.anhadirEvento(evento);
         buscarTodosLosEventos();
     }
 
     private void BtnVerObjetivosMouseClicked(MouseEvent e) {
-        fa.ventanaObjetivo(this, ((ModeloTablaEventos_5)TablaEventos.getModel()).getFilas().get(TablaEventos.getSelectedRow()));
+        fa.ventanaObjetivo(this, ((ModeloTablaEventos)TablaEventos.getModel()).getFilas().get(TablaEventos.getSelectedRow()));
     }
 
 
