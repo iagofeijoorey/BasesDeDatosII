@@ -200,26 +200,7 @@ public class FachadaAplicacion {
     }
 
             // Contenido Almacenes
-    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
-        return gp.consultarVehiculos(idAlmacen);
-    }
-    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
-        return gp.consultarArmas(idAlmacen);
-    }
 
-            // Anadir propiedad
-    public void anadirPropiedad(Propiedad p){
-        gp.anadirPropiedad(p);
-    }
-
-            // ActualizarPropiedad
-    public void actualizarPropiedad(Propiedad p){
-        gp.actualizarPropiedad(p);
-    }
-
-    public void ventanaObjetivo(Window parent, Evento evento) {
-        fgui.ventanaObjetivo(parent, evento);
-    }
 
     public void actualizarAcolito(Acolito organizador) {
         ga.actualizarAcolito(organizador);

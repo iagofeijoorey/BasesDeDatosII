@@ -356,7 +356,7 @@
         <string>javax.swing.JButton</string>
         <void method="setProperty">
          <string>text</string>
-         <string>Vaciar campos</string>
+         <string>Nuevo objetivo</string>
         </void>
         <void property="name">
          <string>button5</string>

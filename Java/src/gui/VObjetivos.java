@@ -117,7 +117,7 @@ public class VObjetivos extends JDialog {
                         fa.actualizarRecompensaInfluencia((RecompensaInfluencia) r);
                     }
                 }
-
+            button5.setText("Vaciar campos");
             } else {
                 ModeloTablaObjetivos m = (ModeloTablaObjetivos) tablaObjetivos.getModel();
                 m.setFilas(fa.consultarObjetivosEvento(evento));
@@ -212,6 +212,7 @@ public class VObjetivos extends JDialog {
                 comboBoxPrioridad.setSelectedItem(objetivo.getPrioridad());
                 textEvento.setText(evento.getDescripcion());
                 textJefe.setText(evento.getOrganizador().getAlias());
+                button5.setText("Vaciar campos");
 
                 setCont(1);
             }
@@ -245,6 +246,7 @@ public class VObjetivos extends JDialog {
                 comboBoxPrioridad.setSelectedItem(objetivo.getPrioridad());
                 textEvento.setText(evento.getDescripcion());
                 textJefe.setText(evento.getOrganizador().getAlias());
+                button5.setText("Vaciar campos");
 
 
                 setCont(1);
@@ -256,7 +258,6 @@ public class VObjetivos extends JDialog {
             private void comboBoxNuevaPropertyChange(PropertyChangeEvent e) { //Reseteamos a arriba el combo box y abrimos la ventana de recompensa
                 // TODO add your code here
                 Objetivo objetivo;
-                System.out.println("Bellakeria");
                 if (tablaObjetivos.getSelectedRow() == -1) {
                     objetivo = new Objetivo(-1, evento.getUbicacion(), evento.getFecha(),
                             textDescripcionObjetivo.getText(), Integer.parseInt(comboBoxPrioridad.getSelectedItem().toString()), recompensas);
@@ -279,8 +280,6 @@ public class VObjetivos extends JDialog {
 //                            ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
 //                    vRecompensaContacto.setVisible(true);
                     }
-
-
             }
 
             private void textDescripcionObjetivoFocusLost(FocusEvent e) {
@@ -301,11 +300,14 @@ public class VObjetivos extends JDialog {
                 recompensas = objetivoSeleccionado.getRecompensas();
                 for (Recompensa r: recompensas){
                     if (r instanceof RecompensaDinero){
+                        System.out.println("Dinero añadido "+ ((RecompensaDinero) r).getCantidad()+" a " + evento.getOrganizador().getAlias());
                         evento.getOrganizador().addDinero(((RecompensaDinero) r).getCantidad());
                         fa.actualizarAcolito(evento.getOrganizador());
 
                     } else if (r instanceof RecompensaInfluencia){
-                        fa.actualizarRecompensaInfluencia((RecompensaInfluencia) r);
+                        System.out.println("Influencia añadido "+ ((RecompensaInfluencia) r).getCantidad()+" a " + evento.getOrganizador().getAlias());
+                        evento.getOrganizador().addInfluencia(((RecompensaInfluencia) r).getCantidad());
+                        fa.actualizarAcolito(evento.getOrganizador());
                     }
                 }
 
@@ -443,7 +445,7 @@ public class VObjetivos extends JDialog {
         button4.addActionListener(e -> buttonEliminar(e));
 
         //---- button5 ----
-        button5.setText("Vaciar campos");
+        button5.setText("Nuevo objetivo");
         button5.addActionListener(e -> botonVaciarONuevo(e));
 
         //---- button6 ----

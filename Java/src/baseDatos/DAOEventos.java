@@ -18,7 +18,6 @@ public class DAOEventos extends AbstractDAO {
 
 
     //Métodos de gestión de eventos
-
     public List<Objetivo> consultarObjetivosEvento(Evento evento) {
         List<Objetivo> resultado = null;
         Objetivo objetivoActual;
@@ -131,17 +130,17 @@ public class DAOEventos extends AbstractDAO {
                     stmObjetivo.setString(4, objetivoSeleccionado.getUbicacion());
                 }
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmObjetivo.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            } finally {
-                try {
-                    stmObjetivo.close();
-                } catch (SQLException e) {
-                    System.out.println("Imposible cerrar cursores");
-                }
+                System.out.println("Imposible cerrar cursores");
             }
         }
+    }
     public void insertarRecompensaDinero(RecompensaDinero recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -169,7 +168,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public Integer obtenerIdRecompensaMayor() {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -206,7 +204,6 @@ public class DAOEventos extends AbstractDAO {
         }
         return 0;
     }
-
     public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -253,7 +250,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public void insertarRecompensaInfluencia(RecompensaInfluencia recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -262,12 +258,13 @@ public class DAOEventos extends AbstractDAO {
 
         con = super.getConexion();
         try {
-            stmRecompensa = con.prepareStatement("insert into recompensas_influencia(idobjetivo, fecha, ubicacion, influencia) " +
-                    "values (?,?,?,?)");
-            stmRecompensa.setInt(1, recompensa.getIdObjetivo());
-            stmRecompensa.setDate(2, java.sql.Date.valueOf(recompensa.getFecha()));
-            stmRecompensa.setString(3, recompensa.getUbicacion());
-            stmRecompensa.setInt(4, recompensa.getCantidad());
+            stmRecompensa = con.prepareStatement("insert into recompensas_influencia(idrecompensa,idobjetivo, fecha, ubicacion, influencia) " +
+                    "values (?,?,?,?,?)");
+            stmRecompensa.setInt(1, recompensa.getIdRecompensa());
+            stmRecompensa.setInt(2, recompensa.getIdObjetivo());
+            stmRecompensa.setDate(3, java.sql.Date.valueOf(recompensa.getFecha()));
+            stmRecompensa.setString(4, recompensa.getUbicacion());
+            stmRecompensa.setInt(5, recompensa.getCantidad());
             stmRecompensa.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -280,7 +277,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -360,7 +356,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
 
     public void insertarEvento(Evento evento) {
         Connection con = super.getConexion();
@@ -580,11 +575,6 @@ public class DAOEventos extends AbstractDAO {
 
     }
     public void insertarObjetivo(Objetivo objetivoSeleccionado) {
-        return 0;
-
-    }
-
-    public void insertarObjetivo(Objetivo objetivoSeleccionado) {
         Connection con;
         PreparedStatement stmObjetivo = null;
 
@@ -623,5 +613,3 @@ public class DAOEventos extends AbstractDAO {
         }
     }
 }
-
-

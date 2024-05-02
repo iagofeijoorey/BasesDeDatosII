@@ -194,37 +194,6 @@ public class FachadaBaseDatos {
         daoEventos.borrarObjetivo(objetivoSeleccionado);
     }
 
-    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
-        return daoPropiedades.consultarArmasAlmacen(almacen);
-    }
-
-    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
-        return daoPropiedades.consultarVehiculosAlmacen(almacen);
-    }
-
-    public List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
-        return daoPropiedades.consultarVehiculos(idAlmacen);
-    }
-
-    public List<Arma> consultarArmas(Integer idAlmacen) {
-        return daoPropiedades.consultarArmas(idAlmacen);
-    }
-
-
-    public void anadirPropiedad(Propiedad p) {
-        daoPropiedades.anadirPropiedad(p);
-    }
-
-    public int insertarObjetivo(Objetivo objetivoSeleccionado) {
-        objetivoSeleccionado.setIdObjetivo(daoEventos.obtenerIdObjetivoMayor()+1);
-        daoEventos.insertarObjetivo(objetivoSeleccionado);
-        return objetivoSeleccionado.getIdObjetivo();
-    public void actualizarPropiedad(Propiedad p) {
-        daoPropiedades.actualizarPropiedad(p);
-    }
-
-
-
     public int insertarObjetivo(Objetivo objetivoSeleccionado) {
         objetivoSeleccionado.setIdObjetivo(daoEventos.obtenerIdObjetivoMayor()+1);
         daoEventos.insertarObjetivo(objetivoSeleccionado);
@@ -232,6 +201,6 @@ public class FachadaBaseDatos {
     }
 
     public void actualizarAcolito(Acolito organizador) {
-         this.actualizarAcolito(organizador.getAlias(), organizador.getNombre(), organizador.getCiudad(), organizador.getPais());
-    }
+        daoAcolitos.actualizarAcolito(organizador);
+        }
 }

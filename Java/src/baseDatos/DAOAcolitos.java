@@ -147,6 +147,37 @@ public class DAOAcolitos extends AbstractDAO {
         return nombresJefes;
     }
 
+    public void actualizarAcolito(Acolito organizador) {
+        Connection con;
+        PreparedStatement stmUsuario = null;
+
+        con = this.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("UPDATE acólitos " +
+                    "SET nombrecompleto = ?, direccion = ?, influencia = ?, dinero = ?, contraseña = ? " +
+                    "WHERE alias = ?");
+            stmUsuario.setString(1, organizador.getNombreCompleto());
+            stmUsuario.setString(2, organizador.getDireccion());
+            stmUsuario.setInt(3, organizador.getInfluencia());
+            stmUsuario.setInt(4, organizador.getDinero());
+            stmUsuario.setString(5, organizador.getContraseña());
+            stmUsuario.setString(6, organizador.getAlias());
+            stmUsuario.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                if (stmUsuario != null) {
+                    stmUsuario.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+
 
     /*
     public void insertarAcolito(Acolito acolito){
