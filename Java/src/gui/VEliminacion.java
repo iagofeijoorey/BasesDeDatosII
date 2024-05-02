@@ -5,6 +5,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -12,9 +13,28 @@ import javax.swing.GroupLayout;
  * @author Diego
  */
 public class VEliminacion extends JDialog {
-    public VEliminacion(Window owner) {
-        super(owner);
+    aplicacion.FachadaAplicacion fa;
+    String mensaje;
+    VPropiedades v;
+    public VEliminacion(aplicacion.FachadaAplicacion fa, String mensaje, VPropiedades v) { /** Creates new form VPrincipal */
+        this.fa=fa;
+        this.mensaje=mensaje;
+        this.v=v;
         initComponents();
+        Mensaje.setText(mensaje);
+        Mensaje.setEditable(false);
+    }
+
+    private void btnSiMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        v.setConfirmacion(true);
+        this.dispose();
+    }
+
+    private void btnNoMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        v.setConfirmacion(false);
+        this.dispose();
     }
 
     private void initComponents() {
@@ -27,33 +47,40 @@ public class VEliminacion extends JDialog {
         btnNo = new JButton();
 
         //======== this ========
+        setTitle("Eliminacion");
         Container contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-            new javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
-            ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-            ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
-            ,java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(
-            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //======== scrollPane2 ========
             {
-
-                //---- Mensaje ----
-                Mensaje.setText("\u00bfDeseas eliminar esta informaci\u00f3n de la base de datos?");
                 scrollPane2.setViewportView(Mensaje);
-                Mensaje.setEditable(false);
             }
 
             //---- btnSi ----
             btnSi.setText("S\u00ed");
+            btnSi.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    btnSiMouseClicked(e);
+                }
+            });
 
             //---- btnNo ----
             btnNo.setText("No");
+            btnNo.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    btnNoMouseClicked(e);
+                }
+            });
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);

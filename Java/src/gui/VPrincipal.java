@@ -19,7 +19,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
-import javax.swing.table.*;
 
 /**
  *
@@ -44,8 +43,21 @@ public class VPrincipal extends javax.swing.JFrame {
             buscarTodosLosEventos();
         }
         else{
-            buscarEventos();
+            if(!estaFechaEnFormato(buscaFecha.getText())){
+                buscaFecha.setText("");
+                buscaUbicacion.setText("");
+            }
+            else buscarEventos();
         }
+    }
+    private boolean estaFechaEnFormato(String fecha) {
+        // El formato deseado es "aaaa-mm-dd"
+        String formatoEsperado = "\\d{4}-\\d{2}-\\d{2}";
+
+        // Comprobar si la fecha coincide con el formato esperado
+        boolean resultado = fecha.matches(formatoEsperado);
+
+        return resultado;
     }
     private void btnSalirMouseClicked(MouseEvent e) {
         System.exit(0);
@@ -74,14 +86,14 @@ public class VPrincipal extends javax.swing.JFrame {
 
     //Funciones para tablas
     public void limpiarTabla(){
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventosVPrincipal.getModel();
 
         m.setFilas(new java.util.ArrayList<Evento>());
     }
     public void buscarEventos(){
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventosVPrincipal.getModel();
         Evento evento = new Evento(buscaUbicacion.getText(), buscaFecha.getText(), TipoEvento.stringToTipoEvento("Normal"), "", null);
 
         m.setFilas(fa.consultarEventos(evento));
@@ -90,13 +102,13 @@ public class VPrincipal extends javax.swing.JFrame {
     private void createUIComponents() {
         // TODO: add custom component creation code here
         TablaEventosVPrincipal = new JTable();
-        ModeloTablaEventos_5 mtablaP = new ModeloTablaEventos_5();
+        ModeloTablaEventos mtablaP = new ModeloTablaEventos();
         TablaEventosVPrincipal.setModel(mtablaP);
     }
 
     public void buscarTodosLosEventos(){
-        ModeloTablaEventos_5 m;
-        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
+        ModeloTablaEventos m;
+        m=(ModeloTablaEventos) TablaEventosVPrincipal.getModel();
 
         m.setFilas(fa.consultarEventosSinArgs());
     }
@@ -142,7 +154,6 @@ public class VPrincipal extends javax.swing.JFrame {
             //======== Desplegable ========
             {
                 Desplegable.setText("Opciones");
-                //Desplegable.setSelectedIcon(new ImageIcon(null)));
                 Desplegable.setIcon(UIManager.getIcon("FileView.hardDriveIcon"));
                 Desplegable.setBackground(new Color(0xffffcc));
 
@@ -212,8 +223,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
         //======== scrollListaEventos ========
         {
-
-            //---- TablaEventosVPrincipal ----
             scrollListaEventos.setViewportView(TablaEventosVPrincipal);
         }
 
@@ -257,7 +266,7 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         //---- Logo ----
-        //Logo.setIcon(new ImageIcon(getClass().getResource("/gui/logoPeque\u00f1o1.jpg")));
+        Logo.setIcon(new ImageIcon(getClass().getResource("/gui/_logoPeque\u00f1o.jpg")));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);

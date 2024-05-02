@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import java.awt.BorderLayout;
+
 
 import aplicacion.PropiedadesYCuentas.Propiedad;
 
@@ -18,8 +20,12 @@ public class VPropiedades extends JDialog {
 
     aplicacion.FachadaAplicacion fa;
 
+    // Confirmación de borrado
+    boolean confirmacion;
+
     // Constructor
     public VPropiedades(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+
         this.fa=fa;
         initComponents();
         buscarPropiedades();
@@ -32,12 +38,45 @@ public class VPropiedades extends JDialog {
 
     }
 
+    public void setConfirmacion(boolean c){
+        confirmacion = c;
+    }
+
     // BOTONES
     private void buscarTipoMouseClicked(MouseEvent e) {
         buscarPropiedades();
     }
     private void borrarPropiedad(MouseEvent e) {
-        fa.borrarPropiedad(Id.getText());
+
+        // Crear un JDialog modal
+        JDialog dialog = new JDialog(this, "Confirmación", true);
+        dialog.setLayout(new BorderLayout());
+
+        // Agregar un mensaje al diálogo
+        JLabel label = new JLabel("¿Estás seguro de que quieres borrar esta propiedad?");
+        dialog.add(label, BorderLayout.CENTER);
+
+        // Agregar un botón para confirmar la eliminación
+        JButton button = new JButton("Confirmar");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cerrar el diálogo cuando se haga clic en el botón
+                dialog.dispose();
+
+                // Continuar con la eliminación de la propiedad
+                System.out.println("Borrando propiedad...");
+                fa.borrarPropiedad(Integer.parseInt(Id.getText()));
+                buscarPropiedades();
+            }
+        });
+        dialog.add(button, BorderLayout.SOUTH);
+
+        // Mostrar el diálogo
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+
     }
     private void volver(MouseEvent e) {
         this.dispose();
@@ -53,6 +92,7 @@ public class VPropiedades extends JDialog {
     public java.util.List<Propiedad> obtenerPropiedades(String uno){
         return fa.consultarPropiedades(uno);
     }
+
     // Actualizar cuadros de texto
     private void actualizarCuadrosTexto() {
         ModeloTablaPropiedades m;
@@ -64,8 +104,8 @@ public class VPropiedades extends JDialog {
         Valor.setText(p.getValorActual().toString());
         Tipo.setText(p.getTipoGeneral());
         Gestor.setText(p.getGestor().getNombreCompleto());
-        if (p.getEventoActual() != null)
-            Evento.setText(p.getEventoActual().getDescripcion());
+        if (p.getEventoProximo() != null)
+            Evento.setText(p.getEventoProximo().getDescripcion());
         else Evento.setText("No hay un evento asociado a esta propiedad.");
 
     }
@@ -75,7 +115,8 @@ public class VPropiedades extends JDialog {
         ModeloTablaPropiedades m;
         m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
 
-        m.setFilas(fa.consultarPropiedades(TipoSearch.getText()));
+        java.util.List<Propiedad> propiedades = obtenerPropiedades(TipoSearch.getText());
+        m.setFilas(propiedades);
         if (m.getRowCount() > 0) {
             tablaPropiedades.setRowSelectionInterval(0, 0);
             actualizarCuadrosTexto();
@@ -95,7 +136,6 @@ public class VPropiedades extends JDialog {
         Propiedad p = m.getPropiedad(tablaPropiedades.getSelectedRow());
         fa.ventanaDetalles(p, behavior);
     }
-
 
     ///ESTA VENTANA
     private void createUIComponents() {
@@ -122,12 +162,11 @@ public class VPropiedades extends JDialog {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+        // Generated using JFormDesigner Evaluation license - Diego
         createUIComponents();
 
         panel1 = new JPanel();
         btnVolver = new JButton();
-        ImagenPropiedad = new JLabel();
         TextId = new JLabel();
         Id = new JTextField();
         Valor = new JTextField();
@@ -137,27 +176,28 @@ public class VPropiedades extends JDialog {
         TextTipoSearch = new JLabel();
         TipoSearch = new JTextField();
         buscar = new JButton();
-        scrollPane1 = new JScrollPane();
         TextEvento = new JLabel();
         Evento = new JTextField();
         BtnMasInfo = new JButton();
-        btnNewProp = new JButton();
         BtnEraseProp = new JButton();
         Tipo = new JTextField();
         Gestor = new JTextField();
+        scrollPane1 = new JScrollPane();
+        btnNewProp = new JButton();
+        label1 = new JLabel();
 
         //======== this ========
-        var contentPane = getContentPane();
+        setTitle("Propiedades");
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-            swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border
-            . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
-            ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder
-            ( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-            .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
-            ( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
+            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
+            .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
+            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- btnVolver ----
             btnVolver.setText("volver");
@@ -192,6 +232,27 @@ public class VPropiedades extends JDialog {
                 }
             });
 
+            //---- TextEvento ----
+            TextEvento.setText("Evento:");
+
+            //---- BtnMasInfo ----
+            BtnMasInfo.setText("Detalles");
+            BtnMasInfo.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    entrarDetalles(e);
+                }
+            });
+
+            //---- BtnEraseProp ----
+            BtnEraseProp.setText("Borrar");
+            BtnEraseProp.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    borrarPropiedad(e);
+                }
+            });
+
             //======== scrollPane1 ========
             {
                 scrollPane1.addMouseListener(new MouseAdapter() {
@@ -212,18 +273,6 @@ public class VPropiedades extends JDialog {
                 scrollPane1.setViewportView(tablaPropiedades);
             }
 
-            //---- TextEvento ----
-            TextEvento.setText("Evento:");
-
-            //---- BtnMasInfo ----
-            BtnMasInfo.setText("Detalles");
-            BtnMasInfo.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    entrarDetalles(e);
-                }
-            });
-
             //---- btnNewProp ----
             btnNewProp.setText("Nueva Propiedad");
             btnNewProp.addMouseListener(new MouseAdapter() {
@@ -233,111 +282,95 @@ public class VPropiedades extends JDialog {
                 }
             });
 
-            //---- BtnEraseProp ----
-            BtnEraseProp.setText("Borrar");
-            BtnEraseProp.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    borrarPropiedad(e);
-                }
-            });
+            //---- label1 ----
+            label1.setText("PROPIEDADES");
+            label1.setFont(new Font("Broadway", Font.PLAIN, 30));
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(btnVolver)
-                                .addGap(148, 148, 148)
-                                .addComponent(ImagenPropiedad, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
+                                .addGap(156, 156, 156)
+                                .addComponent(label1))
+                            .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGroup(panel1Layout.createParallelGroup()
+                                        .addGap(28, 28, 28)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addComponent(TextValor)
-                                            .addComponent(TextId)
-                                            .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(8, 8, 8)
+                                            .addComponent(TextId))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(panel1Layout.createParallelGroup()
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                .addGroup(panel1Layout.createParallelGroup()
-                                                    .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(TextTipo))
-                                                    .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(TextGestor)))
-                                                .addGap(31, 31, 31)
-                                                .addGroup(panel1Layout.createParallelGroup()
-                                                    .addComponent(Tipo)
-                                                    .addComponent(Gestor)))
-                                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(4, 4, 4))
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                        .addComponent(BtnEraseProp)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BtnMasInfo)))
-                                .addGap(1, 1, 1)))
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(btnNewProp, GroupLayout.Alignment.TRAILING)
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(TextTipoSearch, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TipoSearch, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscar))
-                            .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34))
+                                            .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addComponent(TextTipo)
+                                            .addComponent(TextGestor))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(Tipo)
+                                            .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(TextTipoSearch, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                                .addComponent(TipoSearch)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(buscar))
+                                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE))))
+                                .addGap(29, 29, 29)
+                                .addGroup(panel1Layout.createParallelGroup()
+                                    .addComponent(btnNewProp)
+                                    .addComponent(BtnMasInfo)
+                                    .addComponent(BtnEraseProp))))
+                        .addContainerGap(42, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnVolver))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(TipoSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(buscar)
-                                        .addComponent(TextTipoSearch))
-                                    .addComponent(ImagenPropiedad, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))))
-                        .addGap(37, 37, 37)
+                            .addComponent(btnVolver)
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextId)
                             .addComponent(Id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextTipo)
-                            .addComponent(Tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
+                            .addComponent(Tipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextId)
+                            .addComponent(TextTipo))
+                        .addGap(6, 6, 6)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextValor)
                             .addComponent(Valor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextGestor)
-                            .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextEvento)
-                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnMasInfo)
-                            .addComponent(BtnEraseProp))
-                        .addContainerGap(60, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap(83, Short.MAX_VALUE)
-                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextValor)
+                            .addComponent(TextGestor))
                         .addGap(18, 18, 18)
-                        .addComponent(btnNewProp)
-                        .addGap(16, 16, 16))
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(Evento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextEvento))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNewProp)
+                            .addComponent(buscar)
+                            .addComponent(TipoSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextTipoSearch))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnEraseProp))
+                        .addGap(24, 24, 24))
             );
         }
 
@@ -363,10 +396,9 @@ public class VPropiedades extends JDialog {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+    // Generated using JFormDesigner Evaluation license - Diego
     private JPanel panel1;
     private JButton btnVolver;
-    private JLabel ImagenPropiedad;
     private JLabel TextId;
     private JTextField Id;
     private JTextField Valor;
@@ -376,14 +408,15 @@ public class VPropiedades extends JDialog {
     private JLabel TextTipoSearch;
     private JTextField TipoSearch;
     private JButton buscar;
-    private JScrollPane scrollPane1;
-    private JTable tablaPropiedades;
     private JLabel TextEvento;
     private JTextField Evento;
     private JButton BtnMasInfo;
-    private JButton btnNewProp;
     private JButton BtnEraseProp;
     private JTextField Tipo;
     private JTextField Gestor;
+    private JScrollPane scrollPane1;
+    private JTable tablaPropiedades;
+    private JButton btnNewProp;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

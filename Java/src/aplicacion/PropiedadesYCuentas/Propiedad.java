@@ -10,7 +10,8 @@ package aplicacion.PropiedadesYCuentas;
 import aplicacion.Acolito;
 import aplicacion.Evento;
 
-import java.util.ArrayList;
+   import java.time.temporal.ChronoUnit;
+   import java.util.ArrayList;
 
 /**
  *
@@ -20,19 +21,20 @@ public abstract class Propiedad {
     private int idPropiedad;
     private int valorActual;
     private Acolito gestor;
-    private ArrayList<Evento> eventos= new ArrayList<>();
+    private java.util.List<Evento> eventos;
 
-    public Propiedad(int idPropiedad, int valorActual, Acolito gestor){
+    public Propiedad(int idPropiedad, int valorActual, Acolito gestor, java.util.List<Evento> eventos){
         this.idPropiedad = idPropiedad;
         this.valorActual = valorActual;
         this.gestor = gestor;
+        this.eventos = eventos;
     }
 
     public Integer getIdPropiedad() {
         return idPropiedad;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public java.util.List<Evento> getEventos() {
         return eventos;
     }
 
@@ -57,18 +59,28 @@ public abstract class Propiedad {
     }
 
 
-
-    public Evento getEventoActual() {
+    public Evento getEventoProximo() {
         LocalDate fechaActual = LocalDate.now();
+        Evento eventoProximo = null;
+        long diasRestantes = Long.MAX_VALUE; // Inicializamos con un valor muy grande
+
         for (Evento evento : eventos) {
-            java.sql.Date sqlDate = Date.valueOf(evento.getFecha());// tu fecha SQL
-            LocalDate localDate = sqlDate.toLocalDate();
-            if (localDate.equals(fechaActual)) {
-                return evento;
+            java.sql.Date sqlDate = Date.valueOf(evento.getFecha()); // Convierte la fecha del evento a un objeto java.sql.Date
+            LocalDate localDate = sqlDate.toLocalDate(); // Convierte java.sql.Date a LocalDate
+
+            // Calcula los días restantes hasta el evento
+            long dias = ChronoUnit.DAYS.between(fechaActual, localDate);
+
+            // Si el evento ocurre en el futuro y es más cercano que el anteriormente encontrado, actualiza la información del evento próximo
+            if (dias >= 0 && dias < diasRestantes) {
+                diasRestantes = dias;
+                eventoProximo = evento;
             }
         }
-        return null;
+
+        return eventoProximo;
     }
+
 
     public void addEvento(Evento e){
         eventos.add(e);

@@ -1,7 +1,10 @@
 package baseDatos;
 import aplicacion.Acolito;
 import aplicacion.TipoAcolito;
+import aplicacion.Trato;
+
 import java.sql.*;
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -12,8 +15,8 @@ public class DAOAcolitos extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    /*public Acolito validarLogin(String alias, String contraseña) {
-        Acolito resultado = null;
+    public Boolean comprobarAutentificacion(String alias, String contraseña) {
+        Boolean booleanValor = null;
         Connection con;
         PreparedStatement stmUsuario = null;
         ResultSet rsUsuario;
@@ -21,82 +24,131 @@ public class DAOAcolitos extends AbstractDAO {
         con = this.getConexion();
 
         try {
-            stmUsuario = con.prepareStatement("select * " +
-                    "from acólitos " +
-                    "where alias = ? and contraseña = ?");
+            stmUsuario = con.prepareStatement("SELECT * " +
+                    "FROM acólitos " +
+                    "WHERE alias = ?");
             stmUsuario.setString(1, alias);
-            stmUsuario.setString(2, contraseña);
             rsUsuario = stmUsuario.executeQuery();
             if (rsUsuario.next()) {
-                resultado = new Acolito(rsUsuario.getString("alias"), rsUsuario.getString("contraseña"),
-                        rsUsuario.getString("nombrecompleto"), rsUsuario.getString("direccion"), rsUsuario.getString("email"),
-                        rsUsuario.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsUsuario.getString("tipo_usuario")));
+                // El usuario existe, ahora verificamos la contraseña
+                String contraseñaBD = rsUsuario.getString("contraseña");
+                if (contraseña.equals(contraseñaBD)) {
+                    // Las contraseñas coinciden, creamos el objeto Acolito
+                    booleanValor = true;
+                }
+                else booleanValor = false;
+            } else booleanValor = false;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                if (stmUsuario != null) {
+                    stmUsuario.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return booleanValor;
+    }
+
+
+    public Acolito devolverUsuario(String alias, String contraseña) {
+        Acolito resultado = null;
+        Connection con;
+        PreparedStatement stmUsuario = null;
+        ResultSet rsUsuario, rsTipo;
+
+        con = this.getConexion();
+
+        try {
+            stmUsuario = con.prepareStatement("SELECT * " +
+                    "FROM acólitos " +
+                    "WHERE alias = ?");
+            stmUsuario.setString(1, alias);
+            rsUsuario = stmUsuario.executeQuery();
+            if (rsUsuario.next()) {
+                // El usuario existe, ahora verificamos la contraseña
+                String contraseñaBD = rsUsuario.getString("contraseña");
+                if (contraseña.equals(contraseñaBD)) {
+                    // Las contraseñas coinciden, creamos el objeto Acolito
+                    resultado = new Acolito(rsUsuario.getString("alias"), contraseñaBD,
+                            rsUsuario.getString("nombrecompleto"), rsUsuario.getString("direccion"),
+                            rsUsuario.getInt("influencia"), null);
+
+                    stmUsuario = con.prepareStatement("WITH todas_las_tablas AS (\n" +
+                            "    SELECT alias, 'cabecillas' AS tabla FROM cabecillas\n" +
+                            "    UNION\n" +
+                            "    SELECT alias, 'gestor_interno' AS tabla FROM gestor_interno\n" +
+                            "    UNION\n" +
+                            "    SELECT alias, 'miembros_basicos' AS tabla FROM miembros_basicos\n" +
+                            "    UNION\n" +
+                            "    SELECT alias, 'guia_espiritual' AS tabla FROM guia_espiritual\n" +
+                            ")\n" +
+                            "SELECT * FROM todas_las_tablas WHERE alias = ?;");
+                    stmUsuario.setString(1, alias);
+                    rsTipo = stmUsuario.executeQuery();
+                    if (rsTipo.next()) {
+                        String tipo = rsTipo.getString("tabla");
+                        switch (tipo) {
+                            case "cabecillas": resultado.setTipo(TipoAcolito.Cabecilla); break;
+                            case "gestor_interno": resultado.setTipo(TipoAcolito.Gestor); break;
+                            case "miembros_basicos": resultado.setTipo(TipoAcolito.Normal); break;
+                            case "guia_espiritual": resultado.setTipo(TipoAcolito.LiderEspiritual); break;
+                        }
+                    }
+
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                assert stmUsuario != null;
-                stmUsuario.close();
+                if (stmUsuario != null) {
+                    stmUsuario.close();
+                }
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
         }
         return resultado;
     }
-    public ArrayList<Acolito> consultarAcolitos(String alias, String nombre){
-        java.util.ArrayList<Acolito> resultado = new java.util.ArrayList<Acolito>();
-        Acolito acolitoActual;
+
+    public List<String> getNombresJefesDeDivision() {
+        List<String> nombresJefes = new ArrayList<>();
         Connection con;
-        PreparedStatement stmUsuarios=null;
-        ResultSet rsUsuarios;
+        PreparedStatement stmJefes = null;
+        ResultSet rsJefes;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
-        String consulta =   "SELECT u.*,\n" +
-                "       CASE\n" +
-                "           WHEN public.cabecillas.alias IS NOT NULL THEN 'Cabecilla' " +
-                "           WHEN public.gestor_interno.alias IS NOT NULL THEN 'Gestor' " +
-                "           WHEN public.jefes_de_division.alias IS NOT NULL THEN 'JefeDivision' " +
-                "           WHEN public.miembros_basicos.alias IS NOT NULL THEN 'Normal' " +
-                "           WHEN public.guia_espiritual.alias IS NOT NULL THEN 'LiderEspiritual' " +
-                "           ELSE 'tipo_desconocido' " +
-                "           END AS tipo\n" +
-                "FROM acólitos u " +
-                "         LEFT JOIN public.cabecillas ON u.alias = cabecillas.alias " +
-                "         LEFT JOIN public.gestor_interno ON u.alias = gestor_interno.alias " +
-                "         LEFT JOIN public.jefes_de_division ON u.alias = jefes_de_division.alias " +
-                "         LEFT JOIN public.miembros_basicos ON u.alias = miembros_basicos.alias " +
-                "         LEFT JOIN public.guia_espiritual ON u.alias = guia_espiritual.alias " +
-                "WHERE u.alias LIKE ? OR u.nombrecompleto LIKE ?";
-
-
-        try  {
-            stmUsuarios=con.prepareStatement(consulta);
-            stmUsuarios.setString(1, "%"+alias+"%");
-            stmUsuarios.setString(2, "%"+nombre+"%");
-
-            rsUsuarios=stmUsuarios.executeQuery();
-            while (rsUsuarios.next())
-            {
-                acolitoActual = new Acolito(rsUsuarios.getString("alias"), rsUsuarios.getString("contraseña"),
-                        rsUsuarios.getString("nombrecompleto"), rsUsuarios.getString("direccion"), rsUsuarios.getString("email"),
-                        rsUsuarios.getInt("influencia"), TipoAcolito.stringToTipoAcolito(rsUsuarios.getString("tipo_usuario")));
-
-                resultado.add(acolitoActual);
+        try {
+            stmJefes = con.prepareStatement("SELECT a.nombrecompleto\n" +
+                    "FROM acólitos a\n" +
+                    "         INNER JOIN jefes_de_division jd ON a.alias = jd.alias;");
+            rsJefes = stmJefes.executeQuery();
+            while (rsJefes.next()) {
+                nombresJefes.add(rsJefes.getString("nombrecompleto"));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
+        } finally {
             try {
-                assert stmUsuarios != null;
-                stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+                if (stmJefes != null) {
+                    stmJefes.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
-        return resultado;
+        return nombresJefes;
     }
-    
+
+
+    /*
     public void insertarAcolito(Acolito acolito){
         Connection con;
         PreparedStatement stmUsuario=null;

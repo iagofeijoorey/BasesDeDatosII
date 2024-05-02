@@ -11,6 +11,8 @@ import aplicacion.PropiedadesYCuentas.Propiedad;
 
 import java.awt.*;
 
+import java.awt.*;
+
 /**
  *
  * @author alumno

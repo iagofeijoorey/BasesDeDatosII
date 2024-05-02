@@ -4,6 +4,7 @@ import aplicacion.*;
 
 import java.sql.*;
 import java.util.List;
+import java.util.ArrayList;
 
 import aplicacion.Objetivo;
 
@@ -90,7 +91,6 @@ public class DAOEventos extends AbstractDAO {
         }
         return resultado;
     }
-
     public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
         Connection con;
         PreparedStatement stmObjetivo = null;
@@ -142,7 +142,6 @@ public class DAOEventos extends AbstractDAO {
                 }
             }
         }
-
     public void insertarRecompensaDinero(RecompensaDinero recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -234,7 +233,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public void borrarRecompensaDinero(RecompensaDinero recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -309,7 +307,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
         Connection con;
         PreparedStatement stmRecompensa = null;
@@ -330,7 +327,6 @@ public class DAOEventos extends AbstractDAO {
             }
         }
     }
-
     public void borrarObjetivo(Objetivo objetivoSeleccionado) {
         Connection con;
         PreparedStatement stmObjetivo = null;
@@ -581,7 +577,11 @@ public class DAOEventos extends AbstractDAO {
             }
         }
         return 0;
-        
+
+    }
+    public void insertarObjetivo(Objetivo objetivoSeleccionado) {
+        return 0;
+
     }
 
     public void insertarObjetivo(Objetivo objetivoSeleccionado) {

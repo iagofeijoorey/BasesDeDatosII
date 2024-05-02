@@ -9,11 +9,7 @@ import gui.VPrincipal;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author basesdatos
- */
+import java.util.SortedMap;
 
 public class FachadaAplicacion {
     private gui.FachadaGui fgui;
@@ -25,13 +21,14 @@ public class FachadaAplicacion {
     private Acolito currentUser;
 
     public static void main(String[] args) {
-        FachadaAplicacion fa;
+        aplicacion.FachadaAplicacion fa;
 
-        fa= new FachadaAplicacion();
+        fa= new aplicacion.FachadaAplicacion();
         fa.iniciaInterfazUsuario();
     }
 
     public FachadaAplicacion(){
+        currentUser = null;
         fgui=new gui.FachadaGui(this);
         fbd= new baseDatos.FachadaBaseDatos(this);
         ge = new GestionEventos(fgui, fbd);
@@ -39,52 +36,34 @@ public class FachadaAplicacion {
         gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
     }
- 
+
+    public Acolito getCurrentUser(){
+        return currentUser;
+    }
+
     public void iniciaInterfazUsuario(){
-     fgui.iniciaVista();
- }
+        fgui.iniciaVista();
+    }
 
     public void muestraExcepcion(String e){
-     fgui.muestraExcepcion(e);
- }
- /*
-public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
-  return cl.obtenerLibros(id, titulo,  isbn,  autor);
-}*/
-/*
-public java.util.List<Acolito> consultarAcolitos(){
-    return ga.consultarAcolitos();
-}
-
-
-    public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
-        return ga.buscarUsuarios(IDUsuario, Nombre);
+        fgui.muestraExcepcion(e);
     }
 
-    public void nuevoUsuario(Acolito usuario){
-    ga.nuevoUsuario(usuario);
-}
-
-
-    public void borrarAcolito(Acolito usuario){
-    ga.borrarAcolito(usuario);
-}
-
-
-    public Boolean comprobarAutentificacion(String idUsuario, String clave){
-        //return cu.comprobarAutentificacion(idUsuario, clave);
-        return true;
+    ///Código de VAutentificacion
+    //////////////////////////////////////////
+    public void setUsuario(String alias, String clave){
+        currentUser = ga.devolverUsuario(alias, clave);
+    }
+    public boolean comprobarAutentificacion(String alias, String clave){
+        return ga.comprobarAutentificacion(alias, clave);
     }
 
 
-    public void setCurrentUser(Acolito u) {
-        currentUser = u;
+    ///Código de VEventos
+    /////////////////////////////////////////////
+    public java.util.List<String> getNombresJefesDeDivision(){
+        return ga.getNombresJefesDeDivision();
     }
-*/
-    //Abrir ventanas
-//    public void ventanaPerfil(VPrincipal vp){
-//        fgui.ventanaPerfil(vp);
-//    }
 
 
     ///Código abrir ventanas
@@ -110,6 +89,9 @@ public java.util.List<Acolito> consultarAcolitos(){
     }
     public void ventanaRituales(){
         //fgui.ventanaRituales();
+    }
+    public void ventanaObjetivo(Window parent, Evento evento) {
+        fgui.ventanaObjetivo(parent, evento);
     }
 
     //Métodos de VPerfil
@@ -142,18 +124,53 @@ public java.util.List<Acolito> consultarAcolitos(){
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
         return gp.consultarPropiedades(tipo);
     }
-    public void borrarPropiedad(String idPropiedad){
+    public void borrarPropiedad(Integer idPropiedad){
         gp.borrarPropiedad(idPropiedad);
     }
 
-    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
-        return gp.consultarArmasAlmacen(almacen);
+    // Contenido Almacenes
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return gp.consultarVehiculos(idAlmacen);
+    }
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return gp.consultarArmas(idAlmacen);
     }
 
-    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
-        return gp.consultarVehiculosAlmacen(almacen);
+    // Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        gp.anadirPropiedad(p);
     }
 
+    // ActualizarPropiedad
+    public void actualizarPropiedad(Propiedad p){
+        gp.actualizarPropiedad(p);
+    }
+
+    // Buscar mayor id Propiedad
+    public Integer obtenerIdPropiedadMayor(){
+        return gp.obtenerIdPropiedadMayor();
+    }
+
+    // Contenido Almacén
+    public java.util.List<Inmobiliario> consultaAlmacenes(){
+        // TODO add your code here
+        return gp.consultaAlmacenes();
+    }
+
+    // Contenido Almacenes
+
+
+    // Anadir propiedad
+
+
+    // ActualizarPropiedad
+
+
+
+
+
+
+    ///Código de GestionObjetivos/Recompensas
     public List<Objetivo> consultarObjetivosEvento(Evento evento) {
         return ge.consultarObjetivosEvento(evento);
     }

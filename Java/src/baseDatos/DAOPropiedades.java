@@ -4,10 +4,8 @@
  */
 
 package baseDatos;
-import aplicacion.Acolito;
-import aplicacion.FachadaAplicacion;
+import aplicacion.*;
 import aplicacion.PropiedadesYCuentas.*;
-import aplicacion.TipoAcolito;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -96,8 +94,68 @@ public class DAOPropiedades extends AbstractDAO {
         }
     }
 
-    public void actualizarPropiedad (Propiedad  propiedad) {
+    public void actualizarPropiedad(Propiedad propiedad) {
+        Connection con;
+        PreparedStatement stmPropiedad = null;
 
+        con = super.getConexion();
+
+        try {
+            // Actualizar datos en la tabla propiedades
+            stmPropiedad = con.prepareStatement("UPDATE propiedades SET valor_actual = ?, gestor = ? WHERE idpropiedad = ?");
+            stmPropiedad.setInt(1, propiedad.getValorActual());
+            stmPropiedad.setString(2, propiedad.getGestor().getAlias());
+            stmPropiedad.setInt(3, propiedad.getIdPropiedad());
+            stmPropiedad.executeUpdate();
+
+            // Actualizar datos en la tabla correspondiente dependiendo del tipo de propiedad
+            if (propiedad instanceof Inmobiliario) {
+                Inmobiliario inmobiliario = (Inmobiliario) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE inmobiliario SET ubicacion = ?, tipoinmobiliario = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, inmobiliario.getUbicacion());
+                stmPropiedad.setString(2, inmobiliario.getTipo().toString());
+                stmPropiedad.setInt(3, inmobiliario.getIdPropiedad());
+                if (inmobiliario.getTipo().equals(TipoInmobiliario.Almacen)) {
+                    stmPropiedad = con.prepareStatement("UPDATE almacenes SET capacidad = ? WHERE idpropiedad = ?");
+                    stmPropiedad.setInt(1, inmobiliario.getCapacidad());
+                    stmPropiedad.setInt(2, inmobiliario.getIdPropiedad());
+                }
+            } else if (propiedad instanceof Vehiculo) {
+                Vehiculo vehiculo = (Vehiculo) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE vehiculos SET tipovehiculo = ?, capacidad = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, vehiculo.getTipo().toString());
+                stmPropiedad.setInt(2, vehiculo.getCantidad());
+                stmPropiedad.setInt(3, vehiculo.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(4, vehiculo.getIdPropiedad());
+            } else if (propiedad instanceof Arma) {
+                Arma arma = (Arma) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE armas SET tipoarmamento = ?, cantidad = ?, numbalas = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, arma.getTipoString().toString());
+                stmPropiedad.setInt(2, arma.getCantidad());
+                stmPropiedad.setInt(3, arma.getBalas());
+                stmPropiedad.setInt(4, arma.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(5, arma.getIdPropiedad());
+            } else if (propiedad instanceof Commodity) {
+                Commodity commodity = (Commodity) propiedad;
+                stmPropiedad = con.prepareStatement("UPDATE commodities SET nombre = ?, cantidad = ? WHERE idpropiedad = ?");
+                stmPropiedad.setString(1, commodity.getNombre());
+                stmPropiedad.setInt(2, commodity.getCantidad());
+                stmPropiedad.setInt(3, commodity.getIdPropiedad());
+            }
+
+            // Ejecutar la actualización
+            stmPropiedad.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPropiedad.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
 
     public List<Propiedad> consultarPropiedades(String tipo) {
@@ -105,13 +163,15 @@ public class DAOPropiedades extends AbstractDAO {
         Propiedad propiedadActual = null;
         Connection con;
         PreparedStatement stmPropiedades = null;
-        ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAlmacen;
+        ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAlmacen, rsEventos, rsOrganizador;
 
-        Acolito gestorAux=null;
+        Acolito gestorAux=null, organizadorAux=null;
         Inmobiliario almacenAux=null;
         TipoInmobiliario tipoInmobiliarioAux=null;
         int cantidad, numbalas, capacidad;
         String TipoConcreto, nombre;
+        java.util.List<Evento> eventosAux = new ArrayList<>();
+        Evento eventoActualAux=null;
 
         con = this.getConexion();
 
@@ -150,14 +210,18 @@ public class DAOPropiedades extends AbstractDAO {
 
             rsPropiedades = stmPropiedades.executeQuery();
             while (rsPropiedades.next()) {
-                String consulta2 = "SELECT * FROM acólitos " +
+
+                eventosAux = new ArrayList<>();
+                /// Gestor
+                //////////////////////////
+                consulta = "SELECT * FROM acólitos " +
                         "WHERE alias = ? ";
 
-                stmPropiedades = con.prepareStatement(consulta2);
+                stmPropiedades = con.prepareStatement(consulta);
                 stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
                 rsGestor = stmPropiedades.executeQuery();
                 if(!rsGestor.next()){
-                    System.out.println("No hay vehículo asociado al almacen");
+                    System.out.println("No hay Gestor asociado a la propiedad");
                     gestorAux = null;
                 }
                 else {
@@ -166,6 +230,60 @@ public class DAOPropiedades extends AbstractDAO {
                             rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"),
                             rsGestor.getInt("influencia"), TipoAcolito.Gestor);
                 }
+                /// Gestor
+                //////////////////////////
+
+
+                // Eventos
+                //////////////////////////
+                consulta = "SELECT e.*\n" +
+                        "FROM eventos e\n" +
+                        "WHERE (e.ubicacion, e.fecha) IN (\n" +
+                        "    SELECT pu.ubicacion, pu.fecha\n" +
+                        "    FROM propiedadesusadas pu\n" +
+                        "    WHERE pu.idpropiedad = ?\n" +
+                        ");";
+
+                stmPropiedades = con.prepareStatement(consulta);
+                stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
+                rsEventos = stmPropiedades.executeQuery();
+                int idPropiedaddebroma = rsPropiedades.getInt("idpropiedad");
+                //////////////////////////
+                // TIPOS DE PROPIEDADES
+                //////////////////////////
+                while (rsEventos.next()) {
+                    // Organizador
+                    consulta = "SELECT jd.nombredivision, a.*\n" +
+                            "FROM jefes_de_division jd\n" +
+                            "         LEFT JOIN acólitos a ON jd.alias = a.alias\n" +
+                            "WHERE jd.alias IN (\n" +
+                            "    SELECT e.organizador\n" +
+                            "    FROM eventos e\n" +
+                            "    WHERE e.ubicacion = ? AND e.fecha = ?\n" +
+                            ");";
+
+                    stmPropiedades = con.prepareStatement(consulta);
+                    stmPropiedades.setString(1, rsEventos.getString("ubicacion"));
+                    stmPropiedades.setDate(2,  java.sql.Date.valueOf(rsEventos.getString("fecha")));
+                    rsOrganizador = stmPropiedades.executeQuery();
+                    if(!rsOrganizador.next()) {
+                        System.out.println("No hay Organizador asociado al evento");
+                        organizadorAux = null;
+                    }
+                    else {
+                        // Crea al organizador relacionado
+                        organizadorAux = new JefeDivision(rsOrganizador.getString("alias"), rsOrganizador.getString("contraseña"),
+                                rsOrganizador.getString("nombrecompleto"), rsOrganizador.getString("direccion"),
+                                rsOrganizador.getInt("influencia"), TipoAcolito.JefeDivision, rsOrganizador.getString("nombredivision"));
+                    }
+                    eventoActualAux = new Evento(rsEventos.getString("ubicacion"), rsEventos.getString("fecha"),
+                            TipoEvento.stringToTipoEvento(rsEventos.getString("tipoevento")), rsEventos.getString("descripcion"),
+                            organizadorAux);
+                    eventosAux.add(eventoActualAux);
+                }
+                //////////////////////////
+                // TIPOS DE PROPIEDADES
+                //////////////////////////
 
 
                 switch (rsPropiedades.getString("tipo")) {
@@ -192,13 +310,13 @@ public class DAOPropiedades extends AbstractDAO {
                             // Crea el almacen
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), TipoConcreto,
                                     capacidad, TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         else {
                             // Crea el inmobiliario
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
 
                         }
                         break;
@@ -219,7 +337,7 @@ public class DAOPropiedades extends AbstractDAO {
                             // Almacen asociado al vehículo
                             almacenAux = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
                                     rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         // Setea el tipo de inmobiliario del almacen
@@ -242,7 +360,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea al vehículo
                         propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"),
                                 TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipovehiculo")), rsPropiedades.getInt("valor_actual"),
-                                capacidad, almacenAux);
+                                capacidad, almacenAux, eventosAux);
                         break;
                     case "Arma":
 
@@ -264,7 +382,7 @@ public class DAOPropiedades extends AbstractDAO {
                             // Almacen asociado al vehículo
                             almacenAux = new Inmobiliario(rsAlmacen.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
                                     rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         // Busca info especial del arma
@@ -286,7 +404,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea el arma
                         propiedadActual = new Arma(rsPropiedades.getInt("idpropiedad"), TipoArmamento.stringToTipoArmamento(rsPropiedades.getString("tipoarmamento")),
                                 cantidad, numbalas, rsPropiedades.getInt("valor_actual"),
-                                almacenAux);
+                                almacenAux, eventosAux);
                         break;
                     case "Commodity":
 
@@ -309,7 +427,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea el commodity
                         propiedadActual = new Commodity(rsPropiedades.getInt("idpropiedad"),nombre,
                                 cantidad, rsPropiedades.getInt("valor_actual"),
-                                gestorAux);
+                                gestorAux, eventosAux);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
@@ -327,20 +445,17 @@ public class DAOPropiedades extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        /*return resultado.stream()
-                .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
-                .collect(Collectors.toList());*/
         return resultado;
     }
 
-    public void borrarPropiedad(String idPropiedad) {
+    public void borrarPropiedad(Integer idPropiedad) {
         Connection con;
         PreparedStatement stmUsuario = null;
 
         con = super.getConexion();
         try {
             stmUsuario = con.prepareStatement("delete from propiedades where idpropiedad = ?");
-            stmUsuario.setString(1, idPropiedad);
+            stmUsuario.setInt(1, idPropiedad);
             stmUsuario.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -434,32 +549,30 @@ public class DAOPropiedades extends AbstractDAO {
         return resultado;
     }
 
-    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
-        List<String> resultado = new ArrayList<>();
+    // Buscar mayor id Propiedad
+    public Integer obtenerIdPropiedadMayor(){
         Connection con;
-        PreparedStatement stmVehiculos = null;
-        ResultSet rsVehiculos;
+        PreparedStatement stmPropiedad = null;
+        ResultSet rsPropiedad;
+        Integer resultado = null;
 
-        con = this.getConexion();
+        con = super.getConexion();
 
-        String consulta = "SELECT v.*\n" +
-                "FROM vehiculos v\n" +
-                "WHERE v.almacén = ?";
+        String consulta = "SELECT MAX(idpropiedad) as idpropiedad FROM propiedades";
 
-        try{
-            stmVehiculos = con.prepareStatement(consulta);
-            stmVehiculos.setInt(1, almacen.getIdPropiedad());
-            rsVehiculos = stmVehiculos.executeQuery();
-            while(rsVehiculos.next()){
-                resultado.add(rsVehiculos.getString("tipovehiculo"));
+        try {
+            stmPropiedad = con.prepareStatement(consulta);
+            rsPropiedad = stmPropiedad.executeQuery();
+            if(rsPropiedad.next()){
+                resultado = rsPropiedad.getInt("idpropiedad");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                assert stmVehiculos != null;
-                stmVehiculos.close();
+                assert stmPropiedad != null;
+                stmPropiedad.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
@@ -468,32 +581,40 @@ public class DAOPropiedades extends AbstractDAO {
         return resultado;
     }
 
-    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
-        List<String> resultado = new ArrayList<>();
+    public java.util.List<Inmobiliario> consultaAlmacenes() {
+        List<Inmobiliario> resultado = new ArrayList<>();
         Connection con;
-        PreparedStatement stmArmas = null;
-        ResultSet rsArmas;
+        PreparedStatement stmAlmacenes = null;
+        ResultSet rsAlmacenes;
 
         con = this.getConexion();
 
-        String consulta = "SELECT a.*\n" +
-                "FROM armas a\n" +
-                "WHERE a.almacén = ?";
+        String consulta = "SELECT p.idpropiedad, p.valor_actual, i.ubicacion, a.capacidad, i.tipoinmobiliario, a.*\n" +
+                "FROM propiedades p\n" +
+                "         INNER JOIN inmobiliario i ON p.idpropiedad = i.idpropiedad\n" +
+                "         INNER JOIN almacenes a ON i.idpropiedad = a.idpropiedad";
 
-        try{
-            stmArmas = con.prepareStatement(consulta);
-            stmArmas.setInt(1, almacen.getIdPropiedad());
-            rsArmas = stmArmas.executeQuery();
-            while(rsArmas.next()){
-                resultado.add(rsArmas.getString("tipoarmamento"));
+        try {
+            stmAlmacenes = con.prepareStatement(consulta);
+            rsAlmacenes = stmAlmacenes.executeQuery();
+            while (rsAlmacenes.next()) {
+                Inmobiliario almacen = new Inmobiliario(
+                        rsAlmacenes.getInt("idpropiedad"),
+                        rsAlmacenes.getString("ubicacion"),
+                        rsAlmacenes.getInt("capacidad"),
+                        TipoInmobiliario.stringToTipoInmobiliario(rsAlmacenes.getString("tipoinmobiliario")),
+                        rsAlmacenes.getInt("valor_actual"),
+                        null,
+                        null
+                );
+                resultado.add(almacen);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                assert stmArmas != null;
-                stmArmas.close();
+                stmAlmacenes.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
@@ -570,6 +691,7 @@ public class DAOPropiedades extends AbstractDAO {
             System.out.println("Imposible cerrar cursores");
         }
     }
+
 }
     }
 
