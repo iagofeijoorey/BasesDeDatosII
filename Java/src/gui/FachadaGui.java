@@ -1,17 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import aplicacion.Evento;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 
-/**
- *
- * @author alumno
- */
+import java.awt.*;
+
 public class FachadaGui {
     aplicacion.FachadaAplicacion fa;
     VPrincipal vPrincipal;
@@ -19,7 +14,6 @@ public class FachadaGui {
    public FachadaGui(aplicacion.FachadaAplicacion fa){
         this.fa=fa;
         this.vPrincipal = new VPrincipal(fa);
-        //vPrincipal.setVisible(false);
    }
     
     public void iniciaVista(){
@@ -84,6 +78,15 @@ public class FachadaGui {
 
         vdn = new VContenidoAlmacen(fa, almacen);
         vdn.setVisible(true);
+
+
+    }
+
+    public void ventanaObjetivo(Window parent, Evento evento){
+        VObjetivos vo;
+
+       vo = new VObjetivos(fa,parent,evento);
+        vo.setVisible(true);
     }
 /*
     public void ventanaRituales(VPrincipal vP){

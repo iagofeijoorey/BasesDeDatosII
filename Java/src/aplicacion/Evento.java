@@ -19,7 +19,7 @@ public class Evento {
     private String descripcion;
     private Acolito autorizador;
     private Acolito organizador;
-    private List<Recompensa> recompensa = new ArrayList<>(); //Sin inicializar, se cargan las recompensas con el método setRecompensa,
+    private List<Objetivo> objetivos = new ArrayList<>(); //Lista de objetivos a cumplir en el evento
     //y la consulta correspondiente definida en el DAOEvento cuando se necesite
 
     //Constructor
@@ -49,10 +49,10 @@ public class Evento {
     public Acolito getOrganizador() {
         return organizador;
     }
-    public List<Recompensa> getRecompensa() {
-        return recompensa;
-    }
 
+    public List<Objetivo> getObjetivos() {
+        return objetivos;
+    }
     //Setters
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
@@ -72,8 +72,11 @@ public class Evento {
     public void setOrganizador(Acolito organizador) {
         this.organizador = organizador;
     }
-    public void setRecompensa(List<Recompensa> recompensa) {
-        this.recompensa = recompensa;
+    public void setObjetivos(List<Objetivo> objetivos) {
+        this.objetivos = objetivos;
+    }
+    public void addObjetivo(Objetivo objetivo){
+        objetivos.add(objetivo);
     }
 
     //OTRAS FUNCIONES

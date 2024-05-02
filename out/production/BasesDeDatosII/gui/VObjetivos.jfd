@@ -66,10 +66,29 @@
        </object>
       </void>
       <void method="add">
-       <object class="com.jformdesigner.model.FormComponent">
+       <object class="com.jformdesigner.model.FormComponent" id="FormComponent0">
         <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>font</string>
+         <object class="com.jformdesigner.model.SwingDerivedFont">
+          <null/>
+          <int>0</int>
+          <int>2</int>
+          <boolean>false</boolean>
+         </object>
+        </void>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
         <void property="name">
          <string>textEvento</string>
+        </void>
+        <void method="auxiliary">
+         <void method="setProperty">
+          <string>JavaCodeGenerator.postCreateCode</string>
+          <string>textEvento.setText(evento.getDescripcion());</string>
+         </void>
         </void>
        </object>
       </void>
@@ -86,10 +105,20 @@
        </object>
       </void>
       <void method="add">
-       <object class="com.jformdesigner.model.FormComponent">
+       <object class="com.jformdesigner.model.FormComponent" id="FormComponent1">
         <string>javax.swing.JTextField</string>
+        <void method="setProperty">
+         <string>editable</string>
+         <boolean>false</boolean>
+        </void>
         <void property="name">
          <string>textJefe</string>
+        </void>
+        <void method="auxiliary">
+         <void method="setProperty">
+          <string>JavaCodeGenerator.postCreateCode</string>
+          <string>        textEvento.setText(evento.getOrganizador().getAlias());</string>
+         </void>
         </void>
        </object>
       </void>
@@ -139,6 +168,14 @@
           </void>
           <void property="name">
            <string>textDescripcionObjetivo</string>
+          </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>java.awt.event.FocusListener</string>
+            <string>focusLost</string>
+            <string>textDescripcionObjetivoFocusLost</string>
+            <boolean>true</boolean>
+           </object>
           </void>
          </object>
         </void>
@@ -248,10 +285,16 @@
          <string>scrollPane2</string>
         </void>
         <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
+         <object class="com.jformdesigner.model.FormComponent" id="FormComponent2">
           <string>javax.swing.JTable</string>
           <void property="name">
            <string>tablaObjetivos</string>
+          </void>
+          <void method="auxiliary">
+           <void method="setProperty">
+            <string>JavaCodeGenerator.customCreate</string>
+            <boolean>true</boolean>
+           </void>
           </void>
           <void method="addEvent">
            <object class="com.jformdesigner.model.FormEvent">
@@ -260,6 +303,32 @@
             <string>cambioSeleccionTablaObjetivos</string>
             <boolean>true</boolean>
             <string>selectedRow</string>
+           </object>
+          </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>java.beans.PropertyChangeListener</string>
+            <string>propertyChange</string>
+            <string>tablaObjetivosRow</string>
+            <boolean>true</boolean>
+            <string>selectedRow</string>
+           </object>
+          </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>java.beans.PropertyChangeListener</string>
+            <string>propertyChange</string>
+            <string>tablaObjetivosPropertyChangeSeleRow</string>
+            <boolean>true</boolean>
+            <string>selectedRow</string>
+           </object>
+          </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>java.awt.event.MouseListener</string>
+            <string>mouseClicked</string>
+            <string>tablaObjetivosMouseClicked</string>
+            <boolean>true</boolean>
            </object>
           </void>
          </object>
@@ -351,6 +420,23 @@
         </void>
         <void property="name">
          <string>comboBoxNueva</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ItemListener</string>
+          <string>itemStateChanged</string>
+          <string>comboBoxNuevaItemStateChanged</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.beans.PropertyChangeListener</string>
+          <string>propertyChange</string>
+          <string>comboBoxNuevaPropertyChange</string>
+          <boolean>true</boolean>
+          <string>selectedIndex</string>
+         </object>
         </void>
         <void method="addEvent">
          <object class="com.jformdesigner.model.FormEvent">

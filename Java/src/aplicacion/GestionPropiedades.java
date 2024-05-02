@@ -80,4 +80,6 @@ public class GestionPropiedades {
         return fbd.consultaAlmacenes();
     }
 
+
+
 }

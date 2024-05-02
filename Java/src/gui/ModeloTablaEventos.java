@@ -4,17 +4,14 @@
  */
 
 package gui;
+import aplicacion.Acolito;
 import aplicacion.Evento;
-import javax.swing.table.*;
-import java.sql.Date;
+import aplicacion.TipoEvento;
 
-/**
- *
- * @author basesdatos
- */
-public class ModeloTablaEventos extends AbstractTableModel{
+import javax.swing.table.AbstractTableModel;
+
+public class ModeloTablaEventos extends AbstractTableModel {
     private java.util.List<Evento> eventos;
-
     public ModeloTablaEventos(){
         this.eventos=new java.util.ArrayList<Evento>();
     }
@@ -32,10 +29,10 @@ public class ModeloTablaEventos extends AbstractTableModel{
         String nombre="";
 
         switch (col){
-            case 0: nombre= "Ubicación"; break;
+            case 0: nombre= "Tipo"; break;
             case 1: nombre= "Fecha"; break;
-            case 2: nombre="Descripción"; break;
-            case 3: nombre="Jefe a cargo"; break;
+            case 2: nombre="Ubicacion"; break;
+            case 3: nombre="Organizador"; break;
         }
         return nombre;
     }
@@ -45,10 +42,10 @@ public class ModeloTablaEventos extends AbstractTableModel{
         Class clase=null;
 
         switch (col){
-            case 0: clase= java.lang.String.class; break;
-            case 1: clase= java.sql.Date.class; break;
-            case 2: clase=java.lang.String.class; break;
-            case 3: clase=java.lang.String.class; break;
+            case 0: clase= String.class; break;
+            case 1: clase= String.class; break;
+            case 2: clase= String.class; break;
+            case 3: clase= Acolito.class; break;
         }
         return clase;
     }
@@ -62,9 +59,9 @@ public class ModeloTablaEventos extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= eventos.get(row).getUbicacion(); break;
+            case 0: resultado= eventos.get(row).getTipoEvento(); break;
             case 1: resultado= eventos.get(row).getFecha(); break;
-            case 2: resultado= eventos.get(row).getDescripcion();break;
+            case 2: resultado= eventos.get(row).getUbicacion();break;
             case 3: resultado= eventos.get(row).getOrganizador();break;
         }
         return resultado;
@@ -73,10 +70,10 @@ public class ModeloTablaEventos extends AbstractTableModel{
     @Override
     public void setValueAt(Object v, int row, int col){
         switch (col){
-            case 0: eventos.get(row).setUbicacion((String) v); break;
+            case 0: eventos.get(row).setTipoEvento(TipoEvento.valueOf((String) v)); break;
             case 1: eventos.get(row).setFecha((String) v); break;
-            case 2: eventos.get(row).setDescripcion((String) v);break;
-            //case 3: eventos.get(row).setOrganizador((Acolito) v);break; todo arreglar esto
+            case 2: eventos.get(row).setUbicacion((String) v);break;
+            case 3: eventos.get(row).setOrganizador((Acolito) v);break; //todo arreglar esto
         }
     }
 

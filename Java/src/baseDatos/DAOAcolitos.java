@@ -4,6 +4,7 @@ import aplicacion.TipoAcolito;
 import aplicacion.Trato;
 
 import java.sql.*;
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -113,6 +114,37 @@ public class DAOAcolitos extends AbstractDAO {
             }
         }
         return resultado;
+    }
+
+    public List<String> getNombresJefesDeDivision() {
+        List<String> nombresJefes = new ArrayList<>();
+        Connection con;
+        PreparedStatement stmJefes = null;
+        ResultSet rsJefes;
+
+        con = this.getConexion();
+
+        try {
+            stmJefes = con.prepareStatement("SELECT a.nombrecompleto\n" +
+                    "FROM acólitos a\n" +
+                    "         INNER JOIN jefes_de_division jd ON a.alias = jd.alias;");
+            rsJefes = stmJefes.executeQuery();
+            while (rsJefes.next()) {
+                nombresJefes.add(rsJefes.getString("nombrecompleto"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                if (stmJefes != null) {
+                    stmJefes.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return nombresJefes;
     }
 
 

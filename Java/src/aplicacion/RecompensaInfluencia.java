@@ -10,7 +10,7 @@ public class RecompensaInfluencia extends Recompensa{
         this.cantidad = cantidad;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
@@ -25,5 +25,10 @@ public class RecompensaInfluencia extends Recompensa{
             acolito.addInfluencia(acolito.getDinero()+cantidad);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Influencia: "+cantidad;
     }
 }

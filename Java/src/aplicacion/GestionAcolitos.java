@@ -6,6 +6,9 @@
 package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+
+import java.util.SortedMap;
+
 /**
  *
  * @author basesdatos
@@ -28,6 +31,10 @@ public class GestionAcolitos {
 
     public Acolito devolverUsuario(String alias, String clave){
         return fbd.devolverUsuario(alias, clave);
+    }
+
+    public java.util.List<String> getNombresJefesDeDivision(){
+        return fbd.getNombresJefesDeDivision();
     }
 /*
      public java.util.List<Acolito> consultarAcolitos(){

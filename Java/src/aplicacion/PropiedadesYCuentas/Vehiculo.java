@@ -1,5 +1,7 @@
 package aplicacion.PropiedadesYCuentas;
 
+import aplicacion.Evento;
+
 public class Vehiculo extends Propiedad{
     private TipoVehiculo tipo;
     private Integer cantidad;
@@ -19,15 +21,15 @@ public class Vehiculo extends Propiedad{
      * @param tipo
      * @param valorActual
      */
-    public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad, Inmobiliario almacen){
-        super(idPropiedad, valorActual, almacen.getGestor());
+    public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad, Inmobiliario almacen, java.util.List<Evento> eventos){
+        super(idPropiedad, valorActual, almacen.getGestor(), eventos);
         this.tipo = tipo;
         this.almacen = almacen;
         this.cantidad = capacidad;
     }
 
     public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad){
-        super(idPropiedad, valorActual, null);
+        super(idPropiedad, valorActual, null, null);
         this.tipo = tipo;
         this.cantidad = capacidad;
     }

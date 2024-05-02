@@ -5,11 +5,13 @@ import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 import aplicacion.PropiedadesYCuentas.Vehiculo;
+import java.util.List;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.SortedMap;
 
 public class FachadaBaseDatos {
     private aplicacion.FachadaAplicacion fa;
@@ -77,6 +79,10 @@ public class FachadaBaseDatos {
         return daoAcolitos.devolverUsuario(alias, clave);
     }
 
+    public java.util.List<String> getNombresJefesDeDivision(){
+        return daoAcolitos.getNombresJefesDeDivision();
+    }
+
 
     ///Código VPrincipal
     public java.util.List<Evento> consultarEventos(Evento evento) {
@@ -140,4 +146,55 @@ public class FachadaBaseDatos {
         // TODO add your code here
         return daoPropiedades.consultaAlmacenes();
     }
+
+    public void insertarRecompensaDinero(RecompensaDinero recompensa) {
+        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
+        daoEventos.insertarRecompensaDinero(recompensa);
+    }
+
+    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
+        if (recompensa.getIdRecompensa() == -1 || recompensa.getIdObjetivo() == -1)
+            System.out.println("-1 por alun lado");
+        daoEventos.actualizarRecompensaDinero(recompensa);
+    }
+
+    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        daoEventos.actualizarObjetivo(objetivoSeleccionado);
+    }
+
+    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
+        return daoEventos.consultarObjetivosEvento(evento);
+    }
+
+    public void borrarRecompensaDinero(RecompensaDinero recompensa) {
+        daoEventos.borrarRecompensaDinero(recompensa);
+    }
+
+    public void insertarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        daoEventos.insertarRecompensaInfluencia(recompensa);
+    }
+
+    public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        daoEventos.actualizarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        daoEventos.borrarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarObjetivo(Objetivo objetivoSeleccionado) {
+        daoEventos.borrarObjetivo(objetivoSeleccionado);
+    }
+
+
+
+
+
+    public int insertarObjetivo(Objetivo objetivoSeleccionado) {
+        objetivoSeleccionado.setIdObjetivo(daoEventos.obtenerIdObjetivoMayor()+1);
+        daoEventos.insertarObjetivo(objetivoSeleccionado);
+        return objetivoSeleccionado.getIdObjetivo();
+    }
+
+
 }
