@@ -1,4 +1,5 @@
 package aplicacion;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
@@ -6,6 +7,12 @@ import aplicacion.PropiedadesYCuentas.Vehiculo;
 import gui.VPrincipal;
 
 import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author basesdatos
+ */
 
 public class FachadaAplicacion {
     private gui.FachadaGui fgui;
@@ -39,6 +46,44 @@ public class FachadaAplicacion {
     public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
+ /*
+public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
+  return cl.obtenerLibros(id, titulo,  isbn,  autor);
+}*/
+/*
+public java.util.List<Acolito> consultarAcolitos(){
+    return ga.consultarAcolitos();
+}
+
+
+    public java.util.List<Acolito> consultarAcolitos(String IDUsuario, String Nombre){
+        return ga.buscarUsuarios(IDUsuario, Nombre);
+    }
+
+    public void nuevoUsuario(Acolito usuario){
+    ga.nuevoUsuario(usuario);
+}
+
+
+    public void borrarAcolito(Acolito usuario){
+    ga.borrarAcolito(usuario);
+}
+
+
+    public Boolean comprobarAutentificacion(String idUsuario, String clave){
+        //return cu.comprobarAutentificacion(idUsuario, clave);
+        return true;
+    }
+
+
+    public void setCurrentUser(Acolito u) {
+        currentUser = u;
+    }
+*/
+    //Abrir ventanas
+//    public void ventanaPerfil(VPrincipal vp){
+//        fgui.ventanaPerfil(vp);
+//    }
 
 
     ///Código abrir ventanas
@@ -55,6 +100,7 @@ public class FachadaAplicacion {
     public void ventanaDetalles(Propiedad p, int behavior){
         fgui.ventanaDetalles(p, behavior);
     }
+
     public void ventanaContenido(Inmobiliario almacen){
         fgui.ventanaContenido(almacen);
     }
@@ -97,6 +143,42 @@ public class FachadaAplicacion {
     }
     public void borrarPropiedad(String idPropiedad){
         gp.borrarPropiedad(idPropiedad);
+    }
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return gp.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return gp.consultarVehiculosAlmacen(almacen);
+    }
+
+    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
+        return ge.consultarObjetivosEvento(evento);
+    }
+
+    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        ge.actualizarObjetivo(objetivoSeleccionado);
+    }
+
+    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
+        ge.actualizarRecompensaDinero(recompensa);
+    }
+
+    public void borrarRecompensaDinero(RecompensaDinero recompensa) {
+        ge.borrarRecompensaDinero(recompensa);
+    }
+
+    public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        ge.actualizarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        ge.borrarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarObjetivo(Objetivo objetivoSeleccionado) {
+        ge.borrarObjetivo(objetivoSeleccionado);
     }
 
             // Contenido Almacenes

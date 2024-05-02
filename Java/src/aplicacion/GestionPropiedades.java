@@ -5,6 +5,7 @@
 
 package aplicacion;
 
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 import aplicacion.PropiedadesYCuentas.Vehiculo;
@@ -12,6 +13,7 @@ import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -44,7 +46,15 @@ public class GestionPropiedades {
      public void borrarPropiedad(String propiedad){
          fbd.borrarPropiedad(propiedad);
      }
-     
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return fbd.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return fbd.consultarVehiculosAlmacen(almacen);
+    }
+
 //     public void nuevoUsuario(Acolito acolito){
 //         fbd.insertarAcolito(acolito);
 //     }
@@ -67,5 +77,5 @@ public class GestionPropiedades {
     public void actualizarPropiedad(Propiedad p){
         fbd.actualizarPropiedad(p);
     }
-  
+
 }

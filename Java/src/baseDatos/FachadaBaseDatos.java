@@ -1,6 +1,8 @@
 package baseDatos;
 
 import aplicacion.*;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.Objetivo;
 import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 import aplicacion.PropiedadesYCuentas.Vehiculo;
@@ -8,8 +10,13 @@ import aplicacion.PropiedadesYCuentas.Vehiculo;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
+/**
+ *
+ * @author basesdatos
+ */
 public class FachadaBaseDatos {
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
@@ -101,6 +108,53 @@ public class FachadaBaseDatos {
 
     public void borrarPropiedad(String idPropiedad){
         daoPropiedades.borrarPropiedad(idPropiedad);
+    }
+
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarVehiculosAlmacen(almacen);
+    }
+
+    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
+        return daoEventos.consultarObjetivosEvento(evento);
+    }
+
+    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        daoEventos.actualizarObjetivo(objetivoSeleccionado);
+    }
+
+    public void insertarRecompensaDinero(RecompensaDinero recompensa) {
+
+        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
+        daoEventos.insertarRecompensaDinero(recompensa);
+    }
+
+    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
+        daoEventos.actualizarRecompensaDinero(recompensa);
+    }
+
+    public void borrarRecompensaDinero(RecompensaDinero recompensa) {
+        daoEventos.borrarRecompensaDinero(recompensa);
+    }
+
+    public void insertarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
+        daoEventos.insertarRecompensaInfluencia(recompensa);
+    }
+
+    public void actualizarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        daoEventos.actualizarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarRecompensaInfluencia(RecompensaInfluencia recompensa) {
+        daoEventos.borrarRecompensaInfluencia(recompensa);
+    }
+
+    public void borrarObjetivo(Objetivo objetivoSeleccionado) {
+        daoEventos.borrarObjetivo(objetivoSeleccionado);
     }
 
     // Contenido Almacén

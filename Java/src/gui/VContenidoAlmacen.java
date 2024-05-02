@@ -4,6 +4,8 @@
 
 package gui;
 
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+
 import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
@@ -24,6 +26,17 @@ public class VContenidoAlmacen extends JDialog {
     public VContenidoAlmacen(aplicacion.FachadaAplicacion fa, Inmobiliario almacen) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
+
+        Vehicles.setModel(new ModeloListaStrings());
+        ModeloListaStrings modelo = (ModeloListaStrings) Vehicles.getModel();
+
+        modelo.setElementos(fa.consultarVehiculosAlmacen(almacen));
+
+        Armas.setModel(new ModeloListaStrings());
+        ModeloListaStrings modelo2 = (ModeloListaStrings) Armas.getModel();
+        modelo.setElementos(fa.consultarArmasAlmacen(almacen));
+
+
 
         //Vehículos - Vehículos
         this.almacen = almacen;
@@ -76,9 +89,11 @@ public class VContenidoAlmacen extends JDialog {
 
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
+        Vehicles = new JList();
         TextVehicle = new JLabel();
         TextWeapon = new JLabel();
         scrollPane2 = new JScrollPane();
+        Armas = new JList();
 
         //======== this ========
         Container contentPane = getContentPane();
