@@ -12,6 +12,8 @@
 package gui;
 
 import aplicacion.Evento;
+import aplicacion.TipoEvento;
+import javafx.scene.control.Tab;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -31,15 +33,20 @@ public class VPrincipal extends javax.swing.JFrame {
     public VPrincipal(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
         this.fa=fa;
         initComponents();
-        buscarRituales();
-        buscaEstadisticas();
+        //buscarTodosLosEventos();
     }
 
 
 
     ///BOTONES
     private void btnBuscarMouseClicked(MouseEvent e) {
-        //buscarEventos();
+        limpiarTabla();
+        if(buscaUbicacion.getText().isEmpty() && buscaFecha.getText().isEmpty()){
+            buscarTodosLosEventos();
+        }
+        else{
+            buscarEventos();
+        }
     }
     private void btnSalirMouseClicked(MouseEvent e) {
         System.exit(0);
@@ -66,32 +73,41 @@ public class VPrincipal extends javax.swing.JFrame {
 
 
 
-    //Funciones buscar para tablas
-    public void buscarRituales(){
-        ModeloTablaRituales m;
+    //Funciones para tablas
+    public void limpiarTabla(){
+        ModeloTablaEventos_5 m;
+        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
 
-        //m=(ModeloTablaRituales) TablaRituales.getModel();
-        //m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        //if (m.getRowCount() > 0) TablaRituales.setRowSelectionInterval(0, 0);
+        m.setFilas(new java.util.ArrayList<Evento>());
     }
-    public void buscaEstadisticas(){
-        //ModeloEstadisticas me= (ModeloEstadisticas)lstEstadisticas.getModel();
-        //fa.actualizarEstadisticas();
-    }
-    /*public void buscarEventos(){
-        ModeloTablaEventos m = new ModeloTablaEventos();
+    public void buscarEventos(){
+        ModeloTablaEventos_5 m;
+        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
+        Evento evento = new Evento(buscaUbicacion.getText(), buscaFecha.getText(), TipoEvento.stringToTipoEvento("Normal"), "", null);
 
-        m=(ModeloTablaEventos) tablaEventos.getModel();
-        m.setFilas(fa.consultarEventos(buscaUbicacion.getText(), buscaFecha.getText()));   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-        if (m.getRowCount() > 0) tablaEventos.setRowSelectionInterval(0, 0);
+        m.setFilas(fa.consultarEventos(evento));
     }
-    ///Auxiliar para buscar evento
-    public java.util.List<Evento> obtenerEventos(String uno, String dos){
-        return fa.consultarEventos(uno, dos);   // (buscaUbicacion.getText().isEmpty())?null:Integer.parseInt(buscaUbicacion.getText())
-    }*/
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+        TablaEventosVPrincipal = new JTable();
+        ModeloTablaEventos_5 mtablaP = new ModeloTablaEventos_5();
+        TablaEventosVPrincipal.setModel(mtablaP);
+    }
+
+    public void buscarTodosLosEventos(){
+        ModeloTablaEventos_5 m;
+        m=(ModeloTablaEventos_5) TablaEventosVPrincipal.getModel();
+
+        m.setFilas(fa.consultarEventosSinArgs());
+    }
 
 
     private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+        createUIComponents();
+
         menuBar1 = new JMenuBar();
         Desplegable = new JMenu();
         PerfilBotonDesplegable = new JButton();
@@ -101,7 +117,6 @@ public class VPrincipal extends javax.swing.JFrame {
         EventosBotonDesplegable = new JButton();
         RitualesBotonDesplegable = new JButton();
         scrollListaEventos = new JScrollPane();
-        tablaEventos = new JTable();
         presentacion = new JTextPane();
         buscaUbicacion = new JTextField();
         buscaFecha = new JTextField();
@@ -120,7 +135,7 @@ public class VPrincipal extends javax.swing.JFrame {
         setTitle("Bienvenido a la Comunidad Imyriano");
         setName("vPrincipal");
         setResizable(false);
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== menuBar1 ========
         {
@@ -199,20 +214,8 @@ public class VPrincipal extends javax.swing.JFrame {
         //======== scrollListaEventos ========
         {
 
-            //---- tablaEventos ----
-            tablaEventos.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                },
-                new String[] {
-                    null, null, null, null
-                }
-            ));
-            scrollListaEventos.setViewportView(tablaEventos);
+            //---- TablaEventosVPrincipal ----
+            scrollListaEventos.setViewportView(TablaEventosVPrincipal);
         }
 
         //---- presentacion ----
@@ -285,16 +288,16 @@ public class VPrincipal extends javax.swing.JFrame {
                             .addComponent(btnBuscar))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(scrollListaEventos, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-                                .addComponent(scrollPane2))))
+                            .addGroup(contentPaneLayout.createParallelGroup()
+                                .addComponent(scrollPane2)
+                                .addComponent(scrollListaEventos, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))))
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(18, 18, 18)
                             .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(16, Short.MAX_VALUE))
+                            .addContainerGap(9, Short.MAX_VALUE))
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                             .addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
                             .addGap(57, 57, 57))))
         );
@@ -315,10 +318,7 @@ public class VPrincipal extends javax.swing.JFrame {
                                     .addGroup(contentPaneLayout.createParallelGroup()
                                         .addComponent(buscaFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtFecha))))
-                            .addGap(18, 18, 18)
-                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                            .addGap(376, 376, 376))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -327,18 +327,26 @@ public class VPrincipal extends javax.swing.JFrame {
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(presentacion, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(contentPaneLayout.createSequentialGroup()
-                                    .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(96, 96, 96)
-                                    .addComponent(btnSalir)
+                                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addGap(78, 78, 78)
+                                            .addComponent(scrollListaEventos, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                            .addComponent(ScrollListaRituales, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+                                            .addGap(96, 96, 96)
+                                            .addComponent(btnSalir)))
                                     .addGap(12, 12, 12)))))
                     .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
-    }// </editor-fold>//GEN-END:initComponents
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Diego
+    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
     private JMenuBar menuBar1;
     private JMenu Desplegable;
     private JButton PerfilBotonDesplegable;
@@ -348,7 +356,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private JButton EventosBotonDesplegable;
     private JButton RitualesBotonDesplegable;
     private JScrollPane scrollListaEventos;
-    private JTable tablaEventos;
+    private JTable TablaEventosVPrincipal;
     private JTextPane presentacion;
     private JTextField buscaUbicacion;
     private JTextField buscaFecha;

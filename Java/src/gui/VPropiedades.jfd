@@ -9,8 +9,8 @@ new FormModel {
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {par t {seq t {space :::p, comp btnVolver:::p::p, space :p:148:p, comp ImagenPropiedad:::p:90:p, space :0:0:x}, seq l {space :p:21:p, par l {seq {par l {comp TextValor::l:p::p, comp TextId::l:p::p, comp TextEvento::l:p:61:p}, space :p:8:p, par l {seq {par l {seq l {comp Id:::p:160:p, space s:::p, comp TextTipo:::p::p}, seq l {comp Valor:::p:160:p, space s:::p, comp TextGestor:::p::p}}, space :p:31:p, par l {comp Gestor:::::x, comp Tipo:::::x}}, seq {comp Evento:::p:450:p, space :0:0:x}}}, seq t {comp BtnEraseProp:::p::p, space :::x, comp BtnMasInfo:::p::p}}, space :p:1:p}}, par l {par l {comp btnNewProp::t:p::p, seq t {comp TextTipoSearch:::p:44:p, space :::p, comp TipoSearch:::p:188:p, space :::p, comp buscar:::p::p}}, comp scrollPane1::l:p:319:p}, space ::38:x}}"
-				"$verticalGroup": "par l {seq {par l {seq l {space :::p, comp btnVolver:::p::p}, seq l {space :p:23:p, par l {par b {comp TipoSearch::b:p::p, comp buscar::b:p::p, comp TextTipoSearch::b:p::p}, comp ImagenPropiedad:::p:84:p}}}, space :p:36:p, par b {comp TextId::b:p::p, comp Id::b:p::p, comp TextTipo::b:p::p, comp Tipo::b:p::p}, space :p:6:p, par b {comp TextValor::b:p::p, comp Valor::b:p::p, comp TextGestor::b:p::p, comp Gestor::b:p::p}, space s:::p, par b {comp TextEvento::b:p::p, comp Evento::b:p::p}, space s:::p, par b {comp BtnMasInfo::b:p::p, comp BtnEraseProp::b:p::p}, space ::60:x}, seq l {space ::83:x, comp scrollPane1:::p:220:p, space s:::p, comp btnNewProp:::p::p, space :p:16:p}}"
+				"$horizontalGroup": "par l {seq t {par t {seq t {space :::p, comp btnVolver:::p::p, space :p:148:p, comp ImagenPropiedad:::p:90:p, space :0:0:x}, seq l {space :p:21:p, par l {seq {par l {comp TextValor::l:p::p, comp TextId::l:p::p, comp TextEvento::l:p:61:p}, space :p:8:p, par l {seq {par l {seq l {comp Id:::p:160:p, space s:::p, comp TextTipo:::p::p}, seq l {comp Valor:::p:160:p, space s:::p, comp TextGestor:::p::p}}, space :p:31:p, par l {comp Tipo:::::x, comp Gestor:::::x}}, comp Evento:::p:450:p}, space :p:4:p}, seq t {comp BtnEraseProp:::p::p, space :::x, comp BtnMasInfo:::p::p}}, space :p:1:p}}, par l {comp btnNewProp::t:p::p, seq t {comp TextTipoSearch:::p:44:p, space :::p, comp TipoSearch:::p:188:p, space :::p, comp buscar:::p::p}, comp scrollPane1::t:p:290:p}, space :p:34:p}}"
+				"$verticalGroup": "par l {seq {par l {seq l {space :::p, comp btnVolver:::p::p}, seq l {space :p:23:p, par l {par b {comp TipoSearch::b:p::p, comp buscar::b:p::p, comp TextTipoSearch::b:p::p}, comp ImagenPropiedad:::p:84:p}}}, space :p:37:p, par b {comp TextId::b:p::p, comp Id::b:p::p, comp TextTipo::b:p::p, comp Tipo::b:p::p}, space :p:7:p, par b {comp TextValor::b:p::p, comp Valor::b:p::p, comp TextGestor::b:p::p, comp Gestor::b:p::p}, space s:::p, par b {comp TextEvento::b:p::p, comp Evento::b:p::p}, space s:::p, par b {comp BtnMasInfo::b:p::p, comp BtnEraseProp::b:p::p}, space ::60:x}, seq l {space ::83:x, comp scrollPane1:::p:220:p, space s:::p, comp btnNewProp:::p::p, space :p:16:p}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -58,11 +58,13 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "seleccionarPropiedad", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "scrollPane1MouseClicked", true ) )
 					add( new FormComponent( "javax.swing.JTable" ) {
 						name: "tablaPropiedades"
 						auxiliary() {
 							"JavaCodeGenerator.customCreate": true
 						}
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaPropiedadesMouseClicked", true ) )
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -77,12 +79,6 @@ new FormModel {
 					"text": "Detalles"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarDetalles", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "Gestor"
-				} )
-				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "Tipo"
-				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "btnNewProp"
 					"text": "Nueva Propiedad"
@@ -92,6 +88,12 @@ new FormModel {
 					name: "BtnEraseProp"
 					"text": "Borrar"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "borrarPropiedad", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Tipo"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Gestor"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

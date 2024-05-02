@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -10,7 +10,7 @@ new FormModel {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq t {par t {seq t {space :::p, comp btnVolver:::p::p, space :p:148:p, comp ImagenPropiedad:::p:90:p, space :0:0:x}, seq l {space :p:21:p, par l {seq {par l {comp TextValor::l:p::p, comp TextId::l:p::p, comp TextEvento::l:p:61:p}, space :p:8:p, par l {seq {par l {seq l {comp Id:::p:160:p, space s:::p, comp TextTipo:::p::p}, seq l {comp Valor:::p:160:p, space s:::p, comp TextGestor:::p::p}}, space :p:31:p, par l {comp Tipo:::::x, comp Gestor:::::x}}, comp Evento:::p:450:p}, space :p:4:p}, seq t {comp BtnEraseProp:::p::p, space :::x, comp BtnMasInfo:::p::p}}, space :p:1:p}}, par l {comp btnNewProp::t:p::p, seq t {comp TextTipoSearch:::p:44:p, space :::p, comp TipoSearch:::p:188:p, space :::p, comp buscar:::p::p}, comp scrollPane1::t:p:290:p}, space :p:34:p}}"
-				"$verticalGroup": "par l {seq {par l {seq l {space :::p, comp btnVolver:::p::p}, seq l {space :p:23:p, par l {par b {comp TipoSearch::b:p::p, comp buscar::b:p::p, comp TextTipoSearch::b:p::p}, comp ImagenPropiedad:::p:84:p}}}, space :p:37:p, par b {comp TextId::b:p::p, comp Id::b:p::p, comp TextTipo::b:p::p, comp Tipo::b:p::p}, space :p:7:p, par b {comp TextValor::b:p::p, comp Valor::b:p::p, comp TextGestor::b:p::p, comp Gestor::b:p::p}, space s:::p, par b {comp TextEvento::b:p::p, comp Evento::b:p::p}, space s:::p, par b {comp BtnMasInfo::b:p::p, comp BtnEraseProp::b:p::p}, space ::42:x}, seq l {space ::83:x, comp scrollPane1:::p:220:p, space s:::p, comp btnNewProp:::p::p, space :p:16:p}}"
+				"$verticalGroup": "par l {seq {par l {seq l {space :::p, comp btnVolver:::p::p}, seq l {space :p:23:p, par l {par b {comp TipoSearch::b:p::p, comp buscar::b:p::p, comp TextTipoSearch::b:p::p}, comp ImagenPropiedad:::p:84:p}}}, space :p:37:p, par b {comp TextId::b:p::p, comp Id::b:p::p, comp TextTipo::b:p::p, comp Tipo::b:p::p}, space :p:7:p, par b {comp TextValor::b:p::p, comp Valor::b:p::p, comp TextGestor::b:p::p, comp Gestor::b:p::p}, space s:::p, par b {comp TextEvento::b:p::p, comp Evento::b:p::p}, space s:::p, par b {comp BtnMasInfo::b:p::p, comp BtnEraseProp::b:p::p}, space ::60:x}, seq l {space ::83:x, comp scrollPane1:::p:220:p, space s:::p, comp btnNewProp:::p::p, space :p:16:p}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -88,7 +88,6 @@ new FormModel {
 					name: "BtnEraseProp"
 					"text": "Borrar"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "borrarPropiedad", true ) )
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BtnErasePropMouseClicked", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "Tipo"
