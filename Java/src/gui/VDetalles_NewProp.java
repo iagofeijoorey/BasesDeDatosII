@@ -61,7 +61,7 @@ public class VDetalles_NewProp extends JDialog {
 
     // Constructor para mostrar detalles
     public VDetalles_NewProp(aplicacion.FachadaAplicacion fa, Propiedad propiedad) {
-        this.fa=fa;
+        this.fa = fa;
         this.propiedad = propiedad;
         inicializador = true;
         continuador = true;
@@ -99,7 +99,7 @@ public class VDetalles_NewProp extends JDialog {
         BoxString.setPopupVisible(false);
 
         // Inicializar datos
-        switch (propiedad.getTipoGeneral().toString()){
+        switch (propiedad.getTipoGeneral().toString()) {
             case "arma":
                 Arma arma = (Arma) propiedad;
                 BoxTipo.setSelectedItem(arma.getTipoGeneral().toString());
@@ -127,8 +127,8 @@ public class VDetalles_NewProp extends JDialog {
                     BoxString.addItem(tipo);
                 }
                 BoxString.setSelectedItem(inmobiliario.getTipoString());
-                if (BoxString.getSelectedItem().toString().equals("Almacen")){
-                    AmountCapacity.setText(inmobiliario.getCapacidad().toString());}
+                if (BoxString.getSelectedItem().toString().equals("Almacen")) {
+                    AmountCapacity.setText(inmobiliario.getCapacidad().toString());
                 }
                 break;
 
@@ -159,6 +159,7 @@ public class VDetalles_NewProp extends JDialog {
                 break;
         }
     }
+
 
     //// Gestión Visibilidad
     // Visibilidad dependiendo del tipo de propiedad

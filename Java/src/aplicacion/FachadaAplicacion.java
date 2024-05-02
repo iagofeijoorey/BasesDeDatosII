@@ -7,6 +7,7 @@ import aplicacion.PropiedadesYCuentas.Vehiculo;
 import gui.VPrincipal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -99,9 +100,7 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void ventanaDetalles(Propiedad p, int behavior){
         fgui.ventanaDetalles(p, behavior);
     }
-    public void ventanaContenido(Inmobiliario almacen){
-        fgui.ventanaContenido(almacen);
-}
+
     public void ventanaContenido(Inmobiliario almacen){
         fgui.ventanaContenido(almacen);
     }

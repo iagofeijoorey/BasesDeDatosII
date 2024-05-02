@@ -545,6 +545,55 @@ public class DAOEventos extends AbstractDAO {
         return resultado;
     }
 
+    public void borrarEvento(Evento evento) {
+        Connection con;
+        PreparedStatement stmEvento = null;
+
+        con = super.getConexion();
+        try {
+            stmEvento = con.prepareStatement("delete from eventos where ubicacion = ? and fecha = ?");
+            stmEvento.setString(1, evento.getUbicacion());
+            stmEvento.setString(2, evento.getFecha());
+            stmEvento.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEvento.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+
+    public void insertarEvento(Evento evento) {
+        Connection con;
+        PreparedStatement stmEvento = null;
+
+        con = super.getConexion();
+        try {
+            stmEvento = con.prepareStatement("insert into eventos(ubicacion, fecha, tipoevento, descripcion, autorizador, organizador) " +
+                    "values (?,?,?,?,?,?)");
+            stmEvento.setString(1, evento.getUbicacion());
+            stmEvento.setString(2, evento.getFecha());
+            stmEvento.setString(3, evento.getTipoEvento().toString());
+            stmEvento.setString(4, evento.getDescripcion());
+            stmEvento.setString(5, evento.getAutorizador().getAlias());
+            stmEvento.setString(6, evento.getOrganizador().getAlias());
+            stmEvento.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmEvento.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+
 
 
 /*
