@@ -32,6 +32,10 @@ public class FachadaAplicacion {
         gc = new GestionContactos(fgui, fbd);
         ga = new GestionAcolitos(fgui, fbd);
     }
+
+    public Acolito getCurrentUser(){
+        return currentUser;
+    }
  
     public void iniciaInterfazUsuario(){
      fgui.iniciaVista();
@@ -41,8 +45,6 @@ public class FachadaAplicacion {
      fgui.muestraExcepcion(e);
  }
 
-   
-
     ///Código de VAutentificacion
     //////////////////////////////////////////
     public void setUsuario(String alias, String clave){
@@ -50,6 +52,13 @@ public class FachadaAplicacion {
     }
     public boolean comprobarAutentificacion(String alias, String clave){
         return ga.comprobarAutentificacion(alias, clave);
+    }
+
+
+    ///Código de VEventos
+    /////////////////////////////////////////////
+    public java.util.List<String> getNombresJefesDeDivision(){
+        return ga.getNombresJefesDeDivision();
     }
 
 
@@ -139,5 +148,6 @@ public class FachadaAplicacion {
         // TODO add your code here
         return gp.consultaAlmacenes();
     }
+
 }
 

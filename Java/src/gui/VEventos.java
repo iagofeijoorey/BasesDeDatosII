@@ -71,8 +71,6 @@ public class VEventos extends JDialog {
 
         TextoFecha.setText(evento.getFecha());
         TextoUbicacion.setText(evento.getUbicacion());
-        TextoOrganizador.setText(evento.getOrganizador().getAlias());
-        TextoTipo.setText(evento.getTipoEvento().toString());
         TextoPanelDescripcion.setText(evento.getDescripcion());
 
     }
@@ -114,7 +112,32 @@ public class VEventos extends JDialog {
     }
 
     private void btnBorrarMouseClicked(MouseEvent e) {
-        borrarEvento();
+        // Crear un JDialog modal
+        JDialog dialog = new JDialog(this, "Confirmación", true);
+        dialog.setLayout(new BorderLayout());
+
+        // Agregar un mensaje al diálogo
+        JLabel label = new JLabel("¿Estás seguro de que quieres borrar este evento?");
+        dialog.add(label, BorderLayout.CENTER);
+
+        // Agregar un botón para confirmar la eliminación
+        JButton button = new JButton("Confirmar");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cerrar el diálogo cuando se haga clic en el botón
+                dialog.dispose();
+
+                // Continuar con la eliminación de la propiedad
+                borrarEvento();
+            }
+        });
+        dialog.add(button, BorderLayout.SOUTH);
+
+        // Mostrar el diálogo
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
     }
 
     public void borrarEvento(){
@@ -126,18 +149,18 @@ public class VEventos extends JDialog {
     }
 
     private void BtnGuardarEventoMouseClicked(MouseEvent e) {
-        ModeloTablaEventos_5 m;
+        /*ModeloTablaEventos_5 m;
         m=(ModeloTablaEventos_5) TablaEventos.getModel();
         Evento evento = new Evento(TextoUbicacion.getText(),TextoFecha.getText(), TipoEvento.stringToTipoEvento(TextoTipo.getText()), TextoPanelDescripcion.getText(), m.obtenerEjemplar(TablaEventos.getSelectedRow()).getOrganizador());
         fa.anhadirEvento(evento);
-        buscarTodosLosEventos();
+        buscarTodosLosEventos();*/
     }
 
 
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+        // Generated using JFormDesigner Evaluation license - Diego
         createUIComponents();
 
         panel1 = new JPanel();
@@ -146,7 +169,6 @@ public class VEventos extends JDialog {
         scrollPane1 = new JScrollPane();
         BtnGuardarEvento = new JButton();
         btnBorrar = new JButton();
-        TextoOrganizador = new JTextField();
         TextoFecha = new JTextField();
         BtnVerPropiedades = new JButton();
         BtnVerObjetivos = new JButton();
@@ -158,20 +180,23 @@ public class VEventos extends JDialog {
         label2 = new JLabel();
         label4 = new JLabel();
         label3 = new JLabel();
-        TextoTipo = new JTextField();
+        Titulo = new JLabel();
+        BoxTipo = new JComboBox();
+        BoxOrganizador = new JComboBox();
 
         //======== this ========
         setTitle("Eventos");
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
-            java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
-            throw new RuntimeException( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- btnVolver ----
             btnVolver.setText("volver");
@@ -184,7 +209,7 @@ public class VEventos extends JDialog {
             });
 
             //---- BtnVerAcolitos ----
-            BtnVerAcolitos.setText("Ver A\u00f3litos");
+            BtnVerAcolitos.setText("Ver Ac\u00f3litos");
             BtnVerAcolitos.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -266,83 +291,89 @@ public class VEventos extends JDialog {
             }
 
             //---- label1 ----
-            label1.setText("Ubicaci\u00f3n");
+            label1.setText("Ubicaci\u00f3n:");
 
             //---- label2 ----
-            label2.setText("Fecha");
+            label2.setText("Fecha:");
 
             //---- label4 ----
-            label4.setText("Organizador");
+            label4.setText("Organizador:");
 
             //---- label3 ----
-            label3.setText("Tipo");
+            label3.setText("Tipo:");
+
+            //---- Titulo ----
+            Titulo.setText("EVENTOS");
+            Titulo.setFont(new Font("Broadway", Font.PLAIN, 30));
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(21, 21, 21)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(btnVolver))
-                                    .addComponent(label4, GroupLayout.Alignment.TRAILING))
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextoOrganizador, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(label3)
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addComponent(label1)
+                                            .addComponent(label2))
                                         .addGap(18, 18, 18)
-                                        .addComponent(TextoTipo, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(panel1Layout.createParallelGroup()
-                                .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 483, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(TextoFecha)
+                                            .addComponent(TextoUbicacion, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                    .addComponent(btnVolver)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                                    .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
                                     .addGroup(panel1Layout.createParallelGroup()
-                                        .addComponent(label1)
-                                        .addComponent(label2))
-                                    .addGap(18, 18, 18)
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addComponent(label3)
+                                            .addGap(55, 55, 55))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                            .addComponent(label4)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(TextoFecha, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-                                        .addComponent(TextoUbicacion, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)))))
-                        .addGap(18, 18, 18)
+                                        .addComponent(BoxTipo, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                                        .addComponent(BoxOrganizador, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)))))
+                        .addGap(30, 30, 30)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(BtnVerPropiedades, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(BtnVerAcolitos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(BtnVerObjetivos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(BtnGuardarEvento, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnNuevoEvento, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15))
+                                    .addComponent(BtnGuardarEvento, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(BtnNuevoEvento, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(BtnVerPropiedades, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnVerAcolitos, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scrollPane2, GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnVerObjetivos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(39, 39, 39))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(btnVolver)
-                                        .addGap(24, 24, 24))
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(label3)
-                                            .addComponent(TextoTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
+                                .addContainerGap()
+                                .addComponent(btnVolver))
+                            .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TextoOrganizador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label3)
+                                    .addComponent(BoxTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BoxOrganizador, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(label4))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -351,25 +382,25 @@ public class VEventos extends JDialog {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(TextoFecha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label2))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                                    .addComponent(label2)))
+                            .addComponent(scrollPane2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(BtnNuevoEvento)
-                                    .addComponent(BtnVerObjetivos))
+                                .addComponent(BtnVerObjetivos, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(BtnGuardarEvento)
-                                    .addComponent(BtnVerPropiedades)
-                                    .addComponent(BtnVerAcolitos)))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37))
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(BtnVerAcolitos, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                                    .addComponent(BtnVerPropiedades, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel1Layout.createParallelGroup()
+                                    .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(BtnNuevoEvento, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtnGuardarEvento)))))
+                        .addGap(185, 185, 185))
             );
         }
 
@@ -377,13 +408,16 @@ public class VEventos extends JDialog {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(8, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -392,7 +426,7 @@ public class VEventos extends JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Iago Feijoo Rey
+    // Generated using JFormDesigner Evaluation license - Diego
     private JPanel panel1;
     private JButton btnVolver;
     private JButton BtnVerAcolitos;
@@ -400,7 +434,6 @@ public class VEventos extends JDialog {
     private JTable TablaEventos;
     private JButton BtnGuardarEvento;
     private JButton btnBorrar;
-    private JTextField TextoOrganizador;
     private JTextField TextoFecha;
     private JButton BtnVerPropiedades;
     private JButton BtnVerObjetivos;
@@ -412,7 +445,9 @@ public class VEventos extends JDialog {
     private JLabel label2;
     private JLabel label4;
     private JLabel label3;
-    private JTextField TextoTipo;
+    private JLabel Titulo;
+    private JComboBox BoxTipo;
+    private JComboBox BoxOrganizador;
     // End of variables declaration//GEN-END:variables
 
 

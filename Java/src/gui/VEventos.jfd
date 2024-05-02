@@ -1,17 +1,17 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.8" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp panel1::t:::x}"
-			"$verticalGroup": "par l {seq t {space :0:0:x, comp panel1:::p::p}}"
+			"$horizontalGroup": "par l {seq l {comp panel1:::::x, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::p:395:p, space ::8:x}}"
 		} ) {
 			name: "this"
 			"title": "Eventos"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :::p, par l {seq l {par l {seq {space :p:15:p, comp btnVolver:::p::p}, comp label4::t:p::p}, par t {seq {space :p::p, comp TextoOrganizador:::p:384:p}, seq l {space :p:33:p, comp label3:::p::p, space s:::p, comp TextoTipo:::p:288:p}}}, par l {comp btnBorrar:::p:120:p, comp scrollPane2:::p:483:p, seq t {par l {comp label1:::p::p, comp label2:::p::p}, space s:::p, par l:::p {comp TextoFecha::::384:x, comp TextoUbicación::::384:x}}}}, space s:::p, par l {seq {par l {seq {comp BtnVerPropiedades:::p:175:p, space s:::p, comp BtnVerAcolitos:::::x}, comp BtnVerObjetivos:::::x}, space s:::p, par l {comp BtnGuardarEvento:::p:118:p, comp BtnNuevoEvento:::p:118:p}}, comp scrollPane1:::p:468:p}, space :p:15:p}}"
-				"$verticalGroup": "par l {seq {space :::p, par l {seq {par l {seq {comp btnVolver:::p::p, space :p:24:p}, seq t {par b {comp label3::b:p::p, comp TextoTipo::b:p::p}, space :::p}}, par b {comp TextoOrganizador::b:p::p, comp label4::b:p::p}, space :::p, par b {comp TextoUbicación::b:p::p, comp label1::b:p::p}, space :::p, par b {comp TextoFecha::b:p::p, comp label2::b:p::p}, space :::p, comp scrollPane2::::162:x}, comp scrollPane1::::0:x}, par l {seq {space s:::p, par b {comp BtnNuevoEvento::b:p::p, comp BtnVerObjetivos::b:p::p}, space :::p, par b {comp BtnGuardarEvento::b:p::p, comp BtnVerPropiedades::b:p::p, comp BtnVerAcolitos::b:p::p}}, seq {space :p:27:p, comp btnBorrar:::p:47:p}}, space :p:37:p}}"
+				"$horizontalGroup": "par l {seq t {space :p:21:p, par l {seq l {space :p:2:p, par l {seq l {par l {comp label1:::p::p, comp label2:::p::p}, space s:::p, par l:::p {comp TextoFecha:::::x, comp TextoUbicación:::p:384:p}}, comp scrollPane1:::p:468:p}}, par t:l::p {seq l {comp btnVolver:::p::p, space ::241:x, comp Titulo:::p:150:p}, seq l {par l {seq {comp label3:::p::p, space :p:55:p}, seq t {comp label4:::p::p, space :::p}}, par l:::p {comp BoxTipo::::384:x, comp BoxOrganizador::::384:x}}}}, space :p:30:p, par l {seq {comp btnBorrar:::p:123:p, space s:::p, par l {comp BtnGuardarEvento::::121:x, comp BtnNuevoEvento::::121:x}}, seq l {comp BtnVerPropiedades::::123:x, space s:::p, comp BtnVerAcolitos:::p:121:p}, comp scrollPane2::t:::x, comp BtnVerObjetivos::l:::x}, space :p:39:p}}"
+				"$verticalGroup": "par l {seq {par l {seq {space :::p, comp btnVolver:::p::p}, comp Titulo::l:p:53:p}, space :::x, par l {seq {par b {comp label3::b:p::p, comp BoxTipo::b:p::p}, space :::p, par b {comp BoxOrganizador::b:p:30:p, comp label4::b:p::p}, space :::p, par b {comp TextoUbicación::b:p::p, comp label1::b:p::p}, space :::p, par b {comp TextoFecha::b:p::p, comp label2::b:p::p}}, comp scrollPane2::t:p:138:p}, space :p:18:p, par l {comp scrollPane1:::p:158:p, seq {comp BtnVerObjetivos:::p:30:p, space :::p, par l:::p {comp BtnVerAcolitos::::36:x, comp BtnVerPropiedades::::36:x}, space :::p, par l {comp btnBorrar:::p:66:p, seq {comp BtnNuevoEvento:::p:30:p, space :::p, comp BtnGuardarEvento:::p::p}}}}, space :p:185:p}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -22,7 +22,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "BtnVerAcolitos"
-					"text": "Ver Aólitos"
+					"text": "Ver Acólitos"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -48,9 +48,6 @@ new FormModel {
 					"text": "Borrar"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "borrarPropiedad", true ) )
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "btnBorrarMouseClicked", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "TextoOrganizador"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "TextoFecha"
@@ -85,27 +82,35 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "Ubicación"
+					"text": "Ubicación:"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
-					"text": "Fecha"
+					"text": "Fecha:"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label4"
-					"text": "Organizador"
+					"text": "Organizador:"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label3"
-					"text": "Tipo"
+					"text": "Tipo:"
 				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "TextoTipo"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "Titulo"
+					"text": "EVENTOS"
+					"font": new java.awt.Font( "Broadway", 0, 30 )
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxTipo"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "BoxOrganizador"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 20, 0 )
-			"size": new java.awt.Dimension( 980, 480 )
+			"size": new java.awt.Dimension( 830, 440 )
 		} )
 	}
 }

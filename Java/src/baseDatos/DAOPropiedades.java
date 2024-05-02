@@ -4,10 +4,8 @@
  */
 
 package baseDatos;
-import aplicacion.Acolito;
-import aplicacion.FachadaAplicacion;
+import aplicacion.*;
 import aplicacion.PropiedadesYCuentas.*;
-import aplicacion.TipoAcolito;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,20 +18,65 @@ import java.util.List;
 
 public class DAOPropiedades extends AbstractDAO {
 
+    aplicacion.FachadaAplicacion fa;
+
 
     public DAOPropiedades(Connection conexion, FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
+        this.fa = fa;
+    }
+
+
+    // Comprueba si existe un gestor
+    public boolean existeGestor(String alias) {
+        Connection con;
+        PreparedStatement stmGestor = null;
+        ResultSet rsGestor;
+
+        boolean resultado = false;
+        con = super.getConexion();
+
+        String consulta = "SELECT COUNT(*) FROM gestor_interno WHERE alias = ?";
+
+        try {
+            stmGestor = con.prepareStatement(consulta);
+            stmGestor.setString(1, alias);
+            rsGestor = stmGestor.executeQuery();
+            if(rsGestor.next()){
+                if (rsGestor.getInt("count") > 0)
+                    resultado = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                if(stmGestor != null) {
+                    stmGestor.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+
+        return resultado;
     }
 
     public void insertarPropiedad(Propiedad propiedad) {
         Connection con;
         PreparedStatement stmUsuario = null;
-        ResultSet rsIdUsuario;
+        ResultSet rsIdUsuario, rsGestor;
         String idUsuario = null;
 
         con = super.getConexion();
         try {
+
+            // Consulta para ver si el gestor existe
+            if (!existeGestor(propiedad.getGestor().getAlias())) {
+                fa.muestraExcepcion(propiedad.getGestor().getAlias() + " no es un gestor interno");
+            }
+
             stmUsuario = con.prepareStatement("insert into propiedades(idpropiedad, valor_actual, gestor) " +
                     "values (?,?,?)");
             stmUsuario.setInt(1, propiedad.getIdPropiedad());
@@ -103,15 +146,15 @@ public class DAOPropiedades extends AbstractDAO {
         con = super.getConexion();
 
         try {
+            System.out.println("Actualizando propiedad con id: " + propiedad.getIdPropiedad());
             // Actualizar datos en la tabla propiedades
-            stmPropiedad = con.prepareStatement("UPDATE propiedades SET valor_actual = ?, gestor = ? WHERE idpropiedad = ?");
+            stmPropiedad = con.prepareStatement("UPDATE propiedades SET valor_actual = ? WHERE idpropiedad = ?");
             stmPropiedad.setInt(1, propiedad.getValorActual());
-            stmPropiedad.setString(2, propiedad.getGestor().getAlias());
-            stmPropiedad.setInt(3, propiedad.getIdPropiedad());
+            stmPropiedad.setInt(2, propiedad.getIdPropiedad());
             stmPropiedad.executeUpdate();
 
             // Actualizar datos en la tabla correspondiente dependiendo del tipo de propiedad
-            if (propiedad instanceof Inmobiliario) {
+            if (propiedad.getClass().equals(Inmobiliario.class)) {
                 Inmobiliario inmobiliario = (Inmobiliario) propiedad;
                 stmPropiedad = con.prepareStatement("UPDATE inmobiliario SET ubicacion = ?, tipoinmobiliario = ? WHERE idpropiedad = ?");
                 stmPropiedad.setString(1, inmobiliario.getUbicacion());
@@ -122,22 +165,20 @@ public class DAOPropiedades extends AbstractDAO {
                     stmPropiedad.setInt(1, inmobiliario.getCapacidad());
                     stmPropiedad.setInt(2, inmobiliario.getIdPropiedad());
                 }
-            } else if (propiedad instanceof Vehiculo) {
+            } else if (propiedad.getClass().equals(Vehiculo.class)) {
                 Vehiculo vehiculo = (Vehiculo) propiedad;
-                stmPropiedad = con.prepareStatement("UPDATE vehiculos SET tipovehiculo = ?, capacidad = ?, almacén = ? WHERE idpropiedad = ?");
-                stmPropiedad.setString(1, vehiculo.getTipo().toString());
-                stmPropiedad.setInt(2, vehiculo.getCantidad());
-                stmPropiedad.setInt(3, vehiculo.getAlmacen().getIdPropiedad());
-                stmPropiedad.setInt(4, vehiculo.getIdPropiedad());
-            } else if (propiedad instanceof Arma) {
+                stmPropiedad = con.prepareStatement("UPDATE vehiculos SET capacidad = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setInt(1, vehiculo.getCantidad());
+                stmPropiedad.setInt(2, vehiculo.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(3, vehiculo.getIdPropiedad());
+            } else if (propiedad.getClass().equals(Arma.class)) {
                 Arma arma = (Arma) propiedad;
-                stmPropiedad = con.prepareStatement("UPDATE armas SET tipoarmamento = ?, cantidad = ?, numbalas = ?, almacén = ? WHERE idpropiedad = ?");
-                stmPropiedad.setString(1, arma.getTipoString().toString());
-                stmPropiedad.setInt(2, arma.getCantidad());
-                stmPropiedad.setInt(3, arma.getBalas());
-                stmPropiedad.setInt(4, arma.getAlmacen().getIdPropiedad());
-                stmPropiedad.setInt(5, arma.getIdPropiedad());
-            } else if (propiedad instanceof Commodity) {
+                stmPropiedad = con.prepareStatement("UPDATE armas SET cantidad = ?, numbalas = ?, almacén = ? WHERE idpropiedad = ?");
+                stmPropiedad.setInt(1, arma.getCantidad());
+                stmPropiedad.setInt(2, arma.getBalas());
+                stmPropiedad.setInt(3, arma.getAlmacen().getIdPropiedad());
+                stmPropiedad.setInt(4, arma.getIdPropiedad());
+            } else if (propiedad.getClass().equals(Commodity.class)) {
                 Commodity commodity = (Commodity) propiedad;
                 stmPropiedad = con.prepareStatement("UPDATE commodities SET nombre = ?, cantidad = ? WHERE idpropiedad = ?");
                 stmPropiedad.setString(1, commodity.getNombre());
@@ -165,13 +206,15 @@ public class DAOPropiedades extends AbstractDAO {
         Propiedad propiedadActual = null;
         Connection con;
         PreparedStatement stmPropiedades = null;
-        ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAlmacen;
+        ResultSet rsPropiedades, rsGestor, rsTipoConcreto, rsAlmacen, rsEventos, rsOrganizador;
 
-        Acolito gestorAux=null;
+        Acolito gestorAux=null, organizadorAux=null;
         Inmobiliario almacenAux=null;
         TipoInmobiliario tipoInmobiliarioAux=null;
         int cantidad, numbalas, capacidad;
         String TipoConcreto, nombre;
+        java.util.List<Evento> eventosAux = new ArrayList<>();
+        Evento eventoActualAux=null;
 
         con = this.getConexion();
 
@@ -210,10 +253,14 @@ public class DAOPropiedades extends AbstractDAO {
 
             rsPropiedades = stmPropiedades.executeQuery();
             while (rsPropiedades.next()) {
-                String consulta2 = "SELECT * FROM acólitos " +
+
+                eventosAux = new ArrayList<>();
+                /// Gestor
+                //////////////////////////
+                consulta = "SELECT * FROM acólitos " +
                         "WHERE alias = ? ";
 
-                stmPropiedades = con.prepareStatement(consulta2);
+                stmPropiedades = con.prepareStatement(consulta);
                 stmPropiedades.setString(1, rsPropiedades.getString("gestor"));
                 rsGestor = stmPropiedades.executeQuery();
                 if(!rsGestor.next()){
@@ -225,6 +272,54 @@ public class DAOPropiedades extends AbstractDAO {
                     gestorAux = new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
                             rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"),
                             rsGestor.getInt("influencia"), TipoAcolito.Gestor);
+                }
+                /// Gestor
+                //////////////////////////
+
+
+                // Eventos
+                //////////////////////////
+                consulta = "SELECT e.*\n" +
+                        "FROM eventos e\n" +
+                        "WHERE (e.ubicacion, e.fecha) IN (\n" +
+                        "    SELECT pu.ubicacion, pu.fecha\n" +
+                        "    FROM propiedadesusadas pu\n" +
+                        "    WHERE pu.idpropiedad = ?\n" +
+                        ");";
+
+                stmPropiedades = con.prepareStatement(consulta);
+                stmPropiedades.setInt(1, rsPropiedades.getInt("idpropiedad"));
+                rsEventos = stmPropiedades.executeQuery();
+
+                while (rsEventos.next()) {
+                    // Organizador
+                    consulta = "SELECT jd.nombredivision, a.*\n" +
+                            "FROM jefes_de_division jd\n" +
+                            "         LEFT JOIN acólitos a ON jd.alias = a.alias\n" +
+                            "WHERE jd.alias IN (\n" +
+                            "    SELECT e.organizador\n" +
+                            "    FROM eventos e\n" +
+                            "    WHERE e.ubicacion = ? AND e.fecha = ?\n" +
+                            ");";
+
+                    stmPropiedades = con.prepareStatement(consulta);
+                    stmPropiedades.setString(1, rsEventos.getString("ubicacion"));
+                    stmPropiedades.setDate(2,  java.sql.Date.valueOf(rsEventos.getString("fecha")));
+                    rsOrganizador = stmPropiedades.executeQuery();
+                    if(!rsOrganizador.next()) {
+                        System.out.println("No hay Organizador asociado al evento");
+                        organizadorAux = null;
+                    }
+                    else {
+                        // Crea al organizador relacionado
+                        organizadorAux = new JefeDivision(rsOrganizador.getString("alias"), rsOrganizador.getString("contraseña"),
+                                rsOrganizador.getString("nombrecompleto"), rsOrganizador.getString("direccion"),
+                                rsOrganizador.getInt("influencia"), TipoAcolito.JefeDivision, rsOrganizador.getString("nombredivision"));
+                    }
+                    eventoActualAux = new Evento(rsEventos.getString("ubicacion"), rsEventos.getString("fecha"),
+                            TipoEvento.stringToTipoEvento(rsEventos.getString("tipoevento")), rsEventos.getString("descripcion"),
+                            organizadorAux);
+                    eventosAux.add(eventoActualAux);
                 }
 
 
@@ -252,13 +347,13 @@ public class DAOPropiedades extends AbstractDAO {
                             // Crea el almacen
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), TipoConcreto,
                                     capacidad, TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         else {
                             // Crea el inmobiliario
                             propiedadActual = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsPropiedades.getString("ubicacion"), TipoInmobiliario.stringToTipoInmobiliario(rsPropiedades.getString("tipoinmobiliario")), rsPropiedades.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
 
                         }
                         break;
@@ -279,7 +374,7 @@ public class DAOPropiedades extends AbstractDAO {
                             // Almacen asociado al vehículo
                             almacenAux = new Inmobiliario(rsPropiedades.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
                                     rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         // Setea el tipo de inmobiliario del almacen
@@ -302,7 +397,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea al vehículo
                         propiedadActual = new Vehiculo(rsPropiedades.getInt("idpropiedad"),
                                 TipoVehiculo.stringToTipoVehiculo(rsPropiedades.getString("tipovehiculo")), rsPropiedades.getInt("valor_actual"),
-                                capacidad, almacenAux);
+                                capacidad, almacenAux, eventosAux);
                         break;
                     case "Arma":
 
@@ -324,7 +419,7 @@ public class DAOPropiedades extends AbstractDAO {
                             // Almacen asociado al vehículo
                             almacenAux = new Inmobiliario(rsAlmacen.getInt("idpropiedad"), rsAlmacen.getString("ubicacion"),
                                     rsAlmacen.getInt("capacidad"), tipoInmobiliarioAux, rsAlmacen.getInt("valor_actual"),
-                                    gestorAux);
+                                    gestorAux, eventosAux);
                         }
 
                         // Busca info especial del arma
@@ -346,7 +441,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea el arma
                         propiedadActual = new Arma(rsPropiedades.getInt("idpropiedad"), TipoArmamento.stringToTipoArmamento(rsPropiedades.getString("tipoarmamento")),
                                 cantidad, numbalas, rsPropiedades.getInt("valor_actual"),
-                                almacenAux);
+                                almacenAux, eventosAux);
                         break;
                     case "Commodity":
 
@@ -369,7 +464,7 @@ public class DAOPropiedades extends AbstractDAO {
                         // Crea el commodity
                         propiedadActual = new Commodity(rsPropiedades.getInt("idpropiedad"),nombre,
                                 cantidad, rsPropiedades.getInt("valor_actual"),
-                                gestorAux);
+                                gestorAux, eventosAux);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value of propiedades type: " + rsPropiedades.getString("tipo"));
@@ -387,9 +482,6 @@ public class DAOPropiedades extends AbstractDAO {
                 System.out.println("Imposible cerrar cursores");
             }
         }
-        /*return resultado.stream()
-                .filter(propiedad -> propiedad.getClass().toString().equals(tipo))
-                .collect(Collectors.toList());*/
         return resultado;
     }
 
@@ -527,14 +619,19 @@ public class DAOPropiedades extends AbstractDAO {
     }
 
     public java.util.List<Inmobiliario> consultaAlmacenes() {
+
         List<Inmobiliario> resultado = new ArrayList<>();
         Connection con;
         PreparedStatement stmAlmacenes = null;
-        ResultSet rsAlmacenes;
+        ResultSet rsAlmacenes, rsGestor, rsEventos, rsOrganizador;
+
+        Acolito gestorAux=null, organizadorAux=null;
+        Evento eventoActualAux=null;
+        java.util.List<Evento> eventosAux = new ArrayList<>();
 
         con = this.getConexion();
 
-        String consulta = "SELECT p.idpropiedad, p.valor_actual, i.ubicacion, a.capacidad, i.tipoinmobiliario, a.*\n" +
+        String consulta = "SELECT p.idpropiedad, p.valor_actual, p.gestor, i.ubicacion, i.tipoinmobiliario, a.capacidad\n" +
                 "FROM propiedades p\n" +
                 "         INNER JOIN inmobiliario i ON p.idpropiedad = i.idpropiedad\n" +
                 "         INNER JOIN almacenes a ON i.idpropiedad = a.idpropiedad";
@@ -543,13 +640,80 @@ public class DAOPropiedades extends AbstractDAO {
             stmAlmacenes = con.prepareStatement(consulta);
             rsAlmacenes = stmAlmacenes.executeQuery();
             while (rsAlmacenes.next()) {
+
+                eventosAux = new ArrayList<>();
+
+                /// Gestor
+                consulta = "SELECT * FROM acólitos " +
+                        "WHERE alias = ? ";
+
+                stmAlmacenes = con.prepareStatement(consulta);
+                stmAlmacenes.setString(1, rsAlmacenes.getString("gestor"));
+                rsGestor = stmAlmacenes.executeQuery();
+                if(!rsGestor.next()){
+                    System.out.println("No hay Gestor asociado a la propiedad");
+                    gestorAux = null;
+                }
+                else {
+                    // Crea al gestor relacionado
+                    gestorAux = new Acolito(rsGestor.getString("alias"), rsGestor.getString("contraseña"),
+                            rsGestor.getString("nombrecompleto"), rsGestor.getString("direccion"),
+                            rsGestor.getInt("influencia"), TipoAcolito.Gestor);
+                }
+
+
+                // Eventos
+                consulta = "SELECT e.*\n" +
+                        "FROM eventos e\n" +
+                        "WHERE (e.ubicacion, e.fecha) IN (\n" +
+                        "    SELECT pu.ubicacion, pu.fecha\n" +
+                        "    FROM propiedadesusadas pu\n" +
+                        "    WHERE pu.idpropiedad = ?\n" +
+                        ");";
+
+                stmAlmacenes = con.prepareStatement(consulta);
+                stmAlmacenes.setInt(1, rsAlmacenes.getInt("idpropiedad"));
+                rsEventos = stmAlmacenes.executeQuery();
+
+                while (rsEventos.next()) {
+                    // Organizador
+                    consulta = "SELECT jd.nombredivision, a.*\n" +
+                            "FROM jefes_de_division jd\n" +
+                            "         LEFT JOIN acólitos a ON jd.alias = a.alias\n" +
+                            "WHERE jd.alias IN (\n" +
+                            "    SELECT e.organizador\n" +
+                            "    FROM eventos e\n" +
+                            "    WHERE e.ubicacion = ? AND e.fecha = ?\n" +
+                            ");";
+
+                    stmAlmacenes = con.prepareStatement(consulta);
+                    stmAlmacenes.setString(1, rsEventos.getString("ubicacion"));
+                    stmAlmacenes.setDate(2,  java.sql.Date.valueOf(rsEventos.getString("fecha")));
+                    rsOrganizador = stmAlmacenes.executeQuery();
+                    if(!rsOrganizador.next()) {
+                        System.out.println("No hay Organizador asociado al evento");
+                        organizadorAux = null;
+                    }
+                    else {
+                        // Crea al organizador relacionado
+                        organizadorAux = new JefeDivision(rsOrganizador.getString("alias"), rsOrganizador.getString("contraseña"),
+                                rsOrganizador.getString("nombrecompleto"), rsOrganizador.getString("direccion"),
+                                rsOrganizador.getInt("influencia"), TipoAcolito.JefeDivision, rsOrganizador.getString("nombredivision"));
+                    }
+                    eventoActualAux = new Evento(rsEventos.getString("ubicacion"), rsEventos.getString("fecha"),
+                            TipoEvento.stringToTipoEvento(rsEventos.getString("tipoevento")), rsEventos.getString("descripcion"),
+                            organizadorAux);
+                    eventosAux.add(eventoActualAux);
+                }
+
                 Inmobiliario almacen = new Inmobiliario(
                         rsAlmacenes.getInt("idpropiedad"),
                         rsAlmacenes.getString("ubicacion"),
                         rsAlmacenes.getInt("capacidad"),
                         TipoInmobiliario.stringToTipoInmobiliario(rsAlmacenes.getString("tipoinmobiliario")),
                         rsAlmacenes.getInt("valor_actual"),
-                        null // Aquí puedes agregar el gestor si es necesario
+                        gestorAux,
+                        null
                 );
                 resultado.add(almacen);
             }
@@ -566,4 +730,5 @@ public class DAOPropiedades extends AbstractDAO {
 
         return resultado;
     }
+
 }

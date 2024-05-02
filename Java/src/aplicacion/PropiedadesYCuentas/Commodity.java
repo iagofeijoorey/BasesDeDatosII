@@ -1,13 +1,14 @@
 package aplicacion.PropiedadesYCuentas;
 
 import aplicacion.Acolito;
+import aplicacion.Evento;
 
 public class Commodity extends Propiedad{
     private String nombre;
     private Integer cantidad;
 
-    public Commodity(Integer idPropiedad, String nombre, Integer cantidad, Integer valorActual, Acolito gestor){
-        super(idPropiedad, valorActual, gestor);
+    public Commodity(Integer idPropiedad, String nombre, Integer cantidad, Integer valorActual, Acolito gestor, java.util.List<Evento> eventos){
+        super(idPropiedad, valorActual, gestor, eventos);
         this.nombre = nombre;
         this.cantidad = cantidad;
     }

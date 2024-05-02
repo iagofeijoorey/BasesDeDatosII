@@ -13,7 +13,6 @@ package gui;
 
 import aplicacion.Evento;
 import aplicacion.TipoEvento;
-import javafx.scene.control.Tab;
 
 import java.awt.*;
 import java.awt.event.*;

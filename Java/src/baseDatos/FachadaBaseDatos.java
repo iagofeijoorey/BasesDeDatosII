@@ -140,4 +140,5 @@ public class FachadaBaseDatos {
         // TODO add your code here
         return daoPropiedades.consultaAlmacenes();
     }
+
 }

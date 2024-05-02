@@ -4,6 +4,7 @@
 
 package gui;
 
+import aplicacion.Acolito;
 import aplicacion.PropiedadesYCuentas.*;
 
 import java.awt.*;
@@ -21,6 +22,8 @@ public class VDetalles_NewProp extends JDialog {
     boolean inicializador; // Para controlar el cambio de tipo
     boolean continuador; // Para controlar el cambio de tipo
     boolean continuador_almacen; // Para controlar el cambio de subtipo
+    boolean continuador_almacenes=false;
+    boolean guardar; // 0:Nuevo 1:Actualizar
 
     // Constructor para añadir propiedad
     public VDetalles_NewProp(aplicacion.FachadaAplicacion fa) {
@@ -28,6 +31,7 @@ public class VDetalles_NewProp extends JDialog {
         this.fa=fa;
         inicializador = true;
         continuador = true;
+        guardar = true;
         initComponents();
 
         // Botones
@@ -41,8 +45,12 @@ public class VDetalles_NewProp extends JDialog {
         BoxTipo.addItem("Inmobiliario");
         BoxTipo.addItem("Vehículo");
 
+        //Gestor
+        Gestor.setText(fa.getCurrentUser().getNombreCompleto());
+
         // Editable
         Id.setEditable(false);
+        Gestor.setEditable(false);
 
         BoxTipo.setSelectedItem("arma");
         iniciarVisibilidad();
@@ -55,7 +63,11 @@ public class VDetalles_NewProp extends JDialog {
         this.propiedad = propiedad;
         inicializador = true;
         continuador = true;
+        guardar = false;
         initComponents();
+
+        // Tabla eventos
+        buscarEventos();
 
         // Botones
         BtnActualizar.setText("Actualizar");
@@ -71,9 +83,8 @@ public class VDetalles_NewProp extends JDialog {
         Id.setText(propiedad.getIdPropiedad().toString());
         Valor.setText(propiedad.getValorActual().toString());
 
-        //BoxGestor
-        BoxGestor.addItem(propiedad.getGestor().getNombreCompleto());
-        BoxGestor.setSelectedItem(propiedad.getGestor().getNombreCompleto());
+        //Gestor
+        Gestor.setText(propiedad.getGestor().getAlias());
 
         BoxTipo.setSelectedItem(propiedad.getTipoGeneral().toString());
         iniciarVisibilidad();
@@ -82,6 +93,7 @@ public class VDetalles_NewProp extends JDialog {
         Id.setEditable(false);
         BoxTipo.setEnabled(false);
         BoxString.setEnabled(false);
+        Gestor.setEditable(false);
 
         // Inicializar datos
         switch (propiedad.getTipoGeneral().toString()){
@@ -184,6 +196,7 @@ public class VDetalles_NewProp extends JDialog {
                 for (Inmobiliario inmobiliario : almacenes) {
                     String tipoString = inmobiliario.getUbicacion();
                     BoxAlmacen.addItem(tipoString);
+                    BoxAlmacen.setSelectedItem(tipoString);
                 }
 
                 break;
@@ -207,6 +220,8 @@ public class VDetalles_NewProp extends JDialog {
                     TextAmountCapacity.setVisible(false);
                     BtnContent.setVisible(false);
                 }
+                if (guardar)
+                    Gestor.setText(fa.getCurrentUser().getNombreCompleto());
 
                 break;
 
@@ -221,6 +236,9 @@ public class VDetalles_NewProp extends JDialog {
 
                 // Datos
                 TextAmountCapacity.setText("Cantidad:");
+
+                if (guardar)
+                    Gestor.setText(fa.getCurrentUser().getNombreCompleto());
 
                 break;
 
@@ -244,6 +262,7 @@ public class VDetalles_NewProp extends JDialog {
                 for (Inmobiliario inmobiliario : almacenes) {
                     String tipoString = inmobiliario.getUbicacion();
                     BoxAlmacen.addItem(tipoString);
+                    BoxAlmacen.setSelectedItem(tipoString);
                 }
                 break;
 
@@ -265,7 +284,6 @@ public class VDetalles_NewProp extends JDialog {
         else {
             BoxString.removeAllItems();
             BoxAlmacen.removeAllItems();
-            BoxGestor.removeAllItems();
             iniciarVisibilidad();
         }
     }
@@ -337,7 +355,6 @@ public class VDetalles_NewProp extends JDialog {
         return false;
     }
 
-
     // Añadir propiedad / modificar OJO HAY QUE PONER LA LISTA DE ALMACENES Y METER EL USUARIO EN
     private void BtnActualizar_AnadirMouseClicked(MouseEvent e) {
         // TODO add your code here
@@ -345,52 +362,122 @@ public class VDetalles_NewProp extends JDialog {
             fa.muestraExcepcion("Rellene todos los campos");
             return;
         }
-        Integer idPropiedad = fa.obtenerIdPropiedadMayor() + 1;;
+
+        // Acolito actual
+        Acolito gestor = fa.getCurrentUser();
+
+        // Buscar almacen
+        java.util.List<Inmobiliario> almacenes;
+        Inmobiliario almacenSelected=null;
+
+        if (guardar){
+            System.out.println("Guardando...");
+        }
+        else {
+            System.out.println("Actualizando...");
+        }
+
+        propiedad.setValorActual(Integer.parseInt(Valor.getText()));
+
+        Integer idPropiedad = fa.obtenerIdPropiedadMayor() + 1;
+        System.out.println("TIPO:" + BoxTipo.getSelectedItem().toString());
         switch (BoxTipo.getSelectedItem().toString()){
             case "arma":
 
-                Arma arma = new Arma(idPropiedad, TipoArmamento.stringToTipoArmamento(BoxString.getSelectedItem().toString()),
-                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Balas.getText()), Integer.parseInt(Valor.getText()),
-                        null);
-                if (BtnActualizar.getText().equals("Actualizar")){
-                    fa.actualizarPropiedad(arma);
+                System.out.println("Guardando arma...");
+                // Busca el almacen seleccionado
+                almacenes = consultaAlmacenes();
+                for (Inmobiliario inmobiliario : almacenes) {
+                    if (inmobiliario.getUbicacion().equals(BoxAlmacen.getSelectedItem().toString())){
+                        almacenSelected = inmobiliario;
+                    }
+                }
+
+                if (guardar){
+                    Arma arma = new Arma(idPropiedad, TipoArmamento.stringToTipoArmamento(BoxString.getSelectedItem().toString()),
+                            Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Balas.getText()), Integer.parseInt(Valor.getText()),
+                            almacenSelected, null);
+                    fa.anadirPropiedad(arma);
                 }
                 else {
-                    fa.anadirPropiedad(arma);
+                    Arma arma = (Arma) propiedad;
+                    arma.setBalas(Integer.parseInt(Balas.getText()));
+                    arma.setCantidad(Integer.parseInt(AmountCapacity.getText()));
+                    java.util.List<Inmobiliario> inmobiliarios = consultaAlmacenes();
+                    for (Inmobiliario inmobiliario : inmobiliarios) {
+                        if (inmobiliario.getUbicacion().equals(BoxAlmacen.getSelectedItem().toString())){
+                            arma.setAlmacen(inmobiliario);
+                        }
+                    }
+                    fa.actualizarPropiedad(propiedad);
+                    System.out.println("ID:" + propiedad.getIdPropiedad());
                 }
                 break;
 
             case "Inmobiliario":
-                Inmobiliario inmobiliario = new Inmobiliario(idPropiedad, Ubicacion.getText(), Integer.parseInt(AmountCapacity.getText()),
-                        TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()), Integer.parseInt(Valor.getText()), null);
 
-                if (BtnActualizar.getText().equals("Actualizar")){
-                    fa.actualizarPropiedad(inmobiliario);
+                System.out.println("Guardando inmobiliario...");
+
+                if (guardar){
+                    Inmobiliario inmobiliario = new Inmobiliario(idPropiedad, Ubicacion.getText(), Integer.parseInt(AmountCapacity.getText()),
+                            TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()), Integer.parseInt(Valor.getText()), gestor, null);
+                    fa.anadirPropiedad(inmobiliario);
                 }
                 else {
-                    fa.anadirPropiedad(inmobiliario);
+
+                    Inmobiliario inmobiliario = (Inmobiliario) propiedad;
+                    inmobiliario.setUbicacion(Ubicacion.getText());
+                    inmobiliario.setTipo(TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()));
+                    if (BoxString.getSelectedItem().toString().equals("Almacen"))
+                         inmobiliario.setCapacidad(Integer.parseInt(AmountCapacity.getText()));
+                    System.out.println("ID:" + propiedad.getIdPropiedad());
+                    fa.actualizarPropiedad(propiedad);
                 }
                 break;
 
             case "Commodities":
-                Commodity commodity = new Commodity(idPropiedad, TipoCommodity.getText(),
-                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Valor.getText()), null);
-                if (BtnActualizar.getText().equals("Actualizar")){
-                    fa.actualizarPropiedad(commodity);
+                System.out.println("Guardando commodity...");
+                if (guardar){
+                    Commodity commodity = new Commodity(idPropiedad, TipoCommodity.getText(),
+                            Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Valor.getText()), gestor, null);
+                    fa.anadirPropiedad(commodity);
                 }
                 else {
-                    fa.anadirPropiedad(commodity);
+                    Commodity commodity = (Commodity) propiedad;
+                    commodity.setCantidad(Integer.parseInt(AmountCapacity.getText()));
+                    commodity.setNombre(TipoCommodity.getText());
+                    fa.actualizarPropiedad(propiedad);
+                    System.out.println("ID:" + propiedad.getIdPropiedad());
                 }
                 break;
 
             case "Vehículo":
-                Vehiculo vehiculo = new Vehiculo(idPropiedad, TipoVehiculo.stringToTipoVehiculo(BoxString.getSelectedItem().toString()),
-                        Integer.parseInt(Valor.getText()), Integer.parseInt(AmountCapacity.getText()), null);
-                if (BtnActualizar.getText().equals("Actualizar")){
-                    fa.actualizarPropiedad(vehiculo);
+                System.out.println("Guardando vehículo...");
+                // Busca el almacen seleccionado
+
+                almacenes = consultaAlmacenes();
+
+                for (Inmobiliario inmobiliarios : almacenes) {
+                    if (inmobiliarios.getUbicacion().equals(BoxAlmacen.getSelectedItem().toString())){
+                        almacenSelected = inmobiliarios;
+                    }
+                }
+                if (guardar){
+                    Vehiculo vehiculo = new Vehiculo(idPropiedad, TipoVehiculo.stringToTipoVehiculo(BoxString.getSelectedItem().toString()),
+                            Integer.parseInt(Valor.getText()), Integer.parseInt(AmountCapacity.getText()), almacenSelected, null);
+                    fa.anadirPropiedad(vehiculo);
                 }
                 else {
-                    fa.anadirPropiedad(vehiculo);
+                    Vehiculo vehiculo = (Vehiculo) propiedad;
+                    vehiculo.setCantidad(Integer.parseInt(AmountCapacity.getText()));
+                    java.util.List<Inmobiliario> inmobiliarios = consultaAlmacenes();
+                    for (Inmobiliario inmobiliario : inmobiliarios) {
+                        if (inmobiliario.getUbicacion().equals(BoxAlmacen.getSelectedItem().toString())){
+                            vehiculo.setAlmacen(inmobiliario);
+                        }
+                    }
+                    fa.actualizarPropiedad(propiedad);
+                    System.out.println("ID:" + propiedad.getIdPropiedad());
                 }
                 break;
 
@@ -406,10 +493,44 @@ public class VDetalles_NewProp extends JDialog {
         return fa.consultaAlmacenes();
     }
 
+    // Inicializa la tabla eventos
+    private void buscarEventos(){
+        // TODO add your code here
+        ModeloTablaEventos_5 mtablaE = (ModeloTablaEventos_5) tablaEventos.getModel();
+        mtablaE.setFilas(propiedad.getEventos());
+    }
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+        // Inicializa tabla propiedades
+        tablaEventos = new JTable();
+        ModeloTablaEventos_5 mtablaE = new ModeloTablaEventos_5();
+        tablaEventos.setModel(mtablaE);
+    }
+
+    private void BoxAlmacenItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        if (continuador_almacenes) {
+            // Solo para armas y vehículos
+            if (!BoxTipo.getSelectedItem().toString().equals("arma") && !BoxTipo.getSelectedItem().toString().equals("Vehículo")) {
+                return;
+            }
+            java.util.List<Inmobiliario> almacenes = consultaAlmacenes();
+            for (Inmobiliario inmobiliario : almacenes) {
+                if (BoxAlmacen.getSelectedItem()!=null && inmobiliario.getUbicacion().equals(BoxAlmacen.getSelectedItem().toString())) {
+                    Gestor.setText(inmobiliario.getGestor().getAlias());
+                }
+            }
+            continuador_almacenes = false;
+        }
+        continuador_almacenes = true;
+        
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Diego
+        createUIComponents();
+
         panel1 = new JPanel();
         TextAlmacen = new JLabel();
         AmountCapacity = new JTextField();
@@ -421,34 +542,32 @@ public class VDetalles_NewProp extends JDialog {
         TextTipo = new JLabel();
         BoxTipo = new JComboBox();
         TextGestor = new JLabel();
-        BoxGestor = new JComboBox();
         TextAmountCapacity = new JLabel();
         BoxAlmacen = new JComboBox();
         TextUbicacion = new JLabel();
         Ubicacion = new JTextField();
         scrollPane1 = new JScrollPane();
-        tablaEventos = new JTable();
         TextNameType = new JLabel();
         BoxString = new JComboBox();
         TipoCommodity = new JTextField();
         TextTipoCommodity = new JLabel();
         TextBalas = new JLabel();
         Balas = new JTextField();
+        Gestor = new JTextField();
         BtnContent = new JButton();
         BtnActualizar = new JButton();
 
         //======== this ========
         setTitle("Detalles");
-        Container contentPane = getContentPane();
+        var contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- TextAlmacen ----
             TextAlmacen.setText("Almacen:");
@@ -480,11 +599,17 @@ public class VDetalles_NewProp extends JDialog {
             //---- TextAmountCapacity ----
             TextAmountCapacity.setText("Integer:");
 
+            //---- BoxAlmacen ----
+            BoxAlmacen.addItemListener(e -> BoxAlmacenItemStateChanged(e));
+
             //---- TextUbicacion ----
             TextUbicacion.setText("Ubicaci\u00f3n:");
 
             //======== scrollPane1 ========
             {
+
+                //---- tablaEventos ----
+                tablaEventos.setFont(tablaEventos.getFont().deriveFont(tablaEventos.getFont().getStyle() & ~Font.ITALIC));
                 scrollPane1.setViewportView(tablaEventos);
             }
 
@@ -514,8 +639,11 @@ public class VDetalles_NewProp extends JDialog {
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(TextAmountCapacity)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(TextAmountCapacity)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panel1Layout.createSequentialGroup()
                                         .addComponent(TextAlmacen)
                                         .addGap(18, 18, 18)
@@ -542,29 +670,27 @@ public class VDetalles_NewProp extends JDialog {
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextId)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(TextTipo)
-                                        .addGap(45, 45, 45)
-                                        .addComponent(BoxTipo, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(TextValor)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(TextGestor)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(BoxGestor, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
                                         .addComponent(TextEvento, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                                    .addGroup(panel1Layout.createSequentialGroup()
                                         .addGroup(panel1Layout.createParallelGroup()
                                             .addGroup(panel1Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))))
+                                                .addComponent(TextId)
+                                                .addGap(56, 56, 56)
+                                                .addComponent(Id, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(20, 20, 20)
+                                                .addComponent(TextTipo))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                .addComponent(TextValor)
+                                                .addGap(35, 35, 35)
+                                                .addComponent(Valor, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(20, 20, 20)
+                                                .addComponent(TextGestor)))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(BoxTipo, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(Gestor, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
             );
             panel1Layout.setVerticalGroup(
@@ -579,15 +705,20 @@ public class VDetalles_NewProp extends JDialog {
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(TextId)
                                     .addComponent(TextTipo))))
-                        .addGap(10, 10, 10)
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(Valor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BoxGestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
+                                .addGap(10, 10, 10)
                                 .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(TextValor)
-                                    .addComponent(TextGestor))))
+                                    .addComponent(Valor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addGap(5, 5, 5)
+                                        .addGroup(panel1Layout.createParallelGroup()
+                                            .addComponent(TextValor)
+                                            .addComponent(TextGestor)))))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Gestor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
@@ -595,33 +726,30 @@ public class VDetalles_NewProp extends JDialog {
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(TextAmountCapacity, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(TextNameType, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(TextNameType, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BoxString, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createParallelGroup()
                                 .addComponent(AmountCapacity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(TextAmountCapacity, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)))
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(TextAlmacen, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                .addGap(9, 9, 9)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(TipoCommodity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextTipoCommodity, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TextUbicacion, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TextBalas)
-                                    .addComponent(Balas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TextTipoCommodity, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BoxAlmacen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(TextAlmacen, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextUbicacion, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextBalas)
+                            .addComponent(Balas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Ubicacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29))
             );
         }
@@ -663,7 +791,7 @@ public class VDetalles_NewProp extends JDialog {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(BtnActualizar)
@@ -688,7 +816,6 @@ public class VDetalles_NewProp extends JDialog {
     private JLabel TextTipo;
     private JComboBox BoxTipo;
     private JLabel TextGestor;
-    private JComboBox BoxGestor;
     private JLabel TextAmountCapacity;
     private JComboBox BoxAlmacen;
     private JLabel TextUbicacion;
@@ -701,6 +828,7 @@ public class VDetalles_NewProp extends JDialog {
     private JLabel TextTipoCommodity;
     private JLabel TextBalas;
     private JTextField Balas;
+    private JTextField Gestor;
     private JButton BtnContent;
     private JButton BtnActualizar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
