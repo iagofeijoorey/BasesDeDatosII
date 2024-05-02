@@ -8,6 +8,7 @@ new FormModel {
 			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
 		} ) {
 			name: "this"
+			"title": "Contenido Almacen"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq l {space :p:16:p, par l {seq l {comp scrollPane1:::p:159:p, space ::66:x, comp scrollPane2:::p:159:p, space :::p}, seq l {space :p:49:p, comp TextVehicle:::p::p, space ::176:x, comp TextWeapon:::p::p, space :p:66:p}}}}"
 				"$verticalGroup": "par l {seq t {space :::x, par b {comp TextVehicle::b:p::p, comp TextWeapon::b:p:23:p}, space :::p, par l {comp scrollPane1:::p::p, comp scrollPane2:::::x}, space :p:26:p}}"

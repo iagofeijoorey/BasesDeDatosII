@@ -10,7 +10,7 @@ public class RecompensaInfluencia extends Recompensa{
         this.cantidad = cantidad;
     }
 
-    public Integer getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 

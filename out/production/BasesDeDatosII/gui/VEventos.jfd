@@ -10,8 +10,8 @@ new FormModel {
 			name: "this"
 			"title": "Eventos"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :::p, par l {seq l {par l {seq {space :p:15:p, comp btnVolver:::p::p}, comp label4::t:p::p}, par t:::p {seq {space :p::p, comp TextoOrganizador:::p:384:p}, seq {space :p:33:p, comp label3:::p::p, space :::p, comp TextoTipo:::::x}}}, par l {comp btnBorrar:::p:120:p, comp scrollPane2:::p:483:p, seq t {par l {comp label1:::p::p, comp label2:::p::p}, space s:::p, par l:::p {comp TextoFecha::::384:x, comp TextoUbicación::::384:x}}}}, space s:::p, par l {seq {par l {seq {comp BtnVerPropiedades:::p:175:p, space s:::p, comp BtnVerAcolitos:::::x}, comp BtnVerObjetivos:::::x}, space s:::p, par l {comp BtnGuardarEvento:::p:118:p, comp BtnNuevoEvento:::p:118:p}}, comp scrollPane1:::p:468:p}, space :p:15:p}}"
-				"$verticalGroup": "par l {seq {space :::p, par l {seq {par l {seq {comp btnVolver:::p::p, space :p:24:p}, seq t {par b {comp TextoTipo::b:p::p, comp label3::b:p::p}, space :::p}}, par b {comp TextoOrganizador::b:p::p, comp label4::b:p::p}, space :::p, par b {comp TextoUbicación::b:p::p, comp label1::b:p::p}, space :::p, par b {comp TextoFecha::b:p::p, comp label2::b:p::p}, space :::p, comp scrollPane2::::162:x}, comp scrollPane1::::0:x}, par l {seq {space s:::p, par b {comp BtnNuevoEvento::b:p::p, comp BtnVerObjetivos::b:p::p}, space :::p, par b {comp BtnGuardarEvento::b:p::p, comp BtnVerPropiedades::b:p::p, comp BtnVerAcolitos::b:p::p}}, seq {space :p:27:p, comp btnBorrar:::p:47:p}}, space :p:37:p}}"
+				"$horizontalGroup": "par l {seq t {space :::p, par l {seq l {par l {seq {space :p:15:p, comp btnVolver:::p::p}, comp label4::t:p::p}, par t {seq {space :p::p, comp TextoOrganizador:::p:384:p}, seq l {space :p:33:p, comp label3:::p::p, space s:::p, comp TextoTipo:::p:288:p}}}, par l {comp btnBorrar:::p:120:p, comp scrollPane2:::p:483:p, seq t {par l {comp label1:::p::p, comp label2:::p::p}, space s:::p, par l:::p {comp TextoFecha::::384:x, comp TextoUbicación::::384:x}}}}, space s:::p, par l {seq {par l {seq {comp BtnVerPropiedades:::p:175:p, space s:::p, comp BtnVerAcolitos:::::x}, comp BtnVerObjetivos:::::x}, space s:::p, par l {comp BtnGuardarEvento:::p:118:p, comp BtnNuevoEvento:::p:118:p}}, comp scrollPane1:::p:468:p}, space :p:15:p}}"
+				"$verticalGroup": "par l {seq {space :::p, par l {seq {par l {seq {comp btnVolver:::p::p, space :p:24:p}, seq t {par b {comp label3::b:p::p, comp TextoTipo::b:p::p}, space :::p}}, par b {comp TextoOrganizador::b:p::p, comp label4::b:p::p}, space :::p, par b {comp TextoUbicación::b:p::p, comp label1::b:p::p}, space :::p, par b {comp TextoFecha::b:p::p, comp label2::b:p::p}, space :::p, comp scrollPane2::::162:x}, comp scrollPane1::::0:x}, par l {seq {space s:::p, par b {comp BtnNuevoEvento::b:p::p, comp BtnVerObjetivos::b:p::p}, space :::p, par b {comp BtnGuardarEvento::b:p::p, comp BtnVerPropiedades::b:p::p, comp BtnVerAcolitos::b:p::p}}, seq {space :p:27:p, comp btnBorrar:::p:47:p}}, space :p:37:p}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -31,34 +31,6 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "tablaEventosMouseClicked", true ) )
 					add( new FormComponent( "javax.swing.JTable" ) {
 						name: "TablaEventos"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-								add( null )
-							} )
-						}, new java.util.Vector {
-							add( "Tipo" )
-							add( "Fecha" )
-							add( "Ubicación" )
-							add( "Organizador" )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						}, new java.util.Vector {
-							add( null )
-							add( null )
-							add( null )
-							add( null )
-						} )
 						auxiliary() {
 							"JavaCodeGenerator.customCreate": true
 						}
@@ -123,12 +95,12 @@ new FormModel {
 					name: "label4"
 					"text": "Organizador"
 				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "TextoTipo"
-				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label3"
 					"text": "Tipo"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "TextoTipo"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

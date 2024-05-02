@@ -10,7 +10,7 @@ public class RecompensaDinero extends Recompensa{
         this.cantidad = cantidad;
     }
 
-    public Integer getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
