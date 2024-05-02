@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "17.0.8" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.2.0.382" Java: "17.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -92,6 +92,7 @@ new FormModel {
 					name: "BtnVerObjetivos"
 					"text": "Ver objetivos"
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "buscarTipoMouseClicked", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BtnVerObjetivos", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "BtnNuevoEvento"

@@ -96,44 +96,31 @@ public class FachadaBaseDatos {
         daoEventos.insertarEvento(evento);
     }
 
-    public void insertarEvento(Evento evento){
-        //daoEventos.insertarEvento(evento);
-    }
-
-
-    ///Código VPropiedades
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
-        return daoPropiedades.consultarPropiedades(tipo);
+         return daoPropiedades.consultarPropiedades(tipo);
     }
 
     public void borrarPropiedad(String idPropiedad){
         daoPropiedades.borrarPropiedad(idPropiedad);
     }
 
-    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
-        return daoPropiedades.consultarArmasAlmacen(almacen);
+    public void insertarRecompensaDinero(RecompensaDinero recompensa) {
+        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
+        daoEventos.insertarRecompensaDinero(recompensa);
     }
 
-    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
-        return daoPropiedades.consultarVehiculosAlmacen(almacen);
-    }
-
-    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
-        return daoEventos.consultarObjetivosEvento(evento);
+    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
+        if (recompensa.getIdRecompensa() == -1 || recompensa.getIdObjetivo() == -1)
+            System.out.println("-1 por alun lado");
+        daoEventos.actualizarRecompensaDinero(recompensa);
     }
 
     public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
         daoEventos.actualizarObjetivo(objetivoSeleccionado);
     }
 
-    public void insertarRecompensaDinero(RecompensaDinero recompensa) {
-
-        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
-        daoEventos.insertarRecompensaDinero(recompensa);
-    }
-
-    public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
-        daoEventos.actualizarRecompensaDinero(recompensa);
+    public List<Objetivo> consultarObjetivosEvento(Evento evento) {
+        return daoEventos.consultarObjetivosEvento(evento);
     }
 
     public void borrarRecompensaDinero(RecompensaDinero recompensa) {
@@ -141,7 +128,6 @@ public class FachadaBaseDatos {
     }
 
     public void insertarRecompensaInfluencia(RecompensaInfluencia recompensa) {
-        recompensa.setIdRecompensa(daoEventos.obtenerIdRecompensaMayor()+1);
         daoEventos.insertarRecompensaInfluencia(recompensa);
     }
 
@@ -157,22 +143,33 @@ public class FachadaBaseDatos {
         daoEventos.borrarObjetivo(objetivoSeleccionado);
     }
 
-    // Contenido Almacén
-    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+    public List<String> consultarArmasAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarArmasAlmacen(almacen);
+    }
+
+    public List<String> consultarVehiculosAlmacen(Inmobiliario almacen) {
+        return daoPropiedades.consultarVehiculosAlmacen(almacen);
+    }
+
+    public List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
         return daoPropiedades.consultarVehiculos(idAlmacen);
     }
 
-    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+    public List<Arma> consultarArmas(Integer idAlmacen) {
         return daoPropiedades.consultarArmas(idAlmacen);
     }
 
-    //Anadir propiedad
-    public void anadirPropiedad(Propiedad p){
-        daoPropiedades.insertarPropiedad(p);
+    public void anadirPropiedad(Propiedad p) {
+        daoPropiedades.anadirPropiedad(p);
     }
 
-    //Actualizar propiedad
-    public void actualizarPropiedad(Propiedad p){
+    public void actualizarPropiedad(Propiedad p) {
         daoPropiedades.actualizarPropiedad(p);
+    }
+
+    public int insertarObjetivo(Objetivo objetivoSeleccionado) {
+        objetivoSeleccionado.setIdObjetivo(daoEventos.obtenerIdObjetivoMayor()+1);
+        daoEventos.insertarObjetivo(objetivoSeleccionado);
+        return objetivoSeleccionado.getIdObjetivo();
     }
 }

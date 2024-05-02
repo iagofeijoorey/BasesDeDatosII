@@ -21,21 +21,15 @@ import javax.swing.GroupLayout;
 public class VObjetivos extends JDialog {
     private Evento evento;
     private FachadaAplicacion fa;
-    private ArrayList<Recompensa> recompensas;
+    private ArrayList<Recompensa> recompensas = new ArrayList<>();
+    private Integer cont = 1;
     public VObjetivos(aplicacion.FachadaAplicacion fa, Window owner, Evento evento) {
         super(owner);
-        initComponents();
         this.fa = fa;
         this.evento = evento;
-        tablaObjetivos.setModel(new ModeloTablaObjetivos());
-        ModeloTablaObjetivos m = (ModeloTablaObjetivos) tablaObjetivos.getModel();
 
-        m.setFilas(fa.consultarObjetivosEvento(evento));
-
-        for (int i = 0; i < m.getRowCount(); i++) {
-            comboBoxRecompensas.addItem(((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensa().get(i).toString());
-        }
-
+        initComponents();
+        ((ModeloTablaObjetivos)tablaObjetivos.getModel()).setFilas(fa.consultarObjetivosEvento(evento));
     }
 
     public ArrayList<Recompensa> getRecompensas() {
@@ -65,7 +59,7 @@ public class VObjetivos extends JDialog {
 
     private void comboBoxPrioridadItemStateChanged(ItemEvent e) {
         // TODO add your code here
-
+        if (tablaObjetivos.getSelectedRow() == -1) return;
         Objetivo objetivoSeleccionado = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
         objetivoSeleccionado.setPrioridad(Integer.parseInt(comboBoxPrioridad.getSelectedItem().toString()));
         fa.actualizarObjetivo(objetivoSeleccionado);
@@ -106,43 +100,196 @@ public class VObjetivos extends JDialog {
             m.setFilas(fa.consultarObjetivosEvento(evento));
         }
 
-        private void botonVaciarONuevo(ActionEvent e) {
+        private void botonVaciarONuevo(ActionEvent e) { //Vaciar y nuevo objetivo son un mismo botón cuya caption cambia
             // TODO add your code here
             if (button5.getText().equals("Nuevo objetivo")){
                 Objetivo objetivo = new Objetivo(-1, evento.getUbicacion(), evento.getFecha(),
                         textDescripcionObjetivo.getText(), Integer.parseInt(comboBoxPrioridad.getSelectedItem().toString()),  recompensas);
-                fa.actualizarObjetivo(objetivo);
+                int id = fa.actualizarObjetivo(objetivo);
                 ModeloTablaObjetivos m = (ModeloTablaObjetivos) tablaObjetivos.getModel();
+                m.setFilas(fa.consultarObjetivosEvento(evento));
+
+                for (Recompensa r: recompensas){
+                    r.setIdObjetivo(id);
+                    if (r instanceof RecompensaDinero){
+                        fa.actualizarRecompensaDinero((RecompensaDinero) r);
+                    } else if (r instanceof RecompensaInfluencia){
+                        fa.actualizarRecompensaInfluencia((RecompensaInfluencia) r);
+                    }
+                }
+
             } else {
-                textEvento.setText("");
+                ModeloTablaObjetivos m = (ModeloTablaObjetivos) tablaObjetivos.getModel();
+                m.setFilas(fa.consultarObjetivosEvento(evento));
+                //textEvento.setText("");
                 textJefe.setText("");
                 textDescripcionObjetivo.setText("");
-                comboBoxRecompensas.setSelectedIndex(0);
+                //comboBoxRecompensas.setSelectedIndex(0);
                 comboBoxPrioridad.setSelectedIndex(0);
                 Integer a = tablaObjetivos.getSelectedRow();
                 a = -1;
+                button5.setText("Nuevo objetivo");
+                //tablaObjetivos.setRowSelectionInterval(-1,-1);
+                recompensas.clear();
+
+                actualizarRecompensasBox();
             }
 
         }
 
-        private void comboBoxNuevaItemStateChanged(ItemEvent e) {
-            String selec = comboBoxRecompensas.getSelectedItem().toString();
-            if (selec.equals("Nueva recompensa dinero")){
+
+
+    public void setCont(Integer cont) {
+        this.cont = cont;
+    }
+
+    private void comboBoxNuevaItemStateChanged(ItemEvent e) {
+        if (cont!=1) return;
+        cont++;
+            Objetivo objetivo;
+            if (tablaObjetivos.getSelectedRow() == -1) {
+                objetivo = new Objetivo(-1, evento.getUbicacion(), evento.getFecha(),
+                        textDescripcionObjetivo.getText(), Integer.parseInt(comboBoxPrioridad.getSelectedItem().toString()), recompensas);
+            } else {
+                objetivo = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+            }
+
+            if (comboBoxNueva.getSelectedIndex() == 0) {
+                comboBoxNueva.setSelectedIndex(-1);
+            } else if (comboBoxNueva.getSelectedIndex() == 1) {
                 VRecompensaDinero vRecompensaDinero = new VRecompensaDinero(this, fa,
-                        new RecompensaDinero(-1, ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getIdObjetivo(),
-                                ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getFecha(),
-                                ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getUbicacion(), 0),
-                        ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+                        objetivo);
                 vRecompensaDinero.setVisible(true);
-            } else if (selec.equals("Nueva recompensa influencia")){
+            } else if (comboBoxNueva.getSelectedIndex() == 2) {
                 VRecompensaInfluencia vRecompensaInfluencia = new VRecompensaInfluencia(this, fa,
-                        new RecompensaInfluencia(-1, ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getIdObjetivo(),
-                                ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getFecha(),
-                                ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getUbicacion(), 0),
-                        ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+                        objetivo);
                 vRecompensaInfluencia.setVisible(true);
+            } else if (comboBoxNueva.getSelectedIndex() == 3) {
+//                    VRecompensaContacto vRecompensaContacto = new VRecompensaContacto(this, fa, null,
+//                            ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+//                    vRecompensaContacto.setVisible(true);
+            }
         }
 
+            private void createUIComponents() {
+                // TODO: add custom component creation code here
+                tablaObjetivos = new JTable();
+                ModeloTablaObjetivos m = new ModeloTablaObjetivos();
+                tablaObjetivos.setModel(m);
+
+
+            }
+
+            private void tablaObjetivosRow(PropertyChangeEvent e) {
+                // TODO add your code here
+                comboBoxRecompensas.removeAllItems();
+                if (((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas()!=null)
+                    recompensas = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas();
+                else recompensas = new ArrayList<>();
+                for (Recompensa r: recompensas){
+                    comboBoxRecompensas.addItem(r);
+                }
+                Objetivo objetivo = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+                textDescripcionObjetivo.setText(objetivo.getDescripcion());
+                comboBoxPrioridad.setSelectedItem(objetivo.getPrioridad());
+                textEvento.setText(evento.getDescripcion());
+                textJefe.setText(evento.getOrganizador().getAlias());
+
+                setCont(1);
+            }
+
+            private void tablaObjetivosPropertyChangeSeleRow(PropertyChangeEvent e) {
+                // TODO add your code here
+                comboBoxRecompensas.removeAllItems();
+                if (((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas()!=null)
+                    recompensas = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas();
+                else recompensas = new ArrayList<>();
+                for (Recompensa r: recompensas){
+                    comboBoxRecompensas.addItem(r);
+                }
+                Objetivo objetivo = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+                textDescripcionObjetivo.setText(objetivo.getDescripcion());
+                comboBoxPrioridad.setSelectedItem(objetivo.getPrioridad());
+                textEvento.setText(evento.getDescripcion());
+                textJefe.setText(evento.getOrganizador().getAlias());
+
+                setCont(1);
+            }
+
+            //private JComboBox<String> comboBoxNueva;
+    public void actualizarRecompensasBox() {
+                comboBoxRecompensas.removeAllItems();
+                for (Recompensa r: recompensas){
+                    comboBoxRecompensas.addItem(r);
+                }
+
+                comboBoxNueva.setSelectedIndex(0);
+    }
+            private void tablaObjetivosMouseClicked(MouseEvent e) {
+                System.out.println("Bellakosososos");
+                comboBoxRecompensas.removeAllItems();
+                if (((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas()!=null){
+                    recompensas = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas();
+                    System.out.println("Nada vacío");
+                }
+                else recompensas = new ArrayList<>();
+
+                for (Recompensa r: recompensas){
+                    System.out.println(r);
+                    comboBoxRecompensas.addItem(r);
+                }
+                comboBoxPrioridad.setSelectedItem(((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getPrioridad());
+                comboBoxPrioridad.setSelectedIndex(((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getPrioridad());
+                Objetivo objetivo = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+                textDescripcionObjetivo.setText(objetivo.getDescripcion());
+                comboBoxPrioridad.setSelectedItem(objetivo.getPrioridad());
+                textEvento.setText(evento.getDescripcion());
+                textJefe.setText(evento.getOrganizador().getAlias());
+
+
+                setCont(1);
+
+                recompensas = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()).getRecompensas();
+                actualizarRecompensasBox();
+            }
+
+            private void comboBoxNuevaPropertyChange(PropertyChangeEvent e) { //Reseteamos a arriba el combo box y abrimos la ventana de recompensa
+                // TODO add your code here
+                Objetivo objetivo;
+                System.out.println("Bellakeria");
+                if (tablaObjetivos.getSelectedRow() == -1) {
+                    objetivo = new Objetivo(-1, evento.getUbicacion(), evento.getFecha(),
+                            textDescripcionObjetivo.getText(), Integer.parseInt(comboBoxPrioridad.getSelectedItem().toString()), recompensas);
+                } else {
+                    objetivo = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+                }
+
+                    if (comboBoxNueva.getSelectedIndex() == 0) {
+                        comboBoxNueva.setSelectedIndex(-1);
+                    } else if (comboBoxNueva.getSelectedIndex() == 1) {
+                        VRecompensaDinero vRecompensaDinero = new VRecompensaDinero(this, fa,
+                                ((ModeloTablaObjetivos) tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+                        vRecompensaDinero.setVisible(true);
+                    } else if (comboBoxNueva.getSelectedIndex() == 2) {
+                        VRecompensaInfluencia vRecompensaInfluencia = new VRecompensaInfluencia(this, fa,
+                                ((ModeloTablaObjetivos) tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+                        vRecompensaInfluencia.setVisible(true);
+                    } else if (comboBoxNueva.getSelectedIndex() == 3) {
+//                    VRecompensaContacto vRecompensaContacto = new VRecompensaContacto(this, fa, null,
+//                            ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow()));
+//                    vRecompensaContacto.setVisible(true);
+                    }
+
+
+            }
+
+            private void textDescripcionObjetivoFocusLost(FocusEvent e) {
+                // TODO add your code here
+                if (tablaObjetivos.getSelectedRow() == -1)
+                    return;
+                Objetivo objetivoSeleccionado = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+                objetivoSeleccionado.setDescripcion(textDescripcionObjetivo.getText());
+                fa.actualizarObjetivo(objetivoSeleccionado);
             }
 
 
@@ -153,11 +300,15 @@ public class VObjetivos extends JDialog {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Mateo Bodenlle Villarino
+        createUIComponents();
+
         Titulo = new JLabel();
         button1 = new JButton();
         textEvento = new JTextField();
+        textEvento.setText(evento.getDescripcion());
         textE = new JLabel();
         textJefe = new JTextField();
+                textEvento.setText(evento.getOrganizador().getAlias());
         label2 = new JLabel();
         label3 = new JLabel();
         scrollPane1 = new JScrollPane();
@@ -168,7 +319,6 @@ public class VObjetivos extends JDialog {
         label5 = new JLabel();
         comboBoxPrioridad = new JComboBox<>();
         scrollPane2 = new JScrollPane();
-        tablaObjetivos = new JTable();
         button4 = new JButton();
         button5 = new JButton();
         button6 = new JButton();
@@ -186,8 +336,15 @@ public class VObjetivos extends JDialog {
         button1.setText("Volver");
         button1.addActionListener(e -> botonVolver(e));
 
+        //---- textEvento ----
+        textEvento.setFont(textEvento.getFont().deriveFont(textEvento.getFont().getSize() + 2f));
+        textEvento.setEditable(false);
+
         //---- textE ----
         textE.setText("Evento");
+
+        //---- textJefe ----
+        textJefe.setEditable(false);
 
         //---- label2 ----
         label2.setText("Jefe a cargo");
@@ -201,6 +358,12 @@ public class VObjetivos extends JDialog {
 
             //---- textDescripcionObjetivo ----
             textDescripcionObjetivo.setText(" Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum ");
+            textDescripcionObjetivo.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusLost(FocusEvent e) {
+                    textDescripcionObjetivoFocusLost(e);
+                }
+            });
             scrollPane1.setViewportView(textDescripcionObjetivo);
         }
 
@@ -229,7 +392,17 @@ public class VObjetivos extends JDialog {
         {
 
             //---- tablaObjetivos ----
-            tablaObjetivos.addPropertyChangeListener("selectedRow", e -> cambioSeleccionTablaObjetivos(e));
+            tablaObjetivos.addPropertyChangeListener("selectedRow", e -> {
+			cambioSeleccionTablaObjetivos(e);
+			tablaObjetivosRow(e);
+			tablaObjetivosPropertyChangeSeleRow(e);
+		});
+            tablaObjetivos.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tablaObjetivosMouseClicked(e);
+                }
+            });
             scrollPane2.setViewportView(tablaObjetivos);
         }
 
@@ -252,7 +425,11 @@ public class VObjetivos extends JDialog {
             "Nueva recompensa infuencia",
             "Not contacto"
         }));
-        comboBoxNueva.addItemListener(e -> comboBoxNuevaItemStateChanged(e));
+        comboBoxNueva.addItemListener(e -> {
+			comboBoxNuevaItemStateChanged(e);
+			comboBoxNuevaItemStateChanged(e);
+		});
+        comboBoxNueva.addPropertyChangeListener("selectedIndex", e -> comboBoxNuevaPropertyChange(e));
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);

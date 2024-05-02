@@ -20,6 +20,14 @@ public class Objetivo {
         this.descripcion = descripcion;
         this.prioridad = prioridad;
         this.recompensas = recompensa;
+
+        if (recompensa != null)
+            for (Recompensa r : recompensa) {
+                r.setIdObjetivo(this.idObjetivo);
+            }
+        else
+            this.recompensas = new ArrayList<>();
+
     }
 
 
@@ -72,4 +80,11 @@ public class Objetivo {
     }
 
 
+    public ArrayList<Recompensa> getRecompensas() {
+        return recompensas;
+    }
+
+    public void setIdObjetivo(int i) {
+        this.idObjetivo = i;
+    }
 }

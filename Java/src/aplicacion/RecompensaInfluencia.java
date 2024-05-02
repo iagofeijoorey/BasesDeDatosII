@@ -26,4 +26,9 @@ public class RecompensaInfluencia extends Recompensa{
         }
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Influencia: "+cantidad;
+    }
 }

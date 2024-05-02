@@ -6,6 +6,7 @@ import aplicacion.PropiedadesYCuentas.Propiedad;
 import aplicacion.PropiedadesYCuentas.Vehiculo;
 import gui.VPrincipal;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,8 +158,8 @@ public java.util.List<Acolito> consultarAcolitos(){
         return ge.consultarObjetivosEvento(evento);
     }
 
-    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
-        ge.actualizarObjetivo(objetivoSeleccionado);
+    public int actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        return ge.actualizarObjetivo(objetivoSeleccionado);
     }
 
     public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
@@ -197,6 +198,10 @@ public java.util.List<Acolito> consultarAcolitos(){
             // ActualizarPropiedad
     public void actualizarPropiedad(Propiedad p){
         gp.actualizarPropiedad(p);
+    }
+
+    public void ventanaObjetivo(Window parent, Evento evento) {
+        fgui.ventanaObjetivo(parent, evento);
     }
 }
 

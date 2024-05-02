@@ -9,6 +9,8 @@ import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
 
+import java.awt.*;
+
 /**
  *
  * @author alumno
@@ -86,6 +88,13 @@ public class FachadaGui {
         vdn.setVisible(true);
 
 
+    }
+
+    public void ventanaObjetivo(Window parent, Evento evento){
+        VObjetivos vo;
+
+       vo = new VObjetivos(fa,parent,evento);
+        vo.setVisible(true);
     }
 /*
     public void ventanaRituales(VPrincipal vP){

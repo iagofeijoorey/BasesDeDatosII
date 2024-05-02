@@ -32,10 +32,12 @@ public class VRecompensaInfluencia extends JDialog {
     public VRecompensaInfluencia(Window owner, FachadaAplicacion fa, Recompensa recompensa, Objetivo objetivo) {
         super(owner);
         initComponents();
+        this.owner = (VObjetivos) owner;
         this.fa = fa;
         this.recompensa = (RecompensaInfluencia) recompensa;
         textCantidad.setText(((RecompensaInfluencia)recompensa).getCantidad().toString());
     }
+
     private void botonVolver(ActionEvent e) {
         // TODO add your code here
         this.dispose();
@@ -43,18 +45,32 @@ public class VRecompensaInfluencia extends JDialog {
 
     private void botonConfirmar(ActionEvent e) {
         recompensa.setCantidad(Integer.parseInt(textCantidad.getText()));
-        fa.actualizarRecompensaInfluencia(recompensa);
+        //En principio, no se añaden ht que se confirma el objetivo
+        //fa.actualizarRecompensaDinero(recompensa);
 
+        //Si el objetivo ya está cargado
+        if(recompensa.getIdObjetivo()!=-1){
+            fa.actualizarRecompensaInfluencia((RecompensaInfluencia) recompensa);
+            owner.getRecompensas().remove(recompensa);
+        }
 
+        owner.addRecompensa(recompensa);
+        owner.actualizarRecompensasBox();
+        owner.setCont(1);
+        this.dispose();
+    }
 
+    private void botonBorrar(ActionEvent e) {
+
+        fa.borrarRecompensaInfluencia(recompensa);
+        owner.getRecompensas().remove(recompensa);
+
+        owner.actualizarRecompensasBox();
         this.dispose();
     }
 
     private void botonEliminar(ActionEvent e) {
-        fa.borrarRecompensaInfluencia(recompensa);
-        owner.getRecompensas().remove(recompensa);
-
-        this.dispose();
+        // TODO add your code here
     }
 
     private void initComponents() {
@@ -64,7 +80,7 @@ public class VRecompensaInfluencia extends JDialog {
         titulo = new JLabel();
         textCantidad = new JTextField();
         label = new JLabel();
-        botonVOlver2 = new JButton();
+        botonBorrar = new JButton();
         botonConfirmar = new JButton();
 
         //======== this ========
@@ -84,9 +100,9 @@ public class VRecompensaInfluencia extends JDialog {
         label.setText("Influencia");
         label.setFont(label.getFont().deriveFont(label.getFont().getSize() + 8f));
 
-        //---- botonVOlver2 ----
-        botonVOlver2.setText("Eliminar recompensa");
-        botonVOlver2.addActionListener(e -> botonEliminar(e));
+        //---- botonBorrar ----
+        botonBorrar.setText("Eliminar recompensa");
+        botonBorrar.addActionListener(e -> botonEliminar(e));
 
         //---- botonConfirmar ----
         botonConfirmar.setText("Confirmar");
@@ -114,10 +130,10 @@ public class VRecompensaInfluencia extends JDialog {
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(textCantidad, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                                    .addComponent(botonVOlver2)
+                                    .addComponent(botonBorrar)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(botonConfirmar, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))))
-                    .addContainerGap(33, Short.MAX_VALUE))
+                    .addContainerGap(24, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -133,7 +149,7 @@ public class VRecompensaInfluencia extends JDialog {
                     .addGap(26, 26, 26)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(botonConfirmar, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonVOlver2, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonBorrar, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
                     .addGap(37, 37, 37))
         );
         pack();
@@ -147,7 +163,7 @@ public class VRecompensaInfluencia extends JDialog {
     private JLabel titulo;
     private JTextField textCantidad;
     private JLabel label;
-    private JButton botonVOlver2;
+    private JButton botonBorrar;
     private JButton botonConfirmar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

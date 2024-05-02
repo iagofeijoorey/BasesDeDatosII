@@ -26,4 +26,9 @@ public class RecompensaDinero extends Recompensa{
         }
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"Dinero: "+cantidad+"€";
+    }
 }

@@ -34,6 +34,7 @@ public class VRecompensaDinero extends JDialog {
     public VRecompensaDinero(Window owner, FachadaAplicacion fa, Recompensa recompensa, Objetivo objetivo) {
         super(owner);
         initComponents();
+        this.owner = (VObjetivos) owner;
         this.fa = fa;
         this.recompensa = (RecompensaDinero) recompensa;
         textCantidad.setText(((RecompensaDinero)recompensa).getCantidad().toString());
@@ -45,12 +46,19 @@ public class VRecompensaDinero extends JDialog {
     }
 
     private void botonConfirmar(ActionEvent e) {
-
         recompensa.setCantidad(Integer.parseInt(textCantidad.getText()));
-        fa.actualizarRecompensaDinero(recompensa);
+        //En principio, no se añaden ht que se confirma el objetivo
+        //fa.actualizarRecompensaDinero(recompensa);
 
-        owner.addRecompensa(recompensa);
+        //Si el objetivo ya está cargado
+        if(recompensa.getIdObjetivo()!=-1){
+            fa.actualizarRecompensaDinero((RecompensaDinero) recompensa);
+            owner.getRecompensas().remove(recompensa);
+        }
 
+            owner.addRecompensa(recompensa);
+        owner.actualizarRecompensasBox();
+        owner.setCont(1);
         this.dispose();
     }
 
@@ -58,6 +66,8 @@ public class VRecompensaDinero extends JDialog {
 
         fa.borrarRecompensaDinero(recompensa);
         owner.getRecompensas().remove(recompensa);
+
+        owner.actualizarRecompensasBox();
         this.dispose();
     }
 

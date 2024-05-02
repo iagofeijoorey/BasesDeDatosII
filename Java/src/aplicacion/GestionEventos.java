@@ -23,12 +23,17 @@ public class GestionEventos {
         return fbd.consultarObjetivosEvento(evento);
     }
 
-    public void actualizarObjetivo(Objetivo objetivoSeleccionado) {
-        fbd.actualizarObjetivo(objetivoSeleccionado);
+    public int actualizarObjetivo(Objetivo objetivoSeleccionado) {
+        if (objetivoSeleccionado.getIdObjetivo() == -1) {
+            return fbd.insertarObjetivo(objetivoSeleccionado);
+        }
+        else
+         fbd.actualizarObjetivo(objetivoSeleccionado);
+        return objetivoSeleccionado.getIdObjetivo();
     }
 
     public void actualizarRecompensaDinero(RecompensaDinero recompensa) {
-        if (recompensa.getIdRecompensa() == -1) {
+        if (recompensa.getIdRecompensa() == -1) {;
             fbd.insertarRecompensaDinero(recompensa);
         } else {
             fbd.actualizarRecompensaDinero(recompensa);
