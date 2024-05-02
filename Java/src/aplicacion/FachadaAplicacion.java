@@ -203,5 +203,9 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void ventanaObjetivo(Window parent, Evento evento) {
         fgui.ventanaObjetivo(parent, evento);
     }
+
+    public void actualizarAcolito(Acolito organizador) {
+        ga.actualizarAcolito(organizador);
+    }
 }
 

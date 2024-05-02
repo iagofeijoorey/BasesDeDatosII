@@ -172,4 +172,8 @@ public class FachadaBaseDatos {
         daoEventos.insertarObjetivo(objetivoSeleccionado);
         return objetivoSeleccionado.getIdObjetivo();
     }
+
+    public void actualizarAcolito(Acolito organizador) {
+         this.actualizarAcolito(organizador.getAlias(), organizador.getNombre(), organizador.getCiudad(), organizador.getPais());
+    }
 }

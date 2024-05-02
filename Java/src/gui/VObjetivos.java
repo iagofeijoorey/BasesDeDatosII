@@ -292,6 +292,38 @@ public class VObjetivos extends JDialog {
                 fa.actualizarObjetivo(objetivoSeleccionado);
             }
 
+            private void completarObjetivo(ActionEvent e) {
+                // TODO add your code here
+                if (tablaObjetivos.getSelectedRow() == -1) return;
+                Objetivo objetivoSeleccionado = ((ModeloTablaObjetivos)tablaObjetivos.getModel()).getFilas().get(tablaObjetivos.getSelectedRow());
+
+                //Materializar recompensas
+                recompensas = objetivoSeleccionado.getRecompensas();
+                for (Recompensa r: recompensas){
+                    if (r instanceof RecompensaDinero){
+                        evento.getOrganizador().addDinero(((RecompensaDinero) r).getCantidad());
+                        fa.actualizarAcolito(evento.getOrganizador());
+
+                    } else if (r instanceof RecompensaInfluencia){
+                        fa.actualizarRecompensaInfluencia((RecompensaInfluencia) r);
+                    }
+                }
+
+                for (Recompensa r: recompensas){
+                    if (r instanceof RecompensaDinero){
+                        fa.actualizarRecompensaDinero((RecompensaDinero) r);
+                    } else if (r instanceof RecompensaInfluencia){
+                        fa.actualizarRecompensaInfluencia((RecompensaInfluencia) r);
+                    }
+                }
+
+                //Eliminar objetivo
+                ModeloTablaObjetivos m = (ModeloTablaObjetivos) tablaObjetivos.getModel();
+                fa.borrarObjetivo(objetivoSeleccionado);
+
+                m.setFilas(fa.consultarObjetivosEvento(evento));
+            }
+
 
 
 
@@ -323,6 +355,7 @@ public class VObjetivos extends JDialog {
         button5 = new JButton();
         button6 = new JButton();
         comboBoxNueva = new JComboBox<>();
+        buttonCompletar = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -357,7 +390,6 @@ public class VObjetivos extends JDialog {
             scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
             //---- textDescripcionObjetivo ----
-            textDescripcionObjetivo.setText(" Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum ");
             textDescripcionObjetivo.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(FocusEvent e) {
@@ -431,6 +463,11 @@ public class VObjetivos extends JDialog {
 		});
         comboBoxNueva.addPropertyChangeListener("selectedIndex", e -> comboBoxNuevaPropertyChange(e));
 
+        //---- buttonCompletar ----
+        buttonCompletar.setText("Completar");
+        buttonCompletar.setFont(buttonCompletar.getFont().deriveFont(buttonCompletar.getFont().getSize() + 8f));
+        buttonCompletar.addActionListener(e -> completarObjetivo(e));
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -452,7 +489,7 @@ public class VObjetivos extends JDialog {
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                             .addComponent(label5)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(comboBoxPrioridad, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(comboBoxPrioridad, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                             .addComponent(comboBoxRecompensas, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -470,9 +507,11 @@ public class VObjetivos extends JDialog {
                                 .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 560, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPaneLayout.createSequentialGroup()
                                     .addGroup(contentPaneLayout.createParallelGroup()
-                                        .addComponent(button4)
-                                        .addComponent(button5, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(262, 262, 262)
+                                        .addComponent(button5, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(button4))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(buttonCompletar, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(26, 26, 26)
                                     .addComponent(button6, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(106, 106, 106)
@@ -521,8 +560,9 @@ public class VObjetivos extends JDialog {
                             .addComponent(button4)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(button5, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonCompletar, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
                         .addComponent(button6, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(14, Short.MAX_VALUE))
+                    .addContainerGap(15, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -551,5 +591,6 @@ public class VObjetivos extends JDialog {
     private JButton button5;
     private JButton button6;
     private JComboBox<String> comboBoxNueva;
+    private JButton buttonCompletar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

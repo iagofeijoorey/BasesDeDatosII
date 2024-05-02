@@ -293,7 +293,7 @@ public class DAOEventos extends AbstractDAO {
                     "set idobjetivo = ?, fecha = ?, ubicacion = ?, influencia = ? " +
                     "where idrecompensa = ?");
             stmRecompensa.setInt(1, recompensa.getIdObjetivo());
-            stmRecompensa.setDate(2, java.sql.Date.valueOf(recompensa.getFecha());
+            stmRecompensa.setDate(2, java.sql.Date.valueOf(recompensa.getFecha()));
             stmRecompensa.setString(3, recompensa.getUbicacion());
             stmRecompensa.setInt(4, recompensa.getCantidad());
             stmRecompensa.setInt(5, recompensa.getIdRecompensa());
@@ -606,7 +606,7 @@ public class DAOEventos extends AbstractDAO {
                             "values (?,?,?,?,?)");
                     stmObjetivo.setInt(1, recompensa.getIdRecompensa());
                     stmObjetivo.setInt(2, objetivoSeleccionado.getIdObjetivo());
-                    stmObjetivo.setDate(3, java.sql.Date.valueOf(objetivoSeleccionado.getFecha());
+                    stmObjetivo.setDate(3, java.sql.Date.valueOf(objetivoSeleccionado.getFecha()));
                     stmObjetivo.setString(4, objetivoSeleccionado.getUbicacion());
                     stmObjetivo.setInt(5, ((RecompensaDinero) recompensa).getCantidad());
                 }

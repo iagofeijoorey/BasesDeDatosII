@@ -40,6 +40,7 @@ public class VRecompensaInfluencia extends JDialog {
 
     private void botonVolver(ActionEvent e) {
         // TODO add your code here
+        owner.setCont(1);
         this.dispose();
     }
 
@@ -61,16 +62,21 @@ public class VRecompensaInfluencia extends JDialog {
     }
 
     private void botonBorrar(ActionEvent e) {
-
         fa.borrarRecompensaInfluencia(recompensa);
         owner.getRecompensas().remove(recompensa);
+        owner.setCont(1);
 
         owner.actualizarRecompensasBox();
         this.dispose();
     }
 
     private void botonEliminar(ActionEvent e) {
-        // TODO add your code here
+        fa.borrarRecompensaInfluencia(recompensa);
+        owner.getRecompensas().remove(recompensa);
+        owner.setCont(1);
+
+        owner.actualizarRecompensasBox();
+        this.dispose();
     }
 
     private void initComponents() {

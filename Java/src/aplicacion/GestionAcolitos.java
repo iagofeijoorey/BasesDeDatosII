@@ -19,7 +19,14 @@ public class GestionAcolitos {
     public GestionAcolitos(FachadaGui fgui, FachadaBaseDatos fbd){
      this.fgui=fgui;
      this.fbd=fbd;
-    }  
+    }
+
+    public void actualizarAcolito(Acolito organizador) {
+
+
+            fbd.actualizarAcolito(organizador);
+
+    }
     
     /*
   public Boolean comprobarAutentificacion(String idUsuario, String clave, FachadaAplicacion faABD){

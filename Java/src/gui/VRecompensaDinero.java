@@ -66,6 +66,7 @@ public class VRecompensaDinero extends JDialog {
 
         fa.borrarRecompensaDinero(recompensa);
         owner.getRecompensas().remove(recompensa);
+        owner.setCont(1);
 
         owner.actualizarRecompensasBox();
         this.dispose();

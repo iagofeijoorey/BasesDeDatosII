@@ -17,6 +17,7 @@ public class Acolito {
     private String fechaingreso;
     private Integer telefono;
     private String direccion;
+    private String pais;
     private int influencia;
     private Integer dinero;
     private String contraseña;
@@ -30,6 +31,7 @@ public class Acolito {
     this.direccion = direccion;
     this.influencia = influencia;
     this.tipo=tipo;
+    this.dinero = 0;
    }
 
 
@@ -122,5 +124,17 @@ public class Acolito {
     //OTRAS FUNCIONES
     public boolean isPrimeraEntrada() {
         return primeraEntrada;
+    }
+
+    public String getNombre() {
+        return nombreCompleto;
+    }
+
+    public String getCiudad() {
+        return direccion;
+    }
+
+    public String getPais() {
+        return "España";
     }
 }

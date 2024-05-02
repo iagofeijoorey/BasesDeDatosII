@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l {seq l {space :::p, comp button1:::p:97:p, space :p:72:p, comp Titulo:::p:300:p}, seq {space :p:47:p, comp label4:::p::p, par l {seq {space u:::p, par l {seq l {comp label5:::p::p, space :::p, comp comboBoxPrioridad:::p:179:p}, seq l {comp comboBoxRecompensas:::p:142:p, space u:::p, comp button2:::p:91:p, space :::p, comp comboBoxNueva:::p:203:p}}}, seq l {space :p:19:p, comp textE:::p::p, space :::p, comp textEvento:::p:379:p}}}, seq l {space :p:69:p, par t {comp scrollPane2:::p:560:p, seq {par l {comp button4::l:p::p, comp button5::l:p:149:p}, space :p:262:p, comp button6:::p:149:p}}}, seq l {space :p:106:p, par t {comp label2:::p::p, comp label3:::p::p}, space :::p, par l {comp scrollPane1:::p:379:p, comp textJefe:::p:379:p}}}, space ::59:x}}</string>
+        <string>par l {seq {par l {seq l {space :::p, comp button1:::p:97:p, space :p:72:p, comp Titulo:::p:300:p}, seq {space :p:47:p, comp label4:::p::p, par l {seq {space u:::p, par l {seq l {comp label5:::p::p, space :::p, comp comboBoxPrioridad:::p:185:p}, seq l {comp comboBoxRecompensas:::p:142:p, space u:::p, comp button2:::p:91:p, space :::p, comp comboBoxNueva:::p:203:p}}}, seq l {space :p:19:p, comp textE:::p::p, space :::p, comp textEvento:::p:379:p}}}, seq l {space :p:69:p, par t {comp scrollPane2:::p:560:p, seq {par l {comp button5::l:p:149:p, comp button4::l:p::p}, space u:::p, comp buttonCompletar:::p:224:p, space :p:26:p, comp button6:::p:149:p}}}, seq l {space :p:106:p, par t {comp label2:::p::p, comp label3:::p::p}, space :::p, par l {comp scrollPane1:::p:379:p, comp textJefe:::p:379:p}}}, space ::59:x}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :::p, par l:::p {comp Titulo:::p:40:p, comp button1::::46:x}, par b {comp textEvento::b:p::p, comp textE::b:p::p}, space :::p, par l {comp label2:::p::p, comp textJefe:::p::p}, space :p:12:p, par l {comp label3:::p::p, comp scrollPane1:::p:100:p}, space :::p, par b {comp label4::b:p:24:p, comp comboBoxRecompensas::b:p::p, comp button2::b:p::p, comp comboBoxNueva::b:p::p}, space :::p, par b {comp label5::b:p:24:p, comp comboBoxPrioridad::b:p::p}, space s:::p, comp scrollPane2:::p:189:p, space u:::p, par l {seq {comp button4:::p::p, space :::p, comp button5:::p:58:p}, comp button6:::p:58:p}, space ::14:x}}</string>
+        <string>par l {seq l {space :::p, par l:::p {comp Titulo:::p:40:p, comp button1::::46:x}, par b {comp textEvento::b:p::p, comp textE::b:p::p}, space :::p, par l {comp label2:::p::p, comp textJefe:::p::p}, space :p:12:p, par l {comp label3:::p::p, comp scrollPane1:::p:100:p}, space :::p, par b {comp label4::b:p:24:p, comp comboBoxRecompensas::b:p::p, comp button2::b:p::p, comp comboBoxNueva::b:p::p}, space :::p, par b {comp label5::b:p:24:p, comp comboBoxPrioridad::b:p::p}, space s:::p, comp scrollPane2:::p:189:p, space u:::p, par l {seq {comp button4:::p::p, space :::p, comp button5:::p:58:p}, comp buttonCompletar:::p:58:p, comp button6::l:p:58:p}, space ::15:x}}</string>
        </void>
       </object>
       <void method="add">
@@ -162,10 +162,6 @@
         <void method="add">
          <object class="com.jformdesigner.model.FormComponent">
           <string>javax.swing.JTextPane</string>
-          <void method="setProperty">
-           <string>text</string>
-           <string> Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum  Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum </string>
-          </void>
           <void property="name">
            <string>textDescripcionObjetivo</string>
           </void>
@@ -448,6 +444,35 @@
         </void>
        </object>
       </void>
+      <void method="add">
+       <object class="com.jformdesigner.model.FormComponent">
+        <string>javax.swing.JButton</string>
+        <void method="setProperty">
+         <string>text</string>
+         <string>Completar</string>
+        </void>
+        <void method="setProperty">
+         <string>font</string>
+         <object class="com.jformdesigner.model.SwingDerivedFont">
+          <null/>
+          <int>0</int>
+          <int>8</int>
+          <boolean>false</boolean>
+         </object>
+        </void>
+        <void property="name">
+         <string>buttonCompletar</string>
+        </void>
+        <void method="addEvent">
+         <object class="com.jformdesigner.model.FormEvent">
+          <string>java.awt.event.ActionListener</string>
+          <string>actionPerformed</string>
+          <string>completarObjetivo</string>
+          <boolean>true</boolean>
+         </object>
+        </void>
+       </object>
+      </void>
       <void property="name">
        <string>this</string>
       </void>
@@ -465,7 +490,7 @@
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>690</int>
-        <int>640</int>
+        <int>645</int>
        </object>
       </void>
      </object>
