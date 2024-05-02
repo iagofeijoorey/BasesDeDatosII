@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package baseDatos;
 import aplicacion.Acolito;
 import aplicacion.TipoAcolito;
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author basesdatos
- */
 
 public class DAOAcolitos extends AbstractDAO {
 

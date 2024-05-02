@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package baseDatos;
 
 import aplicacion.Acolito;
@@ -17,11 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.List;
-
-/**
- * DAO de Contactos y Tratos
- * @author basesdatos
- */
 
 public class DAOContactos extends AbstractDAO {
 

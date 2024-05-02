@@ -6,6 +6,8 @@ package gui;
 
 import aplicacion.Evento;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.PropiedadesYCuentas.Propiedad;
 
 /**
  *
@@ -59,10 +61,21 @@ public class FachadaGui {
         vpr.setVisible(true);
     }
 
-    public void ventanaDetalles(){
+    public void ventanaEventos(){
+        VEventos ve;
+
+        ve = new VEventos(fa);
+        ve.setVisible(true);
+    }
+
+    public void ventanaDetalles(Propiedad p, int behavior){
         VDetalles_NewProp vdn;
 
-        vdn = new VDetalles_NewProp(fa);
+        if (behavior==0)
+            vdn = new VDetalles_NewProp(fa, p);
+        else
+            vdn = new VDetalles_NewProp(fa);
+
         vdn.setVisible(true);
     }
 

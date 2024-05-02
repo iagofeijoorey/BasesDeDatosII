@@ -6,7 +6,13 @@ package gui;
 
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 
+import aplicacion.PropiedadesYCuentas.Arma;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
+
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -15,6 +21,7 @@ import javax.swing.GroupLayout;
  */
 public class VContenidoAlmacen extends JDialog {
     aplicacion.FachadaAplicacion fa;
+    Inmobiliario almacen;
 
     public VContenidoAlmacen(aplicacion.FachadaAplicacion fa, Inmobiliario almacen) { /** Creates new form VPrincipal */
         this.fa=fa;
@@ -30,11 +37,56 @@ public class VContenidoAlmacen extends JDialog {
         modelo.setElementos(fa.consultarArmasAlmacen(almacen));
 
 
+
+        //Vehículos - Vehículos
+        this.almacen = almacen;
+        inicializarListas();
+
+
+        //Arma - Armas
+    }
+
+    private static String concatenar(Integer numero, String cadena) {
+        return numero.toString() + "-" + cadena;
+    }
+
+
+    private void inicializarListas() {
+        ModeloListaStrings v;
+        v=(ModeloListaStrings) Vehicles.getModel();
+        java.util.List<Vehiculo> vehiculos = fa.consultarVehiculos(almacen.getIdPropiedad());
+        for (Propiedad vehiculo : vehiculos) {
+            v.nuevoElemento(concatenar(vehiculo.getIdPropiedad(), vehiculo.getTipoString()));
+        }
+
+
+        ModeloListaStrings a;
+        a=(ModeloListaStrings) Armas.getModel();
+        java.util.List<Arma> armas = fa.consultarArmas(almacen.getIdPropiedad());
+        for (Propiedad arma : armas) {
+            a.nuevoElemento(concatenar(arma.getIdPropiedad(), arma.getTipoString()));
+        }
+
+    }
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+        // Inicializa lista Vehículos
+        Vehicles = new JList();
+        ModeloListaStrings mlistaV = new ModeloListaStrings();
+        Vehicles.setModel(mlistaV);
+
+        // Inicializa lista Armas
+        Armas = new JList();
+        ModeloListaStrings mlistaA = new ModeloListaStrings();
+        Armas.setModel(mlistaA);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Diego
+        createUIComponents();
+
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
         Vehicles = new JList();
@@ -44,17 +96,17 @@ public class VContenidoAlmacen extends JDialog {
         Armas = new JList();
 
         //======== this ========
-        var contentPane = getContentPane();
+        Container contentPane = getContentPane();
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //======== scrollPane1 ========
             {
@@ -81,15 +133,15 @@ public class VContenidoAlmacen extends JDialog {
                         .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                                 .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(TextVehicle)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                                 .addComponent(TextWeapon)
-                                .addGap(68, 68, 68))))
+                                .addGap(66, 66, 66))))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -97,10 +149,10 @@ public class VContenidoAlmacen extends JDialog {
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(TextVehicle)
-                            .addComponent(TextWeapon))
+                            .addComponent(TextWeapon, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addComponent(scrollPane1)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addComponent(scrollPane2))
                         .addGap(26, 26, 26))
             );

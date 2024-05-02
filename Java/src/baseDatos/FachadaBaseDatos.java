@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package baseDatos;
 
 import aplicacion.*;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.Objetivo;
+import aplicacion.PropiedadesYCuentas.Arma;
 import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +18,6 @@ import java.util.Properties;
  * @author basesdatos
  */
 public class FachadaBaseDatos {
-    // Hola, esta es la branch de prueba
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
     private DAOAcolitos daoAcolitos;
@@ -29,6 +25,7 @@ public class FachadaBaseDatos {
     private DAOEventos daoEventos;
     private DAOPropiedades daoPropiedades;
 
+    //constructor
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa) {
 
         Properties configuracion = new Properties();
@@ -74,26 +71,39 @@ public class FachadaBaseDatos {
         }
     }
 
+    ///Código VAcólitos
     public void actualizarAcolito(String alias, String nombre, String ciudad, String pais){
         //daoAcolitos.actualizarAcolito(alias, nombre, ciudad, pais);
     }
 
 
-    //Código VPrincipal
-    /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
-        return daoEventos.consultarEventos(ubicacion, fecha);
+    ///Código VPrincipal
+    public java.util.List<Evento> consultarEventos(Evento evento) {
+        return daoEventos.consultarEventos(evento);
+    }
+
+
+    ///Código VEventos
+    public java.util.List<Evento> consultarEventosSinArgs(){
+        return daoEventos.consultarEventosSinArgs();
     }
 
     public void borrarEvento(Evento evento){
         daoEventos.borrarEvento(evento);
     }
 
-    public void insertarEvento(Evento evento){
+    public void anhadirEvento(Evento evento){
         daoEventos.insertarEvento(evento);
-    }*/
+    }
 
+    public void insertarEvento(Evento evento){
+        //daoEventos.insertarEvento(evento);
+    }
+
+
+    ///Código VPropiedades
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
-         return daoPropiedades.consultarPropiedades(tipo);
+        return daoPropiedades.consultarPropiedades(tipo);
     }
 
     public void borrarPropiedad(String idPropiedad){
@@ -145,5 +155,24 @@ public class FachadaBaseDatos {
 
     public void borrarObjetivo(Objetivo objetivoSeleccionado) {
         daoEventos.borrarObjetivo(objetivoSeleccionado);
+    }
+
+    // Contenido Almacén
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return daoPropiedades.consultarVehiculos(idAlmacen);
+    }
+
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return daoPropiedades.consultarArmas(idAlmacen);
+    }
+
+    //Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        daoPropiedades.insertarPropiedad(p);
+    }
+
+    //Actualizar propiedad
+    public void actualizarPropiedad(Propiedad p){
+        daoPropiedades.actualizarPropiedad(p);
     }
 }

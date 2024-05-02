@@ -1,31 +1,21 @@
 package aplicacion;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
-/**
- *
- * @author basesdatos
- */
 public enum TipoEvento {
-    //Administrador,
-    Yoquese,
-    JefeDivision,
-    Gestor,
-    LiderEspiritual,
+    TiroAlBlanco,
+    EntrenamientoDeAutodefensa,
+    EntrenamientoDeCombate,
+    ConferenciaSobreLaReligion,
+    AtaqueT,
+    CharlaDelLider,
     Normal;
 
 
     public static TipoEvento stringToTipoEvento(String tu){
         switch (tu){
             case ("Cabecilla"):
-                return Yoquese;
+                return CharlaDelLider;
             default:
                 return Normal;
         }
     }
-}
+    }

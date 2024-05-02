@@ -16,13 +16,17 @@ public enum TipoInmobiliario {
     //Administrador,
     Almacen,
     Normal,
-    Casa;
-
+    Casa,
+    Piso_Franco;
 
     public static TipoInmobiliario stringToTipoInmobiliario(String tu){
         switch (tu){
-            case ("Almacen"):
+            case ("Almacén"):
                 return Almacen;
+            case ("Casa"):
+                return Casa;
+            case ("Piso Franco"):
+                return Piso_Franco;
             default:
                 return Normal;
         }

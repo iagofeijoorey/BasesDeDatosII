@@ -4,30 +4,18 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}}"
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::::x, space :::p}, seq l {space :p:109:p, comp BtnContent:::p::p, space ::183:x, comp BtnActualizar:::p::p, space :p:115:p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp panel1:::p::p, space :::p, par b {comp BtnActualizar::b:p::p, comp BtnContent::b:p::p}, space ::41:x}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp TextUbicacion:::p::p, space :::p, comp Ubicacion:::p:160:p, space :::x}, seq {par l:::p {seq l {comp TextId:::p::p, space :56:56:p, comp Id:::p:160:p, space :20:20:p, comp TextTipo:::p::p, space :45:45:p, comp BoxTipo:::p:196:p}, seq l {comp TextValor:::p::p, space :35:35:p, comp Valor:::p:160:p, space :20:20:p, comp TextGestor:::p::p, space :30:30:p, comp BoxGestor:::p:196:p}, seq l {comp TextEvento:::p:61:p, space u:::p, comp scrollPane1::::0:x}, seq l {par l {seq l {comp TextAlmacen:::p::p, space s:::p, comp BoxAlmacen:::p:156:p}, seq l {comp TextBalas:::p::p, space :28:28:p, comp Balas:::p:95:p}}, space ::152:x, par l {seq t {comp BtnActualizar:::p::p, space :p:72:p}, seq t {comp BtnContent:::p::p, space :p:61:p}}}, seq t {comp TextAmountCapacity:::p::p, space s:::p, par l {seq {space :0:196:x, comp TextTipoCommodity:::p::p}, seq t {comp AmountCapacity:::p:141:p, space ::120:x, comp TextNameType:::p::p}}, space u:::p, par t {comp BoxString:::p:148:p, comp TipoCommodity:::p:122:p}, space :p:42:p}}, space :0:6:x}}}}"
-				"$verticalGroup": "par l {seq l {space :p:19:p, par l {comp Id:::p::p, comp BoxTipo:::p::p, seq l {space :10:10:p, par l {comp TextId:::p::p, comp TextTipo:::p::p}}}, space :10:10:p, par l {comp Valor:::p::p, comp BoxGestor:::p::p, seq l {space :5:5:p, par l {comp TextValor:::p::p, comp TextGestor:::p::p}}}, par l {seq {space :p:25:p, comp scrollPane1:::p:93:p}, seq t {space :::p, comp TextEvento:::p::p, space :p:38:p}}, space ::9:x, par l {seq t {par b {comp BoxString::b:p::p, comp TextNameType::b:p::p}, space :::p, par b {comp TextTipoCommodity::b:p::p, comp TipoCommodity::b:p::p}, space :p:3:p}, seq t {par b {comp TextAmountCapacity::b:p::p, comp AmountCapacity::b:p::p}, space :p:28:p}}, par t {seq t {par l {seq l {space :10:10:p, comp TextBalas:::p::p}, comp Balas:::p::p}, space :p:23:p, par b {comp TextAlmacen::b:p::p, comp BoxAlmacen::b:p::p}, space s:::p}, seq t {comp BtnContent:::p::p, space u:::p, comp BtnActualizar:::p::p, space :p:8:p}}, par b {comp TextUbicacion::b:p::p, comp Ubicacion::b:p::p}, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l {comp TextAmountCapacity::l:p::p, seq l {comp TextAlmacen:::p::p, space s:::p, comp BoxAlmacen:::p:187:p}, seq l {comp TextUbicacion:::p::p, space u:::p, comp Ubicacion:::p:184:p}}, space ::30:x, par l {seq l {par t {comp TextNameType:::p::p, comp TextTipoCommodity:::p::p}, space :::p, par l {comp BoxString:::p:154:p, comp TipoCommodity::l:p:154:p}}, seq l {comp TextBalas:::p::p, space :::p, comp Balas:::p:153:p}}, space :p:48:p}, seq {par l:::p {seq l {comp TextId:::p::p, space :56:56:p, comp Id:::p:160:p, space :20:20:p, comp TextTipo:::p::p, space :45:45:p, comp BoxTipo:::p:196:p}, seq l {comp TextValor:::p::p, space :35:35:p, comp Valor:::p:160:p, space :20:20:p, comp TextGestor:::p::p, space :30:30:p, comp BoxGestor:::p:196:p}, seq l {comp TextEvento:::p:61:p, space u:::p, par l {seq {space :6:6:p, comp AmountCapacity:::p:182:p}, comp scrollPane1::::0:x}}}, space :0:0:x}}}}"
+				"$verticalGroup": "par l {seq l {space :p:19:p, par l {comp Id:::p::p, comp BoxTipo:::p::p, seq l {space :10:10:p, par l {comp TextId:::p::p, comp TextTipo:::p::p}}}, space :10:10:p, par l {comp Valor:::p::p, comp BoxGestor:::p::p, seq l {space :5:5:p, par l {comp TextValor:::p::p, comp TextGestor:::p::p}}}, par l {seq {space :p:63:p, comp TextEvento:::p::p}, seq l {space :p:25:p, comp scrollPane1:::p:93:p}}, par l {seq {space :::x, par t {comp TextAmountCapacity:::p:24:p, par b:l {comp TextNameType::b:p:23:p, comp BoxString::b:p::p}}, space :::p}, seq l {space :::p, comp AmountCapacity:::p::p, space :::x}}, par l {comp TextAlmacen:::p:30:p, seq {space :p:10:p, par b {comp TipoCommodity::b:p::p, comp TextTipoCommodity::b:p:24:p}, space u:::p, par b {comp TextUbicacion::b:p:30:p, comp TextBalas::b:p::p, comp Balas::b:p::p, comp Ubicacion::b:p::p}}, comp BoxAlmacen::l:p::p}, space :p:29:p}}"
 			} ) {
 				name: "panel1"
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "BtnContent"
-					"text": "Ver contenido"
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContenido", true ) )
-				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "TextAlmacen"
 					"text": "Almacen:"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "TextBalas"
-					"text": "Numero de balas:"
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "Balas"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "AmountCapacity"
@@ -70,10 +58,6 @@ new FormModel {
 					name: "TextAmountCapacity"
 					"text": "Integer:"
 				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "BtnActualizar"
-					"text": "Actualizar"
-				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {
 					name: "BoxAlmacen"
 				} )
@@ -92,21 +76,40 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "TextNameType"
-					"text": "String"
+					"text": "Tipo:"
 				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {
 					name: "BoxString"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BoxStringMouseClicked", true ) )
+					addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "BoxStringItemStateChanged", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "TipoCommodity"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "TextTipoCommodity"
-					"text": "Tipo Commodity"
+					"text": "Tipo Commodity:"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "TextBalas"
+					"text": "Numero de balas:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "Balas"
 				} )
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "BtnContent"
+				"text": "Ver contenido"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "entrarContenido", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "BtnActualizar"
+				"text": "Actualizar"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "BtnActualizar_AnadirMouseClicked", true ) )
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 590, 465 )
+			"size": new java.awt.Dimension( 625, 475 )
 			"location": new java.awt.Point( 0, 5 )
 		} )
 	}

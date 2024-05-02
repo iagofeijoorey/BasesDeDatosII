@@ -23,8 +23,13 @@ public enum TipoVehiculo {
 
     public static TipoVehiculo stringToTipoVehiculo(String tu){
         switch (tu){
-            case ("Coche"):
+            case ("Coche"): case ("Automóvil"):
                 return Coche;
+            case ("Camión"):
+                return Camion;
+            case ("Tanque"):
+                return Tanque;
+
             default:
                 return Normal;
         }

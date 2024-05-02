@@ -58,18 +58,26 @@ public class GestionEventos {
 
 
 
-    /*public void borrarEvento(Evento evento){
+    public void borrarEvento(Evento evento){
         fbd.borrarEvento(evento);
     }
 
+    public void anhadirEvento(Evento evento){
+        fbd.anhadirEvento(evento);
+    }
+
+
     public void nuevoEvento(Evento evento){
-        fbd.insertarEvento(evento);
+        //fbd.insertarEvento(evento);
     }
 
 
     //Código VPrincipal
-    public java.util.List<Evento> consultarEventos(String ubicacion, String fecha) {
-        return fbd.consultarEventos(ubicacion, fecha);
-    }*/
+    public java.util.List<Evento> consultarEventos(Evento evento) {
+        return fbd.consultarEventos(evento);
+    }
+    public java.util.List<Evento> consultarEventosSinArgs(){
+        return fbd.consultarEventosSinArgs();
+    }
 
 }

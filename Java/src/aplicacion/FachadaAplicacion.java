@@ -1,13 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package aplicacion;
 import aplicacion.PropiedadesYCuentas.Inmobiliario;
+import aplicacion.PropiedadesYCuentas.Arma;
+import aplicacion.PropiedadesYCuentas.Inmobiliario;
 import aplicacion.PropiedadesYCuentas.Propiedad;
+import aplicacion.PropiedadesYCuentas.Vehiculo;
+import gui.VPrincipal;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -91,27 +90,24 @@ public java.util.List<Acolito> consultarAcolitos(){
     public void ventanaContactos(){
         //fgui.ventanaContactos();
     }
-
     public void ventanaAcolitos(){
         //fgui.ventanaAcolitos();
     }
-
     public void ventanaPropiedades(){
         fgui.ventanaPropiedades();
     }
-
-    public void ventanaDetalles(){
-        fgui.ventanaDetalles();
+    public void ventanaDetalles(Propiedad p, int behavior){
+        fgui.ventanaDetalles(p, behavior);
     }
-
+    public void ventanaContenido(Inmobiliario almacen){
+        fgui.ventanaContenido(almacen);
+}
     public void ventanaContenido(Inmobiliario almacen){
         fgui.ventanaContenido(almacen);
     }
-
     public void ventanaEventos(){
-        //fgui.ventanaEventos();
+        fgui.ventanaEventos();
     }
-
     public void ventanaRituales(){
         //fgui.ventanaRituales();
     }
@@ -124,14 +120,28 @@ public java.util.List<Acolito> consultarAcolitos(){
 
     ///Código consultas
     //////////////////////////////////////////
-    /*public java.util.List<Evento> consultarEventos(String ubicacion, String fecha){
-        return ge.consultarEventos(ubicacion, fecha);
-    }*/
 
+    ///Codigo de gestionEventos
+    public java.util.List<Evento> consultarEventos(Evento evento){
+        return ge.consultarEventos(evento);
+    }
+
+    public java.util.List<Evento> consultarEventosSinArgs(){
+        return ge.consultarEventosSinArgs();
+    }
+    public void borrarEvento(Evento evento){
+        ge.borrarEvento(evento);
+    }
+
+    public void anhadirEvento(Evento evento){
+        ge.anhadirEvento(evento);
+    }
+
+
+    ///Código de GestionPropiedades
     public java.util.List<Propiedad> consultarPropiedades(String tipo){
         return gp.consultarPropiedades(tipo);
     }
-
     public void borrarPropiedad(String idPropiedad){
         gp.borrarPropiedad(idPropiedad);
     }
@@ -170,6 +180,24 @@ public java.util.List<Acolito> consultarAcolitos(){
 
     public void borrarObjetivo(Objetivo objetivoSeleccionado) {
         ge.borrarObjetivo(objetivoSeleccionado);
+    }
+
+            // Contenido Almacenes
+    public java.util.List<Vehiculo> consultarVehiculos(Integer idAlmacen) {
+        return gp.consultarVehiculos(idAlmacen);
+    }
+    public java.util.List<Arma> consultarArmas(Integer idAlmacen) {
+        return gp.consultarArmas(idAlmacen);
+    }
+
+            // Anadir propiedad
+    public void anadirPropiedad(Propiedad p){
+        gp.anadirPropiedad(p);
+    }
+
+            // ActualizarPropiedad
+    public void actualizarPropiedad(Propiedad p){
+        gp.actualizarPropiedad(p);
     }
 }
 

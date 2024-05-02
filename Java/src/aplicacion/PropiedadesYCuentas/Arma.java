@@ -14,6 +14,13 @@ public class Arma extends Propiedad{
         this.almacen = almacen;
     }
 
+    public Arma(Integer idPropiedad, TipoArmamento tipo, Integer cantidad, Integer balas, Integer valorActual){
+        super(idPropiedad, valorActual, null);
+        this.tipo = tipo;
+        this.cantidad = cantidad;
+        this.balas = balas;
+    }
+
     // Getters
     public TipoArmamento getTipo() {
         return tipo;

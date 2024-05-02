@@ -1,10 +1,8 @@
 package aplicacion.PropiedadesYCuentas;
 
-import aplicacion.Acolito;
-
 public class Vehiculo extends Propiedad{
     private TipoVehiculo tipo;
-    private int capacidad = 0;
+    private Integer cantidad;
     private Inmobiliario almacen; //Donde está estacionado
 
     /**
@@ -25,15 +23,21 @@ public class Vehiculo extends Propiedad{
         super(idPropiedad, valorActual, almacen.getGestor());
         this.tipo = tipo;
         this.almacen = almacen;
-        this.capacidad = capacidad;
+        this.cantidad = capacidad;
+    }
+
+    public Vehiculo(Integer idPropiedad, TipoVehiculo tipo, int valorActual, Integer capacidad){
+        super(idPropiedad, valorActual, null);
+        this.tipo = tipo;
+        this.cantidad = capacidad;
     }
 
     // Getters
     public TipoVehiculo getTipo() {
         return tipo;
     }
-    public int getCapacidad() {
-        return capacidad;
+    public Integer getCantidad() {
+        return cantidad;
     }
     public Inmobiliario getAlmacen() {
         return almacen;
@@ -49,8 +53,8 @@ public class Vehiculo extends Propiedad{
     public void setTipo(TipoVehiculo tipo) {
         this.tipo = tipo;
     }
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
     public void setAlmacen(Inmobiliario almacen) {
         this.almacen = almacen;

@@ -32,6 +32,7 @@ public class Acolito {
     this.tipo=tipo;
    }
 
+
     public String getAlias() {
         return alias;
     }
