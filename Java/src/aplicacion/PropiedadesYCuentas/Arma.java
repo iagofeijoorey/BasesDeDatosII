@@ -1,13 +1,15 @@
 package aplicacion.PropiedadesYCuentas;
 
+import aplicacion.Evento;
+
 public class Arma extends Propiedad{
     private TipoArmamento tipo;
     private Integer cantidad;
     private Integer balas;
     private Inmobiliario almacen;
 
-    public Arma(Integer idPropiedad, TipoArmamento tipo, Integer cantidad, Integer balas, Integer valorActual, Inmobiliario almacen){
-        super(idPropiedad, valorActual, almacen.getGestor());
+    public Arma(Integer idPropiedad, TipoArmamento tipo, Integer cantidad, Integer balas, Integer valorActual, Inmobiliario almacen, java.util.List<Evento> eventos){
+        super(idPropiedad, valorActual, almacen.getGestor(), eventos);
         this.tipo = tipo;
         this.cantidad = cantidad;
         this.balas = balas;
@@ -15,7 +17,7 @@ public class Arma extends Propiedad{
     }
 
     public Arma(Integer idPropiedad, TipoArmamento tipo, Integer cantidad, Integer balas, Integer valorActual){
-        super(idPropiedad, valorActual, null);
+        super(idPropiedad, valorActual, null, null);
         this.tipo = tipo;
         this.cantidad = cantidad;
         this.balas = balas;

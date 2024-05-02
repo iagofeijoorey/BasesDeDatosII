@@ -51,6 +51,9 @@ public abstract class Recompensa {
 
     public abstract void realizarRecompensa(ArrayList<Acolito> acolitos);
 
-
+    @Override
+    public String toString() {
+        return "Recompensa: "+idRecompensa;
+    }
 
 }

@@ -57,6 +57,9 @@ public class VDetalles_NewProp extends JDialog {
         continuador = true;
         initComponents();
 
+        // Tabla eventos
+        buscarEventos();
+
         // Botones
         BtnActualizar.setText("Actualizar");
         BtnContent.setVisible(false);
@@ -337,7 +340,6 @@ public class VDetalles_NewProp extends JDialog {
         return false;
     }
 
-
     // Añadir propiedad / modificar OJO HAY QUE PONER LA LISTA DE ALMACENES Y METER EL USUARIO EN
     private void BtnActualizar_AnadirMouseClicked(MouseEvent e) {
         // TODO add your code here
@@ -345,13 +347,13 @@ public class VDetalles_NewProp extends JDialog {
             fa.muestraExcepcion("Rellene todos los campos");
             return;
         }
-        Integer idPropiedad = fa.obtenerIdPropiedadMayor() + 1;;
+        Integer idPropiedad = fa.obtenerIdPropiedadMayor() + 1;
         switch (BoxTipo.getSelectedItem().toString()){
             case "arma":
 
                 Arma arma = new Arma(idPropiedad, TipoArmamento.stringToTipoArmamento(BoxString.getSelectedItem().toString()),
                         Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Balas.getText()), Integer.parseInt(Valor.getText()),
-                        null);
+                        null, null);
                 if (BtnActualizar.getText().equals("Actualizar")){
                     fa.actualizarPropiedad(arma);
                 }
@@ -362,7 +364,7 @@ public class VDetalles_NewProp extends JDialog {
 
             case "Inmobiliario":
                 Inmobiliario inmobiliario = new Inmobiliario(idPropiedad, Ubicacion.getText(), Integer.parseInt(AmountCapacity.getText()),
-                        TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()), Integer.parseInt(Valor.getText()), null);
+                        TipoInmobiliario.stringToTipoInmobiliario(BoxString.getSelectedItem().toString()), Integer.parseInt(Valor.getText()), null, null);
 
                 if (BtnActualizar.getText().equals("Actualizar")){
                     fa.actualizarPropiedad(inmobiliario);
@@ -374,7 +376,7 @@ public class VDetalles_NewProp extends JDialog {
 
             case "Commodities":
                 Commodity commodity = new Commodity(idPropiedad, TipoCommodity.getText(),
-                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Valor.getText()), null);
+                        Integer.parseInt(AmountCapacity.getText()), Integer.parseInt(Valor.getText()), null, null);
                 if (BtnActualizar.getText().equals("Actualizar")){
                     fa.actualizarPropiedad(commodity);
                 }
@@ -385,7 +387,7 @@ public class VDetalles_NewProp extends JDialog {
 
             case "Vehículo":
                 Vehiculo vehiculo = new Vehiculo(idPropiedad, TipoVehiculo.stringToTipoVehiculo(BoxString.getSelectedItem().toString()),
-                        Integer.parseInt(Valor.getText()), Integer.parseInt(AmountCapacity.getText()), null);
+                        Integer.parseInt(Valor.getText()), Integer.parseInt(AmountCapacity.getText()), null, null);
                 if (BtnActualizar.getText().equals("Actualizar")){
                     fa.actualizarPropiedad(vehiculo);
                 }
@@ -406,10 +408,26 @@ public class VDetalles_NewProp extends JDialog {
         return fa.consultaAlmacenes();
     }
 
+    // Inicializa la tabla eventos
+    private void buscarEventos(){
+        // TODO add your code here
+        ModeloTablaEventos_5 mtablaE = (ModeloTablaEventos_5) tablaEventos.getModel();
+        mtablaE.setFilas(propiedad.getEventos());
+    }
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+        // Inicializa tabla propiedades
+        tablaEventos = new JTable();
+        ModeloTablaEventos_5 mtablaE = new ModeloTablaEventos_5();
+        tablaEventos.setModel(mtablaE);
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Diego
+        createUIComponents();
+
         panel1 = new JPanel();
         TextAlmacen = new JLabel();
         AmountCapacity = new JTextField();
@@ -427,7 +445,6 @@ public class VDetalles_NewProp extends JDialog {
         TextUbicacion = new JLabel();
         Ubicacion = new JTextField();
         scrollPane1 = new JScrollPane();
-        tablaEventos = new JTable();
         TextNameType = new JLabel();
         BoxString = new JComboBox();
         TipoCommodity = new JTextField();
@@ -443,12 +460,14 @@ public class VDetalles_NewProp extends JDialog {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
+            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 )
+            , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //---- TextAlmacen ----
             TextAlmacen.setText("Almacen:");
@@ -485,6 +504,9 @@ public class VDetalles_NewProp extends JDialog {
 
             //======== scrollPane1 ========
             {
+
+                //---- tablaEventos ----
+                tablaEventos.setFont(tablaEventos.getFont().deriveFont(tablaEventos.getFont().getStyle() & ~Font.ITALIC));
                 scrollPane1.setViewportView(tablaEventos);
             }
 

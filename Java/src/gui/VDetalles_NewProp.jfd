@@ -73,6 +73,10 @@ new FormModel {
 					name: "scrollPane1"
 					add( new FormComponent( "javax.swing.JTable" ) {
 						name: "tablaEventos"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 131072, 0, false )
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -115,4 +119,3 @@ new FormModel {
 		} )
 	}
 }
-

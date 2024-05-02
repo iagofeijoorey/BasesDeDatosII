@@ -25,6 +25,7 @@ public class VPropiedades extends JDialog {
 
     // Constructor
     public VPropiedades(aplicacion.FachadaAplicacion fa) { /** Creates new form VPrincipal */
+
         this.fa=fa;
         initComponents();
         buscarPropiedades();
@@ -37,11 +38,14 @@ public class VPropiedades extends JDialog {
 
     }
 
+    public void setConfirmacion(boolean c){
+        confirmacion = c;
+    }
+
     // BOTONES
     private void buscarTipoMouseClicked(MouseEvent e) {
         buscarPropiedades();
     }
-
     private void borrarPropiedad(MouseEvent e) {
 
         // Crear un JDialog modal
@@ -74,10 +78,6 @@ public class VPropiedades extends JDialog {
         dialog.setVisible(true);
 
     }
-
-    public void setConfirmacion(boolean c){
-        confirmacion = c;
-    }
     private void volver(MouseEvent e) {
         this.dispose();
     }
@@ -92,6 +92,7 @@ public class VPropiedades extends JDialog {
     public java.util.List<Propiedad> obtenerPropiedades(String uno){
         return fa.consultarPropiedades(uno);
     }
+
     // Actualizar cuadros de texto
     private void actualizarCuadrosTexto() {
         ModeloTablaPropiedades m;
@@ -103,8 +104,8 @@ public class VPropiedades extends JDialog {
         Valor.setText(p.getValorActual().toString());
         Tipo.setText(p.getTipoGeneral());
         Gestor.setText(p.getGestor().getNombreCompleto());
-        if (p.getEventoActual() != null)
-            Evento.setText(p.getEventoActual().getDescripcion());
+        if (p.getEventoProximo() != null)
+            Evento.setText(p.getEventoProximo().getDescripcion());
         else Evento.setText("No hay un evento asociado a esta propiedad.");
 
     }
@@ -114,7 +115,8 @@ public class VPropiedades extends JDialog {
         ModeloTablaPropiedades m;
         m=(ModeloTablaPropiedades) tablaPropiedades.getModel();
 
-        m.setFilas(fa.consultarPropiedades(TipoSearch.getText()));
+        java.util.List<Propiedad> propiedades = obtenerPropiedades(TipoSearch.getText());
+        m.setFilas(propiedades);
         if (m.getRowCount() > 0) {
             tablaPropiedades.setRowSelectionInterval(0, 0);
             actualizarCuadrosTexto();
@@ -134,7 +136,6 @@ public class VPropiedades extends JDialog {
         Propiedad p = m.getPropiedad(tablaPropiedades.getSelectedRow());
         fa.ventanaDetalles(p, behavior);
     }
-
 
     ///ESTA VENTANA
     private void createUIComponents() {
@@ -191,12 +192,12 @@ public class VPropiedades extends JDialog {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
+            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
+            .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
+            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- btnVolver ----
             btnVolver.setText("volver");
@@ -295,7 +296,7 @@ public class VPropiedades extends JDialog {
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(btnVolver)
                                 .addGap(156, 156, 156)
-                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(label1))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addGroup(panel1Layout.createSequentialGroup()

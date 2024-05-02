@@ -1,6 +1,7 @@
 package aplicacion.PropiedadesYCuentas;
 
 import aplicacion.Acolito;
+import aplicacion.Evento;
 
 public class Inmobiliario extends Propiedad{
     private String ubicacion;
@@ -15,8 +16,8 @@ public class Inmobiliario extends Propiedad{
      * @param valorActual
      * @param gestor
      */
-    public Inmobiliario(Integer idPropiedad, String ubicacion, Integer capacidad, TipoInmobiliario tipo, int valorActual, Acolito gestor){
-        super(idPropiedad, valorActual , gestor);
+    public Inmobiliario(Integer idPropiedad, String ubicacion, Integer capacidad, TipoInmobiliario tipo, int valorActual, Acolito gestor, java.util.List<Evento> eventos){
+        super(idPropiedad, valorActual , gestor, eventos);
         this.ubicacion = ubicacion;
         this.tipo = tipo;
         this.capacidad = capacidad;
@@ -30,8 +31,8 @@ public class Inmobiliario extends Propiedad{
      * @param valorActual
      * @param gestor
      */
-    public Inmobiliario(Integer idPropiedad, String ubicacion, TipoInmobiliario tipo, Integer valorActual, Acolito gestor){
-        super(idPropiedad, valorActual , gestor);
+    public Inmobiliario(Integer idPropiedad, String ubicacion, TipoInmobiliario tipo, Integer valorActual, Acolito gestor, java.util.List<Evento> eventos){
+        super(idPropiedad, valorActual , gestor, eventos);
         this.ubicacion = ubicacion;
         this.tipo = tipo;
     }
